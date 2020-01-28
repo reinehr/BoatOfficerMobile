@@ -1,6 +1,6 @@
 {
   "nativescript": {
-    "id": "org.nativescript.HalloWelt4",
+    "id": "com.boatofficer.BoatOfficerMobile",
     "tns-android": {
       "version": "6.3.1"
     },
@@ -24,7 +24,10 @@
     "@angular/platform-browser-dynamic": "~8.2.0",
     "@angular/router": "~8.2.0",
     "@nativescript/theme": "~2.2.1",
+    "@types/mocha": "^5.2.7",
+    "angular-font-awesome": "^3.1.2",
     "nativescript-angular": "~8.20.3",
+    "ngx-cookie-service": "^2.3.0",
     "reflect-metadata": "~0.1.12",
     "rxjs": "^6.4.0",
     "tns-core-modules": "~6.3.0",
@@ -32,7 +35,7 @@
   },
   "devDependencies": {
     "@angular/compiler-cli": "~8.2.0",
-    "@ngtools/webpack": "~8.2.0",
+    "@ngtools/webpack": "^8.3.23",
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "~1.4.0",
     "node-sass": "^4.7.1",

@@ -2,16 +2,14 @@ import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
 import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
-import { HomeComponent } from './home.component';
-import { ItemDetailComponent } from './item-detail/item-detail.component';
+import { AuthComponent} from '~/app/auth/auth.component';
 
 const routes: Routes = [
-    { path: 'default', component: HomeComponent },
-    { path: 'item/:id', component: ItemDetailComponent }
+    { path: 'default', component: AuthComponent }
 ];
 
 @NgModule({
     imports: [NativeScriptRouterModule.forChild(routes)],
     exports: [NativeScriptRouterModule]
 })
-export class HomeRoutingModule { }
+export class AuthRoutingModule { }

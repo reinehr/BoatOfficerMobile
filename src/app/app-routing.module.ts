@@ -1,32 +1,32 @@
-import { NgModule } from "@angular/core";
-import { Routes } from "@angular/router";
-import { NSEmptyOutletComponent } from "nativescript-angular";
-import { NativeScriptRouterModule } from "nativescript-angular/router";
+import { NgModule } from '@angular/core';
+import { Routes } from '@angular/router';
+import { NSEmptyOutletComponent } from 'nativescript-angular';
+import { NativeScriptRouterModule } from 'nativescript-angular/router';
 
 const routes: Routes = [
     {
-        path: "",
-        redirectTo: "/(homeTab:home/default//browseTab:browse/default//searchTab:search/default)",
-        pathMatch: "full"
+        path: '',
+        redirectTo: '/(homeTab:home/default//alarmTab:alarm/default//boatTab:boat/default)',
+        pathMatch: 'full'
     },
 
     {
-        path: "home",
+        path: 'home',
         component: NSEmptyOutletComponent,
-        loadChildren: () => import("~/app/home/home.module").then((m) => m.HomeModule),
-        outlet: "homeTab"
+        loadChildren: () => import('~/app/home/home.module').then((m) => m.HomeModule),
+        outlet: 'homeTab'
     },
     {
-        path: "browse",
+        path: 'alarm',
         component: NSEmptyOutletComponent,
-        loadChildren: () => import("~/app/browse/browse.module").then((m) => m.BrowseModule),
-        outlet: "browseTab"
+        loadChildren: () => import('~/app/alarm/alarm.module').then((m) => m.AlarmModule),
+        outlet: 'alarmTab'
     },
     {
-        path: "search",
+        path: 'boat',
         component: NSEmptyOutletComponent,
-        loadChildren: () => import("~/app/search/search.module").then((m) => m.SearchModule),
-        outlet: "searchTab"
+        loadChildren: () => import('~/app/boat/boat.module').then((m) => m.BoatModule),
+        outlet: 'boatTab'
     }
 ];
 

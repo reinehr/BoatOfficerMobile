@@ -6,7 +6,7 @@ import { NativeScriptRouterModule } from 'nativescript-angular/router';
 const routes: Routes = [
     {
         path: '',
-        redirectTo: '/(homeTab:home/default//alarmTab:alarm/default//boatTab:boat/default)',
+        redirectTo: '/(homeTab:home/default//alarmTab:alarm/default//boatTab:boat/default//settingsTab:settings/default//authTab:auth/default)',
         pathMatch: 'full'
     },
 
@@ -27,6 +27,18 @@ const routes: Routes = [
         component: NSEmptyOutletComponent,
         loadChildren: () => import('~/app/boat/boat.module').then((m) => m.BoatModule),
         outlet: 'boatTab'
+    },
+    {
+        path: 'settings',
+        component: NSEmptyOutletComponent,
+        loadChildren: () => import('~/app/settings/settings.module').then((m) => m.SettingsModule),
+        outlet: 'settingsTab'
+    },
+    {
+        path: 'auth',
+        component: NSEmptyOutletComponent,
+        loadChildren: () => import('~/app/auth/auth.module').then((m) => m.AuthModule),
+        outlet: 'authTab'
     }
 ];
 

@@ -5,16 +5,24 @@
                 Note TabStripItem will only accept single Label and/or single Image elements that it
                 will "adopt"; any other layout elements you try to specify will be ignored
             -->
-            <Label text="Home2"></Label>
+            <Label text="Home"></Label>
             <Image src="font://&#xf015;" class="fas t-36"></Image>
         </TabStripItem>
         <TabStripItem class="navigation__item">
             <Label text="Alarm"></Label>
-            <Image src="font://&#xf1ea;" class="far t-36"></Image>
+            <Image src="font://&#xf071;" class="fas t-36"></Image>
         </TabStripItem>
         <TabStripItem class="navigation__item">
             <Label text="Boat"></Label>
-            <Image src="font://&#xf002;" class="fas t-36"></Image>
+            <Image src="font://&#xf773;" class="fas t-36"></Image>
+        </TabStripItem>
+        <TabStripItem class="navigation__item">
+            <Label text="Settings"></Label>
+            <Image src="font://&#xf013;" class="fas t-36"></Image>
+        </TabStripItem>
+        <TabStripItem class="navigation__item">
+            <Label text="Auth"></Label>
+            <Image src="font://&#xf007;" class="fas t-36"></Image>
         </TabStripItem>
     </TabStrip>
 
@@ -28,5 +36,13 @@
 
     <TabContentItem>
         <page-router-outlet name="boatTab"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="settingsTab"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="authTab"></page-router-outlet>
     </TabContentItem>
 </BottomNavigation>

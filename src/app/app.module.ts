@@ -5,6 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
+// import { BoatComponent } from "./boat/boat.component";
 
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 // import { CookieService } from 'ngx-cookie-service';
@@ -29,6 +30,7 @@ firebase
     ],
     declarations: [
         AppComponent,
+        // BoatComponent,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

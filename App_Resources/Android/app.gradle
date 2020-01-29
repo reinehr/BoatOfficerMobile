@@ -13,6 +13,7 @@ android {
   defaultConfig {
     minSdkVersion 17
     generatedDensities = []
+    applicationId = "com.boatofficer.BoatOfficerMobile"
   }
   aaptOptions {
     additionalParameters "--no-version-vectors"

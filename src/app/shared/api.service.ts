@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {Sensordata} from '~/app/shared/interface/sensordata';
+import {Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {switchMap} from 'rxjs/internal/operators';
 import {tap} from 'rxjs/operators';
@@ -17,7 +17,8 @@ const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
 })
 export class ApiService {
     private sensorHistory = new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
-    (null);
+        (null);
+    private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
@@ -45,21 +46,23 @@ export class ApiService {
         return this.sensorHistory.asObservable();
     }
 
+    get currentSensorLatestData() {
+        return this.sensorLatestData.asObservable();
+    }
+
     getLatestSensorData() {
-        this.httpClient.post(this.baseSensorUrl + 'get_latest/', {device: 1},
+        return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest/', {device: 1},
             {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
                     idToken: `${getString('token', '')}`
                 })
             }
-        ).subscribe((resData: Sensordata) => {
-            // for (let inner in resData) {
-            //     this.result[inner] = resData[inner];
-            // }
-            this.result = resData;
-        });
-        return this.result;
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.sensorLatestData.next(resData);
+            }
+        }));
     }
 
     getIntTemperatureHistory() {

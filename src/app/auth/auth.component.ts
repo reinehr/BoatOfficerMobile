@@ -19,7 +19,7 @@ export class AuthComponent implements OnInit {
     username: new FormControl(''),
     password: new FormControl('')
   });
-  regsterMode = false;
+  registerMode = false;
 
   constructor(
     private apiService: ApiService,
@@ -34,7 +34,7 @@ export class AuthComponent implements OnInit {
     }
   }
   saveForm() {
-    if (!this.regsterMode) {
+    if (!this.registerMode) {
       this.loginUser();
     } else {
       this.apiService.registerUser(this.authForm.value).subscribe(

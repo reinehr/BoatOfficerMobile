@@ -8,7 +8,8 @@ import { CookieService } from 'ngx-cookie-service';
 })
 export class ApiService {
 
-  baseUrl = 'http://127.0.0.1:8000/';
+  // baseUrl = 'http://127.0.0.1:8000/';
+  baseUrl = 'https://674bc590.ngrok.io/';
   baseMovieUrl = `${this.baseUrl}api/movies/`;
   headers = new HttpHeaders({
     'Content-Type': 'application/json'

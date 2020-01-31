@@ -1,10 +1,12 @@
 import { NgModule, NO_ERRORS_SCHEMA } from '@angular/core';
 import { NativeScriptModule } from 'nativescript-angular/nativescript.module';
+import { NativeScriptFormsModule } from 'nativescript-angular/forms';
+import { ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
-import { HttpClientModule } from '@angular/common/http';
+import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { CookieService } from 'ngx-cookie-service';
 
 @NgModule({
@@ -13,8 +15,10 @@ import { CookieService } from 'ngx-cookie-service';
     ],
     imports: [
         NativeScriptModule,
+        NativeScriptFormsModule,
+        ReactiveFormsModule,
         AppRoutingModule,
-        HttpClientModule,
+        NativeScriptHttpClientModule,
     ],
     declarations: [
         AppComponent

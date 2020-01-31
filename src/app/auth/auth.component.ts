@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormControl } from '@angular/forms';
+import {FormGroup, FormControl, Validators} from '@angular/forms';
 import { ApiService } from '../api.service';
 import { CookieService } from 'ngx-cookie-service';
-import { Router } from '@angular/router';
+import { TextField } from 'tns-core-modules/ui/text-field';
+import { RouterExtensions } from '@nativescript/angular';
 
 interface TokenObj {
   token: string;
@@ -11,10 +12,14 @@ interface TokenObj {
 @Component({
   selector: 'app-auth',
   templateUrl: './auth.component.html',
-  styleUrls: ['./auth.component.css']
+  styleUrls: ['./auth.component.css'],
+  moduleId: module.id
 })
-export class AuthComponent implements OnInit {
 
+export class AuthComponent implements OnInit {
+  form: FormGroup;
+  usernameControlIsValid = true;
+  passwordControlIsValid = true;
   authForm = new FormGroup({
     username: new FormControl(''),
     password: new FormControl('')
@@ -24,13 +29,17 @@ export class AuthComponent implements OnInit {
   constructor(
     private apiService: ApiService,
     private cookieService: CookieService,
-    private router: Router
+    private router: RouterExtensions
   ) { }
 
   ngOnInit() {
+    this.form = new FormGroup({
+      username: new FormControl(''),
+      password: new FormControl('')
+    });
     const mrToken = this.cookieService.get('mr-token');
     if (mrToken) {
-      this.router.navigate(['/movies']);
+      // this.router.navigate(['/movies']);
     }
   }
   saveForm() {
@@ -46,12 +55,15 @@ export class AuthComponent implements OnInit {
     }
   }
   loginUser() {
-    this.apiService.loginUser(this.authForm.value).subscribe(
-      (result: TokenObj) => {
-        this.cookieService.set('mr-token', result.token);
-        this.router.navigate(['/movies']);
-      },
-      (error) => console.log(error)
-    );
+    // const username = this.authForm.get('username').value;
+    // const password = this.authForm.get('password').value;
+    console.log(this.form.value);
+  //   this.apiService.loginUser(this.authForm.value).subscribe(
+  //     (result: TokenObj) => {
+  //       this.cookieService.set('mr-token', result.token);
+  //       // this.router.navigate(['/movies']);
+  //     },
+  //     (error) => console.log(error)
+  //   );
   }
 }

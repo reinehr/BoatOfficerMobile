@@ -21,7 +21,7 @@ import { CookieService } from 'ngx-cookie-service';
         NativeScriptHttpClientModule,
     ],
     declarations: [
-        AppComponent
+        AppComponent,
     ],
     schemas: [
         NO_ERRORS_SCHEMA

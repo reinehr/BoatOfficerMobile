@@ -1,19 +1,20 @@
 <ActionBar>
-    <Label text="Author"></Label>
+    <Label text="User"></Label>
 </ActionBar>
 
-<StackLayout class="form" [formGroup]="authForm">
+<StackLayout class="form">
   <StackLayout class="input-field">
     <Label
       class="label"
-      text="Username">
+      text="E-Mail">
     </Label>
     <TextField
       class="input"
       returnKeyType="next"
       [autocorrect]="false"
       autocapitalizationType="none"
-      formControlName="username"
+      [(ngModel)]="email"
+      keyboardType="email"
     ></TextField>
   </StackLayout>
   <StackLayout class="input-field">
@@ -25,7 +26,7 @@
       returnKeyType="done"
       [autocorrect]="false"
       autocapitalizationType="none"
-      formControlName="password"
+      [(ngModel)]="password"
       [secure]="true"
     ></TextField>
   </StackLayout>

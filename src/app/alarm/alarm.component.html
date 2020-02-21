@@ -1,9 +1,53 @@
-<GridLayout columns="50, *, 50", rows="50">
-    <Image class="fas t-36" src="~/assets/icon.png" row="0" col="0" backgroundColor="black"></Image>
-    <Label text="Boat History" fontSize="20" row="0" col="1" color="white" textAlignment="center", verticalAlignment="center" backgroundColor="black"></Label>
-    <Label class="fas t-36" horizontalAlignment="stretch" verticalAlignment="stretch" text="&#xf013;" row="0" col="2" color="#1e90ff" backgroundColor="black"></Label>
-</GridLayout>
+<ActionBar title="Title" class="action-bar">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label text="Boat History"></Label>
+    <!--    <ActionItem-->
+    <!--      ios.position="left"-->
+    <!--      android.position="actionBar">-->
+    <!--        <Image class="fas t-25" src="~/assets/boat-black.png"></Image>-->
+    <!--    </ActionItem>-->
+    <ActionItem
+            ios.position="right"
+            android.position="actionBar">
+        <Label text="&#xf013;" class="fas t-25" (tap)="click_gear()"></Label>
+
+    </ActionItem>
+</ActionBar>
 <GridLayout class="page__content">
-    <Label class="page__content-icon fas" text="&#xf071;"></Label>
-    <Label class="page__content-placeholder" text="<!-- Page content goes here -->"></Label>
+    <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10">
+        <Label text="IntBattVolt" height="20" backgroundColor="#add8e6"></Label>
+        <Label [text]="sensorData['IntBattVolt']['value']+'V'" height="20" backgroundColor="#add8e6"></Label>
+        <Label [text]="sensorData['IntBattVolt']['time']" height="30" backgroundColor="#add8e6"></Label>
+        <Label text="IntTemperature" height="20" backgroundColor="#add8e6"></Label>
+        <Label [text]="sensorData['IntTemperature']['value']+'°C'" height="20" backgroundColor="#add8e6"></Label>
+        <Label [text]="sensorData['IntTemperature']['time']" height="30" backgroundColor="#add8e6"></Label>
+        <RadCartesianChart style="height: 500px">
+            <LinearAxis tkCartesianHorizontalAxis></LinearAxis>
+            <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+
+            <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
+                           yProperty="min_temp"></ScatterSeries>
+            <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
+                           yProperty="max_temp"></ScatterSeries>
+<!--            <ScatterSeries tkCartesianSeries [items]="scatterSource" xProperty="Age"-->
+<!--                           yProperty="Savings"></ScatterSeries>-->
+        </RadCartesianChart>
+<!--        <RadCartesianChart>-->
+<!--            <SplineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country"-->
+<!--                          valueProperty="Amount"></SplineSeries>-->
+
+<!--            <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>-->
+<!--            <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--        </RadCartesianChart>-->
+        <RadCartesianChart style="height: 800px">
+            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM.yyyy" labelFitMode="Rotate" labelRotationAngle="-1.2" labelTextColor="black" majorStepUnit="Day" majorStep="2"></DateTimeContinuousAxis>
+            <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"
+                        valueProperty="min_temp"></SplineSeries>
+            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"
+                        valueProperty="max_temp"></SplineSeries>
+        </RadCartesianChart>
+    </StackLayout>
+    <!--    <Label class="page__content-icon fas" text="&#xf071;"></Label>-->
+    <!--    <Label class="page__content-placeholder" [text]="sensorData['latitude']['value']"></Label>-->
 </GridLayout>

@@ -8,7 +8,8 @@ import {Sensordata} from '~/app/shared/interface/sensordata';
 })
 export class AlarmComponent implements OnInit {
     sensorData: Sensordata;
-    temperatureHistory: {'min_temp': number, 'max_temp': number, 'day': number, 'date': string, 'milliseconds': number}[];
+    temperatureHistory: {'min': number, 'max': number, 'day': number, 'date': string, 'milliseconds': number}[];
+    intBattVolt: {'min': number, 'max': number, 'day': number, 'date': string, 'milliseconds': number}[];
 
     constructor(
         private apiService: ApiService
@@ -17,13 +18,16 @@ export class AlarmComponent implements OnInit {
 
     ngOnInit(): void {
         this.temperatureHistory = this.apiService.getIntTemperatureHistory();
+        this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 5, 31);
         this.sensorData = this.apiService.getLatestSensorData();
         // Use the "ngOnInit" handler to initialize data for the view.
     }
 
     click_gear() {
         this.sensorData = this.apiService.getLatestSensorData();
+        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
         this.temperatureHistory = this.apiService.getIntTemperatureHistory();
+        this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 5, 31);
         console.log(this.temperatureHistory);
     }
 

@@ -5,7 +5,7 @@ import {catchError} from "rxjs/internal/operators";
 import {throwError} from "rxjs";
 import {alert} from 'tns-core-modules/ui/dialogs';
 
-const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
+const FIREBASE_API_KEY = '';
 
 @Injectable({providedIn: 'root'})
 export class AuthService {

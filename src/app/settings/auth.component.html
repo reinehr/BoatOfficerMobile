@@ -1,40 +1,63 @@
-<ActionBar>
-    <Label text="User"></Label>
-</ActionBar>
+<ns-action-bar
+        title="Authorisation"
+        [showBackButton]="true"
+></ns-action-bar>
 
 <StackLayout class="form">
-  <StackLayout class="input-field">
-    <Label
-      class="label"
-      text="E-Mail">
-    </Label>
-    <TextField
-      class="input"
-      returnKeyType="next"
-      [autocorrect]="false"
-      autocapitalizationType="none"
-      [(ngModel)]="email"
-      keyboardType="email"
-    ></TextField>
-  </StackLayout>
-  <StackLayout class="input-field">
-    <Label
-      class="label"
-      text="Password"></Label>
-    <TextField
-      class="input"
-      returnKeyType="done"
-      [autocorrect]="false"
-      autocapitalizationType="none"
-      [(ngModel)]="password"
-      [secure]="true"
-    ></TextField>
-  </StackLayout>
-  <Button
-    text="Login"
-    class="btn btn-primary btn-rounded-lg"
-    (tap)="saveForm()"
-  ></Button>
+    <StackLayout class="input-field">
+        <Label
+                class="label"
+                text="E-Mail">
+        </Label>
+        <TextField
+                class="input"
+                returnKeyType="next"
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                [(ngModel)]="email"
+                keyboardType="email"
+        ></TextField>
+    </StackLayout>
+    <StackLayout class="input-field">
+        <Label
+                class="label"
+                text="Password">
+        </Label>
+        <TextField
+                class="input"
+                returnKeyType="done"
+                [autocorrect]="false"
+                autocapitalizationType="none"
+                [(ngModel)]="password"
+                [secure]="true"
+        ></TextField>
+    </StackLayout>
+    <Button
+            text="Login"
+            class="btn btn-blue btn-rounded-lg"
+            (tap)="saveForm()"
+            *ngIf="!registerMode && !isLoading"
+    ></Button>
+    <Button
+            text="Sign Up"
+            class="btn btn-blue btn-rounded-lg"
+            (tap)="saveForm()"
+            *ngIf="registerMode && !isLoading"
+    ></Button>
+    <ActivityIndicator [busy]="isLoading">
+    </ActivityIndicator>
+        <Label
+                class="c-blue"
+                text="Sign Up"
+                *ngIf="!registerMode"
+                (tap)="registerMode = true">
+        </Label>
+        <Label
+                class="c-blue"
+                text="Login"
+                *ngIf="registerMode"
+                (tap)="registerMode = false">
+        </Label>
 </StackLayout>
 <!--<form [formGroup]="authForm" (ngSubmit)="saveForm()">-->
 <!--  <label>Username</label><br>-->

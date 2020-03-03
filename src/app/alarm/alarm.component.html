@@ -21,42 +21,58 @@
         <Label text="IntTemperature" height="20" backgroundColor="#add8e6"></Label>
         <Label [text]="sensorData['IntTemperature']['value']+'°C'" height="20" backgroundColor="#add8e6"></Label>
         <Label [text]="sensorData['IntTemperature']['time']" height="30" backgroundColor="#add8e6"></Label>-->
-<!--        <RadCartesianChart style="height: 500px">
-            <LinearAxis tkCartesianHorizontalAxis></LinearAxis>
-            <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+        <!--        <RadCartesianChart style="height: 500px">
+                    <LinearAxis tkCartesianHorizontalAxis></LinearAxis>
+                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
 
-            <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
-                           yProperty="min_temp"></ScatterSeries>
-            <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
-                           yProperty="max_temp"></ScatterSeries>
-        </RadCartesianChart>-->
-<!--        <RadCartesianChart>-->
-<!--            <SplineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country"-->
-<!--                          valueProperty="Amount"></SplineSeries>-->
+                    <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
+                                   yProperty="min_temp"></ScatterSeries>
+                    <ScatterSeries tkCartesianSeries [items]="temperatureHistory" xProperty="day"
+                                   yProperty="max_temp"></ScatterSeries>
+                </RadCartesianChart>-->
+        <!--        <RadCartesianChart>-->
+        <!--            <SplineSeries tkCartesianSeries [items]="categoricalSource" categoryProperty="Country"-->
+        <!--                          valueProperty="Amount"></SplineSeries>-->
 
-<!--            <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>-->
-<!--            <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
-<!--        </RadCartesianChart>-->
-        <Label text="IntTempertature" height="20" backgroundColor="#add8e6"></Label>
+        <!--            <CategoricalAxis tkCartesianHorizontalAxis></CategoricalAxis>-->
+        <!--            <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+        <!--        </RadCartesianChart>-->
+        <Label text="IntTemperature" height="20" backgroundColor="#add8e6"></Label>
         <RadCartesianChart style="height: 800px" id="intTemp">
-            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate" labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day" majorStep="1"></DateTimeContinuousAxis>
+            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
+                                    labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
+                                    majorStep="1"></DateTimeContinuousAxis>
             <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true" horizontalStripLinesVisible="true" verticalStripLinesVisible="true" verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc" horizontalStrokeWidth="2" verticalStrokeWidth="1" horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds" strokeColor="#5555ff"
-                        valueProperty="min"></SplineSeries>
-            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds" strokeColor="#ff2222"
-                        valueProperty="max"></SplineSeries>
+            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
+                                   horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
+                                   verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                   horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                   horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
+            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"
+                          strokeColor="#5555ff"
+                          valueProperty="min"></SplineSeries>
+            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"
+                          strokeColor="#ff2222"
+                          valueProperty="max"></SplineSeries>
         </RadCartesianChart>
 
         <Label text="IntBattVolt" height="20" backgroundColor="#add8e6"></Label>
         <RadCartesianChart style="height: 800px" id="intBattVolt">
-            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate" labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day" majorStep="1"></DateTimeContinuousAxis>
+            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
+                                    labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
+                                    majorStep="1"></DateTimeContinuousAxis>
             <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true" horizontalStripLinesVisible="true" verticalStripLinesVisible="true" verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc" horizontalStrokeWidth="2" verticalStrokeWidth="1" horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-            <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds" strokeColor="#5555ff"
-                        valueProperty="min"></SplineSeries>
-            <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds" strokeColor="#ff2222"
-                        valueProperty="max"></SplineSeries>
+            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
+                                   horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
+                                   verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                   horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                   horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
+            <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
+                          strokeColor="#5555ff"
+                          valueProperty="min"></SplineSeries>
+            <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
+                          strokeColor="#ff2222"
+                          valueProperty="max"></SplineSeries>
         </RadCartesianChart>
     </StackLayout>
     <!--    <Label class="page__content-icon fas" text="&#xf071;"></Label>-->

@@ -18,7 +18,7 @@ import { CookieService } from 'ngx-cookie-service';
         NativeScriptFormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        NativeScriptHttpClientModule,
+        NativeScriptHttpClientModule
     ],
     declarations: [
         AppComponent,

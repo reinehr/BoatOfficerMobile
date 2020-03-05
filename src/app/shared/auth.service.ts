@@ -1,39 +1,73 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
-import {catchError} from "rxjs/internal/operators";
-import {throwError} from "rxjs";
+import {catchError, tap} from 'rxjs/internal/operators';
+import {BehaviorSubject, throwError} from "rxjs";
 import {alert} from 'tns-core-modules/ui/dialogs';
+import {User} from '~/app/auth/user.model';
 
-const FIREBASE_API_KEY = '';
+const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
+
+interface AuthResponseData {
+    kind: string;
+    idToken: string;
+    email: string;
+    refreshToken: string;
+    expiresIn: string;
+    localID: string;
+    registered?: boolean;
+}
 
 @Injectable({providedIn: 'root'})
 export class AuthService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`;
     logInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
 
+    private _user = new BehaviorSubject<User>(null);
+
     constructor(
-        private httpClient: HttpClient,
-        private cookieService: CookieService
+        private httpClient: HttpClient
     ) {
     }
 
+    get user() {
+        return this._user.asObservable();
+    }
+
     signUp(email: string, password: string) {
-        return this.httpClient.post(this.signInUrl,
+        return this.httpClient.post<AuthResponseData>(this.signInUrl,
             {email, password, returnSecureToken: true}
         ).pipe(catchError(errorRes => {
-            this.handleError(errorRes.error.error.message);
-            return throwError(errorRes);
-        }));
+                this.handleError(errorRes.error.error.message);
+                return throwError(errorRes);
+            }),
+            tap(resData => {
+                if (resData && resData.idToken) {
+                    this.handleLogin(email, resData.idToken, resData.localID, parseInt(resData.expiresIn, 10));
+                }
+            })
+        );
     }
 
     login(email: string, password: string) {
-        return this.httpClient.post(this.logInUrl,
+        return this.httpClient.post<AuthResponseData>(this.logInUrl,
             {email, password, returnSecureToken: true}
         ).pipe(catchError(errorRes => {
-            this.handleError(errorRes.error.error.message);
-            return throwError(errorRes);
-        }));
+                this.handleError(errorRes.error.error.message);
+                return throwError(errorRes);
+            }),
+            tap(resData => {
+                if (resData && resData.idToken) {
+                    this.handleLogin(email, resData.idToken, resData.localID, parseInt(resData.expiresIn, 10));
+                }
+            })
+        );
+    }
+
+    private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
+        const expirationtime = new Date(new Date().getTime() + expiresIn * 1000);
+        const user = new User(email, userId, token, expirationtime);
+        this._user.next(user);
     }
 
     private handleError(errorMessage: string) {

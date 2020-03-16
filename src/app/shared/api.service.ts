@@ -4,6 +4,7 @@ import {CookieService} from 'ngx-cookie-service';
 import {Sensordata} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {switchMap} from 'rxjs/internal/operators';
+import {logger} from "codelyzer/util/logger";
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
 
@@ -63,16 +64,19 @@ export class ApiService {
 
     getSensorHistoryByField(sensorField: string, device: number, days: number) {
         let currentUserToken = '';
+        // console.log(`current token1: ${this.authService.token}`);
         this.authService.user.pipe(switchMap(currentUser => {
+            console.log(`current token2: ${currentUser.token}`);
             currentUserToken = currentUser.token;
             return currentUserToken;
         }));
+        console.log(`current token3: ${currentUserToken}`);
 
         this.httpClient.post(this.baseSensorUrl + 'get_sensor_history_by_field/', {field: sensorField, device, days}
             , {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
-                    Authorization: `Token ${currentUserToken}`
+                    idToken: `${currentUserToken}`
                 })
             }
         ).subscribe((resData: []) => {

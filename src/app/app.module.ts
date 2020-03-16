@@ -9,6 +9,13 @@ import { AppComponent } from './app.component';
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
 import { CookieService } from 'ngx-cookie-service';
 
+import firebase = require('nativescript-plugin-firebase');
+
+firebase
+    .init()
+    .then(() => console.log('Firebase initialized!'))
+    .catch(error => console.error(`Error: ${error}`));
+
 @NgModule({
     bootstrap: [
         AppComponent

@@ -2,7 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 import {CookieService} from 'ngx-cookie-service';
 import {catchError, tap} from 'rxjs/internal/operators';
-import {BehaviorSubject, throwError} from "rxjs";
+import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {User} from '~/app/auth/user.model';
 
@@ -68,6 +68,7 @@ export class AuthService {
         const expirationtime = new Date(new Date().getTime() + expiresIn * 1000);
         const user = new User(email, userId, token, expirationtime);
         this._user.next(user);
+        console.log(`current token0: ${user.token}`);
     }
 
     private handleError(errorMessage: string) {

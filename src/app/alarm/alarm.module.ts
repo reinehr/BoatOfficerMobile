@@ -1,13 +1,16 @@
-import { NgModule, NO_ERRORS_SCHEMA } from "@angular/core";
-import { NativeScriptCommonModule } from "nativescript-angular/common";
+import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {NativeScriptCommonModule} from 'nativescript-angular/common';
+import { NativeScriptUIChartModule } from 'nativescript-ui-chart/angular';
 
-import { AlarmRoutingModule } from "./alarm-routing.module";
-import { AlarmComponent } from "./alarm.component";
+import {AlarmRoutingModule} from './alarm-routing.module';
+import {AlarmComponent} from './alarm.component';
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
-        AlarmRoutingModule
+        AlarmRoutingModule,
+        NativeScriptCommonModule,
+        NativeScriptUIChartModule
     ],
     declarations: [
         AlarmComponent
@@ -16,4 +19,5 @@ import { AlarmComponent } from "./alarm.component";
         NO_ERRORS_SCHEMA
     ]
 })
-export class AlarmModule { }
+export class AlarmModule {
+}

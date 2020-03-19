@@ -7,8 +7,15 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
-import { CookieService } from 'ngx-cookie-service';
+// import { CookieService } from 'ngx-cookie-service';
+/*
+import firebase = require('nativescript-plugin-firebase');
 
+firebase
+    .init()
+    .then(() => console.log('Firebase initialized!'))
+    .catch(error => console.error(`Error: ${error}`));
+*/
 @NgModule({
     bootstrap: [
         AppComponent
@@ -18,7 +25,7 @@ import { CookieService } from 'ngx-cookie-service';
         NativeScriptFormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        NativeScriptHttpClientModule,
+        NativeScriptHttpClientModule
     ],
     declarations: [
         AppComponent,
@@ -27,7 +34,7 @@ import { CookieService } from 'ngx-cookie-service';
         NO_ERRORS_SCHEMA
     ],
     providers: [
-        CookieService
+        // CookieService
     ]
 })
 export class AppModule { }

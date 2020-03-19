@@ -1,8 +1,12 @@
-<ActionBar>
-    <Label text="Settings"></Label>
-</ActionBar>
+<ns-action-bar title="Settings"></ns-action-bar>
 
-<GridLayout class="page__content">
+<StackLayout class="page__content">
+    <Button
+            text="Anmelden"
+            class="btn btn-primary"
+            nsRouterLink="../auth"
+            pageTransition="slideLeft"></Button>
     <Label class="page__content-icon fas" text="&#xf013;"></Label>
     <Label class="page__content-placeholder" text="<!-- Settings page content goes here -->"></Label>
-</GridLayout>
+</StackLayout>
+

@@ -5,9 +5,9 @@ import {catchError, tap} from 'rxjs/internal/operators';
 import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 // import {User} from '~/app/auth/user.model';
+import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
-const appSettings = require('application-settings');
 
 interface AuthResponseData {
     kind: string;
@@ -63,11 +63,15 @@ export class AuthService {
 
     private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
         const expirationtime = new Date(new Date().getTime() + expiresIn * 1000);
-        appSettings.setString('token', token);
+        if (hasKey('token')) {
+            remove('token');
+        }
+        setString('token', token);
         // appSettings.setString('email', email);
         // appSettings.setString('userId', userId);
         // appSettings.setString('expirationtime', expirationtime);
-        console.log(`current token0: ${token}`);
+        console.log(`current token0a: ${token}`);
+        console.log(`current token0b: ${getString('token', '')}`);
     }
 
     private handleError(errorMessage: string) {

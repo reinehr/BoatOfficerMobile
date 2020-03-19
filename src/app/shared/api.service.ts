@@ -5,9 +5,9 @@ import {Sensordata} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {switchMap} from 'rxjs/internal/operators';
 import {logger} from 'codelyzer/util/logger';
+import {getString, hasKey} from 'tns-core-modules/application-settings';
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
-const appSettings = require('application-settings');
 
 @Injectable({
     providedIn: 'root'
@@ -19,15 +19,15 @@ export class ApiService {
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     // baseUrl = 'https://6fa3c20a.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
-    token = appSettings.getString('token', '');
+    token = getString('token', '');
 
     headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        idToken: `${this.token}`
+        idToken: `${getString('token', '')}`
     });
     result: Sensordata;
-    temperatureHistory: { 'min': number, 'max': number, 'milliseconds': number }[];
-    sensorHistory: { 'min': number, 'max': number, 'milliseconds': number }[];
+    temperatureHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
+    sensorHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
 
     constructor(
         private httpClient: HttpClient,
@@ -36,8 +36,13 @@ export class ApiService {
     }
 
     getLatestSensorData() {
-        this.httpClient.post(this.baseSensorUrl + 'get_latest/', {device: 1}
-            , {headers: this.headers}
+        this.httpClient.post(this.baseSensorUrl + 'get_latest/', {device: 1},
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }
         ).subscribe((resData: Sensordata) => {
             // for (let inner in resData) {
             //     this.result[inner] = resData[inner];
@@ -53,7 +58,12 @@ export class ApiService {
                 device: 1,
                 days: 31
             }
-            , {headers: this.headers}
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }
         ).subscribe((resData: []) => {
             // for (let inner in resData) {
             //     this.result[inner] = resData[inner];
@@ -65,11 +75,12 @@ export class ApiService {
 
     getSensorHistoryByField(sensorField: string, device: number, days: number) {
 
+        console.log(`Token: ${this.token}`);
         this.httpClient.post(this.baseSensorUrl + 'get_sensor_history_by_field/', {field: sensorField, device, days}
             , {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
-                    idToken: `${this.token}`
+                    idToken: `${getString('token', '')}`
                 })
             }
         ).subscribe((resData: []) => {

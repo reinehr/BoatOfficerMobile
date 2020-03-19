@@ -10,8 +10,16 @@ import { ScrollView, ScrollEventData } from 'tns-core-modules/ui/scroll-view';
 })
 export class AlarmComponent implements OnInit {
     sensorData: Sensordata;
-    temperatureHistory: {'min': number, 'max': number, 'milliseconds': number}[];
-    intBattVolt: {'min': number, 'max': number, 'milliseconds': number}[];
+    temperatureHistory: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
+    intBattVolt: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
+    intBattVoltMin = new Date(Date.now());
+    intBattVoltMax = new Date(Date.now());
+    intBattVoltMinStr = '';
+    intBattVoltMaxStr = `${this.intBattVoltMax.getDate()}/${this.intBattVoltMax.getMonth() + 1}/${this.intBattVoltMax.getFullYear()}`;
+    intTempMin = new Date(Date.now());
+    intTempMax = new Date(Date.now());
+    intTempMinStr = '';
+    intTempMaxStr = `${this.intTempMax.getDate()}/${this.intTempMax.getMonth() + 1}/${this.intTempMax.getFullYear()}`;
 
     constructor(
         private apiService: ApiService
@@ -24,8 +32,8 @@ export class AlarmComponent implements OnInit {
         console.log('scrollY: ' + args.scrollY);
     }
     ngOnInit(): void {
-        this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
+        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
+        // this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
         // this.sensorData = this.apiService.getLatestSensorData();
         // Use the "ngOnInit" handler to initialize data for the view.
     }
@@ -35,7 +43,20 @@ export class AlarmComponent implements OnInit {
         // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
         this.temperatureHistory = this.apiService.getIntTemperatureHistory();
         this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
-        // console.log(this.temperatureHistory);
+        for (const intSens of this.intBattVolt) {
+            const date = new Date(intSens.date);
+            if (date < this.intBattVoltMin) {
+                this.intBattVoltMin = date;
+                this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+        }
+        for (const intSens of this.temperatureHistory) {
+            const date = new Date(intSens.date);
+            if (date < this.intTempMin) {
+                this.intTempMin = date;
+                this.intTempMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+            }
+        }
     }
 
 }

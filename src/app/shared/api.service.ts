@@ -19,11 +19,11 @@ export class ApiService {
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     // baseUrl = 'https://6fa3c20a.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
+    token = appSettings.getString('token', '');
 
     headers = new HttpHeaders({
         'Content-Type': 'application/json',
-        Authorization: 'Token 4ae96d1410ea4c37878121f13d9cb3e059d37eac' // herohu master sabine
-        // Authorization: 'Token 57a7b700249ab523db88bff0c45a0456ac407f24'
+        idToken: `${this.token}`
     });
     result: Sensordata;
     temperatureHistory: { 'min': number, 'max': number, 'milliseconds': number }[];
@@ -48,7 +48,6 @@ export class ApiService {
     }
 
     getIntTemperatureHistory() {
-        const token = appSettings.getString('token', '');
         this.httpClient.post(this.baseSensorUrl + 'get_sensor_history_by_field/', {
                 field: 'IntTemperature',
                 device: 1,
@@ -65,21 +64,12 @@ export class ApiService {
     }
 
     getSensorHistoryByField(sensorField: string, device: number, days: number) {
-        // let currentUserToken = '';
-        const token = appSettings.getString('token', '');
-        // console.log(`current token1: ${this.authService.token}`);
-        // this.authService.user.pipe(switchMap(currentUser => {
-        //     console.log(`current token2: ${currentUser.token}`);
-        //     currentUserToken = currentUser.token;
-        //     return currentUserToken;
-        // }));
-        console.log(`current token3: ${token}`);
 
         this.httpClient.post(this.baseSensorUrl + 'get_sensor_history_by_field/', {field: sensorField, device, days}
             , {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
-                    idToken: `${token}`
+                    idToken: `${this.token}`
                 })
             }
         ).subscribe((resData: []) => {

@@ -24,7 +24,7 @@ export class AlarmComponent implements OnInit {
         console.log('scrollY: ' + args.scrollY);
     }
     ngOnInit(): void {
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
+        this.temperatureHistory = this.apiService.getIntTemperatureHistory();
         this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
         // this.sensorData = this.apiService.getLatestSensorData();
         // Use the "ngOnInit" handler to initialize data for the view.
@@ -33,7 +33,7 @@ export class AlarmComponent implements OnInit {
     click_gear() {
         // this.sensorData = this.apiService.getLatestSensorData();
         // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
+        this.temperatureHistory = this.apiService.getIntTemperatureHistory();
         this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
         // console.log(this.temperatureHistory);
     }

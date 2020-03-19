@@ -1,9 +1,7 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { ApiService } from '../shared/api.service';
-import { AuthService} from '~/app/shared/auth.service';
-import { CookieService } from 'ngx-cookie-service';
-import { RouterExtensions } from 'nativescript-angular/router';
+import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
+import {ApiService} from '../shared/api.service';
+import {AuthService} from '~/app/shared/auth.service';
+import {RouterExtensions} from 'nativescript-angular/router';
 
 @Component({
     selector: 'app-auth',
@@ -13,27 +11,19 @@ import { RouterExtensions } from 'nativescript-angular/router';
 
 export class AuthComponent implements OnInit {
 
-    emailControlIsValid = true;
-    passwordControlIsValid = true;
-    // @ViewChild('passwordEl') passwordEl: ElementRef<TextField>;
     registerMode = false;
     isLoading = false;
-    email: 'x';
-    password: 'x';
+    email: '';
+    password: '';
 
     constructor(
         private apiService: ApiService,
         private authService: AuthService,
-        private cookieService: CookieService,
         private router: RouterExtensions
-    ) { }
-
-    ngOnInit() {
-        const boToken = this.cookieService.get('bo-token');
-        if (boToken) {
-          // this.router.navigate(['/movies']);
-        }
+    ) {
     }
+
+    ngOnInit() {}
 
     saveForm() {
         this.isLoading = true;

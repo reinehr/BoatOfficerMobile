@@ -1,12 +1,13 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
-import {CookieService} from 'ngx-cookie-service';
+// import {CookieService} from 'ngx-cookie-service';
 import {catchError, tap} from 'rxjs/internal/operators';
 import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
-import {User} from '~/app/auth/user.model';
+// import {User} from '~/app/auth/user.model';
 
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
+const appSettings = require('application-settings');
 
 interface AuthResponseData {
     kind: string;
@@ -23,18 +24,14 @@ export class AuthService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=${FIREBASE_API_KEY}`;
     logInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithPassword?key=${FIREBASE_API_KEY}`;
 
-    private _user = new BehaviorSubject<User>(null);
 
     constructor(
         private httpClient: HttpClient
     ) {
     }
 
-    get user() {
-        return this._user.asObservable();
-    }
-
     signUp(email: string, password: string) {
+        console.log(`EMAIL: ${email}`);
         return this.httpClient.post<AuthResponseData>(this.signInUrl,
             {email, password, returnSecureToken: true}
         ).pipe(catchError(errorRes => {
@@ -66,9 +63,11 @@ export class AuthService {
 
     private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
         const expirationtime = new Date(new Date().getTime() + expiresIn * 1000);
-        const user = new User(email, userId, token, expirationtime);
-        this._user.next(user);
-        console.log(`current token0: ${user.token}`);
+        appSettings.setString('token', token);
+        // appSettings.setString('email', email);
+        // appSettings.setString('userId', userId);
+        // appSettings.setString('expirationtime', expirationtime);
+        console.log(`current token0: ${token}`);
     }
 
     private handleError(errorMessage: string) {

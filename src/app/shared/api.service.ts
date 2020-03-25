@@ -9,7 +9,6 @@ import {logger} from 'codelyzer/util/logger';
 import {getString, hasKey} from 'tns-core-modules/application-settings';
 import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject} from 'rxjs';
-import {Sensordatahistory} from '~/app/alarm/sensordatahistory.model';
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
 
@@ -101,7 +100,6 @@ export class ApiService {
             }
         ).pipe(tap(resData => {
             if (resData) {
-                const loadedSensorData = new Sensordatahistory(resData);
                 this.sensorHistory.next(resData);
             }
         }));

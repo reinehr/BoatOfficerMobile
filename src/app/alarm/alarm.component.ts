@@ -3,7 +3,6 @@ import {ApiService} from '~/app/shared/api.service';
 import {Sensordata} from '~/app/shared/interface/sensordata';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
-import {Sensordatahistory} from '~/app/alarm/sensordatahistory.model';
 import {registerElement} from 'nativescript-angular/element-registry';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);

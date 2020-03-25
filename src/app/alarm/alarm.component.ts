@@ -1,7 +1,13 @@
 import {Component, OnInit} from '@angular/core';
 import {ApiService} from '~/app/shared/api.service';
 import {Sensordata} from '~/app/shared/interface/sensordata';
-import { ScrollView, ScrollEventData } from 'tns-core-modules/ui/scroll-view';
+import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
+import {Subject, Subscription} from 'rxjs';
+import {Sensordatahistory} from '~/app/alarm/sensordatahistory.model';
+import {registerElement} from 'nativescript-angular/element-registry';
+
+registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
+
 
 @Component({
     selector: 'app-alarm',
@@ -9,9 +15,11 @@ import { ScrollView, ScrollEventData } from 'tns-core-modules/ui/scroll-view';
     moduleId: module.id,
 })
 export class AlarmComponent implements OnInit {
+    isLoading = false;
     sensorData: Sensordata;
-    temperatureHistory: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
-    intBattVolt: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
+    sensorDataHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
+    private sensordataSub: Subscription;
+    intBattVolt: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
     intBattVoltMin = new Date(Date.now());
     intBattVoltMax = new Date(Date.now());
     intBattVoltMinStr = '';
@@ -25,38 +33,74 @@ export class AlarmComponent implements OnInit {
         private apiService: ApiService
     ) {
     }
+
     onScroll(args: ScrollEventData) {
         const scrollView = args.object as ScrollView;
 
         console.log('scrollX: ' + args.scrollX);
         console.log('scrollY: ' + args.scrollY);
     }
+
     ngOnInit(): void {
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        // this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
-        // this.sensorData = this.apiService.getLatestSensorData();
-        // Use the "ngOnInit" handler to initialize data for the view.
+        // this.apiService.sensorHistory = [];
+        this.sensordataSub = this.apiService.currentSensorHistoryData.subscribe(
+            history => {
+                if (history) {
+                    console.log(`sensorDataHostory: ${history}`);
+                    this.sensorDataHistory = history;
+
+                    this.intBattVolt = history;
+                    for (const intSens of history) {
+                        const date = new Date(intSens.date);
+                        if (date < this.intBattVoltMin) {
+                            this.intBattVoltMin = date;
+                            this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                        }
+                    }
+                } else {
+                    console.log('no History');
+                }
+            }
+        );
+
+        this.isLoading = true;
+        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
+            console.log('SensorData loading ...');
+            this.isLoading = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+        });
     }
 
     click_gear() {
-        // this.sensorData = this.apiService.getLatestSensorData();
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
-        for (const intSens of this.intBattVolt) {
-            const date = new Date(intSens.date);
-            if (date < this.intBattVoltMin) {
-                this.intBattVoltMin = date;
-                this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            }
-        }
-        for (const intSens of this.temperatureHistory) {
-            const date = new Date(intSens.date);
-            if (date < this.intTempMin) {
-                this.intTempMin = date;
-                this.intTempMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            }
-        }
+        this.isLoading = true;
+        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
+            console.log('SensorData loading ...');
+            this.isLoading = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+        });
     }
 
+    refreshList(args) {
+        const pullRefresh = args.object;
+        this.isLoading = false;
+        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
+            console.log('SensorData loading ...');
+            this.isLoading = false;
+            pullRefresh.refreshing = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+            pullRefresh.refreshing = false;
+        });
+    }
+
+    ngOnDestroy() {
+        if (this.sensordataSub) {
+            this.sensordataSub.unsubscribe();
+        }
+    }
 }

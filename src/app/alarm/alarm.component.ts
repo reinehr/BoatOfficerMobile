@@ -1,11 +1,12 @@
 import {Component, OnInit} from '@angular/core';
+import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
-import {Sensordata} from '~/app/shared/interface/sensordata';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
-import {registerElement} from 'nativescript-angular/element-registry';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
+
+
 
 
 @Component({
@@ -15,14 +16,14 @@ registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefr
 })
 export class AlarmComponent implements OnInit {
     isLoading = false;
-    sensorData: Sensordata;
-    sensorDataHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
-    private sensordataSub: Subscription;
+    private intBattVoltSub: Subscription;
+    private temperatureSub: Subscription;
     intBattVolt: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
     intBattVoltMin = new Date(Date.now());
     intBattVoltMax = new Date(Date.now());
     intBattVoltMinStr = '';
     intBattVoltMaxStr = `${this.intBattVoltMax.getDate()}/${this.intBattVoltMax.getMonth() + 1}/${this.intBattVoltMax.getFullYear()}`;
+    intTemp: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
     intTempMin = new Date(Date.now());
     intTempMax = new Date(Date.now());
     intTempMinStr = '';
@@ -42,11 +43,10 @@ export class AlarmComponent implements OnInit {
 
     ngOnInit(): void {
         // this.apiService.sensorHistory = [];
-        this.sensordataSub = this.apiService.currentSensorHistoryData.subscribe(
+        this.intBattVoltSub = this.apiService.currentSensorHistoryData.subscribe(
             history => {
                 if (history) {
                     console.log(`sensorDataHostory: ${history}`);
-                    this.sensorDataHistory = history;
 
                     this.intBattVolt = history;
                     for (const intSens of history) {
@@ -54,6 +54,24 @@ export class AlarmComponent implements OnInit {
                         if (date < this.intBattVoltMin) {
                             this.intBattVoltMin = date;
                             this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
+                        }
+                    }
+                } else {
+                    console.log('no History');
+                }
+            }
+        );
+        this.temperatureSub = this.apiService.currentTemperatureHistoryData.subscribe(
+            history => {
+                if (history) {
+                    console.log(`temperatureHostory: ${history}`);
+                    this.intTemp = history;
+
+                    for (const intSens of history) {
+                        const date = new Date(intSens.date);
+                        if (date < this.intTempMin) {
+                            this.intTempMin = date;
+                            this.intTempMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
                         }
                     }
                 } else {
@@ -70,17 +88,17 @@ export class AlarmComponent implements OnInit {
             console.log(error);
             this.isLoading = false;
         });
-    }
-
-    click_gear() {
         this.isLoading = true;
-        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
+        this.apiService.getIntTemperatureHistory(1, 31).subscribe(response => {
             console.log('SensorData loading ...');
             this.isLoading = false;
         }, error => {
             console.log(error);
             this.isLoading = false;
         });
+    }
+
+    click_gear() {
     }
 
     refreshList(args) {
@@ -98,8 +116,8 @@ export class AlarmComponent implements OnInit {
     }
 
     ngOnDestroy() {
-        if (this.sensordataSub) {
-            this.sensordataSub.unsubscribe();
+        if (this.intBattVoltSub) {
+            this.intBattVoltSub.unsubscribe();
         }
     }
 }

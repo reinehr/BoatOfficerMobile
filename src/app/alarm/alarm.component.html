@@ -13,56 +13,55 @@
 
     </ActionItem>
 </ActionBar>
-<PullToRefresh (refresh)="refreshList($event)">
-    <ScrollView orientation="vertical">
-        <GridLayout class="page__content" *ngIf="!isLoading">
-            <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10">
-                <!--        <Label text="IntTemperature" height="20" backgroundColor="#add8e6"></Label>-->
-                <!--        <RadCartesianChart style="height: 800px" id="intTemp">-->
-                <!--            <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"-->
-                <!--                                    labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"-->
-                <!--                                    majorStep="1" [minimum]="intTempMinStr" [maximum]="intTempMaxStr"></DateTimeContinuousAxis>-->
-                <!--            <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
-                <!--            <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"-->
-                <!--                                   horizontalStripLinesVisible="true" verticalStripLinesVisible="true"-->
-                <!--                                   verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
-                <!--                                   horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
-                <!--                                   horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
-                <!--            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"-->
-                <!--                          strokeColor="#5555ff"-->
-                <!--                          valueProperty="min"></SplineSeries>-->
-                <!--            <SplineSeries tkCartesianSeries [items]="temperatureHistory" categoryProperty="milliseconds"-->
-                <!--                          strokeColor="#ff2222"-->
-                <!--                          valueProperty="max"></SplineSeries>-->
-                <!--        </RadCartesianChart>-->
+<!--<PullToRefresh (refresh)="refreshList($event)">-->
+<!--    <ScrollView orientation="vertical">-->
+<!--        <GridLayout class="page__content" *ngIf="!isLoading">-->
+<!--            <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10">-->
+<!--                <Label text="IntTemperature" height="20" backgroundColor="#add8e6"></Label>-->
+<!--                <RadCartesianChart style="height: 800px" id="intTemp">-->
+<!--                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"-->
+<!--                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"-->
+<!--                                            majorStep="1" [minimum]="intTempMinStr"-->
+<!--                                            [maximum]="intTempMaxStr"></DateTimeContinuousAxis>-->
+<!--                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"-->
+<!--                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"-->
+<!--                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
+<!--                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
+<!--                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#5555ff"-->
+<!--                                  valueProperty="min"></SplineSeries>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#ff2222"-->
+<!--                                  valueProperty="max"></SplineSeries>-->
+<!--                </RadCartesianChart>-->
 
-                <Label text="IntBattVolt {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"
-                       backgroundColor="#add8e6"></Label>
-                <RadCartesianChart style="height: 800px" id="intBattVolt{{x}}" *ngFor="let x of [1]">
-                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
-                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
-                                            majorStep="1"
-                                            [minimum]="intBattVoltMinStr" [maximum]="intBattVoltMaxStr"
-                    ></DateTimeContinuousAxis>
-                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
-                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
-                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
-                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
-                                  strokeColor="#5555ff"
-                                  valueProperty="min"></SplineSeries>
-                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
-                                  strokeColor="#ff2222"
-                                  valueProperty="max"></SplineSeries>
-                </RadCartesianChart>
-            </StackLayout>
-            <!--    <Label class="page__content-icon fas" text="&#xf071;"></Label>-->
-            <!--    <Label class="page__content-placeholder" [text]="sensorData['latitude']['value']"></Label>-->
-        </GridLayout>
-    </ScrollView>
-</PullToRefresh>
-<FlexboxLayout justifyContent="center" alignItems="center" *ngIf="isLoading">
-    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
-</FlexboxLayout>
+<!--                <Label text="IntBattVolt {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"-->
+<!--                       backgroundColor="#add8e6"></Label>-->
+<!--                <RadCartesianChart style="height: 800px" id="intBattVolt{{x}}" *ngFor="let x of [1]">-->
+<!--                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"-->
+<!--                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"-->
+<!--                                            majorStep="1"-->
+<!--                                            [minimum]="intBattVoltMinStr" [maximum]="intBattVoltMaxStr"-->
+<!--                    ></DateTimeContinuousAxis>-->
+<!--                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"-->
+<!--                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"-->
+<!--                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
+<!--                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
+<!--                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#5555ff"-->
+<!--                                  valueProperty="min"></SplineSeries>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#ff2222"-->
+<!--                                  valueProperty="max"></SplineSeries>-->
+<!--                </RadCartesianChart>-->
+<!--            </StackLayout>-->
+<!--        </GridLayout>-->
+<!--        <FlexboxLayout justifyContent="center" alignItems="center" *ngIf="isLoading">-->
+<!--            <ActivityIndicator [busy]="isLoading"></ActivityIndicator>-->
+<!--        </FlexboxLayout>-->
+<!--    </ScrollView>-->
+<!--</PullToRefresh>-->

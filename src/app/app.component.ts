@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
-import {getCurrentPushToken} from "nativescript-plugin-firebase";
+import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 
 @Component({
     selector: 'app-ns',

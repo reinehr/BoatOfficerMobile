@@ -16,8 +16,10 @@ const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
     providedIn: 'root'
 })
 export class ApiService {
-    private sensorHistory = new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
-        (null);
+    private sensorHistory =
+        new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
+    private temperatureHistory =
+        new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
 
     // baseUrl = 'http://127.0.0.1:8000/';
@@ -32,7 +34,7 @@ export class ApiService {
         idToken: `${getString('token', '')}`
     });
     result: Sensordata;
-    temperatureHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
+    // temperatureHistory: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[];
 
     // sensorHistory = new Subject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>();
 
@@ -44,6 +46,10 @@ export class ApiService {
 
     get currentSensorHistoryData() {
         return this.sensorHistory.asObservable();
+    }
+
+    get currentTemperatureHistoryData() {
+        return this.temperatureHistory.asObservable();
     }
 
     get currentSensorLatestData() {
@@ -65,11 +71,12 @@ export class ApiService {
         }));
     }
 
-    getIntTemperatureHistory() {
-        this.httpClient.post(this.baseSensorUrl + 'get_sensor_history_by_field/', {
+    getIntTemperatureHistory(device: number, days: number) {
+        return this.httpClient.post<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
+        (this.baseSensorUrl + 'get_sensor_history_by_field/', {
                 field: 'IntTemperature',
-                device: 1,
-                days: 31
+                device,
+                days
             }
             , {
                 headers: new HttpHeaders({
@@ -77,13 +84,11 @@ export class ApiService {
                     idToken: `${getString('token', '')}`
                 })
             }
-        ).subscribe((resData: []) => {
-            // for (let inner in resData) {
-            //     this.result[inner] = resData[inner];
-            // }
-            this.temperatureHistory = resData;
-        });
-        return this.temperatureHistory;
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.temperatureHistory.next(resData);
+            }
+        }));
     }
 
     getSensorHistoryByField(sensorField: string, device: number, days: number) {

@@ -3,13 +3,66 @@
 </ActionBar>
 
 
-<GridLayout>
-    <MapView #mapView [latitude]="latitude" [longitude]="longitude"
-             [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-             [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" (mapReady)="onMapReady($event)"
-             (markerSelect)="onMarkerEvent($event)" (markerBeginDragging)="onMarkerEvent($event)"
-             (markerEndDragging)="onMarkerEvent($event)" (markerDrag)="onMarkerEvent($event)"
-             (markerInfoWindowTapped)="onMarkerEvent($event)" (coordinateTapped)="onCoordinateTapped($event)"
-             (cameraChanged)="onCameraChanged($event)"
-             (cameraMove)="onCameraMove($event)"></MapView>
-</GridLayout>
+<PullToRefresh (refresh)="refreshList($event)">
+    <ScrollView orientation="vertical">
+        <GridLayout class="page__content" *ngIf="!isLoading">
+            <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10" minHeight="800">
+                <Label text="MapView" height="20" backgroundColor="#add8e6"></Label>
+                <MapView height="400" #mapView [latitude]="latitude" [longitude]="longitude"
+                         [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                         [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" (mapReady)="onMapReady($event)"
+                         (markerSelect)="onMarkerEvent($event)" (markerBeginDragging)="onMarkerEvent($event)"
+                         (markerEndDragging)="onMarkerEvent($event)" (markerDrag)="onMarkerEvent($event)"
+                         (markerInfoWindowTapped)="onMarkerEvent($event)"
+                         (coordinateTapped)="onCoordinateTapped($event)"
+                         (cameraChanged)="onCameraChanged($event)"
+                         (cameraMove)="onCameraMove($event)"></MapView>
+
+                <Label text="IntTemperature: {{ intTempMinStr }} - {{ intTempMaxStr }}" height="20" backgroundColor="#add8e6"></Label>
+                <RadCartesianChart style="height: 800px" id="intTemp2">
+                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
+                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
+                                            majorStep="1" [minimum]="intTempMinStr"
+                                            [maximum]="intTempMaxStr"></DateTimeContinuousAxis>
+                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
+                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
+                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
+                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"
+                                  strokeColor="#5555ff"
+                                  valueProperty="min"></SplineSeries>
+                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"
+                                  strokeColor="#ff2222"
+                                  valueProperty="max"></SplineSeries>
+                </RadCartesianChart>
+
+                <Label text="IntBattVolt: {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"
+                       backgroundColor="#add8e6"></Label>
+                <RadCartesianChart style="height: 800px" id="intBattVolt_{{x}}" *ngFor="let x of [1,2,3]">
+                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
+                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
+                                            majorStep="1"
+                                            [minimum]="intBattVoltMinStr" [maximum]="intBattVoltMaxStr"
+                    ></DateTimeContinuousAxis>
+                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
+                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
+                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
+                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
+                                  strokeColor="#5555ff"
+                                  valueProperty="min"></SplineSeries>
+                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
+                                  strokeColor="#ff2222"
+                                  valueProperty="max"></SplineSeries>
+                </RadCartesianChart>
+            </StackLayout>
+        </GridLayout>
+    </ScrollView>
+</PullToRefresh>
+<FlexboxLayout justifyContent="center" alignItems="center" *ngIf="isLoading">
+    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
+</FlexboxLayout>

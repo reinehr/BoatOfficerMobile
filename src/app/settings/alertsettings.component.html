@@ -1,0 +1,9 @@
+    <GridLayout columns="*, 120" rows="auto, auto" backgroundColor="#f0f0f0">
+        <Label text="Shock Alert on" verticalAlignment="center" row="0" col="0" style="vertical-align: center"
+               *ngIf="isChecked"></Label>
+        <Label text="Shock Alert off" verticalAlignment="center" row="0" col="0" style="vertical-align: center"
+               *ngIf="!isChecked"></Label>
+        <Switch checked="true" row="0" col="1" (checkedChange)="onCheckedShockChange($event)"></Switch>
+        <Label text="min Temperature Alert: {{ minTemp }}°C" verticalAlignment="center" row="1" col="0" style="vertical-align: center"></Label>
+        <ListPicker row="1" col="1" [items]="minTempList" [selectedIndex]="minTempIndex" (selectedIndexChange)="onSelectedMinTempChanged($event)"></ListPicker>
+    </GridLayout>

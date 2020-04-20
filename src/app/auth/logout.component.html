@@ -1,0 +1,20 @@
+<ns-action-bar
+        title="Logout"
+        [showBackButton]="true"
+></ns-action-bar>
+
+<StackLayout class="form">
+    <StackLayout class="input-field">
+        <Label
+                class="label"
+                text="Logout">
+        </Label>
+        <Button
+                text="Logout"
+                class="btn btn-blue btn-rounded-lg"
+                (tap)="saveForm()"
+        ></Button>
+    </StackLayout>
+    <ActivityIndicator [busy]="isLoading">
+    </ActivityIndicator>
+</StackLayout>

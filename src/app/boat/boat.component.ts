@@ -23,7 +23,9 @@ export class BoatComponent implements OnInit {
     intBattVoltMax = new Date(Date.now());
     intBattVoltMinStr = '';
     intBattVoltMaxStr = `${this.intBattVoltMax.getDate()}/${this.intBattVoltMax.getMonth() + 1}/${this.intBattVoltMax.getFullYear()}`;
-    intTemp: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
+    // sensor_data: {'device_id': number, 'device_name': string, 'device_history':
+    // {string: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]}}[] = [];
+    intTemp: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
     intTempMin = new Date(Date.now());
     intTempMax = new Date(Date.now());
     intTempMinStr = '';

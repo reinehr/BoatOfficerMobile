@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
-import {getCurrentPushToken} from 'nativescript-plugin-firebase';
+import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 
 @Component({
     selector: 'app-ns',
@@ -21,6 +21,7 @@ export class AppComponent implements OnInit {
 
             onPushTokenReceivedCallback: (token) => {
                 console.log('[Firebase] onPushTokenReceivedCallback:', {token});
+                setString('push_token', token);
             },
 
             onMessageReceivedCallback: (message: firebase.Message) => {

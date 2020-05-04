@@ -28,6 +28,10 @@ export class ApiService {
     ) {
     }
 
+    get currentSensorDataHistoryData() {
+        return this.sensorDataHistory.asObservable();
+    }
+
     get currentSensorHistoryData() {
         return this.sensorHistory.asObservable();
     }
@@ -39,6 +43,18 @@ export class ApiService {
     get currentSensorLatestData() {
         return this.sensorLatestData.asObservable();
     }
+
+    private sensorDataHistory =
+        new BehaviorSubject<{
+            'device_id': number,
+            'device_name': string,
+            'device_history': {
+                [others: string]: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]
+            },
+            'device_latest_data': {
+                [others: string]: { 'data': number, 'time': string }
+            }
+        }[]>(null);
     private sensorHistory =
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private temperatureHistory =
@@ -47,8 +63,8 @@ export class ApiService {
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
-    baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    // baseUrl = 'https://75ce23cf.ngrok.io/';
+    // baseUrl = 'https://boat-officer-backend.herokuapp.com/';
+    baseUrl = 'https://bc8a0963.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     token = getString('token', '');
@@ -116,6 +132,7 @@ export class ApiService {
 
         console.log(`Token1: ${this.token}`);
         console.log(`PushToken1: ${getString('push_token', '')}`);
+        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_history_by_field/'}`);
         return this.httpClient.post<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
         (this.baseSensorUrl + 'get_sensor_history_by_field/', {
                 field: sensorField,
@@ -136,6 +153,40 @@ export class ApiService {
         }));
     }
 
+    getSensorHistory(sensorField: string, device: number, days: number) {
+
+        console.log(`Token1: ${this.token}`);
+        console.log(`PushToken1: ${getString('push_token', '')}`);
+        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_data/'}`);
+        return this.httpClient.post<{
+            'device_id': number,
+            'device_name': string,
+            'device_history': {
+                [others: string]: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]
+            },
+            'device_latest_data': {
+                [others: string]: { 'data': number, 'time': string }
+            }
+        }[]>
+        (this.baseSensorUrl + 'get_sensor_data/', {
+                field: sensorField,
+                device,
+                days,
+                push_token: getString('push_token', '')
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.sensorDataHistory.next(resData);
+            }
+        }));
+    }
+
     registerDevice(serialNumber: string, registrationKey: string, deviceName: string) {
         return this.httpClient.post<string>(this.baseDeviceUrl + 'register_device/',
             {serialNumber, registrationKey, device_name: deviceName}, {
@@ -149,5 +200,9 @@ export class ApiService {
                 return throwError(errorRes);
             })
         );
+    }
+
+    saveBoatImage(imageAssets: any[], imageSrc: any) {
+
     }
 }

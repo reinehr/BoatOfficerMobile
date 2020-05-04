@@ -1,4 +1,6 @@
-import { Injectable } from '@angular/core';
+import {Injectable} from '@angular/core';
+import {Subscription} from "rxjs";
+import {ApiService} from "~/app/shared/api.service";
 
 export interface DataItem {
     id: number;
@@ -6,15 +8,32 @@ export interface DataItem {
     description: string;
 }
 
+export interface SensorDataHistory {
+    'device_id': number;
+    'device_name': string;
+    'device_history': {
+        [key: string]: { 'min': number | boolean, 'max': number | boolean, 'milliseconds': number, 'day': number, 'date': string }[]
+    };
+    'device_latest_data': {
+        [key: string]: { 'data': number, 'time': string }
+    };
+    'device_history_interval'?: {
+        [key: string]: { 'min': string, 'max': string }
+    };
+}
+
 @Injectable({
     providedIn: 'root'
 })
 export class DataService {
 
+    private sensorDataHistory: SensorDataHistory[];
+    private sensorDataHistorySub: Subscription;
+
     private items = new Array<DataItem>(
         {
             id: 1,
-            name: 'Item 1x5',
+            name: 'Item 1',
             description: 'Description for Item 1'
         },
         {
@@ -26,93 +45,88 @@ export class DataService {
             id: 3,
             name: 'Item 3',
             description: 'Description for Item 3'
-        },
-        {
-            id: 4,
-            name: 'Item 4',
-            description: 'Description for Item 4'
-        },
-        {
-            id: 5,
-            name: 'Item 5',
-            description: 'Description for Item 5'
-        },
-        {
-            id: 6,
-            name: 'Item 6',
-            description: 'Description for Item 6'
-        },
-        {
-            id: 7,
-            name: 'Item 7',
-            description: 'Description for Item 7'
-        },
-        {
-            id: 8,
-            name: 'Item 8',
-            description: 'Description for Item 8'
-        },
-        {
-            id: 9,
-            name: 'Item 9',
-            description: 'Description for Item 9'
-        },
-        {
-            id: 10,
-            name: 'Item 10',
-            description: 'Description for Item 10'
-        },
-        {
-            id: 11,
-            name: 'Item 11',
-            description: 'Description for Item 11'
-        },
-        {
-            id: 12,
-            name: 'Item 12',
-            description: 'Description for Item 12'
-        },
-        {
-            id: 13,
-            name: 'Item 13',
-            description: 'Description for Item 13'
-        },
-        {
-            id: 14,
-            name: 'Item 14',
-            description: 'Description for Item 14'
-        },
-        {
-            id: 15,
-            name: 'Item 15',
-            description: 'Description for Item 15'
-        },
-        {
-            id: 16,
-            name: 'Item 16',
-            description: 'Description for Item 16'
-        },
-        {
-            id: 17,
-            name: 'Item 17',
-            description: 'Description for Item 17'
-        },
-        {
-            id: 18,
-            name: 'Item 18',
-            description: 'Description for Item 18'
-        },
-        {
-            id: 19,
-            name: 'Item 19',
-            description: 'Description for Item 19'
-        },
-        {
-            id: 20,
-            name: 'Item 20',
-            description: 'Description for Item 20'
         }
     );
+
+    constructor(
+        private apiService: ApiService
+    ) {
+        this.initSensorDataHistory();
+    }
+
+    getSensorDataHistory(): Array<SensorDataHistory> {
+        if (!this.sensorDataHistory) {
+            this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
+                console.log('SensorData DataService loading ...');
+            }, error => {
+                console.log(error);
+            });
+        }
+        return this.sensorDataHistory;
+    }
+
+    initSensorDataHistory(): void {
+        this.sensorDataHistorySub = this.apiService.currentSensorDataHistoryData.subscribe(
+            history => {
+                if (history) {
+                    this.sensorDataHistory = history;
+                    // console.log(`sensorDataHistory: ${JSON.stringify(this.sensorDataHistory, null, 2)}`);
+
+                    // tslint:disable-next-line:forin
+                    for (const deviceIndex in history) {
+                        const deviceData = history[deviceIndex].device_history;
+                        // console.log(`sensorDataHistory: ${JSON.stringify(this.sensorDataHistory[deviceIndex].device_history, null, 2)}`);
+                        // tslint:disable-next-line:forin
+                        if (!this.sensorDataHistory[deviceIndex].device_history_interval) {
+                            this.sensorDataHistory[deviceIndex].device_history_interval = {};
+                        }
+                        for (const sensorType in deviceData) {
+                            if (deviceData.hasOwnProperty(sensorType)) {
+                                // console.log(`sensorDataHistory: ${JSON.stringify(sensorType, null, 2)}`);
+                                if (!this.sensorDataHistory[deviceIndex].device_history_interval[sensorType]) {
+                                    this.sensorDataHistory[deviceIndex].device_history_interval[sensorType] = {
+                                        min: '',
+                                        max: ''
+                                    };
+                                }
+                                let minDate = new Date(Date.now());
+                                let maxDate = new Date(Date.now());
+                                let minDateStr = '';
+                                let maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
+                                for (const day of deviceData[sensorType]) {
+                                    const date = new Date(day.date);
+                                    if (date < minDate) {
+                                        minDate = date;
+                                    }
+                                }
+                                minDateStr = `${minDate.getDate()}/${minDate.getMonth() + 1}/${minDate.getFullYear()}`;
+                                this.sensorDataHistory[deviceIndex].device_history_interval[sensorType].min = minDateStr;
+                                this.sensorDataHistory[deviceIndex].device_history_interval[sensorType].max = maxDateStr;
+                            }
+                        }
+                        console.log(`sensorDataHistoryInterval: service Subscription triggered`);
+                    }
+                } else {
+                    console.log('no History');
+                }
+            }
+        );
+        this.refreshSensorDataHistory();
+    }
+
+    refreshSensorDataHistory(): void {
+        if (!this.sensorDataHistory) {
+            this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
+                console.log('SensorData loading ...');
+            }, error => {
+                console.log(error);
+            });
+        }
+    }
+
+    setSensorDataHistory(input: SensorDataHistory[]) {
+        this.sensorDataHistory = input;
+    }
 
     getItems(): Array<DataItem> {
         return this.items;

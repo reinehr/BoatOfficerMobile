@@ -7,6 +7,44 @@
     <ScrollView orientation="vertical">
         <GridLayout class="page__content" *ngIf="!isLoading">
             <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10" minHeight="800">
+                <!--<StackLayout *ngFor="let device of sensorDataHistory2" class="list-group-item">
+                    <Label id="l1" [text]="device.device_name"></Label>
+
+                    <StackLayout xngIf="device.device_history" class="list-group-item">
+                        <StackLayout *ngFor="let historyData of device.device_history | keyvalue"
+                                     class="list-group-item">
+                            <Label id="{{historyData.key}}" [text]="historyData.key"></Label>
+                            <Label id="{{historyData.key}}" [text]=" historyData.value.length"></Label>
+                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].min"></Label>
+                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].max"></Label>
+                            <RadCartesianChart style="height: 800px" id="{{historyData.key}}">
+                                <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                                <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM"
+                                                        labelFitMode="Rotate"
+                                                        labelRotationAngle="-1.3" labelTextColor="black"
+                                                        majorStepUnit="Day"
+                                                        majorStep="1"
+                                                        [minimum]="device.device_history_interval[historyData.key].min"
+                                                        [maximum]="device.device_history_interval[historyData.key].max"></DateTimeContinuousAxis>
+                                <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
+                                                       verticalLinesVisible="true"
+                                                       horizontalStripLinesVisible="true"
+                                                       verticalStripLinesVisible="true"
+                                                       verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                                       horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                                       horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
+                                <SplineSeries tkCartesianSeries [items]="historyData.value"
+                                              categoryProperty="milliseconds"
+                                              strokeColor="#5555ff"
+                                              valueProperty="min"></SplineSeries>
+                                <SplineSeries tkCartesianSeries [items]="historyData.value"
+                                              categoryProperty="milliseconds"
+                                              strokeColor="#ff2222"
+                                              valueProperty="max"></SplineSeries>
+                            </RadCartesianChart>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>-->
                 <Label text="MapView" height="20" backgroundColor="#add8e6"></Label>
                 <MapView height="400" #mapView [latitude]="latitude" [longitude]="longitude"
                          [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
@@ -40,7 +78,7 @@
 
                 <Label text="IntBattVolt: {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"
                        backgroundColor="#add8e6"></Label>
-                <RadCartesianChart style="height: 800px" id="intBattVolt_{{x}}" *ngFor="let x of [1,2,3]">
+                <RadCartesianChart style="height: 800px" id="intBattVolt" *ngIf="intBattVoltMinStr">
                     <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
                                             labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
                                             majorStep="1"

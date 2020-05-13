@@ -63,9 +63,24 @@ export class UploadpictureComponent implements OnInit {
                     element.options.height = that.isSingleMode ? that.previewSize : that.thumbSize;
                 });
 
-                this.apiService.saveBoatImage(that.imageAssets, that.imageSrc)
-
                 that.imageAssets = selection;
+
+                this.apiService.saveBoatImage(this.imageAssets, that.imageSrc, 1)
+                    // .subscribe(response => {
+                    //     console.log('uploading image ... ', response);
+                    //     if (response === 'SUCCESS') {
+                    //         this.router.navigate(['']);
+                    //     } else {
+                    //         const options = {
+                    //             title: response,
+                    //             okButtonText: 'OK'
+                    //         };
+                    //         alert(options);
+                    //     }
+                    // }, error => {
+                    //     console.log(error);
+                    // })
+                ;
             }).catch(e => {
             console.log(e);
         });

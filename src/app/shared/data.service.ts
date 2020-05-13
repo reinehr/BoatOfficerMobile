@@ -1,11 +1,30 @@
 import {Injectable} from '@angular/core';
-import {Subscription} from "rxjs";
-import {ApiService} from "~/app/shared/api.service";
+import {Subscription} from 'rxjs';
+import {ApiService} from '~/app/shared/api.service';
 
 export interface DataItem {
     id: number;
     name: string;
     description: string;
+}
+
+export interface DeviceAlarmDataFormat {
+    'id': number;
+    'boat_image': string;
+    'name': string;
+    'harbour_contact': string;
+    'berth': string;
+    'alarm': {
+        'type': string,
+        'time': string,
+        'column_sensor_data': string,
+        'value': string,
+        'marked_as_ok_username': string,
+        'responsible_username': string,
+        'clear_by_device_time': string,
+        'marked_as_ok_time': string,
+        'status': string
+    }[];
 }
 
 export interface SensorDataHistory {
@@ -90,9 +109,9 @@ export class DataService {
                                     };
                                 }
                                 let minDate = new Date(Date.now());
-                                let maxDate = new Date(Date.now());
+                                const maxDate = new Date(Date.now());
                                 let minDateStr = '';
-                                let maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
+                                const maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
                                 for (const day of deviceData[sensorType]) {
                                     const date = new Date(day.date);
                                     if (date < minDate) {

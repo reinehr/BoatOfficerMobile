@@ -18,21 +18,128 @@
 .far {
     font-family: "Font Awesome 5 Free", "fa-regular-400";
     font-weight: 400;
+    // font-size: 28pt;
+}
+
+.icon-boatofficer {
+    font-family: "BoatOfficer Icons", "boatofficer";
+    font-weight: 400;
+    // font-size: 28pt;
+}
+
+.homeBackgroundImage {
+    background-image: url("../src/assets/home.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
 }
 
 // Custom tabstrip item class
 .navigation__item {
+    Label{color: #326cb5};
+    background-color: white;
     &:active,
     &:active Label {
-        @include colorize($contrasted-color: complementary background 20% 0%);
+        color: black;
     }
+}
+
+.boatofficer-logo {
+    width: 40%;
+}
+
+.boatoffice-boat-image {
+    width: 100%;
+    // height: 100%;
+    border-radius: 10;
+    display: block;
+    stretch: aspectFill;
+    horizontal-align: center;
+    vertical-align: center;
+
+}
+
+.alarm-card {
+    background-color: white;
+    margin-left: 10;
+    margin-right: 10;
+    margin-bottom: 10;
+    border-radius: 10;
+}
+
+.alarm-button {
+    width: 85%;
+    background-color: #091525;
+    color: white;
+    font-weight: 800;
+    border-radius: 10;
+    height: 44pt;
+}
+
+.action-bar {
+    background-color: #091525;
+    color: white;
+    font-weight: 800;
+}
+
+.alarm-symbol {
+    font-family: "BoatOfficer Icons", "boatofficer";
+    // background-color: #091525;
+    // color: orange;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+}
+
+.alarm-green {
+    color: lawngreen;
+}
+
+.alarm-orange {
+    color: #fa8b24;
+}
+
+.alarm-blue {
+    color: #326cb5;
+}
+
+.alarm-gray {
+    color: lightgray;
+}
+
+.bg-darkblue {
+    background-color: #091525;
+    color: red;
+}
+
+.alarm-text {
+    // background-color: #f91525;
+    color: white;
+    font-weight: 800;
+    font-size: 16px;
+    text-align: center;
+    align-content: center;
+    width: auto;
+    vertical-align: center;
+}
+
+.circle-wrapper{
+    // background-color: #01a0ec;
+    text-align: center;
+    border-radius: 10;
+    width: 85%;
+    height: 200;
+    overflow: hidden;
+    margin: 0;
 }
 
 // Common page class
 .page__content {
     &-icon,
     &-placeholder {
-        color: const(grey);
+        color: white;
         font-size: 20;
         vertical-align: center;
         horizontal-align: center;

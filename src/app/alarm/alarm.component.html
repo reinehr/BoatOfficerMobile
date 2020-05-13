@@ -1,16 +1,90 @@
-<ActionBar title="Title" class="action-bar">
-    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>
-    <Label text="Boat History"></Label>
-    <ActionItem
-            ios.position="left"
-            android.position="actionBar">
-        <Image class="fas t-25" src="~/assets/boat-black.png"></Image>
-    </ActionItem>
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <!--    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>-->
+    <Label text="ALARM HISTORY" class="alarm-text"></Label>
+
     <ActionItem
             ios.position="right"
-            android.position="actionBar">
-        <Label text="&#xf013;" class="fas t-25" (tap)="click_gear()"></Label>
-
+            android.position="right">
+        <Label (tap)="click_gear()"
+               class="alarm-symbol alarm-blue"
+               text="L">
+        </Label>
     </ActionItem>
 </ActionBar>
 
+
+<PullToRefresh (refresh)="refreshList($event)">
+    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+        <StackLayout>
+            <StackLayout *ngFor="let device of deviceData" paddingBottom="15">
+                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                        <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image"
+                               class="boatoffice-boat-image"></Image>
+                    </GridLayout>
+                    <Label col="1" row="0" [text]="'Boat'" class="c-white t-16" height="30"></Label>
+                    <Label col="1" row="1" [text]="device.name" class="alarm-blue t-16" height="30"></Label>
+                </GridLayout>
+                <StackLayout *ngFor="let alarm of device.alarm" class="alarm-card">
+                    <GridLayout columns="40, auto, 55, auto" rows="40">
+                        <Label col=0 row=0 text="S" class="alarm-symbol alarm-blue"></Label>
+                        <Label col=1 row=0 [text]="alarm.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold"
+                               verticalAlignment="middle"></Label>
+                        <Label col=2 row=0 text="o" class="alarm-symbol alarm-blue" marginLeft="15"></Label>
+                        <Label col=3 row=0 [text]="alarm.time | date : 'hh:mm'" class="t-16 font-weight-bold"
+                               verticalAlignment="middle"></Label>
+                    </GridLayout>
+                    <GridLayout columns="40, auto, auto" rows="40">
+                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
+                               *ngIf="alarm.status == 'open'"></Label>
+                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
+                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                               *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                               *ngIf="alarm.status == 'clear_by_device'"></Label>
+                        <Label col=1 row=0 [text]="alarm.type" class="alarm-gray t-16 font-weight-bold"
+                               verticalAlignment="middle"></Label>
+                        <Label col=2 row=0 [text]="' ' + alarm.value + 'V'" class="alarm-gray t-16 font-weight-bold"
+                               verticalAlignment="middle" *ngIf="alarm.value"></Label>
+                    </GridLayout>
+                    <GridLayout columns="*, *" *ngIf="alarm.status == 'open'" padding="10">
+                        <GridLayout col="0" columns="40, *" rows="40" (tap)="onCallTap(device.id)" class="alarm-button" margin="5" *ngIf="device.harbour_contact">
+                            <Label col=0 row=0 text="T" class="alarm-symbol alarm-gray"></Label>
+                            <Label col=1 row=0 [text]="'Call Harbour'" class="alarm-text t-16"></Label>
+                        </GridLayout>
+                        <GridLayout col="0" columns="40, *" rows="40" class="alarm-button" backgroundColor="#a9a9a9" margin="5" *ngIf="!device.harbour_contact">
+                            <Label col=0 row=0 text="T" class="alarm-symbol alarm-gray"></Label>
+                            <Label col=1 row=0 [text]="'Call Harbour'" class="alarm-text t-16"></Label>
+                        </GridLayout>
+                        <GridLayout col="1" columns="40, *" rows="40" class="alarm-button" backgroundColor="#1e90ff" margin="5,5,5,5">
+                            <Label col=0 row=0 text="B" class="alarm-symbol" color="#add8e6"></Label>
+                            <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text t-14"></Label>
+                        </GridLayout>
+                    </GridLayout>
+                    <GridLayout columns="40, auto" rows="40, auto" *ngIf="alarm.status != 'open'">
+                        <Label col=0 row=0 text="B" class="alarm-symbol alarm-blue"></Label>
+                        <Label col=1 row=0 text="Cleared" class="alarm-blue t-16 font-weight-bold"
+                               verticalAlignment="middle" *ngIf="alarm.status == 'clear_by_device'"></Label>
+                        <Label col=1 row=0 text="Marked as OK" class="alarm-blue t-16 font-weight-bold"
+                               verticalAlignment="middle" *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                        <Label col=1 row=0 text="Open (Responsibility clarified)"
+                               class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
+                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                        <Label col=1 row=2
+                               [text]="'by Device on ' + (alarm.clear_by_device_time | date : 'dd.MM.yyy') + ' at ' + (alarm.clear_by_device_time | date : 'hh:mm')"
+                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-8"
+                               *ngIf="alarm.status == 'clear_by_device'"></Label>
+                        <Label col=1 row=2
+                               [text]="'by ' + alarm.marked_as_ok_username + ' on ' + (alarm.marked_as_ok_time | date : 'dd.MM.yyy') + ' at ' + (alarm.marked_as_ok_time | date : 'hh:mm')"
+                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-8"
+                               *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                        <Label col=1 row=2 [text]="'Marked as responsible: ' + alarm.responsible_username"
+                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-8"
+                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </ScrollView>
+</PullToRefresh>

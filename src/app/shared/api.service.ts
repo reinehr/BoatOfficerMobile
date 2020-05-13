@@ -1,8 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
 import {Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
+import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
 import {tap} from 'rxjs/operators';
 import {logger} from 'codelyzer/util/logger';
@@ -11,6 +12,11 @@ import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
+
+
+const bghttpModule = require('nativescript-background-http');
+const session = bghttpModule.session('image-upload');
+const fs = require('file-system');
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
 
@@ -44,6 +50,10 @@ export class ApiService {
         return this.sensorLatestData.asObservable();
     }
 
+    get deviceData() {
+        return this.device.asObservable();
+    }
+
     private sensorDataHistory =
         new BehaviorSubject<{
             'device_id': number,
@@ -60,11 +70,12 @@ export class ApiService {
     private temperatureHistory =
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
+    private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
-    // baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    baseUrl = 'https://bc8a0963.ngrok.io/';
+    baseUrl = 'https://boat-officer-backend.herokuapp.com/';
+    // baseUrl = 'https://bc8a0963.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     token = getString('token', '');
@@ -103,6 +114,26 @@ export class ApiService {
         ).pipe(tap(resData => {
             if (resData) {
                 this.sensorLatestData.next(resData);
+            }
+        }));
+    }
+
+    getDeviceData() {
+        // let params = new HttpParams();
+        // params = params.append('limit', '5');
+        // params = params.append('only_active', 'true');
+        const param: any = {limit: 60, only_active: 'false'};
+        return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                }),
+                params: param
+            }
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.device.next(resData);
             }
         }));
     }
@@ -202,7 +233,58 @@ export class ApiService {
         );
     }
 
-    saveBoatImage(imageAssets: any[], imageSrc: any) {
+    saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
+        console.log('Selection done: ' + JSON.stringify(imageSrc._android));
+        console.log('Selection done: ' + JSON.stringify(imageAssets));
 
+        // const folder = this.fs.knownFolders.documents();
+        // const pathOfImage = fs.path.join(imageSrc._android, '');
+        // const saved = image.saveToFile(pathOfImage, ".png");
+        const request = {
+            url: this.baseDeviceUrl + 'upload_image/',
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/octet-stream',
+                // 'Content-Type': 'multipart/form',
+                // 'File-Name': 'Test.jpg',
+                idToken: `${getString('token', '')}`
+            }
+        };
+
+
+        // const task = session.uploadFile(imageSrc._android, request);
+        const params = [
+            {name: 'deviceId', value: deviceId},
+            {
+                name: 'boatImage',
+                filename: imageSrc._android,
+                mimeType: 'image/jpeg',
+                content_type_extra: '{id_device: ' + deviceId + '}'
+            }
+        ];
+        const task = session.multipartUpload(params, request);
+        task.on('progress', logEvent);
+        task.on('error', logEvent);
+        task.on('complete', logEvent);
+
+        function logEvent(e) {
+            console.log(e.eventName + ' currentBytes: ' + e.currentBytes);
+            console.log(e.eventName + ' totalBytes: ' + e.totalBytes);
+        }
+
+        return task;
+        /*
+                return this.httpClient.post<string>(this.baseDeviceUrl + 'upload_image/',
+                    {imageName: imageSrc._android}, {
+                        headers: new HttpHeaders({
+                            'Content-Type': 'application/json',
+                            idToken: `${getString('token', '')}`
+                        })
+                    }
+                ).pipe(catchError(errorRes => {
+                        // ApiService.handleError(errorRes.error.error.message);
+                        return throwError(errorRes);
+                    })
+                );*/
     }
 }

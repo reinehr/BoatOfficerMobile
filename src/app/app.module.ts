@@ -8,6 +8,8 @@ import { AppComponent } from './app.component';
 // import { BoatComponent } from "./boat/boat.component";
 
 import { NativeScriptHttpClientModule } from 'nativescript-angular/http-client';
+import { NativeScriptSvgModule } from 'nativescript-svg/angular';
+
 // GMSServices.MapView
 // import * as platform from 'tns-core-modules/platform';
 // import * as GMSServices from 'nativescript-google-maps-sdk';
@@ -33,7 +35,8 @@ firebase
         NativeScriptFormsModule,
         ReactiveFormsModule,
         AppRoutingModule,
-        NativeScriptHttpClientModule
+        NativeScriptHttpClientModule,
+        NativeScriptSvgModule
     ],
     declarations: [
         AppComponent,

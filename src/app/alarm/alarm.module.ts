@@ -4,12 +4,14 @@ import {NativeScriptUIChartModule} from 'nativescript-ui-chart/angular';
 
 import {AlarmRoutingModule} from './alarm-routing.module';
 import {AlarmComponent} from './alarm.component';
+import {CommonModule} from "@angular/common";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         AlarmRoutingModule,
-        NativeScriptUIChartModule
+        NativeScriptUIChartModule,
+        CommonModule
     ],
     declarations: [
         AlarmComponent

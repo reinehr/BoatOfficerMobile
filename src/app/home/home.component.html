@@ -14,22 +14,24 @@
                 <Label text="" height="10"></Label>
                 <Label [text]="device.name" class="alarm-button" height="30pt"></Label>
                 <StackLayout class="circle-wrapper">
-                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image"
+                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_medium"
                            class="boatoffice-boat-image"></Image>
                 </StackLayout>
                 <StackLayout *ngFor="let alarm of device.alarm">
-                    <Label text="" height="7"></Label>
-                    <GridLayout columns="40, *, 40" rows="40" (tap)="onButtonTap()" class="alarm-button">
-                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
-                               *ngIf="alarm.status == 'open'"></Label>
-                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
-                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
-                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                               *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                               *ngIf="alarm.status == 'clear_by_device'"></Label>
-                        <Label col=1 row=0 [text]="alarm.type" class="alarm-text"></Label>
-                    </GridLayout>
+                    <StackLayout *ngIf="alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)">
+                        <Label text="" height="7"></Label>
+                        <GridLayout columns="40, *, 40" rows="40" (tap)="onButtonTap()" class="alarm-button">
+                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
+                                   *ngIf="alarm.status == 'open'"></Label>
+                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
+                                   *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                   *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                   *ngIf="alarm.status == 'clear_by_device'"></Label>
+                            <Label col=1 row=0 [text]="alarm.type" class="alarm-text"></Label>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
             <!--                </ng-template>-->

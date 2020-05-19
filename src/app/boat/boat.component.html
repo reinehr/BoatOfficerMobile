@@ -1,106 +1,183 @@
-<ActionBar>
-    <Label text="Boat"></Label>
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <!--    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>-->
+    <Label text="BOAT STATUS" class="alarm-text"></Label>
+
+    <ActionItem
+            ios.position="right"
+            android.position="right">
+        <Label class="alarm-symbol alarm-blue"
+               text="L" [nsRouterLink]="'../settings'" pageTransition="slideLeft">
+        </Label>
+    </ActionItem>
 </ActionBar>
 
 
 <PullToRefresh (refresh)="refreshList($event)">
-    <ScrollView orientation="vertical">
-        <GridLayout class="page__content" *ngIf="!isLoading">
-            <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10" minHeight="800">
-                <!--<StackLayout *ngFor="let device of sensorDataHistory2" class="list-group-item">
-                    <Label id="l1" [text]="device.device_name"></Label>
+    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+        <StackLayout>
+            <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
+                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                        <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                               class="boatoffice-boat-image"></Image>
+                    </GridLayout>
+                    <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
+                    <Label col="1" row="1" [text]="device.name"
+                           class="alarm-blue t-16" height="30"></Label>
+                </GridLayout>
+                <StackLayout class="alarm-card" padding="10,10,10,10">
+                    <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10">
+                        <Label col=0 row=0 [text]="'SENSORS'" class="t-16 font-weight-bold"
+                               verticalAlignment="middle" horizontalAlignment="left"></Label>
+                        <Label col=1 row=0 [text]="'Updated ' + (boatStatus[device.id].sensor_data.time | timeago)"
+                               class="t-12 font-weight-bold"
+                               verticalAlignment="middle" horizontalAlignment="right"></Label>
+                    </GridLayout>
+                    <GridLayout *ngFor="let sensorField of sensorFieldKeys">
+                        <StackLayout *ngFor="let alarmActive of [activeAlarmByField[device.id][sensorFieldMap[sensorField].alarm[0]] || activeAlarmByField[device.id][sensorFieldMap[sensorField].alarm[1]]]">
+                            <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"
+                                        *ngIf="boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="['../details', idDevice, sensorField]">
+                                <Label col=0 row=0 [text]="sensorFieldMap[sensorField].icon"
+                                       [class]="'alarm-symbol' + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
+                                <Label col=1 row=0 [text]="sensorField" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
+                                       verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                <Label col=2 row=0
+                                       [text]="alarmActive ? 'C': ''"
+                                       class="alarm-symbol alarm-orange"></Label>
+                                <Label col=3 row=0
+                                       [text]="sensorFieldMap[sensorField].filter=='active' ? (boatStatus[device.id].sensor_data[sensorField] ? 'yes' : 'no') : sensorFieldMap[sensorField].filter=='closed' ? (boatStatus[device.id].sensor_data[sensorField] ? 'closed' : 'open') : boatStatus[device.id].sensor_data[sensorField] + sensorFieldMap[sensorField].unit"
+                                       [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                       verticalAlignment="middle" horizontalAlignment="right"></Label>
 
-                    <StackLayout xngIf="device.device_history" class="list-group-item">
-                        <StackLayout *ngFor="let historyData of device.device_history | keyvalue"
-                                     class="list-group-item">
-                            <Label id="{{historyData.key}}" [text]="historyData.key"></Label>
-                            <Label id="{{historyData.key}}" [text]=" historyData.value.length"></Label>
-                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].min"></Label>
-                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].max"></Label>
-                            <RadCartesianChart style="height: 800px" id="{{historyData.key}}">
-                                <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                                <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM"
-                                                        labelFitMode="Rotate"
-                                                        labelRotationAngle="-1.3" labelTextColor="black"
-                                                        majorStepUnit="Day"
-                                                        majorStep="1"
-                                                        [minimum]="device.device_history_interval[historyData.key].min"
-                                                        [maximum]="device.device_history_interval[historyData.key].max"></DateTimeContinuousAxis>
-                                <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                                       verticalLinesVisible="true"
-                                                       horizontalStripLinesVisible="true"
-                                                       verticalStripLinesVisible="true"
-                                                       verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                                       horizontalStrokeWidth="2" verticalStrokeWidth="1"
-                                                       horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-                                <SplineSeries tkCartesianSeries [items]="historyData.value"
-                                              categoryProperty="milliseconds"
-                                              strokeColor="#5555ff"
-                                              valueProperty="min"></SplineSeries>
-                                <SplineSeries tkCartesianSeries [items]="historyData.value"
-                                              categoryProperty="milliseconds"
-                                              strokeColor="#ff2222"
-                                              valueProperty="max"></SplineSeries>
-                            </RadCartesianChart>
+                            </GridLayout>
                         </StackLayout>
-                    </StackLayout>
-                </StackLayout>-->
-                <Label text="MapView" height="20" backgroundColor="#add8e6"></Label>
-                <MapView height="400" #mapView [latitude]="latitude" [longitude]="longitude"
-                         [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-                         [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" (mapReady)="onMapReady($event)"
-                         (markerSelect)="onMarkerEvent($event)" (markerBeginDragging)="onMarkerEvent($event)"
-                         (markerEndDragging)="onMarkerEvent($event)" (markerDrag)="onMarkerEvent($event)"
-                         (markerInfoWindowTapped)="onMarkerEvent($event)"
-                         (coordinateTapped)="onCoordinateTapped($event)"
-                         (cameraChanged)="onCameraChanged($event)"
-                         (cameraMove)="onCameraMove($event)"></MapView>
-
-                <Label text="IntTemperature: {{ intTempMinStr }} - {{ intTempMaxStr }}" height="20" backgroundColor="#add8e6"></Label>
-                <RadCartesianChart style="height: 800px" id="intTemp2">
-                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
-                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
-                                            majorStep="1" [minimum]="intTempMinStr"
-                                            [maximum]="intTempMaxStr"></DateTimeContinuousAxis>
-                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
-                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
-                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
-                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"
-                                  strokeColor="#5555ff"
-                                  valueProperty="min"></SplineSeries>
-                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"
-                                  strokeColor="#ff2222"
-                                  valueProperty="max"></SplineSeries>
-                </RadCartesianChart>
-
-                <Label text="IntBattVolt: {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"
-                       backgroundColor="#add8e6"></Label>
-                <RadCartesianChart style="height: 800px" id="intBattVolt" *ngIf="intBattVoltMinStr">
-                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"
-                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"
-                                            majorStep="1"
-                                            [minimum]="intBattVoltMinStr" [maximum]="intBattVoltMaxStr"
-                    ></DateTimeContinuousAxis>
-                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"
-                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"
-                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
-                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>
-                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
-                                  strokeColor="#5555ff"
-                                  valueProperty="min"></SplineSeries>
-                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"
-                                  strokeColor="#ff2222"
-                                  valueProperty="max"></SplineSeries>
-                </RadCartesianChart>
+                    </GridLayout>
+                </StackLayout>
+                <StackLayout class="alarm-card" marginTop="15" padding="10,10,10,10">
+                    <GridLayout columns="*, auto, 10" rows="40" paddingBottom="10">
+                        <Label col=0 row=0 [text]="'POSITION'" class="t-16 font-weight-bold"
+                               verticalAlignment="middle" horizontalAlignment="left"></Label>
+                        <Label col=1 row=0 [text]="'Updated ' + (boatStatus[device.id].position_data.time | timeago)"
+                               class="t-12 font-weight-bold"
+                               verticalAlignment="middle" horizontalAlignment="right"></Label>
+                    </GridLayout>
+                    <MapView height="400" #mapView [latitude]="boatStatus[device.id].position_data.latitude" [longitude]="boatStatus[device.id].position_data.longitude"
+                             [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                             [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
+                             (mapReady)="onMapReady($event, idDevice)"
+                             (markerSelect)="onMarkerEvent($event)"
+                             (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                </StackLayout>
             </StackLayout>
-        </GridLayout>
+
+        <Button
+               class="alarm-symbol alarm-blue"
+               text="L" [nsRouterLink]="['../alarm', {outlets: {alarmTab:['default']}}]" pageTransition="slideLeft">
+        </Button>
+        </StackLayout>
     </ScrollView>
 </PullToRefresh>
-<FlexboxLayout justifyContent="center" alignItems="center" *ngIf="isLoading">
-    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>
-</FlexboxLayout>
+
+
+<!--<PullToRefresh (refresh)="refreshList($event)">-->
+<!--    <ScrollView orientation="vertical">-->
+<!--        <GridLayout class="page__content" *ngIf="!isLoading">-->
+<!--            <StackLayout orientation="vertical" backgroundColor="lightgray" padding="10" minHeight="800">-->
+<!--                &lt;!&ndash;<StackLayout *ngFor="let device of sensorDataHistory2" class="list-group-item">-->
+<!--                    <Label id="l1" [text]="device.device_name"></Label>-->
+
+<!--                    <StackLayout xngIf="device.device_history" class="list-group-item">-->
+<!--                        <StackLayout *ngFor="let historyData of device.device_history | keyvalue"-->
+<!--                                     class="list-group-item">-->
+<!--                            <Label id="{{historyData.key}}" [text]="historyData.key"></Label>-->
+<!--                            <Label id="{{historyData.key}}" [text]=" historyData.value.length"></Label>-->
+<!--                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].min"></Label>-->
+<!--                            <Label id="{{historyData.key}}" [text]=" device.device_history_interval[historyData.key].max"></Label>-->
+<!--                            <RadCartesianChart style="height: 800px" id="{{historyData.key}}">-->
+<!--                                <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--                                <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM"-->
+<!--                                                        labelFitMode="Rotate"-->
+<!--                                                        labelRotationAngle="-1.3" labelTextColor="black"-->
+<!--                                                        majorStepUnit="Day"-->
+<!--                                                        majorStep="1"-->
+<!--                                                        [minimum]="device.device_history_interval[historyData.key].min"-->
+<!--                                                        [maximum]="device.device_history_interval[historyData.key].max"></DateTimeContinuousAxis>-->
+<!--                                <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"-->
+<!--                                                       verticalLinesVisible="true"-->
+<!--                                                       horizontalStripLinesVisible="true"-->
+<!--                                                       verticalStripLinesVisible="true"-->
+<!--                                                       verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
+<!--                                                       horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
+<!--                                                       horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
+<!--                                <SplineSeries tkCartesianSeries [items]="historyData.value"-->
+<!--                                              categoryProperty="milliseconds"-->
+<!--                                              strokeColor="#5555ff"-->
+<!--                                              valueProperty="min"></SplineSeries>-->
+<!--                                <SplineSeries tkCartesianSeries [items]="historyData.value"-->
+<!--                                              categoryProperty="milliseconds"-->
+<!--                                              strokeColor="#ff2222"-->
+<!--                                              valueProperty="max"></SplineSeries>-->
+<!--                            </RadCartesianChart>-->
+<!--                        </StackLayout>-->
+<!--                    </StackLayout>-->
+<!--                </StackLayout>&ndash;&gt;-->
+<!--                <Label text="MapView" height="20" backgroundColor="#add8e6"></Label>-->
+<!--                <MapView height="400" #mapView [latitude]="latitude" [longitude]="longitude"-->
+<!--                         [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"-->
+<!--                         [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" (mapReady)="onMapReady($event)"-->
+<!--                         (markerSelect)="onMarkerEvent($event)" (markerBeginDragging)="onMarkerEvent($event)"-->
+<!--                         (markerEndDragging)="onMarkerEvent($event)" (markerDrag)="onMarkerEvent($event)"-->
+<!--                         (markerInfoWindowTapped)="onMarkerEvent($event)"-->
+<!--                         (coordinateTapped)="onCoordinateTapped($event)"-->
+<!--                         (cameraChanged)="onCameraChanged($event)"-->
+<!--                         (cameraMove)="onCameraMove($event)"></MapView>-->
+
+<!--                <Label text="IntTemperature: {{ intTempMinStr }} - {{ intTempMaxStr }}" height="20" backgroundColor="#add8e6"></Label>-->
+<!--                <RadCartesianChart style="height: 800px" id="intTemp2">-->
+<!--                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"-->
+<!--                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"-->
+<!--                                            majorStep="1" [minimum]="intTempMinStr"-->
+<!--                                            [maximum]="intTempMaxStr"></DateTimeContinuousAxis>-->
+<!--                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"-->
+<!--                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"-->
+<!--                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
+<!--                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
+<!--                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#5555ff"-->
+<!--                                  valueProperty="min"></SplineSeries>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intTemp" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#ff2222"-->
+<!--                                  valueProperty="max"></SplineSeries>-->
+<!--                </RadCartesianChart>-->
+
+<!--                <Label text="IntBattVolt: {{ intBattVoltMinStr }} - {{ intBattVoltMaxStr }}" height="20"-->
+<!--                       backgroundColor="#add8e6"></Label>-->
+<!--                <RadCartesianChart style="height: 800px" id="intBattVolt" *ngIf="intBattVoltMinStr">-->
+<!--                    <DateTimeContinuousAxis tkCartesianHorizontalAxis dateFormat="dd.MM" labelFitMode="Rotate"-->
+<!--                                            labelRotationAngle="-1.3" labelTextColor="black" majorStepUnit="Day"-->
+<!--                                            majorStep="1"-->
+<!--                                            [minimum]="intBattVoltMinStr" [maximum]="intBattVoltMaxStr"-->
+<!--                    ></DateTimeContinuousAxis>-->
+<!--                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>-->
+<!--                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true" verticalLinesVisible="true"-->
+<!--                                           horizontalStripLinesVisible="true" verticalStripLinesVisible="true"-->
+<!--                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"-->
+<!--                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"-->
+<!--                                           horizontalStripLineColor="#eeeef9, #ffffff"></RadCartesianChartGrid>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#5555ff"-->
+<!--                                  valueProperty="min"></SplineSeries>-->
+<!--                    <SplineSeries tkCartesianSeries [items]="intBattVolt" categoryProperty="milliseconds"-->
+<!--                                  strokeColor="#ff2222"-->
+<!--                                  valueProperty="max"></SplineSeries>-->
+<!--                </RadCartesianChart>-->
+<!--            </StackLayout>-->
+<!--        </GridLayout>-->
+<!--    </ScrollView>-->
+<!--</PullToRefresh>-->
+<!--<FlexboxLayout justifyContent="center" alignItems="center" *ngIf="isLoading">-->
+<!--    <ActivityIndicator [busy]="isLoading"></ActivityIndicator>-->
+<!--</FlexboxLayout>-->

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
+import {BoatStatus, Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
@@ -54,6 +54,10 @@ export class ApiService {
         return this.device.asObservable();
     }
 
+    get boatStatus() {
+        return this.boatStatusData.asObservable();
+    }
+
     private sensorDataHistory =
         new BehaviorSubject<{
             'device_id': number,
@@ -71,6 +75,7 @@ export class ApiService {
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
     private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
+    private boatStatusData = new BehaviorSubject<BoatStatus>(null);
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
@@ -78,6 +83,7 @@ export class ApiService {
     // baseUrl = 'https://bc8a0963.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
+    baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
     token = getString('token', '');
 
     headers = new HttpHeaders({
@@ -104,7 +110,7 @@ export class ApiService {
     }
 
     getLatestSensorData() {
-        return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest/', {device: 1},
+        return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest_depricated/', {device: 1},
             {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
@@ -136,6 +142,38 @@ export class ApiService {
                 this.device.next(resData);
             }
         }));
+    }
+
+    getBoatStatus() {
+        const param: any = {};
+        return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                }),
+                params: param
+            }
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.boatStatusData.next(resData);
+            }
+        }));
+    }
+
+    setAlarmData(idAlarm: number, markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
+        this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
+                id: idAlarm,
+                marked_as_ok: markedAsOk,
+                marked_as_responsible: markedAsResponsible
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe();
+        this.getDeviceData().subscribe();
     }
 
     getIntTemperatureHistory(device: number, days: number) {

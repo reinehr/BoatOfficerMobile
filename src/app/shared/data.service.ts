@@ -11,10 +11,20 @@ export interface DataItem {
 export interface DeviceAlarmDataFormat {
     'id': number;
     'boat_image': string;
+    'boat_image_large': string;
+    'boat_image_medium': string;
+    'boat_image_small': string;
+    'boat_image_tag': string;
     'name': string;
     'harbour_contact': string;
     'berth': string;
+    'role': string;
+    'num_sailor': number;
+    'num_guard': number;
+    'num_officer': number;
+    'num_total': number;
     'alarm': {
+        'id': number;
         'type': string,
         'time': string,
         'column_sensor_data': string,
@@ -23,7 +33,9 @@ export interface DeviceAlarmDataFormat {
         'responsible_username': string,
         'clear_by_device_time': string,
         'marked_as_ok_time': string,
-        'status': string
+        'status': string,
+        'i_am_responsible': boolean,
+        'loading': boolean
     }[];
 }
 

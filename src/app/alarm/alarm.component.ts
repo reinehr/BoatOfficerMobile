@@ -18,6 +18,7 @@ export class AlarmComponent implements OnInit {
     isLoading = false;
     private devicedataSub: Subscription;
     deviceData: DeviceAlarmDataFormat[];
+    showOnlyOpen = false;
 
     constructor(
         private apiService: ApiService
@@ -74,8 +75,27 @@ export class AlarmComponent implements OnInit {
         console.log('Button was pressed');
     }
 
+    onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
+        this.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, true, null);
+    }
+
+    onAlarmNotResponsibleTap(idDevice: number, idAlarm: number) {
+        this.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, false, null);
+    }
+
+    onAlarmOkTap(idDevice: number, idAlarm: number) {
+        this.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, true, true);
+    }
+
     onCallTap(idDevice: number) {
-        console.log('Button was pressed' + this.deviceData[idDevice].harbour_contact);
         TNSPhone.dial(this.deviceData[idDevice].harbour_contact, true);
+    }
+
+    onCheckedChange() {
+        this.showOnlyOpen = !this.showOnlyOpen;
+        console.log('onlyOpen: ' + (this.showOnlyOpen ? 't' : 'f'));
     }
 }

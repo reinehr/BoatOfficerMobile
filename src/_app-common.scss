@@ -93,6 +93,17 @@
     vertical-align: center;
 }
 
+.alarm-symbol-s {
+    font-family: "BoatOfficer Icons", "boatofficer";
+    // background-color: #091525;
+    // color: orange;
+    font-weight: 400;
+    font-size: 18px;
+    text-align: center;
+    width: 30pt;
+    vertical-align: center;
+}
+
 .alarm-green {
     color: lawngreen;
 }
@@ -117,7 +128,18 @@
 .alarm-text {
     // background-color: #f91525;
     color: white;
-    font-weight: 800;
+    font-weight: 600;
+    font-size: 16px;
+    text-align: center;
+    align-content: center;
+    width: auto;
+    vertical-align: center;
+}
+
+.alarm-text-s {
+    // background-color: #f91525;
+    color: white;
+    font-weight: 400;
     font-size: 16px;
     text-align: center;
     align-content: center;

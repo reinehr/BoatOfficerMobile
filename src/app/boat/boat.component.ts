@@ -1,10 +1,12 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
-import {DataService, SensorDataHistory} from '~/app/shared/data.service';
+import {DataService, DeviceAlarmDataFormat, SensorDataHistory} from '~/app/shared/data.service';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
+import {BoatStatus, boatStatusMap} from '~/app/shared/interface/sensordata';
+import { RouterExtensions } from 'nativescript-angular/router';
 
 // Important - must register MapView plugin in order to use in Angular templates
 registerElement('MapView', () => MapView);
@@ -20,11 +22,6 @@ export class BoatComponent implements OnInit {
     private intBattVoltSub: Subscription;
     private temperatureSub: Subscription;
     private sensorDataHistorySub: Subscription;
-    intBattVolt: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
-    intBattVoltMin = new Date(Date.now());
-    intBattVoltMax = new Date(Date.now());
-    intBattVoltMinStr = '';
-    intBattVoltMaxStr = `${this.intBattVoltMax.getDate()}/${this.intBattVoltMax.getMonth() + 1}/${this.intBattVoltMax.getFullYear()}`;
     sensorDataHistory2: SensorDataHistory[];
     sensorDataHistory: {
         'device_id': number,
@@ -39,11 +36,14 @@ export class BoatComponent implements OnInit {
             [key: string]: { 'min': string, 'max': string }
         }
     }[];
-    intTemp: { 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[] = [];
-    intTempMin = new Date(Date.now());
-    intTempMax = new Date(Date.now());
-    intTempMinStr = '';
-    intTempMaxStr = `${this.intTempMax.getDate()}/${this.intTempMax.getMonth() + 1}/${this.intTempMax.getFullYear()}`;
+
+    private devicedataSub: Subscription;
+    deviceData: DeviceAlarmDataFormat[];
+    private boatStatusSub: Subscription;
+    boatStatus: BoatStatus;
+    sensorFieldMap = boatStatusMap;
+    sensorFieldKeys = Object.keys(boatStatusMap);
+    activeAlarmByField: {[idDevice: number]: {[sensorFieldKey: string]: boolean}};
 
     latitude = -23.86;
     longitude = 151.20;
@@ -60,14 +60,51 @@ export class BoatComponent implements OnInit {
 
     constructor(
         private apiService: ApiService,
-        private dataService: DataService
+        private dataService: DataService,
+        // private routerExtensions: RouterExtensions
     ) {
         // Use the constructor to inject services.
     }
 
     ngOnInit(): void {
+
+        this.devicedataSub = this.apiService.deviceData.subscribe(
+            ddata => {
+                if (ddata) {
+                    this.deviceData = ddata;
+                    this.activeAlarmByField = {};
+                    for (const device of ddata) {
+                        this.activeAlarmByField[device.id] = {};
+                        for (const mapKey of this.sensorFieldKeys) {
+                            for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
+                                this.activeAlarmByField[device.id][alarmType] = false;
+                            }
+                        }
+                        for (const alarm of device.alarm) {
+                            if (alarm.status === 'open' || alarm.status === 'open_someone_responsible') {
+                                this.activeAlarmByField[device.id][alarm.type] = true;
+                            }
+                        }
+                    }
+                    console.log(this.activeAlarmByField);
+                } else {
+                    console.log('no Device');
+                }
+            }
+        );
+
+        this.boatStatusSub = this.apiService.boatStatus.subscribe(
+            bsdata => {
+                if (bsdata) {
+                    this.boatStatus = bsdata;
+                    console.log('boatStatus id' + 0 + ' num ' + this.sensorFieldKeys.length);
+                } else {
+                    console.log('no boatStatus');
+                }
+            }
+        );
+
         this.dataService.initSensorDataHistory();
-        this.sensorDataHistory2 = this.dataService.getSensorDataHistory();
         setTimeout(xyz => {
             }, 20);
         // Use the "ngOnInit" handler to initialize data for the view.
@@ -84,42 +121,6 @@ export class BoatComponent implements OnInit {
             }
         );
 
-        this.intBattVoltSub = this.apiService.currentSensorHistoryData.subscribe(
-            history => {
-                if (history) {
-                    // console.log(`sensorDataHistory: ${history}`);
-
-                    this.intBattVolt = history;
-                    for (const intSens of history) {
-                        const date = new Date(intSens.date);
-                        if (date < this.intBattVoltMin) {
-                            this.intBattVoltMin = date;
-                            this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-                        }
-                    }
-                } else {
-                    console.log('no History');
-                }
-            }
-        );
-        this.temperatureSub = this.apiService.currentTemperatureHistoryData.subscribe(
-            history => {
-                if (history) {
-                    // console.log(`temperatureHostory: ${history}`);
-                    this.intTemp = history;
-
-                    for (const intSens of history) {
-                        const date = new Date(intSens.date);
-                        if (date < this.intTempMin) {
-                            this.intTempMin = date;
-                            this.intTempMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-                        }
-                    }
-                } else {
-                    console.log('no History');
-                }
-            }
-        );
         this.sensorDataHistorySub = this.apiService.currentSensorDataHistoryData.subscribe(
             history => {
                 if (history) {
@@ -175,24 +176,16 @@ export class BoatComponent implements OnInit {
             this.isLoading = false;
         });
         this.isLoading = true;
-        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
-            console.log('SensorData loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
-        this.isLoading = true;
-        this.apiService.getIntTemperatureHistory(1, 31).subscribe(response => {
-            console.log('SensorData loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
-        this.isLoading = true;
         this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
             console.log('SensorData loading ...');
+            this.isLoading = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+        });
+        this.isLoading = true;
+        this.apiService.getBoatStatus().subscribe(response => {
+            console.log('BoatStatus loading ...');
             this.isLoading = false;
         }, error => {
             console.log(error);
@@ -202,7 +195,7 @@ export class BoatComponent implements OnInit {
 
 
     // Map events
-    onMapReady(event) {
+    onMapReady(event, idDevice: number) {
         console.log('Map Ready');
 
         this.mapView = event.object;
@@ -211,12 +204,13 @@ export class BoatComponent implements OnInit {
         console.log('Setting a marker...');
 
         const marker = new Marker();
-        marker.position = Position.positionFromLatLng(this.latitude, this.longitude);
-        marker.title = 'Sabine II';
+        marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+        marker.title = this.deviceData[idDevice].name + (this.deviceData[idDevice].berth ? ' (Berth ' + this.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
         marker.userData = {index: 1};
         this.mapView.removeAllMarkers();
         this.mapView.addMarker(marker);
+        this.mapView.mapAnimationsEnabled;
     }
 
     onCoordinateTapped(args) {
@@ -264,21 +258,6 @@ export class BoatComponent implements OnInit {
             console.log(error);
             pullRefresh.refreshing = false;
         });
-        this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31).subscribe(response => {
-            console.log('SensorData loading ...');
-        }, error => {
-            console.log(error);
-            pullRefresh.refreshing = false;
-        });
-        this.apiService.getIntTemperatureHistory(1, 31).subscribe(response => {
-            console.log('SensorData loading ...');
-            pullRefresh.refreshing = false;
-        }, error => {
-            console.log(error);
-            pullRefresh.refreshing = false;
-        });
-        // this.isLoading = true;
-        this.sensorDataHistory2 = this.dataService.getSensorDataHistory();
         this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
             console.log('SensorData loading ...');
             pullRefresh.refreshing = false;
@@ -288,5 +267,27 @@ export class BoatComponent implements OnInit {
             pullRefresh.refreshing = false;
             this.isLoading = false;
         });
+
+        this.apiService.getDeviceData().subscribe(response => {
+            console.log('DeviceData loading ...');
+            this.isLoading = false;
+            pullRefresh.refreshing = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+            pullRefresh.refreshing = false;
+        });
+
+        this.apiService.getBoatStatus().subscribe(response => {
+            console.log('BoatStatus loading ...');
+            this.isLoading = false;
+        }, error => {
+            console.log(error);
+            this.isLoading = false;
+        });
+    }
+
+    click_gear() {
+
     }
 }

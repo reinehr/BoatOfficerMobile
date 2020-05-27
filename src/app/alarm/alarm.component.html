@@ -34,7 +34,7 @@
                         <Label col=1 row=0 [text]="alarm.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold"
                                verticalAlignment="middle"></Label>
                         <Label col=2 row=0 text="o" class="alarm-symbol alarm-blue" marginLeft="15"></Label>
-                        <Label col=3 row=0 [text]="alarm.time | date : 'hh:mm'" class="t-16 font-weight-bold"
+                        <Label col=3 row=0 [text]="alarm.time | date : 'HH:mm'" class="t-16 font-weight-bold"
                                verticalAlignment="middle"></Label>
                     </GridLayout>
                     <GridLayout columns="40, auto, auto" rows="40">
@@ -106,11 +106,11 @@
                                class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
                                *ngIf="alarm.status == 'open_someone_responsible'"></Label>
                         <Label col=1 row=1
-                               [text]="'by Device on ' + (alarm.clear_by_device_time | date : 'dd.MM.yyy') + ' at ' + (alarm.clear_by_device_time | date : 'hh:mm')"
+                               [text]="'by Device on ' + (alarm.clear_by_device_time | date : 'dd.MM.yyyy') + ' at ' + (alarm.clear_by_device_time | date : 'HH:mm')"
                                class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                *ngIf="alarm.status == 'clear_by_device'"></Label>
                         <Label col=1 row=1
-                               [text]="'by ' + alarm.marked_as_ok_username + ' on ' + (alarm.marked_as_ok_time | date : 'dd.MM.yyy') + ' at ' + (alarm.marked_as_ok_time | date : 'hh:mm')"
+                               [text]="'by ' + alarm.marked_as_ok_username + ' on ' + (alarm.marked_as_ok_time | date : 'dd.MM.yyyy') + ' at ' + (alarm.marked_as_ok_time | date : 'HH:mm')"
                                class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                *ngIf="alarm.status == 'marked_as_ok'"></Label>
                         <Label col=1 row=1 [text]="'Marked as responsible: ' + alarm.responsible_username"

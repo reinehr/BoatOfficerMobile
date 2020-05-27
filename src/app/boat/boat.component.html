@@ -37,9 +37,9 @@
                         <StackLayout *ngFor="let alarmActive of [activeAlarmByField[device.id][sensorFieldMap[sensorField].alarm[0]] || activeAlarmByField[device.id][sensorFieldMap[sensorField].alarm[1]]]">
                             <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
                                         borderTopColor="#d3d3d3"
-                                        *ngIf="boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="['../details', idDevice, sensorField]">
+                                        *ngIf="boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="['../sensordetails', idDevice, sensorField]">
                                 <Label col=0 row=0 [text]="sensorFieldMap[sensorField].icon"
-                                       [class]="'alarm-symbol' + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
+                                       [class]="'alarm-symbol-' + sensorFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
                                 <Label col=1 row=0 [text]="sensorField" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
                                 <Label col=2 row=0

@@ -1,0 +1,98 @@
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label [text]="field" class="alarm-text"></Label>
+
+</ActionBar>
+
+<PullToRefresh (refresh)="refreshList($event)">
+    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+        <StackLayout>
+            <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + deviceData[idDevice].boat_image_small"
+                           class="boatoffice-boat-image"></Image>
+                </GridLayout>
+                <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
+                <Label col="1" row="1" [text]="deviceData[idDevice].name"
+                       class="alarm-blue t-16" height="30"></Label>
+            </GridLayout>
+            <StackLayout orientation="horizontal" height="60">
+                <GridLayout
+                        class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="center" horizontalAlignment="center"
+                        (tap)="setSelectedInterval(interval.id)" *ngFor="let interval of historyIntervalData">
+                    <Label [text]="interval.name" verticalAlignment="center" horizontalAlignment="center"></Label>
+                </GridLayout>
+            </StackLayout>
+            <StackLayout orientation="vertical" padding="10" class="alarm-card">
+                <RadCartesianChart style="height: 800px" id="{{field}}">
+                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
+                    <DateTimeContinuousAxis tkCartesianHorizontalAxis
+                                            dateFormat="{{'dd.MM' + (historyIntervalData[selectedIntervalId].stepUnit == 'Hour' ? ' HH:00' : '')}}"
+                                            labelFitMode="Rotate"
+                                            labelRotationAngle="-1.3" labelTextColor="black"
+                                            [majorStepUnit]="historyIntervalData[selectedIntervalId].stepUnit"
+                                            [majorStep]="historyIntervalData[selectedIntervalId].step"
+                                            [minimum]="boatHistory[deviceData[idDevice].id].sensor_data[historyIntervalData[selectedIntervalId].sensorData.sliceStart].timestring"
+                                            [maximum]="boatHistory[deviceData[idDevice].id].sensor_data[historyIntervalData[selectedIntervalId].sensorData.sliceStop].timestring">
+                    </DateTimeContinuousAxis>
+                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
+                                           verticalLinesVisible="true"
+                                           horizontalStripLinesVisible="true"
+                                           verticalStripLinesVisible="true"
+                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                           horizontalStripLineColor="#eeeef9, #ffffff">
+                    </RadCartesianChartGrid>
+                    <SplineSeries tkCartesianSeries
+                                  [items]="boatHistory[deviceData[idDevice].id].sensor_data.slice(historyIntervalData[selectedIntervalId].sensorData.sliceStart,historyIntervalData[selectedIntervalId].sensorData.sliceStop)"
+                                  categoryProperty="milliseconds"
+                                  strokeColor="#5555ff"
+                                  valueProperty="{{field}}"></SplineSeries>
+                </RadCartesianChart>
+
+                <Label text="" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10" height="20"></Label>
+                <StackLayout>
+                    <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
+                        <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
+                        <Label col="2" row="1" rowSpan="2" text="Maximum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
+                        <Label col="3" row="1" [text]="minMax[deviceData[idDevice].id][selectedIntervalId][field].max.value + sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
+                        <Label col="3" row="2" [text]="(minMax[deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                    </GridLayout>
+                    <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
+                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3"></GridLayout>
+                        <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
+                        <Label col="2" row="1" rowSpan="2" text="Minimum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
+                        <Label col="3" row="1" [text]="minMax[deviceData[idDevice].id][selectedIntervalId][field].min.value + sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
+                        <Label col="3" row="2" [text]="(minMax[deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
+<!--            <StackLayout class="alarm-card" *ngIf="alarmSettingsMap[field]">-->
+<!--                <Label text="Theshold on device" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10"></Label>-->
+<!--                <StackLayout *ngFor="let alarmType of alarmSettingsMap[field]; let index = index">-->
+<!--                    <GridLayout rows="5,*,*" columns="10,30,*,*,20" paddingBottom="10">-->
+<!--                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index!=-1"></GridLayout>-->
+<!--                        <Label col=1 row=1 rowSpan="2" [text]="alarmType.icon" [class]="'alarm-symbol-' + alarmType.iconfont + ' alarm-gray'"></Label>-->
+<!--                        <Label col="2" row="1" rowSpan="2" [text]="alarmType.name" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>-->
+<!--                        <Label col="3" row="1" [text]="alarmSettings[deviceData[idDevice].id][alarmType.key].value_device + alarmType.unit" class="alarm-blue pull-right font-weight-bold"></Label>-->
+<!--                        <Label col="3" row="2" [text]="'reported ' + alarmSettings[deviceData[idDevice].id][alarmType.key].time_changed_device | timeago" class="c-grey-dark pull-right"></Label>-->
+<!--                    </GridLayout>-->
+<!--                </StackLayout>-->
+<!--            </StackLayout>-->
+<!--            <StackLayout class="alarm-card" *ngIf="alarmSettingsMap[field]">-->
+<!--                <Label text="Theshold set by user" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10"></Label>-->
+<!--                <StackLayout *ngFor="let alarmType of alarmSettingsMap[field]; let index = index">-->
+<!--                    <GridLayout rows="5,*,*,5,5" columns="10,30,*,*,20" paddingBottom="5">-->
+<!--                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index==0"></GridLayout>-->
+<!--                        <Label col=1 row=1 rowSpan="2" [text]="alarmType.icon" [class]="'alarm-symbol-' + alarmType.iconfont + ' alarm-gray'"></Label>-->
+<!--                        <Label col="2" row="1" rowSpan="2" [text]="alarmType.name" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>-->
+<!--                        <Label col="3" row="1" [text]="alarmSettings[deviceData[idDevice].id][alarmType.key].value_user + alarmType.unit" class="alarm-blue pull-right font-weight-bold"></Label>-->
+<!--                        <Label col="3" row="2" [text]="'set ' + alarmSettings[deviceData[idDevice].id][alarmType.key].time_changed_user | timeago" class="c-grey-dark pull-right"></Label>-->
+<!--                        <GridLayout col="1" row="4" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index!=99"></GridLayout>-->
+<!--                    </GridLayout>-->
+<!--                </StackLayout>-->
+<!--                <Label text="Waiting for device to sync" horizontalAlignment="center" class="alarm-orange font-weight-bold" paddingBottom="10"></Label>-->
+<!--            </StackLayout>-->
+        </StackLayout>
+    </ScrollView>
+</PullToRefresh>

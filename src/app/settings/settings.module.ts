@@ -8,7 +8,6 @@ import {ScanComponent} from '~/app/auth/scan.component';
 import {LogoutComponent} from '~/app/auth/logout.component';
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 import {AlertsettingsComponent} from '~/app/settings/alertsettings.component';
-import {UploadpictureComponent} from '~/app/settings/uploadpicture.component';
 
 @NgModule({
     imports: [
@@ -17,7 +16,7 @@ import {UploadpictureComponent} from '~/app/settings/uploadpicture.component';
         NativeScriptFormsModule
     ],
     declarations: [
-        SettingsComponent, AuthComponent, ScanComponent, LogoutComponent, AlertsettingsComponent, UploadpictureComponent
+        SettingsComponent, AuthComponent, ScanComponent, LogoutComponent, AlertsettingsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

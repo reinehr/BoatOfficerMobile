@@ -67,6 +67,30 @@
     border-radius: 10;
 }
 
+.interval-button {
+    margin-left: 5;
+    margin-right: 5;
+    width: 70;
+    height: 40;
+    border-radius: 20;
+    border-width: 2;
+    border-color: #326cb5;
+    color: #326cb5;
+    font-size: 16pt;
+}
+
+.interval-button-selected {
+    margin-left: 5;
+    margin-right: 5;
+    width: 70;
+    height: 40;
+    border-radius: 20;
+    border-width: 0;
+    background-color: #091525;
+    color: #ffffff;
+    font-size: 16pt;
+}
+
 .alarm-button {
     width: 85%;
     background-color: #091525;
@@ -86,6 +110,26 @@
     font-family: "BoatOfficer Icons", "boatofficer";
     // background-color: #091525;
     // color: orange;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+}
+
+.alarm-symbol-bo {
+    font-family: "BoatOfficer Icons", "boatofficer";
+    // background-color: #091525;
+    // color: orange;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+}
+
+.alarm-symbol-fas {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
     font-weight: 400;
     font-size: 24px;
     text-align: center;

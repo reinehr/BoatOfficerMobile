@@ -1,0 +1,78 @@
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="BOAT SETTINGS" class="alarm-text"></Label>
+
+</ActionBar>
+
+<ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+    <StackLayout>
+        <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
+            <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                           class="boatoffice-boat-image"></Image>
+                </GridLayout>
+                <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
+                <Label col="1" row="1" [text]="device.name"
+                       class="alarm-blue t-16" height="30"></Label>
+            </GridLayout>
+            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="alarmSettings[device.id]">
+                <StackLayout>
+                    <Label text="ALARM SETTINGS" class="t-16 font-weight-bold"></Label>
+                    <StackLayout *ngFor="let field of sensorFieldKeys">
+                        <StackLayout>
+                            <StackLayout *ngIf="alarmSettingsMap[field]">
+                                <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
+                                    <StackLayout *ngIf="alarmSettings[device.id][alarm.key]">
+                                        <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="10">
+                                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                                        borderTopColor="#d3d3d3"></GridLayout>
+                                            <Label col=1 row=1 [text]="alarm.icon"
+                                                   [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
+                                            <Label col="2" row="1" [text]="alarm.name"
+                                                   class="alarm-blue font-weight-bold"
+                                                   verticalAlignment="center"></Label>
+                                            <Label col="3" row="1"
+                                                   [text]="alarmSettings[device.id][alarm.key].value_device + alarm.unit"
+                                                   class="alarm-blue pull-right font-weight-bold"></Label>
+                                        </GridLayout>
+                                        <GridLayout paddingBottom="5"
+                                                    *ngIf="alarmSettings[device.id][alarm.key].value_user != alarmSettings[device.id][alarm.key].value_device"
+                                                    marginTop="-10">
+                                            <Label class="alarm-orange"
+                                                   [text]="'Value changed to ' + alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"
+                                                   horizontalAlignment="center"></Label>
+                                        </GridLayout>
+
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="alarmSettings[device.id]">
+                <StackLayout>
+                    <Label text="OTHER SETTINGS" class="t-16 font-weight-bold"></Label>
+                    <StackLayout>
+                        <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="10"
+                                    [nsRouterLink]="['../uploadpicture', device.id]"
+                                    pageTransition="slideLeft">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 [text]="'i'"
+                                   [class]="'alarm-symbol-bo alarm-gray'"></Label>
+                            <Label col="2" row="1" [text]="'Picture'"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <Image col="3" row="1"
+                                   [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                                   class="boatoffice-boat-image"></Image>
+                        </GridLayout>
+
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+</ScrollView>

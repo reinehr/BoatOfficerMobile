@@ -5,7 +5,7 @@ import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
-import {BoatStatus, boatStatusMap} from '~/app/shared/interface/sensordata';
+import {BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 import { RouterExtensions } from 'nativescript-angular/router';
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -86,7 +86,7 @@ export class BoatComponent implements OnInit {
                             }
                         }
                     }
-                    console.log(this.activeAlarmByField);
+                    console.log('Device loading');
                 } else {
                     console.log('no Device');
                 }
@@ -97,7 +97,7 @@ export class BoatComponent implements OnInit {
             bsdata => {
                 if (bsdata) {
                     this.boatStatus = bsdata;
-                    console.log('boatStatus id' + 0 + ' num ' + this.sensorFieldKeys.length);
+                    console.log('boatStatus loading');
                 } else {
                     console.log('no boatStatus');
                 }

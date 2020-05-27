@@ -77,18 +77,61 @@ export interface BoatStatus {
     };
 }
 
-export const boatStatusMap: {[fieldName: string]: {icon: string, alarm: string[], datatype: string, unit: string, filter: string}} = {
-            time: {icon: 'o', alarm: [], datatype: 'bool', unit: '', filter: 'ago'},
-            ExtBatt1Volt: {icon: 'K', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: ''},
-            ExtBatt2Volt: {icon: 'K', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: ''},
-            IntBattVolt: {icon: 'K', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: 'V', filter: ''},
-            ChargingActive: {icon: 'U', alarm: [], datatype: 'bool', unit: '', filter: 'active'},
-            IntTemperature: {icon: 'n', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: ''},
-            PosMessageSubstitute: {icon: '', alarm: [], datatype: 'bool', unit: '', filter: 'hide'},
-            SensorALoopVolt: {icon: 'k', alarm: [], datatype: 'float', unit: 'V', filter: ''},
-            SensorAMulti1Volt: {icon: 'k', alarm: [], datatype: 'float', unit: 'V', filter: ''},
-            SensorAMulti2Volt: {icon: 'k', alarm: [], datatype: 'float', unit: 'V', filter: ''},
-            StatusLoopA: {icon: 'W', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed'},
-            StatusMultiA1: {icon: 'W', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed'},
-            StatusMultiA2: {icon: 'W', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed'}
+export interface BoatHistory {
+    [idDevice: string]: {
+        'position_data': {
+            'time': string,
+            'milliseconds': number,
+            'timestring'?: string,
+            'altitude': number,
+            'haccuracy': number,
+            'heading': number,
+            'latitude': number,
+            'longitude': number,
+            'speed': number
+        }[],
+        'position_data_length'?: number,
+        'sensor_data': {
+            'time': string,
+            'milliseconds': number,
+            'timestring'?: string,
+            'ChargingActive': boolean,
+            'ExtBatt1Volt': number,
+            'ExtBatt2Volt': number,
+            'IntBattVolt': number,
+            'IntTemperature': number,
+            'PosMessageSubstitute': boolean,
+            'SensorALoopVolt': number,
+            'SensorAMulti1Volt': number,
+            'SensorAMulti2Volt': number,
+            'StatusLoopA': boolean,
+            'StatusMultiA1': boolean,
+            'StatusMultiA2': boolean
+        }[],
+        'sensor_data_length'?: number,
+    };
+}
+
+export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string } } = {
+    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago'},
+    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: ''},
+    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: ''},
+    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: 'V', filter: ''},
+    ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active'},
+    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: ''},
+    PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide'},
+    SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: ''},
+    SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: ''},
+    SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: ''},
+    StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed'},
+    StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed'},
+    StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed'},
 };
+
+export const historyInterval: {id: number, days: number, name: string, step: number, stepUnit: string, sensorData: {sliceStart?: number, sliceStop?: number}, positionData: {sliceStart?: number, sliceStop?: number}}[] = [
+    {id: 0, days: 1,  name: '1d', step: 6,  stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}},
+    {id: 1, days: 3,  name: '3d', step: 6, stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}},
+    {id: 2, days: 7,  name: '1W', step: 12,  stepUnit: 'Hour',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}},
+    {id: 3, days: 31, name: '1M', step: 2,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}},
+    {id: 4, days: 92, name: '3M', step: 5,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}},
+];

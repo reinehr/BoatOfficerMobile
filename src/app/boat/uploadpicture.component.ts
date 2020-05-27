@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {RouterExtensions} from 'nativescript-angular/router';
 import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
+import {ActivatedRoute} from "@angular/router";
 
 
 @Component({
@@ -10,8 +11,17 @@ import {ApiService} from '~/app/shared/api.service';
 })
 export class UploadpictureComponent implements OnInit {
 
-    constructor(private router: RouterExtensions, private apiService: ApiService) {
-        // Use the constructor to inject services.
+    public idDevice = 0;
+    private isLoading = false;
+
+    constructor(
+        private router: RouterExtensions,
+        private apiService: ApiService,
+        private route: ActivatedRoute
+    ) {
+        this.route.params.subscribe(params => {
+            this.idDevice = params.idDevice;
+        });
     }
 
 
@@ -65,24 +75,41 @@ export class UploadpictureComponent implements OnInit {
 
                 that.imageAssets = selection;
 
-                this.apiService.saveBoatImage(this.imageAssets, that.imageSrc, 1)
-                    // .subscribe(response => {
-                    //     console.log('uploading image ... ', response);
-                    //     if (response === 'SUCCESS') {
-                    //         this.router.navigate(['']);
-                    //     } else {
-                    //         const options = {
-                    //             title: response,
-                    //             okButtonText: 'OK'
-                    //         };
-                    //         alert(options);
-                    //     }
-                    // }, error => {
-                    //     console.log(error);
-                    // })
-                ;
             }).catch(e => {
             console.log(e);
         });
+    }
+
+    goBack() {
+        this.router.backToPreviousPage();
+    }
+
+    onUploadTap() {
+        console.log('Picture upload started for device with id:' + this.idDevice);
+        this.apiService.saveBoatImage(this.imageAssets, this.imageSrc, this.idDevice)
+            // .subscribe(response => {
+            //     console.log('uploading image ... ', response);
+            //     if (response === 'UPLOAD COMPLETE') {
+            //
+            //         this.isLoading = true;
+            //         this.apiService.getDeviceData().subscribe(resp => {
+            //             console.log('DeviceData loading ...');
+            //             this.isLoading = false;
+            //         }, error => {
+            //             console.log(error);
+            //             this.isLoading = false;
+            //         });
+            //         this.router.navigate(['']);
+            //     } else {
+            //         const options = {
+            //             title: response,
+            //             okButtonText: 'OK'
+            //         };
+            //         alert(options);
+            //     }
+            // }, error => {
+            //     console.log(error);
+            // })
+        ;
     }
 }

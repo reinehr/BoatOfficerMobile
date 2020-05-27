@@ -4,10 +4,11 @@ import {NativeScriptUIChartModule} from 'nativescript-ui-chart/angular';
 
 import {BoatRoutingModule} from './boat-routing.module';
 import {BoatComponent} from './boat.component';
-import {InttemperatureComponent} from './inttemperature.component';
+import {SensordetailsComponent} from './sensordetails.component';
 import {BoatsettingsComponent} from './boatsettings.component';
 import {CommonModule} from '@angular/common';
 import {TimeagoModule} from 'ngx-timeago';
+import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
 
 @NgModule({
     imports: [
@@ -19,8 +20,9 @@ import {TimeagoModule} from 'ngx-timeago';
     ],
     declarations: [
         BoatComponent,
-        InttemperatureComponent,
-        BoatsettingsComponent
+        SensordetailsComponent,
+        BoatsettingsComponent,
+        UploadpictureComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

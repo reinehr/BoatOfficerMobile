@@ -8,7 +8,7 @@
     <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
         <StackLayout>
             <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="deviceData[idDevice].boat_image_small && deviceData[idDevice].boat_image_small != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + deviceData[idDevice].boat_image_small"
                            class="boatoffice-boat-image"></Image>
                 </GridLayout>
@@ -67,32 +67,6 @@
                     </GridLayout>
                 </StackLayout>
             </StackLayout>
-<!--            <StackLayout class="alarm-card" *ngIf="alarmSettingsMap[field]">-->
-<!--                <Label text="Theshold on device" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10"></Label>-->
-<!--                <StackLayout *ngFor="let alarmType of alarmSettingsMap[field]; let index = index">-->
-<!--                    <GridLayout rows="5,*,*" columns="10,30,*,*,20" paddingBottom="10">-->
-<!--                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index!=-1"></GridLayout>-->
-<!--                        <Label col=1 row=1 rowSpan="2" [text]="alarmType.icon" [class]="'alarm-symbol-' + alarmType.iconfont + ' alarm-gray'"></Label>-->
-<!--                        <Label col="2" row="1" rowSpan="2" [text]="alarmType.name" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>-->
-<!--                        <Label col="3" row="1" [text]="alarmSettings[deviceData[idDevice].id][alarmType.key].value_device + alarmType.unit" class="alarm-blue pull-right font-weight-bold"></Label>-->
-<!--                        <Label col="3" row="2" [text]="'reported ' + alarmSettings[deviceData[idDevice].id][alarmType.key].time_changed_device | timeago" class="c-grey-dark pull-right"></Label>-->
-<!--                    </GridLayout>-->
-<!--                </StackLayout>-->
-<!--            </StackLayout>-->
-<!--            <StackLayout class="alarm-card" *ngIf="alarmSettingsMap[field]">-->
-<!--                <Label text="Theshold set by user" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10"></Label>-->
-<!--                <StackLayout *ngFor="let alarmType of alarmSettingsMap[field]; let index = index">-->
-<!--                    <GridLayout rows="5,*,*,5,5" columns="10,30,*,*,20" paddingBottom="5">-->
-<!--                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index==0"></GridLayout>-->
-<!--                        <Label col=1 row=1 rowSpan="2" [text]="alarmType.icon" [class]="'alarm-symbol-' + alarmType.iconfont + ' alarm-gray'"></Label>-->
-<!--                        <Label col="2" row="1" rowSpan="2" [text]="alarmType.name" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>-->
-<!--                        <Label col="3" row="1" [text]="alarmSettings[deviceData[idDevice].id][alarmType.key].value_user + alarmType.unit" class="alarm-blue pull-right font-weight-bold"></Label>-->
-<!--                        <Label col="3" row="2" [text]="'set ' + alarmSettings[deviceData[idDevice].id][alarmType.key].time_changed_user | timeago" class="c-grey-dark pull-right"></Label>-->
-<!--                        <GridLayout col="1" row="4" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3" *ngIf="index!=99"></GridLayout>-->
-<!--                    </GridLayout>-->
-<!--                </StackLayout>-->
-<!--                <Label text="Waiting for device to sync" horizontalAlignment="center" class="alarm-orange font-weight-bold" paddingBottom="10"></Label>-->
-<!--            </StackLayout>-->
         </StackLayout>
     </ScrollView>
 </PullToRefresh>

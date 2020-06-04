@@ -8,12 +8,10 @@
         <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
         <Label col=0 row=2 text="" height="5"></Label>
         <StackLayout col=0 row=3>
-            <!--            <ListView [items]="deviceData" height="1500">-->
-            <!--                <ng-template let-device="item" let-index="index">-->
             <StackLayout *ngFor="let device of deviceData">
                 <Label text="" height="10"></Label>
                 <Label [text]="device.name" class="alarm-button" height="30pt"></Label>
-                <StackLayout class="circle-wrapper">
+                <StackLayout class="circle-wrapper" *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_medium"
                            class="boatoffice-boat-image"></Image>
                 </StackLayout>
@@ -34,8 +32,6 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-            <!--                </ng-template>-->
-            <!--            </ListView>-->
         </StackLayout>
     </GridLayout>
 </ScrollView>

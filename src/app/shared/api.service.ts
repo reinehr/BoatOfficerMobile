@@ -354,6 +354,7 @@ export class ApiService {
         function logEvent(e) {
             console.log(e.eventName + ' currentBytes: ' + e.currentBytes);
             console.log(e.eventName + ' totalBytes: ' + e.totalBytes);
+            console.log(e.eventName + ' message: ' + e.response);
         }
 
         return task;

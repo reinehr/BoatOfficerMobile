@@ -73,7 +73,22 @@ export interface BoatStatus {
             'StatusLoopA': boolean,
             'StatusMultiA1': boolean,
             'StatusMultiA2': boolean
-        }
+        },
+        'alarm_active'?: {
+            'time'?: boolean,
+            'ChargingActive'?: boolean,
+            'ExtBatt1Volt'?: boolean,
+            'ExtBatt2Volt'?: boolean,
+            'IntBattVolt'?: boolean,
+            'IntTemperature'?: boolean,
+            'PosMessageSubstitute'?: boolean,
+            'SensorALoopVolt'?: boolean,
+            'SensorAMulti1Volt'?: boolean,
+            'SensorAMulti2Volt'?: boolean,
+            'StatusLoopA'?: boolean,
+            'StatusMultiA1'?: boolean,
+            'StatusMultiA2'?: boolean
+        },
     };
 }
 

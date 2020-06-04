@@ -2,14 +2,14 @@
     <!--    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back"></NavigationButton>-->
     <Label text="ALARM HISTORY" class="alarm-text"></Label>
 
-    <ActionItem
-            ios.position="right"
-            android.position="right">
-        <Label (tap)="click_gear()"
-               class="alarm-symbol alarm-blue"
-               text="L">
-        </Label>
-    </ActionItem>
+<!--    <ActionItem-->
+<!--            ios.position="right"-->
+<!--            android.position="right">-->
+<!--        <Label (tap)="click_gear()"-->
+<!--               class="alarm-symbol alarm-blue"-->
+<!--               text="L">-->
+<!--        </Label>-->
+<!--    </ActionItem>-->
 </ActionBar>
 
 
@@ -18,7 +18,7 @@
         <StackLayout>
             <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
                 <GridLayout columns="120, *, 100" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                         <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
                                class="boatoffice-boat-image"></Image>
                     </GridLayout>

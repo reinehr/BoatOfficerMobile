@@ -6,6 +6,7 @@ import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/sha
 import {ApiService} from '~/app/shared/api.service';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {AlarmSettings, alarmSettingsMap} from "~/app/shared/interface/alarm";
+import {timeout} from "rxjs/internal/operators";
 
 @Component({
     selector: 'app-sensordetails',
@@ -31,10 +32,11 @@ export class SensordetailsComponent implements OnInit {
     selectedIntervalId = 3;
     minMax: {[idDevice: number]: {[idInterval: number]: {[field: string]: {min: {time: string, value: number}, max: {time: string, value: number}}}}} = {};
     private isLoading = false;
+    dataLoaded = false;
 
     constructor(
         private apiService: ApiService,
-        private dataService: DataService,
+        // private dataService: DataService,
         private routerExtensions: RouterExtensions,
         private route: ActivatedRoute
     ) {
@@ -68,20 +70,28 @@ export class SensordetailsComponent implements OnInit {
                         }
                     }
                     // console.log(this.activeAlarmByField);
+                    this.apiService.getBoatHistory(31).subscribe(resp3 => {
+                        console.log('BoatHistory loading ...');
+                        this.isLoading = false;
+                        this.dataLoaded = true;
+                    }, error => {
+                        console.log(error);
+                        this.isLoading = false;
+                    });
                 } else {
                     console.log('no Device');
                 }
             }
         );
-        this.alarmSettingsSub = this.apiService.alarmSettings.subscribe(
-            asdata => {
-                if (asdata) {
-                    this.alarmSettings = asdata;
-                } else {
-                    console.log('no alarmSettings');
-                }
-            }
-        );
+        // this.alarmSettingsSub = this.apiService.alarmSettings.subscribe(
+        //     asdata => {
+        //         if (asdata) {
+        //             this.alarmSettings = asdata;
+        //         } else {
+        //             console.log('no alarmSettings');
+        //         }
+        //     }
+        // );
         this.boatHistorySub = this.apiService.boatHistory.subscribe(
             bhdata => {
                 let millisecondsNow = new Date().getTime();
@@ -157,21 +167,16 @@ export class SensordetailsComponent implements OnInit {
                         const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
                         this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)}:00`;
                     }
+                    console.log('BoatHistory complete');
                 } else {
                     console.log('no boatHistory');
                 }
             }
         );
-        this.apiService.getBoatHistory(31).subscribe(response => {
-            console.log('BoatHistory loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
-        this.apiService.getDeviceAlarmSettings().subscribe(response => {
-            console.log('AlarmSettings loading ...');
-            this.isLoading = false;
+
+        this.isLoading = true;
+        this.apiService.getDeviceData().subscribe(resp1 => {
+            console.log('DeviceData loading ........');
         }, error => {
             console.log(error);
             this.isLoading = false;
@@ -180,17 +185,8 @@ export class SensordetailsComponent implements OnInit {
 
     refreshList(args) {
         const pullRefresh = args.object;
-        this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
-            console.log('SensorData loading ...');
-            pullRefresh.refreshing = false;
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            pullRefresh.refreshing = false;
-            this.isLoading = false;
-        });
         this.apiService.getDeviceData().subscribe(response => {
-            console.log('DeviceData loading ...');
+            console.log('DeviceData loading ........');
             this.isLoading = false;
             pullRefresh.refreshing = false;
         }, error => {
@@ -198,28 +194,20 @@ export class SensordetailsComponent implements OnInit {
             this.isLoading = false;
             pullRefresh.refreshing = false;
         });
-
-        this.apiService.getBoatStatus().subscribe(response => {
-            console.log('BoatStatus loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
-        this.apiService.getBoatHistory(31).subscribe(response => {
-            console.log('BoatHistory loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
-        this.apiService.getDeviceAlarmSettings().subscribe(response => {
-            console.log('AlarmSettings loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
+        // this.apiService.getDeviceAlarmSettings().subscribe(response => {
+        //     console.log('AlarmSettings loading ...');
+        //     this.isLoading = false;
+        // }, error => {
+        //     console.log(error);
+        //     this.isLoading = false;
+        // });
+        // this.apiService.getBoatHistory(31).subscribe(response => {
+        //     console.log('BoatHistory loading ...');
+        //     this.isLoading = false;
+        // }, error => {
+        //     console.log(error);
+        //     this.isLoading = false;
+        // });
     }
 
     setSelectedInterval(id: number) {

@@ -4,9 +4,10 @@
 
 </ActionBar>
 
-<GridLayout rows="auto, *, auto">
+<StackLayout>
 
     <Button row="0" text="Pick Image" (tap)="onSelectSingleTap()" horizontalAlignment="center" class="alarm-button"></Button>
     <Image row="1" [src]="imageSrc" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
     <Button row="2" text="Upload Image" (tap)="onUploadTap()" horizontalAlignment="center" class="alarm-button alarm-green" *ngIf="imageSrc"></Button>
-</GridLayout>
+<!--    <Label [text]="status" class="alarm-card" horizontalAlignment="center"></Label>-->
+</StackLayout>

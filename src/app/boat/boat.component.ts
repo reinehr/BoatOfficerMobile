@@ -1,12 +1,13 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DataService, DeviceAlarmDataFormat, SensorDataHistory} from '~/app/shared/data.service';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
-import {BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
-import { RouterExtensions } from 'nativescript-angular/router';
+import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
+import {RouterExtensions} from 'nativescript-angular/router';
+import {AlarmSettings, alarmSettingsMap} from "~/app/shared/interface/alarm";
 
 // Important - must register MapView plugin in order to use in Angular templates
 registerElement('MapView', () => MapView);
@@ -17,17 +18,14 @@ registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefr
     templateUrl: './boat.component.html',
     moduleId: module.id,
 })
-export class BoatComponent implements OnInit {
+export class BoatComponent implements OnInit, AfterViewInit {
     isLoading = false;
-    private intBattVoltSub: Subscription;
-    private temperatureSub: Subscription;
     private sensorDataHistorySub: Subscription;
-    sensorDataHistory2: SensorDataHistory[];
     sensorDataHistory: {
         'device_id': number,
         'device_name': string,
         'device_history': {
-            [key: string]: { 'min': number|boolean, 'max': number|boolean, 'milliseconds': number, 'day': number, 'date': string }[]
+            [key: string]: { 'min': number | boolean, 'max': number | boolean, 'milliseconds': number, 'day': number, 'date': string }[]
         },
         'device_latest_data': {
             [key: string]: { 'data': number, 'time': string }
@@ -43,7 +41,12 @@ export class BoatComponent implements OnInit {
     boatStatus: BoatStatus;
     sensorFieldMap = boatStatusMap;
     sensorFieldKeys = Object.keys(boatStatusMap);
-    activeAlarmByField: {[idDevice: number]: {[sensorFieldKey: string]: boolean}};
+    activeAlarmByField: { [idDevice: number]: { [sensorFieldKey: string]: boolean } };
+    private boatHistorySub: Subscription;
+    boatHistory: BoatHistory;
+    historyIntervalData = historyInterval;
+    minMax: {[idDevice: number]: {[idInterval: number]: {[field: string]: {min: {time: string, value: number}, max: {time: string, value: number}}}}} = {};
+    dataLoaded = false;
 
     latitude = -23.86;
     longitude = 151.20;
@@ -57,10 +60,11 @@ export class BoatComponent implements OnInit {
     private sensordataSub: Subscription;
 
     lastCamera: string;
+    private sensorHistoryLoaded: boolean;
 
     constructor(
         private apiService: ApiService,
-        private dataService: DataService,
+        // private dataService: DataService,
         // private routerExtensions: RouterExtensions
     ) {
         // Use the constructor to inject services.
@@ -98,15 +102,28 @@ export class BoatComponent implements OnInit {
                 if (bsdata) {
                     this.boatStatus = bsdata;
                     console.log('boatStatus loading');
+                    for (const idDevice of Object.keys(this.activeAlarmByField)) {
+                        this.boatStatus[idDevice].alarm_active = {};
+                        for (const mapKey of this.sensorFieldKeys) {
+                            // if (mapKey in this.boatStatus[idDevice].alarm_active) {
+                            this.boatStatus[idDevice].alarm_active[mapKey] = false;
+                            for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
+                                if (this.activeAlarmByField[idDevice][alarmType]) {
+                                    this.boatStatus[idDevice].alarm_active[mapKey] = true;
+                                }
+                            }
+                            // }
+                        }
+                    }
                 } else {
                     console.log('no boatStatus');
                 }
             }
         );
 
-        this.dataService.initSensorDataHistory();
+        // this.dataService.initSensorDataHistory();
         setTimeout(xyz => {
-            }, 20);
+        }, 20);
         // Use the "ngOnInit" handler to initialize data for the view.
         this.sensordataSub = this.apiService.currentSensorLatestData.subscribe(
             latest => {
@@ -133,7 +150,7 @@ export class BoatComponent implements OnInit {
                         // console.log(`sensorDataHistory: ${JSON.stringify(this.sensorDataHistory[deviceIndex].device_history, null, 2)}`);
                         // tslint:disable-next-line:forin
                         if (!this.sensorDataHistory[deviceIndex].device_history_interval) {
-                        this.sensorDataHistory[deviceIndex].device_history_interval = {};
+                            this.sensorDataHistory[deviceIndex].device_history_interval = {};
                         }
                         for (const sensorType in deviceData) {
                             if (deviceData.hasOwnProperty(sensorType)) {
@@ -168,25 +185,42 @@ export class BoatComponent implements OnInit {
         );
 
         this.isLoading = true;
-        this.apiService.getLatestSensorData().subscribe(response => {
-            console.log('LatestSensorData loading ...');
+        this.apiService.getDeviceData().subscribe(resp1 => {
+            console.log('DeviceData loading ...');
+            this.apiService.getBoatStatus().subscribe(resp2 => {
+                console.log('BoatStatus loading ...');
+                this.isLoading = true;
+                this.apiService.getSensorHistory('', 0, 31).subscribe(resp3 => {
+                    console.log('SensorData loading ...');
+                    this.isLoading = false;
+                }, error => {
+                    console.log(error);
+                    this.isLoading = false;
+                });
+                this.isLoading = false;
+            }, error => {
+                console.log(error);
+                this.isLoading = false;
+            });
             this.isLoading = false;
         }, error => {
             console.log(error);
             this.isLoading = false;
         });
-        this.isLoading = true;
-        this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
-            console.log('SensorData loading ...');
+    }
+
+    ngAfterViewInit(): void {
+        this.apiService.getBoatHistory(31).subscribe(resp3 => {
+            console.log('BoatHistory loading ...');
             this.isLoading = false;
+            this.sensorHistoryLoaded = true;
         }, error => {
             console.log(error);
             this.isLoading = false;
         });
         this.isLoading = true;
-        this.apiService.getBoatStatus().subscribe(response => {
-            console.log('BoatStatus loading ...');
-            this.isLoading = false;
+        this.apiService.getDeviceData().subscribe(resp1 => {
+            console.log('DeviceData loading ........');
         }, error => {
             console.log(error);
             this.isLoading = false;
@@ -269,7 +303,7 @@ export class BoatComponent implements OnInit {
         });
 
         this.apiService.getDeviceData().subscribe(response => {
-            console.log('DeviceData loading ...');
+            console.log('DeviceData loading ......');
             this.isLoading = false;
             pullRefresh.refreshing = false;
         }, error => {

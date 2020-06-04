@@ -1,9 +1,9 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
-import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
+import {DeviceAlarmDataFormat} from '../shared/data.service';
 import * as TNSPhone from 'nativescript-phone';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
@@ -14,7 +14,7 @@ registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefr
     templateUrl: './alarm.component.html',
     moduleId: module.id,
 })
-export class AlarmComponent implements OnInit {
+export class AlarmComponent implements OnInit, AfterViewInit {
     isLoading = false;
     private devicedataSub: Subscription;
     deviceData: DeviceAlarmDataFormat[];
@@ -42,15 +42,19 @@ export class AlarmComponent implements OnInit {
                 }
             }
         );
+    }
 
-        this.isLoading = true;
-        this.apiService.getDeviceData().subscribe(response => {
-            console.log('DeviceData loading ...');
-            this.isLoading = false;
-        }, error => {
-            console.log(error);
-            this.isLoading = false;
-        });
+    ngAfterViewInit(): void {
+        if (!this.deviceData) {
+            this.isLoading = true;
+            this.apiService.getDeviceData().subscribe(response => {
+                console.log('DeviceData loading ....');
+                this.isLoading = false;
+            }, error => {
+                console.log(error);
+                this.isLoading = false;
+            });
+        }
     }
 
     click_gear() {
@@ -61,7 +65,7 @@ export class AlarmComponent implements OnInit {
         this.isLoading = true;
         const pullRefresh = args.object;
         this.apiService.getDeviceData().subscribe(response => {
-            console.log('DeviceData loading ...');
+            console.log('DeviceData loading .....');
             this.isLoading = false;
             pullRefresh.refreshing = false;
         }, error => {

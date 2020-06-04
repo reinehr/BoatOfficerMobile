@@ -10,7 +10,7 @@ export interface DataItem {
 
 export interface DeviceAlarmDataFormat {
     'id': number;
-    'boat_image': string;
+    // 'boat_image': string;
     'boat_image_large': string;
     'boat_image_medium': string;
     'boat_image_small': string;
@@ -148,7 +148,7 @@ export class DataService {
     refreshSensorDataHistory(): void {
         if (!this.sensorDataHistory) {
             this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
-                console.log('SensorData loading ...');
+                console.log('DS SensorData loading ...');
             }, error => {
                 console.log(error);
             });

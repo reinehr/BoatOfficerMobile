@@ -30,6 +30,7 @@ export class UploadpictureComponent implements OnInit {
     isSingleMode = true;
     thumbSize = 80;
     previewSize = 300;
+    status = '';
 
     ngOnInit(): void {
 
@@ -86,7 +87,7 @@ export class UploadpictureComponent implements OnInit {
 
     onUploadTap() {
         console.log('Picture upload started for device with id:' + this.idDevice);
-        this.apiService.saveBoatImage(this.imageAssets, this.imageSrc, this.idDevice)
+        const session = this.apiService.saveBoatImage(this.imageAssets, this.imageSrc, this.idDevice)
             // .subscribe(response => {
             //     console.log('uploading image ... ', response);
             //     if (response === 'UPLOAD COMPLETE') {
@@ -111,5 +112,13 @@ export class UploadpictureComponent implements OnInit {
             //     console.log(error);
             // })
         ;
+        session.on('complete', e => {
+            this.status = 'complete';
+            const options = {
+                title: 'Upload complete',
+                okButtonText: 'OK'
+            };
+            alert(options);
+        });
     }
 }

@@ -8,7 +8,7 @@
     <StackLayout>
         <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
             <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                <GridLayout col="0" row="0" rowSpan="2" marginRight="12">
+                <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
                            class="boatoffice-boat-image"></Image>
                 </GridLayout>
@@ -65,7 +65,7 @@
                             <Label col="2" row="1" [text]="'Picture'"
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
-                            <Image col="3" row="1"
+                            <Image col="3" row="1" *ngIf="device.boat_image_small && device.boat_image_small != 'null'"
                                    [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
                                    class="boatoffice-boat-image"></Image>
                         </GridLayout>

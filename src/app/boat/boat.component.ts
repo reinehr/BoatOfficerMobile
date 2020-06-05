@@ -4,13 +4,11 @@ import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
-import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
+// import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
-import {RouterExtensions} from 'nativescript-angular/router';
-import {AlarmSettings, alarmSettingsMap} from "~/app/shared/interface/alarm";
 
 // Important - must register MapView plugin in order to use in Angular templates
-registerElement('MapView', () => MapView);
+// registerElement('MapView', () => MapView);
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
 @Component({
@@ -56,7 +54,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     bearing = 0;
     tilt = 0;
     padding = [40, 40, 40, 40];
-    mapView: MapView;
+    // mapView: MapView;
     private sensordataSub: Subscription;
 
     lastCamera: string;
@@ -218,6 +216,89 @@ export class BoatComponent implements OnInit, AfterViewInit {
             console.log(error);
             this.isLoading = false;
         });
+
+        this.boatHistorySub = this.apiService.boatHistory.subscribe(
+            bhdata => {
+                let millisecondsNow = new Date().getTime();
+                if (bhdata) {
+                    this.boatHistory = bhdata;
+                    for (const idDevice of Object.keys(this.boatHistory)) {
+                        if (!this.minMax[idDevice]) {
+                            this.minMax[idDevice] = {};
+                            for (const idInterval in this.historyIntervalData) {
+                                this.minMax[idDevice][idInterval] = {};
+                                for (const field of this.sensorFieldKeys) {
+                                    if (this.sensorFieldMap[field].datatype === 'float') {
+                                        this.minMax[idDevice][idInterval][field] = {};
+                                        // this.minMax[idDevice][interval.id][field] = {min: {}, max: {}};
+                                    }
+                                }
+                            }
+                        }
+                        this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
+                        this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
+                        millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
+                        for (const idEvent in this.boatHistory[idDevice].sensor_data) {
+                            const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
+                            eventTime.setMinutes(0);
+                            eventTime.setHours(0);
+                            eventTime.setSeconds(0);
+                            eventTime.setMilliseconds(0);
+                            this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
+                            const daysPast = (millisecondsNow - eventTime.getTime()) / (1000 * 60 * 60 * 24);
+                            for (const idInterval in this.historyIntervalData) {
+                                if (this.historyIntervalData[idInterval].days < daysPast) {
+                                    this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
+                                } else {
+                                    for (const field of this.sensorFieldKeys) {
+                                        if (!this.minMax[idDevice]) {
+                                            this.minMax[idDevice] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval]) {
+                                            this.minMax[idDevice][idInterval] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval][field]) {
+                                            this.minMax[idDevice][idInterval][field] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval][field].min) {
+                                            this.minMax[idDevice][idInterval][field] = {
+                                                min: {
+                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                                },
+                                                max: {
+                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                                }
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] < this.minMax[idDevice][idInterval][field].min.value) {
+                                            this.minMax[idDevice][idInterval][field].min = {
+                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] > this.minMax[idDevice][idInterval][field].max.value) {
+                                            this.minMax[idDevice][idInterval][field].max = {
+                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                            };
+                                        }
+                                    }
+                                }
+                                this.historyIntervalData[idInterval].sensorData.sliceStop = +idEvent;
+                            }
+                        }
+                        const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
+                        this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)}:00`;
+                    }
+                    console.log('BoatHistory complete');
+                } else {
+                    console.log('no boatHistory');
+                }
+            }
+        );
+
         this.isLoading = true;
         this.apiService.getDeviceData().subscribe(resp1 => {
             console.log('DeviceData loading ........');
@@ -229,7 +310,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
 
 
     // Map events
-    onMapReady(event, idDevice: number) {
+/*    onMapReady(event, idDevice: number) {
         console.log('Map Ready');
 
         this.mapView = event.object;
@@ -270,7 +351,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         marker.userData = {index: 1};
         this.mapView.removeAllMarkers();
         this.mapView.addMarker(marker);
-    }
+    }*/
 
     onCameraMove(args) {
         // console.log('Camera moving: ' + JSON.stringify(args.camera));

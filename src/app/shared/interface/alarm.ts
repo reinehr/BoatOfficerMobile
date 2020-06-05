@@ -6,7 +6,7 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         {key: 'LowVoltAlarm1Level', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: 'V'},
         {key: 'MotorStartAlarm1', name: 'Motor Start', icon: 'h', iconfont: 'bo', datatype: 'bool', unit: '', filter: 'active'},
     ],
-    ExtBatt1Vol2: [
+    ExtBatt2Volt: [
         {key: 'HighVoltAlarm2', name: 'High Voltage 1', icon: 'a', iconfont: 'bo', datatype: 'float', unit: 'V'},
         {key: 'LowVoltAlarm2', name: 'Low Voltage 1', icon: 'f', iconfont: 'bo', datatype: 'float', unit: 'V'}
     ],

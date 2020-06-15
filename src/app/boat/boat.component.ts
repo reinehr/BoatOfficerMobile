@@ -98,20 +98,26 @@ export class BoatComponent implements OnInit, AfterViewInit {
         this.boatStatusSub = this.apiService.boatStatus.subscribe(
             bsdata => {
                 if (bsdata) {
-                    this.boatStatus = bsdata;
-                    console.log('boatStatus loading');
-                    for (const idDevice of Object.keys(this.activeAlarmByField)) {
-                        this.boatStatus[idDevice].alarm_active = {};
-                        for (const mapKey of this.sensorFieldKeys) {
-                            // if (mapKey in this.boatStatus[idDevice].alarm_active) {
-                            this.boatStatus[idDevice].alarm_active[mapKey] = false;
-                            for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
-                                if (this.activeAlarmByField[idDevice][alarmType]) {
-                                    this.boatStatus[idDevice].alarm_active[mapKey] = true;
+                    try {
+                        this.boatStatus = bsdata;
+                        console.log('boatStatus loading');
+                        for (const idDevice of Object.keys(this.activeAlarmByField)) {
+                            if (this.boatStatus && this.boatStatus[idDevice]) {
+                                this.boatStatus[idDevice].alarm_active = {};
+                                for (const mapKey of this.sensorFieldKeys) {
+                                    // if (mapKey in this.boatStatus[idDevice].alarm_active) {
+                                    this.boatStatus[idDevice].alarm_active[mapKey] = false;
+                                    for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
+                                        if (this.activeAlarmByField[idDevice][alarmType]) {
+                                            this.boatStatus[idDevice].alarm_active[mapKey] = true;
+                                        }
+                                    }
+                                    // }
                                 }
                             }
-                            // }
                         }
+                    } catch (e) {
+                        console.log('Error: no boatStatus');
                     }
                 } else {
                     console.log('no boatStatus');
@@ -202,7 +208,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
             });
             this.isLoading = false;
         }, error => {
-            console.log(error);
+            console.log('DeviceData not loading');
             this.isLoading = false;
         });
     }
@@ -303,7 +309,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         this.apiService.getDeviceData().subscribe(resp1 => {
             console.log('DeviceData loading ........');
         }, error => {
-            console.log(error);
+            console.log('DeviceData not loading');
             this.isLoading = false;
         });
     }
@@ -388,7 +394,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
             this.isLoading = false;
             pullRefresh.refreshing = false;
         }, error => {
-            console.log(error);
+            console.log('DeviceData not loading');
             this.isLoading = false;
             pullRefresh.refreshing = false;
         });

@@ -178,7 +178,7 @@ export class SensordetailsComponent implements OnInit {
         this.apiService.getDeviceData().subscribe(resp1 => {
             console.log('DeviceData loading ........');
         }, error => {
-            console.log(error);
+            console.log('DeviceData not loading');
             this.isLoading = false;
         });
     }

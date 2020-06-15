@@ -1,3 +1,6 @@
+# Ignore Gradle project-specific cache directory
+.gradle
+
 # NativeScript
 hooks/
 node_modules/
@@ -8,6 +11,8 @@ platforms/
 *.js
 !webpack.config.js
 # *.css
+# Ignore Gradle build output directory
+build
 
 # Logs
 logs

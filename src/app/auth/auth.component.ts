@@ -23,12 +23,35 @@ export class AuthComponent implements OnInit {
     ) {
     }
 
-    ngOnInit() {}
+    ngOnInit() {
+    }
 
     saveForm() {
         this.isLoading = true;
         if (!this.registerMode) {
             this.authService.login(this.email, this.password).subscribe(resData => {
+                this.apiService.getDeviceData().subscribe(resp1 => {
+                    console.log('DeviceData loading ...');
+                    this.apiService.getBoatStatus().subscribe(resp2 => {
+                        console.log('BoatStatus loading ...');
+                        this.isLoading = true;
+                        this.apiService.getSensorHistory('', 0, 31).subscribe(resp3 => {
+                            console.log('SensorData loading ...');
+                            this.isLoading = false;
+                        }, error => {
+                            console.log(error);
+                            this.isLoading = false;
+                        });
+                        this.isLoading = false;
+                    }, error => {
+                        console.log(error);
+                        this.isLoading = false;
+                    });
+                    this.isLoading = false;
+                }, error => {
+                    console.log('DeviceData not loading');
+                    this.isLoading = false;
+                });
                 this.isLoading = false;
                 this.router.navigate(['']);
             }, error => {
@@ -37,6 +60,28 @@ export class AuthComponent implements OnInit {
             });
         } else {
             this.authService.signUp(this.email, this.password).subscribe(resData => {
+                this.apiService.getDeviceData().subscribe(resp1 => {
+                    console.log('DeviceData loading ...');
+                    this.apiService.getBoatStatus().subscribe(resp2 => {
+                        console.log('BoatStatus loading ...');
+                        this.isLoading = true;
+                        this.apiService.getSensorHistory('', 0, 31).subscribe(resp3 => {
+                            console.log('SensorData loading ...');
+                            this.isLoading = false;
+                        }, error => {
+                            console.log(error);
+                            this.isLoading = false;
+                        });
+                        this.isLoading = false;
+                    }, error => {
+                        console.log(error);
+                        this.isLoading = false;
+                    });
+                    this.isLoading = false;
+                }, error => {
+                    console.log('DeviceData not loading');
+                    this.isLoading = false;
+                });
                 this.isLoading = false;
                 this.router.navigate(['']);
             }, error => {

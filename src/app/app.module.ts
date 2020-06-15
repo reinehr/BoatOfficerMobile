@@ -8,7 +8,6 @@ import {AppComponent} from './app.component';
 // import { BoatComponent } from "./boat/boat.component";
 
 import {NativeScriptHttpClientModule} from 'nativescript-angular/http-client';
-import {NativeScriptSvgModule} from 'nativescript-svg/angular';
 import {TimeagoModule} from 'ngx-timeago';
 
 // GMSServices.MapView
@@ -37,7 +36,6 @@ firebase
         ReactiveFormsModule,
         AppRoutingModule,
         NativeScriptHttpClientModule,
-        NativeScriptSvgModule,
         TimeagoModule.forRoot()
     ],
     declarations: [

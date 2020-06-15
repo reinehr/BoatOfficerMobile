@@ -57,7 +57,7 @@ export class BoatsettingsComponent implements OnInit {
         this.apiService.getDeviceData().subscribe(response => {
             console.log('DeviceData loading .......');
         }, error => {
-            console.log(error);
+            console.log('DeviceData not loading');
         });
     }
 

@@ -51,7 +51,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
                 console.log('DeviceData loading ....');
                 this.isLoading = false;
             }, error => {
-                console.log(error);
+                console.log('not loading');
                 this.isLoading = false;
             });
         }
@@ -69,7 +69,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
             this.isLoading = false;
             pullRefresh.refreshing = false;
         }, error => {
-            console.log(error);
+            console.log('not loading');
             this.isLoading = false;
             pullRefresh.refreshing = false;
         });

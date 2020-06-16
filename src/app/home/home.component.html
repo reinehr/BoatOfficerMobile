@@ -2,7 +2,7 @@
     <Label text="Home" color="white"></Label>
 </ActionBar>-->
 
-<ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+<ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_w_bluesky.png">
     <GridLayout columns="*" rows="40, 100, 5, *" class="page__content">
         <Label col=0 row=0 text="" height="40"></Label>
         <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
@@ -10,7 +10,9 @@
         <StackLayout col=0 row=3>
             <StackLayout *ngFor="let device of deviceData">
                 <Label text="" height="10"></Label>
-                <Label [text]="device.name" class="alarm-button" height="30pt"></Label>
+                <StackLayout class="alarm-button" height="30pt">
+                    <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
+                </StackLayout>
                 <StackLayout class="circle-wrapper" *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_medium"
                            class="boatoffice-boat-image"></Image>

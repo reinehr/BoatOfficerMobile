@@ -13,7 +13,7 @@
 
 
 <PullToRefresh (refresh)="refreshList($event)">
-    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
         <StackLayout>
             <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
                 <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
@@ -62,12 +62,12 @@
                                class="t-12 font-weight-bold"
                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                     </GridLayout>
-<!--                    <MapView height="400" #mapView [latitude]="boatStatus[device.id].position_data.latitude" [longitude]="boatStatus[device.id].position_data.longitude"-->
-<!--                             [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"-->
-<!--                             [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"-->
-<!--                             (mapReady)="onMapReady($event, idDevice)"-->
-<!--                             (markerSelect)="onMarkerEvent($event)"-->
-<!--                             (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>-->
+                    <MapView height="400" #mapView [latitude]="boatStatus[device.id].position_data.latitude" [longitude]="boatStatus[device.id].position_data.longitude"
+                             [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                             [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
+                             (mapReady)="onMapReady($event, idDevice)"
+                             (markerSelect)="onMarkerEvent($event)"
+                             (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

@@ -4,11 +4,11 @@ import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
-// import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
+import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 
 // Important - must register MapView plugin in order to use in Angular templates
-// registerElement('MapView', () => MapView);
+registerElement('MapView', () => MapView);
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
 @Component({
@@ -54,7 +54,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     bearing = 0;
     tilt = 0;
     padding = [40, 40, 40, 40];
-    // mapView: MapView;
+    mapView: MapView;
     private sensordataSub: Subscription;
 
     lastCamera: string;
@@ -166,9 +166,9 @@ export class BoatComponent implements OnInit, AfterViewInit {
                                     };
                                 }
                                 let minDate = new Date(Date.now());
-                                let maxDate = new Date(Date.now());
+                                const maxDate = new Date(Date.now());
                                 let minDateStr = '';
-                                let maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
+                                const maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
                                 for (const day of deviceData[sensorType]) {
                                     const date = new Date(day.date);
                                     if (date < minDate) {
@@ -316,7 +316,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
 
 
     // Map events
-/*    onMapReady(event, idDevice: number) {
+    onMapReady(event, idDevice: number) {
         console.log('Map Ready');
 
         this.mapView = event.object;
@@ -357,7 +357,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         marker.userData = {index: 1};
         this.mapView.removeAllMarkers();
         this.mapView.addMarker(marker);
-    }*/
+    }
 
     onCameraMove(args) {
         // console.log('Camera moving: ' + JSON.stringify(args.camera));

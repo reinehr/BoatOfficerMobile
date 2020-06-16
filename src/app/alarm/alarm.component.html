@@ -14,7 +14,7 @@
 
 
 <PullToRefresh (refresh)="refreshList($event)">
-    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/home.jpg">
+    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
         <StackLayout>
             <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
                 <GridLayout columns="120, *, 100" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
@@ -68,31 +68,38 @@
                                 <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
                                 <Label col=1 row=0 [text]="'Call Harbour'" class="alarm-text-s"></Label>
                             </GridLayout>
+<!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
+<!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#326cb5'"-->
+<!--                                        margin="5" (tap)="onAlarmResponsibleTap(idDevice, idAlarm)"-->
+<!--                                        *ngIf="alarm.status == 'open'">-->
+<!--                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#9cbeda"></Label>-->
+<!--                                <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text-s"></Label>-->
+<!--                            </GridLayout>-->
+<!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
+<!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fa8b24'"-->
+<!--                                        margin="5" (tap)="onAlarmNotResponsibleTap(idDevice, idAlarm)"-->
+<!--                                        *ngIf="alarm.status == 'open_someone_responsible'">-->
+<!--                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"-->
+<!--                                       verticalAlignment="center" width="30pt" textAlignment="center"-->
+<!--                                       color="#fdbb94"></Label>-->
+<!--                                <Label col=1 row=0 [text]="'Make me not resp.'" class="alarm-text-s"></Label>-->
+<!--                            </GridLayout>-->
                             <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"
-                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#326cb5'"
-                                        margin="5" (tap)="onAlarmResponsibleTap(idDevice, idAlarm)"
-                                        *ngIf="alarm.status == 'open'">
-                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#9cbeda"></Label>
-                                <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text-s"></Label>
-                            </GridLayout>
-                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"
-                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fa8b24'"
-                                        margin="5" (tap)="onAlarmNotResponsibleTap(idDevice, idAlarm)"
-                                        *ngIf="alarm.status == 'open_someone_responsible'">
-                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"
-                                       verticalAlignment="center" width="30pt" textAlignment="center"
-                                       color="#fdbb94"></Label>
-                                <Label col=1 row=0 [text]="'Make me not resp.'" class="alarm-text-s"></Label>
+                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"
+                                        margin="5" (tap)="onAlarmOkTap(idDevice, idAlarm)"
+                                        *ngIf="alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)">
+                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>
+                                <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>
                             </GridLayout>
                         </GridLayout>
-                        <GridLayout row="1" columns="30, *, 10" rows="40" class="alarm-button"
-                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"
-                                    marginBottom="10" marginTop="-5" marginLeft="25" marginRight="25"
-                                    (tap)="onAlarmOkTap(idDevice, idAlarm)"
-                                    *ngIf="alarm.status == 'open_someone_responsible' && alarm.i_am_responsible">
-                            <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>
-                            <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>
-                        </GridLayout>
+<!--                        <GridLayout row="1" columns="30, *, 10" rows="40" class="alarm-button"-->
+<!--                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"-->
+<!--                                    marginBottom="10" marginTop="-5" marginLeft="25" marginRight="25"-->
+<!--                                    (tap)="onAlarmOkTap(idDevice, idAlarm)"-->
+<!--                                    *ngIf="alarm.status == 'open_someone_responsible' && alarm.i_am_responsible">-->
+<!--                            <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>-->
+<!--                            <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>-->
+<!--                        </GridLayout>-->
                     </GridLayout>
                     <GridLayout columns="40, auto, 10, *, 10" rows="40, auto"
                                 *ngIf="(alarm.status != 'open' && !(alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) ">

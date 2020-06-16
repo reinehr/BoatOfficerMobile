@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-// import * as firebase from 'nativescript-plugin-firebase';
+import * as firebase from 'nativescript-plugin-firebase';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 
 @Component({
@@ -15,7 +15,7 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-/*        firebase.init({
+        firebase.init({
             showNotifications: true,
             showNotificationsWhenInForeground: true,
 
@@ -33,6 +33,6 @@ export class AppComponent implements OnInit {
             })
             .catch(error => {
                 console.log('[Firebase] Initialize', {error});
-            });*/
+            });
     }
 }

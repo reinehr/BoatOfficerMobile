@@ -12,7 +12,7 @@ import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
-import {AlarmSettings} from "~/app/shared/interface/alarm";
+import {AlarmSettings} from '~/app/shared/interface/alarm';
 
 
 const bghttpModule = require('nativescript-background-http');

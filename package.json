@@ -34,6 +34,7 @@
     "nativescript-google-maps-sdk": "^2.9.1",
     "nativescript-imagepicker": "^7.1.0",
     "nativescript-phone": "^2.0.0",
+    "nativescript-plugin-firebase": "^10.5.0",
     "nativescript-ui-chart": "^7.1.1",
     "ngx-timeago": "^1.0.4",
     "reflect-metadata": "~0.1.12",

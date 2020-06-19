@@ -151,7 +151,7 @@ export class DataService {
                     }
                     // console.log(this.activeAlarmByField);
                     this.apiService.getBoatHistory(31).subscribe(resp3 => {
-                        console.log('BoatHistory loading ...');
+                        console.log('initSensorDataHistory - getBoatHistory');
                         this.isLoading = false;
                         this.dataLoaded = true;
                     }, error => {
@@ -251,7 +251,7 @@ export class DataService {
     refreshSensorDataHistory(): void {
         this.isLoading = true;
         this.apiService.getDeviceData().subscribe(resp1 => {
-            console.log('DeviceData loading by Service ........');
+            console.log('refreshSensorDataHistory - getDeviceData ' + resp1);
         }, error => {
             console.log('DeviceData not loading');
             this.isLoading = false;
@@ -261,16 +261,16 @@ export class DataService {
     refreshBoatStatus(): void {
         this.isLoading = true;
         this.apiService.getDeviceData().subscribe(resp1 => {
-            console.log('DeviceData loading ...');
+            console.log('refreshBoatStatus - getDeviceData');
             this.apiService.getBoatStatus().subscribe(resp2 => {
-                console.log('BoatStatus loading ...');
+                console.log('refreshBoatStatus - getBoatStatus');
                 this.isLoading = false;
             }, error => {
                 console.log(error);
                 this.isLoading = false;
             });
             this.apiService.getDeviceAlarmSettings().subscribe(response => {
-                console.log('AlarmSettings loading .......');
+                console.log('refreshBoatStatus - getDeviceAlarmSettings');
             }, error => {
                 console.log('AlarmSettings not loading');
             });

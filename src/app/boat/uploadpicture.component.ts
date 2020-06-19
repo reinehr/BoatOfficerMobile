@@ -3,6 +3,7 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from "@angular/router";
+import {DataService} from "~/app/shared/data.service";
 
 
 @Component({
@@ -17,6 +18,7 @@ export class UploadpictureComponent implements OnInit {
     constructor(
         private router: RouterExtensions,
         private apiService: ApiService,
+        private dataService: DataService,
         private route: ActivatedRoute
     ) {
         this.route.params.subscribe(params => {
@@ -118,6 +120,7 @@ export class UploadpictureComponent implements OnInit {
                 title: 'Upload complete',
                 okButtonText: 'OK'
             };
+            this.dataService.refreshBoatStatus();
             alert(options);
         });
     }

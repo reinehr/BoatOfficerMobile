@@ -7,6 +7,7 @@ import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import * as TNSPhone from 'nativescript-phone';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Switch } from 'tns-core-modules/ui/switch';
+import { alarmByTypeMap } from '~/app/shared/interface/alarm';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -19,6 +20,7 @@ registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefr
 export class AlarmComponent implements OnInit, AfterViewInit {
     isLoading = false;
     showOnlyOpen = true;
+    alarmByTypeMap = alarmByTypeMap;
 
     constructor(
         private apiService: ApiService,

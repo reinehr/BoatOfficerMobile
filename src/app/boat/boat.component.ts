@@ -42,8 +42,6 @@ export class BoatComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        // this.dataService.refreshSensorDataHistory();
-        this.dataService.refreshBoatStatus();
     }
 
     ngAfterViewInit(): void {

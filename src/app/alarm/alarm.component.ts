@@ -1,62 +1,77 @@
-import {Component, OnInit} from '@angular/core';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
-import {Sensordata} from '~/app/shared/interface/sensordata';
-import { ScrollView, ScrollEventData } from 'tns-core-modules/ui/scroll-view';
+import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
+import {Subject, Subscription} from 'rxjs';
+import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
+import * as TNSPhone from 'nativescript-phone';
+import { EventData } from 'tns-core-modules/data/observable';
+import { Switch } from 'tns-core-modules/ui/switch';
+import { alarmByTypeMap } from '~/app/shared/interface/alarm';
+
+registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
+
 
 @Component({
     selector: 'app-alarm',
     templateUrl: './alarm.component.html',
     moduleId: module.id,
 })
-export class AlarmComponent implements OnInit {
-    sensorData: Sensordata;
-    temperatureHistory: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
-    intBattVolt: {'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string}[];
-    intBattVoltMin = new Date(Date.now());
-    intBattVoltMax = new Date(Date.now());
-    intBattVoltMinStr = '';
-    intBattVoltMaxStr = `${this.intBattVoltMax.getDate()}/${this.intBattVoltMax.getMonth() + 1}/${this.intBattVoltMax.getFullYear()}`;
-    intTempMin = new Date(Date.now());
-    intTempMax = new Date(Date.now());
-    intTempMinStr = '';
-    intTempMaxStr = `${this.intTempMax.getDate()}/${this.intTempMax.getMonth() + 1}/${this.intTempMax.getFullYear()}`;
+export class AlarmComponent implements OnInit, AfterViewInit {
+    isLoading = false;
+    showOnlyOpen = true;
+    alarmByTypeMap = alarmByTypeMap;
 
     constructor(
-        private apiService: ApiService
+        private apiService: ApiService,
+        private dataService: DataService,
     ) {
     }
+
     onScroll(args: ScrollEventData) {
         const scrollView = args.object as ScrollView;
 
         console.log('scrollX: ' + args.scrollX);
         console.log('scrollY: ' + args.scrollY);
     }
+
     ngOnInit(): void {
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        // this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
-        // this.sensorData = this.apiService.getLatestSensorData();
-        // Use the "ngOnInit" handler to initialize data for the view.
     }
 
-    click_gear() {
-        // this.sensorData = this.apiService.getLatestSensorData();
-        // this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        this.temperatureHistory = this.apiService.getIntTemperatureHistory();
-        this.intBattVolt = this.apiService.getSensorHistoryByField('IntBattVolt', 1, 31);
-        for (const intSens of this.intBattVolt) {
-            const date = new Date(intSens.date);
-            if (date < this.intBattVoltMin) {
-                this.intBattVoltMin = date;
-                this.intBattVoltMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            }
-        }
-        for (const intSens of this.temperatureHistory) {
-            const date = new Date(intSens.date);
-            if (date < this.intTempMin) {
-                this.intTempMin = date;
-                this.intTempMinStr = `${date.getDate()}/${date.getMonth() + 1}/${date.getFullYear()}`;
-            }
-        }
+    ngAfterViewInit(): void {
     }
 
+    refreshList(args) {
+        const pullRefresh = args.object;
+        this.dataService.refreshBoatStatus();
+        pullRefresh.refreshing = false;
+    }
+
+    onButtonTap() {
+        console.log('Button was pressed');
+    }
+
+    onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, null);
+    }
+
+    onAlarmNotResponsibleTap(idDevice: number, idAlarm: number) {
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, false, null);
+    }
+
+    onAlarmOkTap(idDevice: number, idAlarm: number) {
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, true);
+    }
+
+    onCallTap(idDevice: number) {
+        TNSPhone.dial(this.dataService.deviceData[idDevice].harbour_contact, true);
+    }
+
+    onCheckedChange(args: EventData) {
+        const sw = args.object as Switch;
+        this.showOnlyOpen = sw.checked;
+    }
 }

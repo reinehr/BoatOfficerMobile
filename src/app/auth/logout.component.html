@@ -1,0 +1,21 @@
+<ActionBar title="Log out" class="action-bar bg-darkblue">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="LOG OUT" class="alarm-text"></Label>
+
+</ActionBar>
+
+<StackLayout class="form homeBackgroundImage" padding="10" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <StackLayout class="input-field">
+        <Label
+                class="label"
+                text="">
+        </Label>
+        <Button
+                text="Logout"
+                class="btn btn-blue btn-rounded-lg"
+                (tap)="saveForm()"
+        ></Button>
+    </StackLayout>
+    <ActivityIndicator [busy]="isLoading">
+    </ActivityIndicator>
+</StackLayout>

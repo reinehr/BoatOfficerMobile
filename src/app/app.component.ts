@@ -1,4 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit} from '@angular/core';
+import * as firebase from 'nativescript-plugin-firebase';
+import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 
 @Component({
     selector: 'app-ns',
@@ -13,6 +15,24 @@ export class AppComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        // Init your component properties here.
+        firebase.init({
+            showNotifications: true,
+            showNotificationsWhenInForeground: true,
+
+            onPushTokenReceivedCallback: (token) => {
+                console.log('[Firebase] onPushTokenReceivedCallback:', {token});
+                setString('push_token', token);
+            },
+
+            onMessageReceivedCallback: (message: firebase.Message) => {
+                console.log('[Firebase] onMessageReceivedCallback:', {message});
+            }
+        })
+            .then(() => {
+                console.log('[Firebase] Initialized');
+            })
+            .catch(error => {
+                console.log('[Firebase] Initialize', {error});
+            });
     }
 }

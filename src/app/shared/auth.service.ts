@@ -61,6 +61,12 @@ export class AuthService {
         );
     }
 
+    logout() {
+        if (hasKey('token')) {
+            remove('token');
+        }
+    }
+
     private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
         const expirationtime = new Date(new Date().getTime() + expiresIn * 1000);
         if (hasKey('token')) {

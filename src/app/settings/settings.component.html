@@ -1,12 +1,23 @@
-<ns-action-bar title="Settings"></ns-action-bar>
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <Label text="SETTINGS" class="alarm-text"></Label>
 
-<StackLayout class="page__content">
+</ActionBar>
+
+<StackLayout class="page__content homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <Button
-            text="Anmelden"
+            text="Log in"
             class="btn btn-primary"
             nsRouterLink="../auth"
             pageTransition="slideLeft"></Button>
-    <Label class="page__content-icon fas" text="&#xf013;"></Label>
-    <Label class="page__content-placeholder" text="<!-- Settings page content goes here -->"></Label>
+    <Button
+            text="Register new device"
+            class="btn btn-primary"
+            nsRouterLink="../scan"
+            pageTransition="slideLeft"></Button>
+    <Button
+            text="Log out"
+            class="btn btn-primary"
+            nsRouterLink="../logout"
+            pageTransition="slideLeft"></Button>
 </StackLayout>
 

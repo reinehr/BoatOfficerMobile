@@ -12,14 +12,14 @@ export class ItemDetailComponent implements OnInit {
     item: DataItem;
 
     constructor(
-        private _data: DataService,
+        // private _data: DataService,
         private _route: ActivatedRoute,
         private _routerExtensions: RouterExtensions
     ) { }
 
     ngOnInit(): void {
         const id = +this._route.snapshot.params.id;
-        this.item = this._data.getItem(id);
+        // this.item = this._data.getItem(id);
     }
 
     onBackTap(): void {

@@ -17,13 +17,57 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         // {key: 'LowIntTemperatureAlarmLevel', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C'},
     ],
     ShockSensor: [
-        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'Light|Medium|Hard', unit: ' Shock', filter: 'shock'},
+        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: ''},
     ],
     Device: [
-        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'float', unit: ' minutes', filter: ''},
-        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'float', unit: ' minutes', filter: ''},
+        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: ''},
+        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: ''},
     ]
 };
+
+export const alarmSettingsDatatypeMap: { [dataTypeKey: string]: { [ttnValue: string]: {value: number, unit: string, name: string} } } = {
+    shock: {
+        0: {value: 0, unit: '', name: 'off'},
+        1: {value: 1, unit: 'intensity', name: 'low'},
+        2: {value: 2, unit: 'intensity', name: 'medium'},
+        3: {value: 3, unit: 'intensity', name: 'hard'},
+    },
+    updaterate: {
+        0: {value: 0, unit: 'hours', name: '4'},
+        1: {value: 7, unit: 'days', name: '7'},
+        2: {value: 5, unit: 'days', name: '5'},
+        3: {value: 3, unit: 'days', name: '3'},
+        4: {value: 2, unit: 'days', name: '2'},
+        5: {value: 1, unit: 'day', name: '1'},
+        6: {value: 1, unit: 'hours', name: '12'},
+        7: {value: 1, unit: 'hours', name: '10'},
+        8: {value: 1, unit: 'hours', name: '8'},
+        9: {value: 1, unit: 'hours', name: '6'},
+        10: {value: 1, unit: 'hours', name: '5'},
+        11: {value: 1, unit: 'hours', name: '3'},
+        12: {value: 1, unit: 'hours', name: '2'},
+        13: {value: 1, unit: 'hours', name: '1,5'},
+        14: {value: 1, unit: 'hour', name: '1'},
+        15: {value: 1, unit: 'minutes', name: '45'},
+        16: {value: 1, unit: 'minutes', name: '30'},
+        17: {value: 1, unit: 'minutes', name: '20'},
+        18: {value: 1, unit: 'minutes', name: '15'},
+        19: {value: 1, unit: 'minutes', name: '10'},
+        20: {value: 1, unit: 'minutes', name: '9'},
+        21: {value: 1, unit: 'minutes', name: '8'},
+        22: {value: 1, unit: 'minutes', name: '7'},
+        23: {value: 1, unit: 'minutes', name: '6'},
+        24: {value: 1, unit: 'minutes', name: '5'},
+        25: {value: 1, unit: 'minutes', name: '4'},
+        26: {value: 1, unit: 'minutes', name: '3'},
+        27: {value: 1, unit: 'minutes', name: '2'},
+        28: {value: 1, unit: 'minute', name: '1'},
+        29: {value: 1, unit: 'seconds', name: '30'},
+        30: {value: 1, unit: 'seconds', name: '20'},
+        31: {value: 1, unit: 'seconds', name: '10'},
+    }
+};
+
 export interface AlarmSettings {
     [idDevice: number]: {
         [alarmKey: string]: { time_reported_device: string, time_changed_device, time_changed_user, value_default: string, value_device: string, value_user: string, type: string, device_id: number }

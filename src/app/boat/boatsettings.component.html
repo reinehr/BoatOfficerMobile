@@ -32,8 +32,11 @@
                                             <Label col="2" row="1" [text]="alarm.name"
                                                    class="alarm-blue font-weight-bold"
                                                    verticalAlignment="center"></Label>
-                                            <Label col="3" row="1"
+                                            <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"
                                                    [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"
+                                                   class="alarm-blue pull-right font-weight-bold"></Label>
+                                            <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"
+                                                   [text]="alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name + ' ' + alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit"
                                                    class="alarm-blue pull-right font-weight-bold"></Label>
                                         </GridLayout>
                                         <GridLayout paddingBottom="5"

@@ -1,10 +1,11 @@
-<ns-action-bar
-        title="Regitration"
-        [showBackButton]="true"
-></ns-action-bar>
+<ActionBar title="Register new device" class="action-bar bg-darkblue">
+    <NavigationButton text="Go Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="REGISTER NEW DEVICE" class="alarm-text"></Label>
 
-<StackLayout class="form">
-    <StackLayout class="input-field">
+</ActionBar>
+
+<StackLayout class="form homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <StackLayout class="input-field" padding="10">
         <Label
                 class="label"
                 text="Serial Number">
@@ -17,7 +18,7 @@
                 [(ngModel)]="serialNumber"
         ></TextField>
     </StackLayout>
-    <StackLayout class="input-field">
+    <StackLayout class="input-field" padding="10">
         <Label
                 class="label"
                 text="Registration Key">
@@ -30,7 +31,7 @@
                 [(ngModel)]="registrationKey"
         ></TextField>
     </StackLayout>
-    <StackLayout class="input-field">
+    <StackLayout class="input-field" padding="10">
         <Label
                 class="label"
                 text="Device Name">

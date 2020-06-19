@@ -30,8 +30,9 @@
 .homeBackgroundImage {
     background-image: url("../src/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png");
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: center  top;
     background-size: cover;
+    stretch: aspectFill;
 }
 
 // Custom tabstrip item class
@@ -56,7 +57,16 @@
     stretch: aspectFill;
     horizontal-align: center;
     vertical-align: center;
+}
 
+.boatoffice-boat-image-home {
+    width: 100%;
+    // height: 100%;
+    border-radius: 0,0,10,10;
+    display: block;
+    stretch: aspectFill;
+    horizontal-align: center;
+    vertical-align: center;
 }
 
 .alarm-card {
@@ -89,6 +99,15 @@
     background-color: #091525;
     color: #ffffff;
     font-size: 16pt;
+}
+
+.boat-name {
+    width: 85%;
+    background-color: #091525;
+    color: white;
+    font-weight: 800;
+    border-radius: 10, 10, 0, 0;
+    height: 44pt;
 }
 
 .alarm-button {

@@ -3,8 +3,10 @@ import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
-import {DeviceAlarmDataFormat} from '../shared/data.service';
+import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import * as TNSPhone from 'nativescript-phone';
+import { EventData } from 'tns-core-modules/data/observable';
+import { Switch } from 'tns-core-modules/ui/switch';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -16,12 +18,11 @@ registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefr
 })
 export class AlarmComponent implements OnInit, AfterViewInit {
     isLoading = false;
-    private devicedataSub: Subscription;
-    deviceData: DeviceAlarmDataFormat[];
-    showOnlyOpen = false;
+    showOnlyOpen = true;
 
     constructor(
-        private apiService: ApiService
+        private apiService: ApiService,
+        private dataService: DataService,
     ) {
     }
 
@@ -33,46 +34,15 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     }
 
     ngOnInit(): void {
-        this.devicedataSub = this.apiService.deviceData.subscribe(
-            ddata => {
-                if (ddata) {
-                    this.deviceData = ddata;
-                } else {
-                    console.log('no Device');
-                }
-            }
-        );
     }
 
     ngAfterViewInit(): void {
-        if (!this.deviceData) {
-            this.isLoading = true;
-            this.apiService.getDeviceData().subscribe(response => {
-                console.log('DeviceData loading ....');
-                this.isLoading = false;
-            }, error => {
-                console.log('not loading');
-                this.isLoading = false;
-            });
-        }
-    }
-
-    click_gear() {
-        console.log('Gear was pressed');
     }
 
     refreshList(args) {
-        this.isLoading = true;
         const pullRefresh = args.object;
-        this.apiService.getDeviceData().subscribe(response => {
-            console.log('DeviceData loading .....');
-            this.isLoading = false;
-            pullRefresh.refreshing = false;
-        }, error => {
-            console.log('not loading');
-            this.isLoading = false;
-            pullRefresh.refreshing = false;
-        });
+        this.dataService.refreshBoatStatus();
+        pullRefresh.refreshing = false;
     }
 
     onButtonTap() {
@@ -80,26 +50,26 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     }
 
     onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
-        this.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, true, null);
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, null);
     }
 
     onAlarmNotResponsibleTap(idDevice: number, idAlarm: number) {
-        this.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, false, null);
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, false, null);
     }
 
     onAlarmOkTap(idDevice: number, idAlarm: number) {
-        this.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.deviceData[idDevice].alarm[idAlarm].id, true, true);
+        this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
+        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, true);
     }
 
     onCallTap(idDevice: number) {
-        TNSPhone.dial(this.deviceData[idDevice].harbour_contact, true);
+        TNSPhone.dial(this.dataService.deviceData[idDevice].harbour_contact, true);
     }
 
-    onCheckedChange() {
-        this.showOnlyOpen = !this.showOnlyOpen;
-        console.log('onlyOpen: ' + (this.showOnlyOpen ? 't' : 'f'));
+    onCheckedChange(args: EventData) {
+        const sw = args.object as Switch;
+        this.showOnlyOpen = sw.checked;
     }
 }

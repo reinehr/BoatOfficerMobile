@@ -1,6 +1,8 @@
 import {Injectable} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ApiService} from '~/app/shared/api.service';
+import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from "~/app/shared/interface/sensordata";
+import {AlarmSettings} from "~/app/shared/interface/alarm";
 
 export interface DataItem {
     id: number;
@@ -58,112 +60,225 @@ export interface SensorDataHistory {
 })
 export class DataService {
 
-    private sensorDataHistory: SensorDataHistory[];
-    private sensorDataHistorySub: Subscription;
-
-    private items = new Array<DataItem>(
-        {
-            id: 1,
-            name: 'Item 1',
-            description: 'Description for Item 1'
-        },
-        {
-            id: 2,
-            name: 'Item 2',
-            description: 'Description for Item 2'
-        },
-        {
-            id: 3,
-            name: 'Item 3',
-            description: 'Description for Item 3'
-        }
-    );
+    sensorFieldMap = boatStatusMap;
+    sensorFieldKeys = Object.keys(boatStatusMap);
+    private boatStatusSub: Subscription;
+    boatStatus: BoatStatus;
+    private devicedataSub: Subscription;
+    public deviceData: DeviceAlarmDataFormat[];
+    activeAlarmByField: { [idDevice: number]: { [sensorFieldKey: string]: boolean } };
+    private alarmSettingsSub: Subscription;
+    alarmSettings: AlarmSettings;
+    private boatHistorySub: Subscription;
+    public boatHistory: BoatHistory;
+    historyIntervalData = historyInterval;
+    minMax: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
+    private isLoading = false;
+    dataLoaded = false;
 
     constructor(
         private apiService: ApiService
     ) {
+        this.initBoatStatus();
         this.initSensorDataHistory();
+        this.initAlarmSettings();
+        this.refreshBoatStatus();
     }
 
-    getSensorDataHistory(): Array<SensorDataHistory> {
-        if (!this.sensorDataHistory) {
-            this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
-                console.log('SensorData DataService loading ...');
-            }, error => {
-                console.log(error);
-            });
-        }
-        return this.sensorDataHistory;
-    }
-
-    initSensorDataHistory(): void {
-        this.sensorDataHistorySub = this.apiService.currentSensorDataHistoryData.subscribe(
-            history => {
-                if (history) {
-                    this.sensorDataHistory = history;
-                    // console.log(`sensorDataHistory: ${JSON.stringify(this.sensorDataHistory, null, 2)}`);
-
-                    // tslint:disable-next-line:forin
-                    for (const deviceIndex in history) {
-                        const deviceData = history[deviceIndex].device_history;
-                        // console.log(`sensorDataHistory: ${JSON.stringify(this.sensorDataHistory[deviceIndex].device_history, null, 2)}`);
-                        // tslint:disable-next-line:forin
-                        if (!this.sensorDataHistory[deviceIndex].device_history_interval) {
-                            this.sensorDataHistory[deviceIndex].device_history_interval = {};
-                        }
-                        for (const sensorType in deviceData) {
-                            if (deviceData.hasOwnProperty(sensorType)) {
-                                // console.log(`sensorDataHistory: ${JSON.stringify(sensorType, null, 2)}`);
-                                if (!this.sensorDataHistory[deviceIndex].device_history_interval[sensorType]) {
-                                    this.sensorDataHistory[deviceIndex].device_history_interval[sensorType] = {
-                                        min: '',
-                                        max: ''
-                                    };
-                                }
-                                let minDate = new Date(Date.now());
-                                const maxDate = new Date(Date.now());
-                                let minDateStr = '';
-                                const maxDateStr = `${maxDate.getDate()}/${maxDate.getMonth() + 1}/${maxDate.getFullYear()}`;
-                                for (const day of deviceData[sensorType]) {
-                                    const date = new Date(day.date);
-                                    if (date < minDate) {
-                                        minDate = date;
+    initBoatStatus(): void {
+        this.boatStatusSub = this.apiService.boatStatus.subscribe(
+            bsdata => {
+                if (bsdata) {
+                    try {
+                        this.boatStatus = bsdata;
+                        console.log('boatStatus loading');
+                        for (const idDevice of Object.keys(this.activeAlarmByField)) {
+                            if (this.boatStatus && this.boatStatus[idDevice]) {
+                                this.boatStatus[idDevice].alarm_active = {};
+                                for (const mapKey of this.sensorFieldKeys) {
+                                    // if (mapKey in this.boatStatus[idDevice].alarm_active) {
+                                    this.boatStatus[idDevice].alarm_active[mapKey] = false;
+                                    for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
+                                        if (this.activeAlarmByField[idDevice][alarmType]) {
+                                            this.boatStatus[idDevice].alarm_active[mapKey] = true;
+                                        }
                                     }
+                                    // }
                                 }
-                                minDateStr = `${minDate.getDate()}/${minDate.getMonth() + 1}/${minDate.getFullYear()}`;
-                                this.sensorDataHistory[deviceIndex].device_history_interval[sensorType].min = minDateStr;
-                                this.sensorDataHistory[deviceIndex].device_history_interval[sensorType].max = maxDateStr;
                             }
                         }
-                        console.log(`sensorDataHistoryInterval: service Subscription triggered`);
+                    } catch (e) {
+                        console.log('Error: no boatStatus');
                     }
                 } else {
-                    console.log('no History');
+                    console.log('no boatStatus');
                 }
             }
         );
-        this.refreshSensorDataHistory();
+    }
+
+    initAlarmSettings(): void {
+        this.alarmSettingsSub = this.apiService.alarmSettings.subscribe(
+            asdata => {
+                if (asdata) {
+                    this.alarmSettings = asdata;
+                    this.dataLoaded = true;
+                } else {
+                    console.log('no alarmSettings');
+                }
+            }
+        );
+    }
+
+    initSensorDataHistory(): void {
+        this.devicedataSub = this.apiService.deviceData.subscribe(
+            ddata => {
+                if (ddata) {
+                    this.deviceData = ddata;
+                    this.activeAlarmByField = {};
+                    for (const device of ddata) {
+                        this.activeAlarmByField[device.id] = {};
+                        for (const mapKey of this.sensorFieldKeys) {
+                            for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
+                                this.activeAlarmByField[device.id][alarmType] = false;
+                            }
+                        }
+                        for (const alarm of device.alarm) {
+                            if (alarm.status === 'open' || alarm.status === 'open_someone_responsible') {
+                                this.activeAlarmByField[device.id][alarm.type] = true;
+                            }
+                        }
+                    }
+                    // console.log(this.activeAlarmByField);
+                    this.apiService.getBoatHistory(31).subscribe(resp3 => {
+                        console.log('BoatHistory loading ...');
+                        this.isLoading = false;
+                        this.dataLoaded = true;
+                    }, error => {
+                        console.log(error);
+                        this.isLoading = false;
+                    });
+                } else {
+                    console.log('no Device');
+                }
+            }
+        );
+        this.boatHistorySub = this.apiService.boatHistory.subscribe(
+            bhdata => {
+                let millisecondsNow = new Date().getTime();
+                if (bhdata) {
+                    this.boatHistory = bhdata;
+                    for (const idDevice of Object.keys(this.boatHistory)) {
+                        if (!this.minMax[idDevice]) {
+                            this.minMax[idDevice] = {};
+                            for (const idInterval in this.historyIntervalData) {
+                                this.minMax[idDevice][idInterval] = {};
+                                for (const field of this.sensorFieldKeys) {
+                                    if (this.sensorFieldMap[field].datatype === 'float') {
+                                        this.minMax[idDevice][idInterval][field] = {};
+                                        // this.minMax[idDevice][interval.id][field] = {min: {}, max: {}};
+                                    }
+                                }
+                            }
+                        }
+                        this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
+                        this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
+                        millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
+                        for (const idEvent in this.boatHistory[idDevice].sensor_data) {
+                            const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
+                            eventTime.setMinutes(0);
+                            eventTime.setHours(0);
+                            eventTime.setSeconds(0);
+                            eventTime.setMilliseconds(0);
+                            this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
+                            const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
+                            for (const idInterval in this.historyIntervalData) {
+                                if (this.historyIntervalData[idInterval].days < (daysPast)) {
+                                    this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
+                                } else {
+                                    for (const field of this.sensorFieldKeys) {
+                                        if (!this.minMax[idDevice]) {
+                                            this.minMax[idDevice] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval]) {
+                                            this.minMax[idDevice][idInterval] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval][field]) {
+                                            this.minMax[idDevice][idInterval][field] = {};
+                                        }
+                                        if (!this.minMax[idDevice][idInterval][field].min) {
+                                            this.minMax[idDevice][idInterval][field] = {
+                                                min: {
+                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                                },
+                                                max: {
+                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                                }
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] < this.minMax[idDevice][idInterval][field].min.value) {
+                                            this.minMax[idDevice][idInterval][field].min = {
+                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] > this.minMax[idDevice][idInterval][field].max.value) {
+                                            this.minMax[idDevice][idInterval][field].max = {
+                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
+                                            };
+                                        }
+                                    }
+                                }
+                                this.historyIntervalData[idInterval].sensorData.sliceStop = +idEvent;
+                            }
+                        }
+                        const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
+                        this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)}:00`;
+                    }
+                    console.log('BoatHistory complete');
+                } else {
+                    console.log('no boatHistory');
+                }
+            }
+        );
+
+        // this.refreshSensorDataHistory();
     }
 
     refreshSensorDataHistory(): void {
-        if (!this.sensorDataHistory) {
-            this.apiService.getSensorHistory('', 0, 31).subscribe(response => {
-                console.log('DS SensorData loading ...');
+        this.isLoading = true;
+        this.apiService.getDeviceData().subscribe(resp1 => {
+            console.log('DeviceData loading by Service ........');
+        }, error => {
+            console.log('DeviceData not loading');
+            this.isLoading = false;
+        });
+    }
+
+    refreshBoatStatus(): void {
+        this.isLoading = true;
+        this.apiService.getDeviceData().subscribe(resp1 => {
+            console.log('DeviceData loading ...');
+            this.apiService.getBoatStatus().subscribe(resp2 => {
+                console.log('BoatStatus loading ...');
+                this.isLoading = false;
             }, error => {
                 console.log(error);
+                this.isLoading = false;
             });
-        }
+            this.apiService.getDeviceAlarmSettings().subscribe(response => {
+                console.log('AlarmSettings loading .......');
+            }, error => {
+                console.log('AlarmSettings not loading');
+            });
+            this.isLoading = false;
+        }, error => {
+            console.log('DeviceData not loading');
+            this.isLoading = false;
+        });
     }
 
-    setSensorDataHistory(input: SensorDataHistory[]) {
-        this.sensorDataHistory = input;
-    }
-
-    getItems(): Array<DataItem> {
-        return this.items;
-    }
-
-    getItem(id: number): DataItem {
-        return this.items.filter((item) => item.id === id)[0];
-    }
 }

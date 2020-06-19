@@ -49,4 +49,8 @@ export class ScanComponent implements OnInit {
             this.isLoading = false;
         });
     }
+
+    goBack() {
+        this.router.backToPreviousPage();
+    }
 }

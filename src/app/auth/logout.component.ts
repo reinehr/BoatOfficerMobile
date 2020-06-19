@@ -38,4 +38,8 @@ export class LogoutComponent implements OnInit {
         this.isLoading = false;
         this.router.navigate(['']);
     }
+
+    goBack() {
+        this.router.backToPreviousPage();
+    }
 }

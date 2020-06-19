@@ -218,8 +218,9 @@ export class ApiService {
                     'Content-Type': 'application/json',
                     idToken: `${getString('token', '')}`
                 })
-            }).subscribe();
-        this.getDeviceData().subscribe();
+            }).subscribe(() => {
+                this.getDeviceData().subscribe();
+        });
     }
 
     getIntTemperatureHistory(device: number, days: number) {

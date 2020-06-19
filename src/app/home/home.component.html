@@ -8,14 +8,14 @@
         <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
         <Label col=0 row=2 text="" height="5"></Label>
         <StackLayout col=0 row=3>
-            <StackLayout *ngFor="let device of deviceData">
+            <StackLayout *ngFor="let device of dataService.deviceData">
                 <Label text="" height="10"></Label>
-                <StackLayout class="alarm-button" height="30pt">
+                <StackLayout [class]="device.boat_image_medium && device.boat_image_medium != 'null' ? 'boat-name' : 'alarm-button'" height="30pt">
                     <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
                 </StackLayout>
                 <StackLayout class="circle-wrapper" *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_medium"
-                           class="boatoffice-boat-image"></Image>
+                           class="boatoffice-boat-image-home"></Image>
                 </StackLayout>
                 <StackLayout *ngFor="let alarm of device.alarm">
                     <StackLayout *ngIf="alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)">

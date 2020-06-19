@@ -5,8 +5,8 @@
 </ActionBar>
 
 <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout *ngIf="dataLoaded">
-        <StackLayout *ngFor="let device of deviceData; let idDevice = index" paddingBottom="15">
+    <StackLayout *ngIf="dataService.dataLoaded">
+        <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
             <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                 <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                     <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
@@ -16,14 +16,14 @@
                 <Label col="1" row="1" [text]="device.name"
                        class="alarm-blue t-16" height="30"></Label>
             </GridLayout>
-            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="alarmSettings[device.id]">
+            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                 <StackLayout>
                     <Label text="ALARM SETTINGS" class="t-16 font-weight-bold"></Label>
                     <StackLayout *ngFor="let field of sensorFieldKeys">
                         <StackLayout>
                             <StackLayout *ngIf="alarmSettingsMap[field]">
                                 <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
-                                    <StackLayout *ngIf="alarmSettings[device.id][alarm.key]">
+                                    <StackLayout *ngIf="dataService.alarmSettings[device.id][alarm.key]">
                                         <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="10">
                                             <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                                         borderTopColor="#d3d3d3"></GridLayout>
@@ -33,14 +33,14 @@
                                                    class="alarm-blue font-weight-bold"
                                                    verticalAlignment="center"></Label>
                                             <Label col="3" row="1"
-                                                   [text]="alarmSettings[device.id][alarm.key].value_device + alarm.unit"
+                                                   [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"
                                                    class="alarm-blue pull-right font-weight-bold"></Label>
                                         </GridLayout>
                                         <GridLayout paddingBottom="5"
-                                                    *ngIf="alarmSettings[device.id][alarm.key].value_user != alarmSettings[device.id][alarm.key].value_device"
+                                                    *ngIf="dataService.alarmSettings[device.id][alarm.key].value_user != null && dataService.alarmSettings[device.id][alarm.key].value_user != dataService.alarmSettings[device.id][alarm.key].value_device"
                                                     marginTop="-10">
                                             <Label class="alarm-orange"
-                                                   [text]="'Value changed to ' + alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"
+                                                   [text]="'Value changed to ' + dataService.alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"
                                                    horizontalAlignment="center"></Label>
                                         </GridLayout>
 
@@ -51,7 +51,7 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="alarmSettings[device.id]">
+            <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                 <StackLayout>
                     <Label text="OTHER SETTINGS" class="t-16 font-weight-bold"></Label>
                     <StackLayout>

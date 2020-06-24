@@ -318,6 +318,23 @@ export class ApiService {
         );
     }
 
+    saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number) {
+        console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue);
+        this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
+                type: alarmKey,
+                value_user: alarmValue,
+                deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+                this.getDeviceAlarmSettings().subscribe();
+        });
+    }
+
     saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
         console.log('Selection done: ' + JSON.stringify(imageSrc._android));
         console.log('Selection done: ' + JSON.stringify(imageAssets));

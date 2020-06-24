@@ -3,7 +3,7 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import {Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {ApiService} from '~/app/shared/api.service';
-import {AlarmSettings, alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
+import {alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
 
 @Component({
     selector: 'app-boatsettings',

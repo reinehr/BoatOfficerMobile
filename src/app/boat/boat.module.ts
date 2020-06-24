@@ -9,6 +9,7 @@ import {BoatsettingsComponent} from './boatsettings.component';
 import {CommonModule} from '@angular/common';
 import {TimeagoModule} from 'ngx-timeago';
 import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
+import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component';
 
 @NgModule({
     imports: [
@@ -22,7 +23,8 @@ import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
         BoatComponent,
         SensordetailsComponent,
         BoatsettingsComponent,
-        UploadpictureComponent
+        UploadpictureComponent,
+        EditalarmsettingsComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

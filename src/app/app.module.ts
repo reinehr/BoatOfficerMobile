@@ -11,13 +11,14 @@ import {NativeScriptHttpClientModule} from 'nativescript-angular/http-client';
 import {TimeagoModule} from 'ngx-timeago';
 
 // GMSServices.MapView
-// import * as platform from 'tns-core-modules/platform';
+import * as platform from 'tns-core-modules/platform';
 // import * as GMSServices from 'nativescript-google-maps-sdk';
-// if (platform.isIOS) {
+if (platform.isIOS) {
 //     GMSServices.
-//     GMSServices.provideAPIKey('AIzaSyDLIIQBXTMyrO0y2ZHjgTM0uEcRliXy4eg');
-// }
+    GMSServices.provideAPIKey('AIzaSyDLIIQBXTMyrO0y2ZHjgTM0uEcRliXy4eg');
+}
 // import { CookieService } from 'ngx-cookie-service';
+declare var GMSServices: any;
 /*
 import firebase = require('nativescript-plugin-firebase');
 

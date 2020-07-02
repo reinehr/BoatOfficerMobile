@@ -157,7 +157,9 @@ export class ApiService {
     }
 
     getBoatStatus() {
-        const param: any = {};
+        console.log('push_token: ' + getString('push_token', ''));
+        const param: any = {
+                push_token: getString('push_token', '')};
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
                 headers: new HttpHeaders({

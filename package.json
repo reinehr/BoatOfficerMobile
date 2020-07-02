@@ -1,11 +1,11 @@
 {
   "nativescript": {
     "id": "com.boatofficer.BoatOfficerMobile",
-    "tns-ios": {
-      "version": "6.3.0"
-    },
     "tns-android": {
       "version": "6.4.1"
+    },
+    "tns-ios": {
+      "version": "6.3.0"
     }
   },
   "description": "NativeScript Application",
@@ -48,7 +48,7 @@
     "@ngtools/webpack": "^9.1.0",
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "^1.5.1",
-    "node-sass": "^4.7.1",
+    "node-sass": "^4.7.2",
     "tslint": "~5.19.0",
     "typescript": "~3.5.3"
   },

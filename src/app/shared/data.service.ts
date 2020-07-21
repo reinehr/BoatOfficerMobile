@@ -16,7 +16,7 @@ export interface DeviceAlarmDataFormat {
     'boat_image_large': string;
     'boat_image_medium': string;
     'boat_image_small': string;
-    'boat_image_tag': string;
+    // 'boat_image_tag': string;
     'name': string;
     'harbour_contact': string;
     'berth': string;

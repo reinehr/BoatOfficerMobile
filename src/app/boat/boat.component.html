@@ -18,7 +18,7 @@
             <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
                 <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
-                        <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                        <Image [src]="'' + device.boat_image_small"
                                class="boatoffice-boat-image"></Image>
                     </GridLayout>
                     <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>

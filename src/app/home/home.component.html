@@ -14,7 +14,7 @@
                     <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
                 </StackLayout>
                 <StackLayout class="circle-wrapper" *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
-                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_medium"
+                    <Image [src]="'' + device.boat_image_medium"
                            class="boatoffice-boat-image-home"></Image>
                 </StackLayout>
                 <StackLayout *ngFor="let alarm of device.alarm">

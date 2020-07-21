@@ -13,6 +13,7 @@ android {
   defaultConfig {
     minSdkVersion 17
     generatedDensities = []
+    multiDexEnabled true
     applicationId = "com.boatofficer.BoatOfficerMobile"
   }
   aaptOptions {

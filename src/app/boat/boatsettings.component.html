@@ -11,7 +11,7 @@
             <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                 <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
                             *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
-                    <Image [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                    <Image [src]="'' + device.boat_image_small"
                            class="boatoffice-boat-image"></Image>
                 </GridLayout>
                 <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
@@ -75,7 +75,7 @@
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
                             <Image col="3" row="1" *ngIf="device.boat_image_small && device.boat_image_small != 'null'"
-                                   [src]="'https://boat-officer-backend.herokuapp.com' + device.boat_image_small"
+                                   [src]="'' + device.boat_image_small"
                                    class="boatoffice-boat-image"></Image>
                         </GridLayout>
 

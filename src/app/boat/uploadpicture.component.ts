@@ -4,6 +4,8 @@ import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "~/app/shared/data.service";
+import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
+import {Folder, path, knownFolders} from "tns-core-modules/file-system";
 
 
 @Component({
@@ -77,6 +79,22 @@ export class UploadpictureComponent implements OnInit {
                 });
 
                 that.imageAssets = selection;
+
+                const source = new ImageSource();
+                source.fromAsset(that.imageAssets[0])
+                    .then((imageSource: ImageSource) => {
+                        const folderPath: string = knownFolders.temp().path;
+                        const fileName = "temp.jpg";
+                        const filePath = path.join(folderPath, fileName);
+                        const saved: boolean = imageSource.saveToFile(filePath, "jpg");
+                        if (saved) {
+                            console.log("Image saved successfully!");
+                        }
+                    })
+                    .catch((e) => {
+                        console.log("Error: ");
+                        console.log(e);
+                    });
 
             }).catch(e => {
             console.log(e);

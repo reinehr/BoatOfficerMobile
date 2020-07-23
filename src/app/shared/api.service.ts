@@ -17,6 +17,7 @@ import {AlarmSettings} from '~/app/shared/interface/alarm';
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
+import {Folder, path, knownFolders} from "tns-core-modules/file-system";
 // const fs = require('file-system');
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
@@ -91,7 +92,7 @@ export class ApiService {
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    // baseUrl = 'https://ab1a72951193.ngrok.io/';
+    // baseUrl = 'https://6be0522bff28.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
@@ -159,7 +160,8 @@ export class ApiService {
     getBoatStatus() {
         console.log('push_token: ' + getString('push_token', ''));
         const param: any = {
-                push_token: getString('push_token', '')};
+            push_token: getString('push_token', '')
+        };
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
                 headers: new HttpHeaders({
@@ -221,7 +223,7 @@ export class ApiService {
                     idToken: `${getString('token', '')}`
                 })
             }).subscribe(() => {
-                this.getDeviceData().subscribe();
+            this.getDeviceData().subscribe();
         });
     }
 
@@ -333,7 +335,7 @@ export class ApiService {
                     idToken: `${getString('token', '')}`
                 })
             }).subscribe(() => {
-                this.getDeviceAlarmSettings().subscribe();
+            this.getDeviceAlarmSettings().subscribe();
         });
     }
 
@@ -344,6 +346,10 @@ export class ApiService {
         // const folder = this.fs.knownFolders.documents();
         // const pathOfImage = fs.path.join(imageSrc._android, '');
         // const saved = image.saveToFile(pathOfImage, ".png");
+
+        const folderPath: string = knownFolders.temp().path;
+        const fileName = "temp.jpg";
+        const filePath = path.join(folderPath, fileName);
         const request = {
             url: this.baseDeviceUrl + 'upload_image/',
             method: 'POST',
@@ -361,7 +367,7 @@ export class ApiService {
             {name: 'deviceId', value: deviceId},
             {
                 name: 'boatImage',
-                filename: imageSrc._android,
+                filename: filePath,
                 mimeType: 'image/jpeg',
                 content_type_extra: '{id_device: ' + deviceId + '}'
             }

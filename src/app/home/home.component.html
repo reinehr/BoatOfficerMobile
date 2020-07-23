@@ -13,9 +13,8 @@
                 <StackLayout [class]="device.boat_image_medium && device.boat_image_medium != 'null' ? 'boat-name' : 'alarm-button'" height="30pt">
                     <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
                 </StackLayout>
-                <StackLayout class="circle-wrapper" *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
-                    <Image [src]="'' + device.boat_image_medium"
-                           class="boatoffice-boat-image-home"></Image>
+                <StackLayout *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
+                    <Image class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                 </StackLayout>
                 <StackLayout *ngFor="let alarm of device.alarm">
                     <StackLayout *ngIf="alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)">

@@ -4,18 +4,21 @@
 
 </ActionBar>
 
-<StackLayout class="form homeBackgroundImage" padding="10" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout class="input-field">
-        <Label
-                class="label"
-                text="">
-        </Label>
-        <Button
-                text="Logout"
-                class="btn btn-blue btn-rounded-lg"
-                (tap)="saveForm()"
-        ></Button>
+<GridLayout class="homeBackgroundImage"
+            backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <StackLayout class="form" padding="10">
+        <StackLayout class="input-field">
+            <Label
+                    class="label"
+                    text="">
+            </Label>
+            <Button
+                    text="Logout"
+                    class="btn btn-blue btn-rounded-lg"
+                    (tap)="saveForm()"
+            ></Button>
+        </StackLayout>
+        <ActivityIndicator [busy]="isLoading">
+        </ActivityIndicator>
     </StackLayout>
-    <ActivityIndicator [busy]="isLoading">
-    </ActivityIndicator>
-</StackLayout>
+</GridLayout>

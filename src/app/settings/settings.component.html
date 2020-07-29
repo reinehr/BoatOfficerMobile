@@ -3,21 +3,23 @@
 
 </ActionBar>
 
-<StackLayout class="page__content homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <Button
-            text="Log in"
-            class="btn btn-primary"
-            nsRouterLink="../auth"
-            pageTransition="slideLeft"></Button>
-    <Button
-            text="Register new device"
-            class="btn btn-primary"
-            nsRouterLink="../scan"
-            pageTransition="slideLeft"></Button>
-    <Button
-            text="Log out"
-            class="btn btn-primary"
-            nsRouterLink="../logout"
-            pageTransition="slideLeft"></Button>
-</StackLayout>
-
+<GridLayout class="homeBackgroundImage"
+            backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <StackLayout class="page__content">
+        <Button
+                text="Log in"
+                class="btn btn-primary"
+                nsRouterLink="../auth"
+                pageTransition="slideLeft"></Button>
+        <Button
+                text="Register new device"
+                class="btn btn-primary"
+                nsRouterLink="../scan"
+                pageTransition="slideLeft"></Button>
+        <Button
+                text="Log out"
+                class="btn btn-primary"
+                nsRouterLink="../logout"
+                pageTransition="slideLeft"></Button>
+    </StackLayout>
+</GridLayout>

@@ -4,64 +4,66 @@
 
 </ActionBar>
 
-<ScrollView orientation="vertical" class="homeBackgroundImage"
+<GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout class="form">
-        <StackLayout class="input-field" padding="10">
-            <Label
-                    class="label"
-                    text="E-Mail">
-            </Label>
-            <TextField
-                    class="input"
-                    returnKeyType="next"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    [(ngModel)]="email"
-                    keyboardType="email"
-            ></TextField>
+    <ScrollView orientation="vertical">
+        <StackLayout class="form">
+            <StackLayout class="input-field" padding="10">
+                <Label
+                        class="label"
+                        text="E-Mail">
+                </Label>
+                <TextField
+                        class="input"
+                        returnKeyType="next"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="email"
+                        keyboardType="email"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="input-field" padding="10">
+                <Label
+                        class="label"
+                        text="Password">
+                </Label>
+                <TextField
+                        class="input"
+                        returnKeyType="done"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="password"
+                        [secure]="true"
+                ></TextField>
+            </StackLayout>
+            <Button
+                    text="Login"
+                    class="btn btn-blue btn-rounded-lg"
+                    (tap)="saveForm()"
+                    *ngIf="!registerMode && !isLoading"
+            ></Button>
+            <Button
+                    text="Sign Up"
+                    class="btn btn-blue btn-rounded-lg"
+                    (tap)="saveForm()"
+                    *ngIf="registerMode && !isLoading"
+            ></Button>
+            <ActivityIndicator [busy]="isLoading">
+            </ActivityIndicator>
+            <StackLayout class="alarm-button alarm-blue" padding="10,10,10,10" margin="10,10,10,10">
+                <Label
+                        class="c-white"
+                        text="Not registered yet? Sign Up!"
+                        *ngIf="!registerMode"
+                        (tap)="registerMode = true">
+                </Label>
+                <Label
+                        class="c-white"
+                        text="Already registered? Login!"
+                        *ngIf="registerMode"
+                        (tap)="registerMode = false">
+                </Label>
+            </StackLayout>
         </StackLayout>
-        <StackLayout class="input-field" padding="10">
-            <Label
-                    class="label"
-                    text="Password">
-            </Label>
-            <TextField
-                    class="input"
-                    returnKeyType="done"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    [(ngModel)]="password"
-                    [secure]="true"
-            ></TextField>
-        </StackLayout>
-        <Button
-                text="Login"
-                class="btn btn-blue btn-rounded-lg"
-                (tap)="saveForm()"
-                *ngIf="!registerMode && !isLoading"
-        ></Button>
-        <Button
-                text="Sign Up"
-                class="btn btn-blue btn-rounded-lg"
-                (tap)="saveForm()"
-                *ngIf="registerMode && !isLoading"
-        ></Button>
-        <ActivityIndicator [busy]="isLoading">
-        </ActivityIndicator>
-        <StackLayout class="alarm-button alarm-blue" padding="10,10,10,10" margin="10,10,10,10">
-            <Label
-                    class="c-white"
-                    text="Not registered yet? Sign Up!"
-                    *ngIf="!registerMode"
-                    (tap)="registerMode = true">
-            </Label>
-            <Label
-                    class="c-white"
-                    text="Already registered? Login!"
-                    *ngIf="registerMode"
-                    (tap)="registerMode = false">
-            </Label>
-        </StackLayout>
-    </StackLayout>
-</ScrollView>
+    </ScrollView>
+</GridLayout>

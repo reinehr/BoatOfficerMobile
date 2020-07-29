@@ -29,4 +29,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
     onButtonTap(): void {
         console.log('Button was pressed');
     }
+
+    refreshList(args) {
+        const pullRefresh = args.object;
+        // this.dataService.refreshSensorDataHistory();
+        this.dataService.refreshBoatStatus();
+        pullRefresh.refreshing = false;
+    }
 }

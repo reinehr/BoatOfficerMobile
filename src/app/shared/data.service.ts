@@ -186,14 +186,15 @@ export class DataService {
                         millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
                         for (const idEvent in this.boatHistory[idDevice].sensor_data) {
                             const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
-                            eventTime.setMinutes(0);
-                            eventTime.setHours(0);
-                            eventTime.setSeconds(0);
-                            eventTime.setMilliseconds(0);
+                            this.boatHistory[idDevice].sensor_data[idEvent].date = eventTime;
+                            // eventTime.setMinutes(0);
+                            // eventTime.setHours(0);
+                            // eventTime.setSeconds(0);
+                            // eventTime.setMilliseconds(0);
                             this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
                             const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
                             for (const idInterval in this.historyIntervalData) {
-                                if (this.historyIntervalData[idInterval].days < (daysPast)) {
+                                if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
                                 } else {
                                     for (const field of this.sensorFieldKeys) {
@@ -236,7 +237,8 @@ export class DataService {
                             }
                         }
                         const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
-                        this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)}:00`;
+                        // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()}`;
+                        // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].date = new Date(time.getFullYear(), (time.getMonth() + 1), (time.getDate() + 1), time.getHours(), time.getMinutes(), time.getSeconds())
                     }
                     console.log('BoatHistory complete');
                 } else {

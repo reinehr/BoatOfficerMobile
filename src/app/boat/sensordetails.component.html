@@ -4,69 +4,75 @@
 
 </ActionBar>
 
-<PullToRefresh (refresh)="refreshList($event)">
-    <ScrollView orientation="vertical" class="homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-        <StackLayout>
-            <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
-                    <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
-                           class="boatoffice-boat-image"></Image>
-                </GridLayout>
-                <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
-                <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
-                       class="alarm-blue t-16" height="30"></Label>
-            </GridLayout>
-            <StackLayout orientation="horizontal" height="60">
-                <GridLayout
-                        class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="center" horizontalAlignment="center"
-                        (tap)="setSelectedInterval(interval.id)" *ngFor="let interval of dataService.historyIntervalData">
-                    <Label [text]="interval.name" verticalAlignment="center" horizontalAlignment="center"></Label>
-                </GridLayout>
-            </StackLayout>
-            <StackLayout orientation="vertical" padding="10" class="alarm-card">
-                <RadCartesianChart style="height: 800px" id="{{field}}">
-                    <LinearAxis tkCartesianVerticalAxis></LinearAxis>
-                    <DateTimeContinuousAxis tkCartesianHorizontalAxis
-                                            dateFormat="{{'dd.MM' + (dataService.historyIntervalData[selectedIntervalId].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                            labelFitMode="Rotate"
-                                            labelRotationAngle="-1.3" labelTextColor="black"
-                                            [majorStepUnit]="dataService.historyIntervalData[selectedIntervalId].stepUnit"
-                                            [majorStep]="dataService.historyIntervalData[selectedIntervalId].step"
-                                            [minimum]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data[dataService.historyIntervalData[selectedIntervalId].sensorData.sliceStart].timestring"
-                                            [maximum]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data[dataService.historyIntervalData[selectedIntervalId].sensorData.sliceStop].timestring">
-                    </DateTimeContinuousAxis>
-                    <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                           verticalLinesVisible="true"
-                                           horizontalStripLinesVisible="true"
-                                           verticalStripLinesVisible="true"
-                                           verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                           horizontalStrokeWidth="2" verticalStrokeWidth="1"
-                                           horizontalStripLineColor="#eeeef9, #ffffff">
-                    </RadCartesianChartGrid>
-                    <LineSeries tkCartesianSeries
-                                  [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data.slice(dataService.historyIntervalData[selectedIntervalId].sensorData.sliceStart,dataService.historyIntervalData[selectedIntervalId].sensorData.sliceStop)"
-                                  categoryProperty="milliseconds"
-                                  strokeColor="#5555ff"
-                                  [valueProperty]='field'></LineSeries>
-                </RadCartesianChart>
-
-                <Label text="" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10" height="20"></Label>
-                <StackLayout>
-                    <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
-                        <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
-                        <Label col="2" row="1" rowSpan="2" text="Maximum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                        <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + dataService.sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
-                        <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+<GridLayout class="homeBackgroundImage"
+            backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <PullToRefresh (refresh)="refreshList($event)">
+        <ScrollView orientation="vertical">
+            <StackLayout>
+                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
+                        <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
+                               class="boatoffice-boat-image"></Image>
                     </GridLayout>
-                    <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
-                        <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3"></GridLayout>
-                        <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
-                        <Label col="2" row="1" rowSpan="2" text="Minimum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                        <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + dataService.sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
-                        <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                    <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
+                    <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
+                           class="alarm-blue t-16" height="30"></Label>
+                </GridLayout>
+                <StackLayout orientation="horizontal" height="60">
+                    <GridLayout
+                            class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="center" horizontalAlignment="center"
+                            (tap)="setSelectedInterval(interval.id)" *ngFor="let interval of dataService.historyIntervalData">
+                        <Label [text]="interval.name" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
+                <StackLayout orientation="vertical" padding="10" class="alarm-card">
+                    <RadCartesianChart style="height: 220" id="{{field}}">
+                        <LinearAxis tkCartesianVerticalAxis
+                                    [minimum]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value"
+                                    [maximum]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value">
+                        </LinearAxis>
+                        <DateTimeContinuousAxis tkCartesianHorizontalAxis
+                                                dateFormat="{{'dd.MM' + (dataService.historyIntervalData[selectedIntervalId].stepUnit == 'Hour' ? ' HH:00' : '')}}"
+                                                labelFitMode="Rotate"
+                                                labelRotationAngle="-1.3" labelTextColor="black"
+                                                [majorStepUnit]="dataService.historyIntervalData[selectedIntervalId].stepUnit"
+                                                [majorStep]="dataService.historyIntervalData[selectedIntervalId].step"
+                                                [minimum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.start"
+                                                [maximum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.stop">
+                        </DateTimeContinuousAxis>
+                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
+                                               verticalLinesVisible="true"
+                                               horizontalStripLinesVisible="true"
+                                               verticalStripLinesVisible="true"
+                                               verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
+                                               horizontalStrokeWidth="2" verticalStrokeWidth="1"
+                                               horizontalStripLineColor="#eeeef9, #ffffff">
+                        </RadCartesianChartGrid>
+                        <LineSeries tkCartesianSeries
+                                      [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                      categoryProperty="date"
+                                      strokeColor="#5555ff"
+                                      [valueProperty]="field"></LineSeries>
+                    </RadCartesianChart>
+
+                    <Label text="" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10" height="20"></Label>
+                    <StackLayout>
+                        <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
+                            <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" rowSpan="2" text="Maximum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + dataService.sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                        </GridLayout>
+                        <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" rowSpan="2" text="Minimum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + dataService.sensorFieldMap[field].unit" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-        </StackLayout>
-    </ScrollView>
-</PullToRefresh>
+        </ScrollView>
+    </PullToRefresh>
+</GridLayout>

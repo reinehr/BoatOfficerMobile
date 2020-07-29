@@ -141,7 +141,7 @@ export class ApiService {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
-        const param: any = {limit: 60, only_active: 'false'};
+        const param: any = {limit: 10, only_active: 'false'};
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: new HttpHeaders({

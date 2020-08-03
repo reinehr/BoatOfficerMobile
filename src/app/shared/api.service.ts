@@ -92,7 +92,7 @@ export class ApiService {
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    // baseUrl = 'https://6be0522bff28.ngrok.io/';
+    // baseUrl = 'https://jakobreinehr3.serverless.social/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;

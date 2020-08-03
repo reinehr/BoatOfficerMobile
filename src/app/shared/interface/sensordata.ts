@@ -128,20 +128,20 @@ export interface BoatHistory {
     };
 }
 
-export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string } } = {
-    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time'},
-    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1'},
-    // ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2'},
-    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Intern Battery'},
-    ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active'},
-    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature'},
-    // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.'},
-    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop'},
-    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 1'},
-    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 2'},
-    // StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Loop A'},
-    // StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A1'},
-    // StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A2'},
+export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, majorStep: number } } = {
+    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', majorStep: 0},
+    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', majorStep: 5},
+    // ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', majorStep:   0},
+    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Intern Battery', majorStep: 1},
+    ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', majorStep: 1},
+    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', majorStep: 5},
+    // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', majorStep: 1},
+    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop', majorStep: 1},
+    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 1', majorStep: 1},
+    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 2', majorStep: 1},
+    // StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Loop A', majorStep: 1},
+    // StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A1', majorStep: 1},
+    // StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A2', majorStep: 1},
 };
 
 export const historyInterval: {id: number, days: number, name: string, step: number, stepUnit: string, sensorData: {sliceStart?: number, sliceStop?: number}, positionData: {sliceStart?: number, sliceStop?: number}, dateInterval?: {start: Date, stop: Date}}[] = [
@@ -149,5 +149,5 @@ export const historyInterval: {id: number, days: number, name: string, step: num
     {id: 1, days: 3.0,  name: '3d', step: 12, stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 3)), stop: new Date()}},
     {id: 2, days: 7.0,  name: '1W', step: 1,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 7)), stop: new Date()}},
     {id: 3, days: 31.0, name: '1M', step: 2,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 31)), stop: new Date()}},
-    // {id: 4, days: 92.0, name: '3M', step: 5,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 92)), stop: new Date()}},
+    {id: 4, days: 92.0, name: '3M', step: 5,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 92)), stop: new Date()}},
 ];

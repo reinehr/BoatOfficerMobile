@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {ActivatedRoute} from '@angular/router';
+import {DecimalPipe} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 import {ApiService} from '~/app/shared/api.service';

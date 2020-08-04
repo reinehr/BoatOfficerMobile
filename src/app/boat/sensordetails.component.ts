@@ -46,5 +46,7 @@ export class SensordetailsComponent implements OnInit {
 
     setSelectedInterval(id: number) {
         this.selectedIntervalId = id;
+        // this.initialized = !this.initialized;
+        // this.initialized = !this.initialized;
     }
 }

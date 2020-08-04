@@ -82,10 +82,11 @@
     border-radius: 10;
 }
 
+$buttons_count: 5;
 .interval-button {
-    margin-left: 5;
-    margin-right: 5;
-    width: 70;
+    margin-left: calc((5%)/#{$buttons_count});
+    margin-right: calc((5%)/#{$buttons_count});
+    width: calc((89%)/#{$buttons_count});
     height: 40;
     border-radius: 20;
     border-width: 2;
@@ -95,9 +96,9 @@
 }
 
 .interval-button-selected {
-    margin-left: 5;
-    margin-right: 5;
-    width: 70;
+    margin-left: calc((5%)/#{$buttons_count});
+    margin-right: calc((5%)/#{$buttons_count});
+    width: calc((89%)/#{$buttons_count});
     height: 40;
     border-radius: 20;
     border-width: 0;
@@ -240,4 +241,43 @@
         vertical-align: top;
         margin-top: 20%;
     }
+}
+
+LineSeries{
+    //stroke-color: #ff0000;
+}
+
+LinearAxis {
+    label-text-color: black;
+    line-hidden: false;
+    label-size: 10;
+    line-thickness: 2;
+    //line-color: green;
+    label-layout-mode: outer;
+}
+
+tkCartesianVerticalAxis {
+    label-layout-mode: outer;
+}
+
+RadCartesianChartGrid {
+    horizontal-lines-visible: true;
+    vertical-lines-visible: true;
+    horizontal-strip-lines-visible: true;
+    vertical-strip-lines-visible: true;
+    vertical-stroke-color: #ffffff;
+    horizontal-stroke-color: #cccccc;
+    horizontal-stroke-width: 2;
+    vertical-stroke-width: 1;
+    horizontal-strip-line-color: #eeeef9;
+}
+
+DateTimeContinuousAxis {
+    plot-mode: OnTicks;
+    label-text-color: #000000;
+    label-rotation-angle: -1.5707963268;
+    label-size: 10;
+    label-height: 50;
+    line-thickness: 2;
+    line-color: black;
 }

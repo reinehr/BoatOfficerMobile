@@ -145,8 +145,8 @@ export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: str
 };
 
 export const historyInterval: {id: number, days: number, name: string, step: number, stepUnit: string, sensorData: {sliceStart?: number, sliceStop?: number}, positionData: {sliceStart?: number, sliceStop?: number}, dateInterval?: {start: Date, stop: Date}}[] = [
-    {id: 0, days: 1.0,  name: '1d', step: 6,  stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 1)), stop: new Date()}},
-    {id: 1, days: 3.0,  name: '3d', step: 12, stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 3)), stop: new Date()}},
+    {id: 0, days: 1.0,  name: '1D', step: 6,  stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 1)), stop: new Date()}},
+    {id: 1, days: 3.0,  name: '3D', step: 12, stepUnit: 'Hour', sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 3)), stop: new Date()}},
     {id: 2, days: 7.0,  name: '1W', step: 1,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 7)), stop: new Date()}},
     {id: 3, days: 31.0, name: '1M', step: 2,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 31)), stop: new Date()}},
     {id: 4, days: 92.0, name: '3M', step: 5,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 92)), stop: new Date()}},

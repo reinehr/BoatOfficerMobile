@@ -2,9 +2,13 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-    <key>com.apple.keystore.access-keychain-keys</key>
-    <true/>
-    <key>com.apple.keystore.device</key>
-    <true/>
+    <key>com.apple.security.application-groups</key>
+    <array>
+        <string>com.boatofficer.BoatOfficerMobile</string>
+    </array>
+    <key>keychain-access-groups</key>
+    <array>
+        <string>$(AppIdentifierPrefix)com.boatofficer.BoatOfficerMobile</string>
+    </array>
 </dict>
 </plist>

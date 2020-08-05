@@ -36,7 +36,7 @@ export class AuthComponent implements OnInit {
             this.authService.login(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
                 const options = {
-                    title: 'Login successfull',
+                    title: 'Login successful',
                     message: 'You are now logged in',
                     okButtonText: 'OK'
                 };
@@ -52,7 +52,7 @@ export class AuthComponent implements OnInit {
             this.authService.signUp(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
                 const options = {
-                    title: 'Reistration successfull',
+                    title: 'Registration successful',
                     message: 'You are now logged in',
                     okButtonText: 'OK'
                 };

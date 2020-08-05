@@ -3,6 +3,7 @@ import {ApiService} from '../shared/api.service';
 import {AuthService} from '~/app/shared/auth.service';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {DataService} from '~/app/shared/data.service';
+import {alert} from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: 'app-auth',
@@ -34,8 +35,15 @@ export class AuthComponent implements OnInit {
         if (!this.registerMode) {
             this.authService.login(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
+                const options = {
+                    title: 'Login successfull',
+                    message: 'You are now logged in',
+                    okButtonText: 'OK'
+                };
+                alert(options).then(() => {
+                    this.router.navigate([''], { clearHistory: true });
+                });
                 this.isLoading = false;
-                this.router.navigate(['']);
             }, error => {
                 console.log(error);
                 this.isLoading = false;
@@ -43,8 +51,15 @@ export class AuthComponent implements OnInit {
         } else {
             this.authService.signUp(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
+                const options = {
+                    title: 'Reistration successfull',
+                    message: 'You are now logged in',
+                    okButtonText: 'OK'
+                };
+                alert(options).then(() => {
+                    this.router.navigate([''], { clearHistory: true });
+                });
                 this.isLoading = false;
-                this.router.navigate(['']);
             }, error => {
                 console.log(error);
                 this.isLoading = false;

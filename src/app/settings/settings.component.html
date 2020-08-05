@@ -6,7 +6,7 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <StackLayout class="page__content">
-        <Button
+        <Button *ngIf="!hasKey"
                 text="Log in"
                 class="btn btn-primary"
                 nsRouterLink="../auth"
@@ -16,7 +16,7 @@
                 class="btn btn-primary"
                 nsRouterLink="../scan"
                 pageTransition="slideLeft"></Button>
-        <Button
+        <Button *ngIf="hasKey"
                 text="Log out"
                 class="btn btn-primary"
                 nsRouterLink="../logout"

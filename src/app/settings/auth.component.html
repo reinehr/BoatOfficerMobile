@@ -8,12 +8,18 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
         <StackLayout class="form">
-            <StackLayout class="input-field" padding="10">
-                <Label
-                        class="label"
-                        text="E-Mail">
+            <StackLayout class="input-field" padding="10, 10, 0, 10">
+                <Label color="black"
+                       fontSize="16"
+                       margin="0,0,0,15"
+                       class="label"
+                       text="E-Mail">
                 </Label>
                 <TextField
+                        backgroundColor="white"
+                        color="black"
+                        fontSize="16"
+                        height="40"
                         class="input"
                         returnKeyType="next"
                         [autocorrect]="false"
@@ -22,12 +28,18 @@
                         keyboardType="email"
                 ></TextField>
             </StackLayout>
-            <StackLayout class="input-field" padding="10">
-                <Label
+            <StackLayout class="input-field" padding="10, 10, 10, 10">
+                <Label color="black"
+                       fontSize="16"
+                       margin="0,0,0,15"
                         class="label"
                         text="Password">
                 </Label>
                 <TextField
+                        backgroundColor="white"
+                        color="black"
+                        fontSize="16"
+                        height="40"
                         class="input"
                         returnKeyType="done"
                         [autocorrect]="false"
@@ -38,31 +50,31 @@
             </StackLayout>
             <Button
                     text="Login"
-                    class="btn btn-blue btn-rounded-lg"
+                    class="alarm-button alarm-blue"
                     (tap)="saveForm()"
                     *ngIf="!registerMode && !isLoading"
             ></Button>
             <Button
                     text="Sign Up"
-                    class="btn btn-blue btn-rounded-lg"
+                    class="alarm-button alarm-blue"
                     (tap)="saveForm()"
                     *ngIf="registerMode && !isLoading"
             ></Button>
             <ActivityIndicator [busy]="isLoading">
             </ActivityIndicator>
-            <StackLayout class="alarm-button alarm-blue" padding="10,10,10,10" margin="10,10,10,10">
-                <Label
-                        class="c-white"
+            <StackLayout>
+                <Button
+                        class="alarm-button alarm-blue"
                         text="Not registered yet? Sign Up!"
                         *ngIf="!registerMode"
                         (tap)="registerMode = true">
-                </Label>
-                <Label
-                        class="c-white"
+                </Button>
+                <Button
+                        class="alarm-button alarm-blue"
                         text="Already registered? Login!"
                         *ngIf="registerMode"
                         (tap)="registerMode = false">
-                </Label>
+                </Button>
             </StackLayout>
         </StackLayout>
     </ScrollView>

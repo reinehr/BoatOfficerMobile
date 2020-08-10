@@ -30,7 +30,7 @@
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [majorStep]="((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max && dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max.value - dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min.value) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
                                     [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
@@ -66,7 +66,7 @@
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [majorStep]="((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max && dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max.value - dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min.value) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
                                     [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
@@ -102,7 +102,7 @@
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [majorStep]="((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max && dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max.value - dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min.value) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
                                     [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
@@ -138,7 +138,7 @@
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [majorStep]="((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max && dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max.value - dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min.value) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
                                     [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
@@ -174,7 +174,7 @@
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [majorStep]="((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max && dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max.value - dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min.value) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
                                     [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>

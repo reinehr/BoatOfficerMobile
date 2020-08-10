@@ -1,6 +1,6 @@
 <ActionBar title="Title" class="action-bar bg-darkblue">
     <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-    <Label [text]="dataService.sensorFieldMap[field].name" class="alarm-text"></Label>
+    <Label [text]="dataService.gpsFieldMap[field].name" class="alarm-text"></Label>
 
 </ActionBar>
 
@@ -29,10 +29,10 @@
                     <RadCartesianChart style="height: 250" id="{{field}}_0" [visibility]="(selectedIntervalId == 0 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.sensorFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.sensorFieldMap[field].majorStep"
-                                    [minimum]="(dataService.minMax[dataService.deviceData[idDevice].id][0][field].min ? (((dataService.minMax[dataService.deviceData[idDevice].id][0][field].min.value / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][0][field].max ? (((dataService.minMax[dataService.deviceData[idDevice].id][0][field].max.value / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][0][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
@@ -53,7 +53,7 @@
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
                         <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].position_data"
                                     categoryProperty="date"
                                     strokeColor="#326cb5"
                                     [valueProperty]="field"></LineSeries>
@@ -65,10 +65,10 @@
                     <RadCartesianChart style="height: 250" id="{{field}}_1" [visibility]="(selectedIntervalId == 1 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.sensorFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.sensorFieldMap[field].majorStep"
-                                    [minimum]="(dataService.minMax[dataService.deviceData[idDevice].id][1][field].min ? (((dataService.minMax[dataService.deviceData[idDevice].id][1][field].min.value / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][1][field].max ? (((dataService.minMax[dataService.deviceData[idDevice].id][1][field].max.value / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][1][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
@@ -89,7 +89,7 @@
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
                         <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].position_data"
                                     categoryProperty="date"
                                     strokeColor="#326cb5"
                                     [valueProperty]="field"></LineSeries>
@@ -101,10 +101,10 @@
                     <RadCartesianChart style="height: 250" id="{{field}}_2" [visibility]="(selectedIntervalId == 2 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.sensorFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.sensorFieldMap[field].majorStep"
-                                    [minimum]="(dataService.minMax[dataService.deviceData[idDevice].id][2][field].min ? (((dataService.minMax[dataService.deviceData[idDevice].id][2][field].min.value / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][2][field].max ? (((dataService.minMax[dataService.deviceData[idDevice].id][2][field].max.value / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][2][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
@@ -125,7 +125,7 @@
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
                         <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].position_data"
                                     categoryProperty="date"
                                     strokeColor="#326cb5"
                                     [valueProperty]="field"></LineSeries>
@@ -137,10 +137,10 @@
                     <RadCartesianChart style="height: 250" id="{{field}}_3" [visibility]="(selectedIntervalId == 3 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.sensorFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.sensorFieldMap[field].majorStep"
-                                    [minimum]="(dataService.minMax[dataService.deviceData[idDevice].id][3][field].min ? (((dataService.minMax[dataService.deviceData[idDevice].id][3][field].min.value / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][3][field].max ? (((dataService.minMax[dataService.deviceData[idDevice].id][3][field].max.value / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][3][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
@@ -161,7 +161,7 @@
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
                         <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].position_data"
                                     categoryProperty="date"
                                     strokeColor="#326cb5"
                                     [valueProperty]="field"></LineSeries>
@@ -173,10 +173,10 @@
                     <RadCartesianChart style="height: 250" id="{{field}}_4" [visibility]="(selectedIntervalId == 4 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.sensorFieldMap[field].unit + ' '"
-                                    [majorStep]="dataService.sensorFieldMap[field].majorStep"
-                                    [minimum]="(dataService.minMax[dataService.deviceData[idDevice].id][4][field].min ? (((dataService.minMax[dataService.deviceData[idDevice].id][4][field].min.value / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][4][field].max ? (((dataService.minMax[dataService.deviceData[idDevice].id][4][field].max.value / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="dataService.gpsFieldMap[field].majorStep"
+                                    [minimum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].min.value / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max ? (((dataService.minMaxGps[dataService.deviceData[idDevice].id][4][field].max.value / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
@@ -196,7 +196,7 @@
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
                         <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
+                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].position_data"
                                     categoryProperty="date"
                                     color="#ff0000"
                                     [valueProperty]="field"></LineSeries>
@@ -207,19 +207,19 @@
                     </RadCartesianChart>
 
                     <Label text="" horizontalAlignment="center" class="alarm-blue font-weight-bold" paddingBottom="10" height="20"></Label>
-                    <StackLayout *ngIf="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max">
+                    <StackLayout *ngIf="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max">
                         <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
                             <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col="2" row="1" rowSpan="2" text="Maximum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                            <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + dataService.sensorFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
-                            <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="2" [text]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
                         </GridLayout>
                         <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
                             <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3"></GridLayout>
                             <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col="2" row="1" rowSpan="2" text="Minimum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                            <Label col="3" row="1" [text]="dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + dataService.sensorFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
-                            <Label col="3" row="2" [text]="(dataService.minMax[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="2" [text]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>

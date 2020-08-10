@@ -10,10 +10,10 @@ import {AlarmSettings, alarmSettingsMap} from "~/app/shared/interface/alarm";
 import {timeout} from "rxjs/internal/operators";
 
 @Component({
-    selector: 'app-sensordetails',
-    templateUrl: './sensordetails.component.html'
+    selector: 'app-gpsdetails',
+    templateUrl: './gpsdetails.component.html'
 })
-export class SensordetailsComponent implements OnInit {
+export class GpsdetailsComponent implements OnInit {
 
     constructor(
         private apiService: ApiService,

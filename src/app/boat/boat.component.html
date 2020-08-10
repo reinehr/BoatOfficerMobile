@@ -28,18 +28,23 @@
                                class="alarm-blue t-16" height="30"></Label>
                     </GridLayout>
                     <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id]">
-                        <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10">
+                        <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10" paddingBottom="-10">
                             <Label col=0 row=0 [text]="'SENSORS'" class="t-16 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
                             <Label col=1 row=0 [text]="'Updated ' + (dataService.boatStatus[device.id].sensor_data.time | timeago)"
                                    class="t-12 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
                         </GridLayout>
+                        <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
+                            <Label col=1 row=0 [text]="'(' + (dataService.boatStatus[device.id].sensor_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                        </GridLayout>
                         <GridLayout *ngFor="let sensorField of dataService.sensorFieldKeys">
                             <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">
                                 <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"
-                                            *ngIf="dataService.boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="['../sensordetails', idDevice, sensorField]">
+                                            *ngIf="dataService.boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
                                     <Label col=0 row=0 [text]="dataService.sensorFieldMap[sensorField].icon"
                                            [class]="'alarm-symbol-' + dataService.sensorFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
                                     <Label col=1 row=0 [text]="dataService.sensorFieldMap[sensorField].name" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
@@ -69,11 +74,16 @@
                         </GridLayout>
                     </StackLayout>
                     <StackLayout class="alarm-card" marginTop="15" padding="10,10,10,10" *ngIf="dataService.boatStatus && [device.id]">
-                        <GridLayout columns="*, auto, 10" rows="40" paddingBottom="10">
+                        <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
                             <Label col=0 row=0 [text]="'POSITION'" class="t-16 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
                             <Label col=1 row=0 [text]="'Updated ' + (dataService.boatStatus[device.id].position_data.time | timeago)"
                                    class="t-12 font-weight-bold"
+                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                        </GridLayout>
+                        <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
+                            <Label col=1 row=0 [text]="'(' + (dataService.boatStatus[device.id].position_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
+                                   class="t-12 font-weight-normal"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
                         </GridLayout>
                         <MapView height="400" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
@@ -82,6 +92,38 @@
                                  (mapReady)="onMapReady($event, idDevice)"
                                  (markerSelect)="onMarkerEvent($event)"
                                  (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                        <GridLayout *ngFor="let sensorField of dataService.gpsFieldKeys">
+                            <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">
+                                <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"
+                                            *ngIf="dataService.boatStatus[device.id].position_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="(dataService.gpsFieldMap[sensorField].show_history ? ['../gpsdetails', idDevice, sensorField]: [])">
+                                    <Label col=0 row=0 [text]="dataService.gpsFieldMap[sensorField].icon"
+                                           [class]="'alarm-symbol-' + dataService.gpsFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
+                                    <Label col=1 row=0 [text]="dataService.gpsFieldMap[sensorField].name" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                    <Label col=2 row=0
+                                           [text]="alarmActive ? 'C': ''"
+                                           class="alarm-symbol alarm-orange"></Label>
+                                    <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter=='active'"
+                                           [text]="dataService.boatStatus[device.id].position_data[sensorField] == true ? 'yes' : 'no'"
+                                           [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                    <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter=='closed'"
+                                           [text]="dataService.boatStatus[device.id].position_data[sensorField] == true ? 'closed' : 'open'"
+                                           [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                    <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter=='3V'"
+                                           [text]="(dataService.boatStatus[device.id].position_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].position_data[sensorField]) + dataService.gpsFieldMap[sensorField].unit"
+                                           [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                    <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter==''"
+                                           [text]="dataService.boatStatus[device.id].position_data[sensorField] + dataService.gpsFieldMap[sensorField].unit"
+                                           [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
+
+                                </GridLayout>
+                            </StackLayout>
+                        </GridLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

@@ -7,6 +7,7 @@ import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 
+
 // Important - must register MapView plugin in order to use in Angular templates
 registerElement('MapView', () => MapView);
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
@@ -29,6 +30,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     padding = [40, 40, 40, 40];
     mapView: MapView;
     private sensordataSub: Subscription;
+    now = new Date();
 
     lastCamera: string;
     private sensorHistoryLoaded: boolean;

@@ -5,6 +5,7 @@ import {NativeScriptUIChartModule} from 'nativescript-ui-chart/angular';
 import {BoatRoutingModule} from './boat-routing.module';
 import {BoatComponent} from './boat.component';
 import {SensordetailsComponent} from './sensordetails.component';
+import {GpsdetailsComponent} from './gpsdetails.component';
 import {BoatsettingsComponent} from './boatsettings.component';
 import {CommonModule} from '@angular/common';
 import {TimeagoModule} from 'ngx-timeago';
@@ -22,6 +23,7 @@ import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component
     declarations: [
         BoatComponent,
         SensordetailsComponent,
+        GpsdetailsComponent,
         BoatsettingsComponent,
         UploadpictureComponent,
         EditalarmsettingsComponent

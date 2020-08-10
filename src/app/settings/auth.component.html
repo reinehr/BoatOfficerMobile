@@ -9,18 +9,11 @@
     <ScrollView orientation="vertical">
         <StackLayout class="form">
             <StackLayout class="input-field" padding="10, 10, 0, 10">
-                <Label color="black"
-                       fontSize="16"
-                       margin="0,0,0,15"
-                       class="label"
+                <Label
+                       class="inputlabel"
                        text="E-Mail">
                 </Label>
                 <TextField
-                        backgroundColor="white"
-                        color="black"
-                        fontSize="16"
-                        height="40"
-                        class="input"
                         returnKeyType="next"
                         [autocorrect]="false"
                         autocapitalizationType="none"
@@ -29,18 +22,11 @@
                 ></TextField>
             </StackLayout>
             <StackLayout class="input-field" padding="10, 10, 10, 10">
-                <Label color="black"
-                       fontSize="16"
-                       margin="0,0,0,15"
-                        class="label"
+                <Label
+                        class="inputlabel"
                         text="Password">
                 </Label>
                 <TextField
-                        backgroundColor="white"
-                        color="black"
-                        fontSize="16"
-                        height="40"
-                        class="input"
                         returnKeyType="done"
                         [autocorrect]="false"
                         autocapitalizationType="none"
@@ -50,13 +36,13 @@
             </StackLayout>
             <Button
                     text="Login"
-                    class="alarm-button alarm-blue"
+                    class="alarm-button"
                     (tap)="saveForm()"
                     *ngIf="!registerMode && !isLoading"
             ></Button>
             <Button
                     text="Sign Up"
-                    class="alarm-button alarm-blue"
+                    class="alarm-button"
                     (tap)="saveForm()"
                     *ngIf="registerMode && !isLoading"
             ></Button>
@@ -64,13 +50,13 @@
             </ActivityIndicator>
             <StackLayout>
                 <Button
-                        class="alarm-button alarm-blue"
+                        class="alarm-button"
                         text="Not registered yet? Sign Up!"
                         *ngIf="!registerMode"
                         (tap)="registerMode = true">
                 </Button>
                 <Button
-                        class="alarm-button alarm-blue"
+                        class="alarm-button"
                         text="Already registered? Login!"
                         *ngIf="registerMode"
                         (tap)="registerMode = false">

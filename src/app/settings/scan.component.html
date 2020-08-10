@@ -7,39 +7,36 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <StackLayout class="form">
-        <StackLayout class="input-field" padding="10">
+        <StackLayout class="input-field" padding="10, 10, 0, 10">
             <Label
-                    class="label"
+                    class="inputlabel"
                     text="Serial Number">
             </Label>
             <TextField
-                    class="input"
                     returnKeyType="next"
                     [autocorrect]="false"
                     autocapitalizationType="none"
                     [(ngModel)]="serialNumber"
             ></TextField>
         </StackLayout>
-        <StackLayout class="input-field" padding="10">
+        <StackLayout class="input-field" padding="10, 10, 0, 10">
             <Label
-                    class="label"
+                    class="inputlabel"
                     text="Registration Key">
             </Label>
             <TextField
-                    class="input"
                     returnKeyType="done"
                     [autocorrect]="false"
                     autocapitalizationType="none"
                     [(ngModel)]="registrationKey"
             ></TextField>
         </StackLayout>
-        <StackLayout class="input-field" padding="10">
+        <StackLayout class="input-field" padding="10, 10, 0, 10">
             <Label
-                    class="label"
+                    class="inputlabel"
                     text="Device Name">
             </Label>
             <TextField
-                    class="input"
                     returnKeyType="done"
                     [autocorrect]="false"
                     autocapitalizationType="none"
@@ -48,7 +45,7 @@
         </StackLayout>
         <Button
                 text="Register Device"
-                class="btn btn-blue btn-rounded-lg"
+                class="alarm-button"
                 (tap)="saveForm()"
         ></Button>
         <ActivityIndicator [busy]="isLoading">

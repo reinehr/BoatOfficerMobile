@@ -8,17 +8,17 @@
     <StackLayout class="page__content">
         <Button *ngIf="!hasKey"
                 text="Log in"
-                class="btn btn-primary"
+                class="alarm-button"
                 nsRouterLink="../auth"
                 pageTransition="slideLeft"></Button>
         <Button
                 text="Register new device"
-                class="btn btn-primary"
+                class="alarm-button"
                 nsRouterLink="../scan"
                 pageTransition="slideLeft"></Button>
         <Button *ngIf="hasKey"
                 text="Log out"
-                class="btn btn-primary"
+                class="alarm-button"
                 nsRouterLink="../logout"
                 pageTransition="slideLeft"></Button>
     </StackLayout>

@@ -6,15 +6,15 @@
 
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout class="form" padding="10">
+    <StackLayout class="form" padding="10, 10, 0, 10">
         <StackLayout class="input-field">
-            <Label
-                    class="label"
-                    text="">
-            </Label>
+            <TextView
+                    class="inputlabel"
+                    text="By logging out you will no longer receive push notifications">
+            </TextView>
             <Button
                     text="Logout"
-                    class="btn btn-blue btn-rounded-lg"
+                    class="alarm-button"
                     (tap)="saveForm()"
                     nsRouterLink="../"
             ></Button>

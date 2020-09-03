@@ -6,49 +6,60 @@
 
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout class="form">
-        <StackLayout class="input-field" padding="10, 10, 0, 10">
-            <Label
-                    class="inputlabel"
-                    text="Serial Number">
-            </Label>
-            <TextField
-                    returnKeyType="next"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    [(ngModel)]="serialNumber"
-            ></TextField>
+    <ScrollView orientation="vertical">
+        <StackLayout class="form">
+            <StackLayout class="input-field" padding="10, 10, 0, 10">
+                <Label
+                        class="inputlabel"
+                        text="Serial Number">
+                </Label>
+                <TextField
+                        returnKeyType="next"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="serialNumber"
+                ></TextField>
+                <TextView
+                        text="Enter the serial number of this device. It's printed on the cardboard box, consists of 13 digits and letters and has the format 12-34-56-7890-ABC. You can type it without the dashes."
+                ></TextView>
+            </StackLayout>
+            <StackLayout class="input-field" padding="10, 10, 0, 10">
+                <Label
+                        class="inputlabel"
+                        text="Registration Key">
+                </Label>
+                <TextField
+                        returnKeyType="done"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="registrationKey"
+                ></TextField>
+                <TextView
+                        text="Enter the registration key of this device. It's printed on the cardboard box and consists of 8 digits and letters. Please note, that the registration of a device is only possible if the device isn't registered to anybody yet."
+                ></TextView>
+            </StackLayout>
+            <StackLayout class="input-field" padding="10, 10, 0, 10">
+                <Label
+                        class="inputlabel"
+                        text="Device Name">
+                </Label>
+                <TextField
+                        returnKeyType="done"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="deviceName"
+                ></TextField>
+                <TextView
+                        text="Give this BoatOfficer-Device a name. Best practice is to give it the name of the boat it is installed on. "
+                ></TextView>
+            </StackLayout>
+            <Button
+                    text="Register Device"
+                    class="alarm-button"
+                    (tap)="saveForm()"
+            ></Button>
+            <ActivityIndicator [busy]="isLoading">
+            </ActivityIndicator>
         </StackLayout>
-        <StackLayout class="input-field" padding="10, 10, 0, 10">
-            <Label
-                    class="inputlabel"
-                    text="Registration Key">
-            </Label>
-            <TextField
-                    returnKeyType="done"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    [(ngModel)]="registrationKey"
-            ></TextField>
-        </StackLayout>
-        <StackLayout class="input-field" padding="10, 10, 0, 10">
-            <Label
-                    class="inputlabel"
-                    text="Device Name">
-            </Label>
-            <TextField
-                    returnKeyType="done"
-                    [autocorrect]="false"
-                    autocapitalizationType="none"
-                    [(ngModel)]="deviceName"
-            ></TextField>
-        </StackLayout>
-        <Button
-                text="Register Device"
-                class="alarm-button"
-                (tap)="saveForm()"
-        ></Button>
-        <ActivityIndicator [busy]="isLoading">
-        </ActivityIndicator>
-    </StackLayout>
+    </ScrollView>
 </GridLayout>

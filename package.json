@@ -1,9 +1,6 @@
 {
   "nativescript": {
     "id": "com.boatofficer.BoatOfficerMobile",
-    "tns-android": {
-      "version": "6.4.1"
-    },
     "tns-ios": {
       "version": "6.5.2"
     }

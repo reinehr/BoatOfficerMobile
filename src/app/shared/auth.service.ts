@@ -65,6 +65,9 @@ export class AuthService {
         if (hasKey('token')) {
             remove('token');
         }
+        if (hasKey('email')) {
+            remove('email');
+        }
     }
 
     private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
@@ -72,7 +75,11 @@ export class AuthService {
         if (hasKey('token')) {
             remove('token');
         }
+        if (hasKey('email')) {
+            remove('email');
+        }
         setString('token', token);
+        setString('email', email);
         // appSettings.setString('email', email);
         // appSettings.setString('userId', userId);
         // appSettings.setString('expirationtime', expirationtime);

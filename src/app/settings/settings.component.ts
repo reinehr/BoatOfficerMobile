@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouterExtensions} from 'nativescript-angular/router';
-import {hasKey} from 'tns-core-modules/application-settings';
+import {hasKey, getString} from 'tns-core-modules/application-settings';
 
 @Component({
     selector: 'app-settings',
@@ -13,8 +13,16 @@ export class SettingsComponent implements OnInit {
     }
 
     hasKey = hasKey('token');
+    hasEmail = hasKey('email');
+    email = getString('email');
 
     ngOnInit(): void {
         this.hasKey = hasKey('token');
+        this.hasEmail = hasKey('email');
+        if (this.hasEmail) {
+            this.email = getString('email');
+        } else {
+            this.email = '';
+        }
     }
 }

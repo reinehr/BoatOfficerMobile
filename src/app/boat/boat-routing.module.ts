@@ -9,6 +9,7 @@ import {SensordetailsComponent} from '~/app/boat/sensordetails.component';
 import {GpsdetailsComponent} from '~/app/boat/gpsdetails.component';
 import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
 import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component';
+import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.component";
 
 const routes: Routes = [
     {path: 'default', component: BoatComponent},
@@ -17,6 +18,7 @@ const routes: Routes = [
     {path: 'sensordetails/:idDevice/:field', component: SensordetailsComponent},
     {path: 'gpsdetails/:idDevice/:field', component: GpsdetailsComponent},
     {path: 'editalarmsettings/:idDevice/:field/:idAlarm', component: EditalarmsettingsComponent},
+    {path: 'editdevicesettings/:idDevice/:field', component: EditdevicesettingsComponent},
     // {path: 'home', component: HomeComponent, outlet: 'homeTab'}
 ];
 

@@ -75,8 +75,8 @@ export interface AlarmSettings {
 }
 
 export const alarmByTypeMap: {[typeKey: string]: {title: string, text: string, priority: string, column_sensor_data: string, unit: string, type: string}} = {
-    'Button 1 Pushed': {title: 'Button', text: 'Button 1 Pushed', priority: 'High', column_sensor_data: '', unit: '', type: 'Button 1 Pushed'},
-    'Button 1 Pushed Long': {title: 'Button', text: 'Button 1 Pushed Long', priority: 'High', column_sensor_data: '', unit: '', type: 'Button 1 Pushed Long'},
+    'Button 1 Pushed': {title: 'Button', text: 'Button Pushed', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed'},
+    'Button 1 Pushed Long': {title: 'Button', text: 'Button Pushed Long', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long'},
     'SOS Activated': {title: 'SOS', text: 'SOS Activated', priority: 'High', column_sensor_data: '', unit: '', type: 'SOS Activated'},
     'Internal Battery Voltage': {title: 'Voltage', text: 'Internal Battery Voltage Warning', priority: 'High', column_sensor_data: 'IntBattVolt', unit: ' V', type: 'Internal Battery Voltage'},
     'Shock Detected': {title: 'Shock', text: 'Shock Detected', priority: 'High', column_sensor_data: '', unit: '', type: 'Shock Detected'},

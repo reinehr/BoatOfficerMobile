@@ -65,6 +65,54 @@
                     <StackLayout>
                         <Label text="OTHER SETTINGS" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'name'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text="O"
+                                       class="alarm-symbol-s alarm-gray"></Label>
+                                <Label col="2" row="1" text="Boat Name"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="!device.name"
+                                       text="no boat name"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                                <Label col="3" row="1" *ngIf="device.name"
+                                       [text]="device.name"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                            </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'berth'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray" fontSize="21"></Label>
+                                <Label col="2" row="1" text="Berth"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="!device.berth"
+                                       text="no berth"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                                <Label col="3" row="1" *ngIf="device.berth"
+                                       [text]="device.berth"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                            </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'contact'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text="T"
+                                       class="alarm-symbol-s alarm-gray"></Label>
+                                <Label col="2" row="1" text="Harbour Contact"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="!device.harbour_contact"
+                                       text="no contact number"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                                <Label col="3" row="1" *ngIf="device.harbour_contact"
+                                       [text]="device.harbour_contact"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                            </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="10"
                                         [nsRouterLink]="device.role == 'officer' ? ['../uploadpicture', device.id] : []"
                                         pageTransition="slideLeft">

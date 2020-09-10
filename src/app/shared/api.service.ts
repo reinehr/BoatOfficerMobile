@@ -339,6 +339,24 @@ export class ApiService {
         });
     }
 
+    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string) {
+        console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName, ', harbour_contact:' + deviceContact);
+        this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
+                device_name: deviceName,
+                berth: deviceBerth,
+                harbour_contact: deviceContact,
+                id: deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
     saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
         console.log('Selection done: ' + JSON.stringify(imageSrc._android));
         console.log('Selection done: ' + JSON.stringify(imageAssets));

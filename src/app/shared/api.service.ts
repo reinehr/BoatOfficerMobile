@@ -13,10 +13,12 @@ import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {AlarmSettings} from '~/app/shared/interface/alarm';
+import { localize } from "nativescript-localize";
 
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
+import {Folder, path, knownFolders} from "tns-core-modules/file-system";
 // const fs = require('file-system');
 
 const FIREBASE_API_KEY = '';
@@ -91,7 +93,7 @@ export class ApiService {
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    // baseUrl = 'https://bc8a0963.ngrok.io/';
+    // baseUrl = 'https://jakobreinehr3.serverless.social/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
@@ -107,16 +109,16 @@ export class ApiService {
     private static handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert('This email address exists already');
+                alert({okButtonText: 'OK', title:localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert('Invalid password');
+                alert({okButtonText: 'OK', title:localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert('Invalid email address');
+                alert({okButtonText: 'OK', title:localize('Invalid email address')});
                 break;
             default:
-                alert('Authentication failed');
+                alert({okButtonText: 'OK', title:localize('Authentication failed')});
                 break;
         }
     }
@@ -140,7 +142,7 @@ export class ApiService {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
-        const param: any = {limit: 60, only_active: 'false'};
+        const param: any = {limit: 10, only_active: 'false'};
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: new HttpHeaders({
@@ -157,7 +159,10 @@ export class ApiService {
     }
 
     getBoatStatus() {
-        const param: any = {};
+        console.log('push_token: ' + getString('push_token', ''));
+        const param: any = {
+            push_token: getString('push_token', '')
+        };
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
                 headers: new HttpHeaders({
@@ -219,7 +224,7 @@ export class ApiService {
                     idToken: `${getString('token', '')}`
                 })
             }).subscribe(() => {
-                this.getDeviceData().subscribe();
+            this.getDeviceData().subscribe();
         });
     }
 
@@ -318,6 +323,41 @@ export class ApiService {
         );
     }
 
+    saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number) {
+        console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue);
+        this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
+                type: alarmKey,
+                value_user: alarmValue,
+                deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceAlarmSettings().subscribe();
+        });
+    }
+
+    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string) {
+        console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName, ', harbour_contact:' + deviceContact);
+        this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
+                device_name: deviceName,
+                berth: deviceBerth,
+                harbour_contact: deviceContact,
+                id: deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
     saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
         console.log('Selection done: ' + JSON.stringify(imageSrc._android));
         console.log('Selection done: ' + JSON.stringify(imageAssets));
@@ -325,6 +365,10 @@ export class ApiService {
         // const folder = this.fs.knownFolders.documents();
         // const pathOfImage = fs.path.join(imageSrc._android, '');
         // const saved = image.saveToFile(pathOfImage, ".png");
+
+        const folderPath: string = knownFolders.temp().path;
+        const fileName = "temp.jpg";
+        const filePath = path.join(folderPath, fileName);
         const request = {
             url: this.baseDeviceUrl + 'upload_image/',
             method: 'POST',
@@ -342,7 +386,7 @@ export class ApiService {
             {name: 'deviceId', value: deviceId},
             {
                 name: 'boatImage',
-                filename: imageSrc._android,
+                filename: filePath,
                 mimeType: 'image/jpeg',
                 content_type_extra: '{id_device: ' + deviceId + '}'
             }

@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouterExtensions} from 'nativescript-angular/router';
+import {hasKey, getString} from 'tns-core-modules/application-settings';
 
 @Component({
     selector: 'app-settings',
@@ -11,7 +12,17 @@ export class SettingsComponent implements OnInit {
         // Use the constructor to inject services.
     }
 
+    hasKey = hasKey('token');
+    hasEmail = hasKey('email');
+    email = getString('email');
+
     ngOnInit(): void {
-        // Use the "ngOnInit" handler to initialize data for the view.
+        this.hasKey = hasKey('token');
+        this.hasEmail = hasKey('email');
+        if (this.hasEmail) {
+            this.email = getString('email');
+        } else {
+            this.email = '';
+        }
     }
 }

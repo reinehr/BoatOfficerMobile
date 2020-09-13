@@ -6,6 +6,7 @@ import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 // import {User} from '~/app/auth/user.model';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
+import {localize} from "nativescript-localize";
 
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
 
@@ -65,6 +66,9 @@ export class AuthService {
         if (hasKey('token')) {
             remove('token');
         }
+        if (hasKey('email')) {
+            remove('email');
+        }
     }
 
     private handleLogin(email: string, token: string, userId: string, expiresIn: number) {
@@ -72,7 +76,11 @@ export class AuthService {
         if (hasKey('token')) {
             remove('token');
         }
+        if (hasKey('email')) {
+            remove('email');
+        }
         setString('token', token);
+        setString('email', email);
         // appSettings.setString('email', email);
         // appSettings.setString('userId', userId);
         // appSettings.setString('expirationtime', expirationtime);
@@ -83,16 +91,16 @@ export class AuthService {
     private handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert('This email address exists already');
+                alert({okButtonText: 'OK', title:localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert('Invalid password');
+                alert({okButtonText: 'OK', title:localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert('Invalid email address');
+                alert({okButtonText: 'OK', title:localize('Invalid email address')});
                 break;
             default:
-                alert('Authentication failed');
+                alert({okButtonText: 'OK', title:localize('Authentication failed')});
                 break;
         }
     }

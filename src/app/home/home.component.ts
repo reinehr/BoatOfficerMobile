@@ -3,6 +3,7 @@ import {Page} from 'tns-core-modules/ui/page/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import {Subscription} from "rxjs";
 import {ApiService} from "~/app/shared/api.service";
+import { localize } from "nativescript-localize";
 
 @Component({
     selector: 'Home',
@@ -28,5 +29,12 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     onButtonTap(): void {
         console.log('Button was pressed');
+    }
+
+    refreshList(args) {
+        const pullRefresh = args.object;
+        // this.dataService.refreshSensorDataHistory();
+        this.dataService.refreshBoatStatus();
+        pullRefresh.refreshing = false;
     }
 }

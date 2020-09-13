@@ -3,7 +3,11 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import {Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {ApiService} from '~/app/shared/api.service';
-import {AlarmSettings, alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
+import {alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
+import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
+import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
+import {TimeagoIntl} from "ngx-timeago";
+import {localize} from "nativescript-localize";
 
 @Component({
     selector: 'app-boatsettings',
@@ -19,9 +23,17 @@ export class BoatsettingsComponent implements OnInit {
     constructor(
         private apiService: ApiService,
         private dataService: DataService,
-        private routerExtensions: RouterExtensions
+        private routerExtensions: RouterExtensions,
+        intl: TimeagoIntl
     ) {
         // Use the constructor to inject services.
+
+        if(localize('LOCALE') == 'de') {
+            intl.strings = germanStrings;
+        } else {
+            intl.strings = englishStrings;
+        }
+        intl.changes.next();
     }
 
     ngOnInit(): void {

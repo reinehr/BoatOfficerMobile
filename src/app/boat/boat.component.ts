@@ -6,6 +6,11 @@ import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
 import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
+import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
+import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
+import {TimeagoIntl} from "ngx-timeago";
+import {localize} from "nativescript-localize";
+
 
 // Important - must register MapView plugin in order to use in Angular templates
 registerElement('MapView', () => MapView);
@@ -29,6 +34,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     padding = [40, 40, 40, 40];
     mapView: MapView;
     private sensordataSub: Subscription;
+    now = new Date();
 
     lastCamera: string;
     private sensorHistoryLoaded: boolean;
@@ -36,9 +42,17 @@ export class BoatComponent implements OnInit, AfterViewInit {
     constructor(
         private apiService: ApiService,
         private dataService: DataService,
+        intl: TimeagoIntl
         // private routerExtensions: RouterExtensions
     ) {
         // Use the constructor to inject services.
+
+        if(localize('LOCALE') == 'de') {
+            intl.strings = germanStrings;
+        } else {
+            intl.strings = englishStrings;
+        }
+        intl.changes.next();
     }
 
     ngOnInit(): void {

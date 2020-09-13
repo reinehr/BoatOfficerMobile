@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ApiService} from '~/app/shared/api.service';
-import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from "~/app/shared/interface/sensordata";
+import {boatGpsMap, BoatHistory, BoatStatus, boatStatusMap, historyInterval} from "~/app/shared/interface/sensordata";
 import {AlarmSettings} from "~/app/shared/interface/alarm";
 
 export interface DataItem {
@@ -16,7 +16,7 @@ export interface DeviceAlarmDataFormat {
     'boat_image_large': string;
     'boat_image_medium': string;
     'boat_image_small': string;
-    'boat_image_tag': string;
+    // 'boat_image_tag': string;
     'name': string;
     'harbour_contact': string;
     'berth': string;
@@ -62,6 +62,8 @@ export class DataService {
 
     sensorFieldMap = boatStatusMap;
     sensorFieldKeys = Object.keys(boatStatusMap);
+    gpsFieldMap = boatGpsMap;
+    gpsFieldKeys = Object.keys(boatGpsMap);
     private boatStatusSub: Subscription;
     boatStatus: BoatStatus;
     private devicedataSub: Subscription;
@@ -73,6 +75,7 @@ export class DataService {
     public boatHistory: BoatHistory;
     historyIntervalData = historyInterval;
     minMax: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
+    minMaxGps: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
     private isLoading = false;
     dataLoaded = false;
 
@@ -150,7 +153,7 @@ export class DataService {
                         }
                     }
                     // console.log(this.activeAlarmByField);
-                    this.apiService.getBoatHistory(31).subscribe(resp3 => {
+                    this.apiService.getBoatHistory(92).subscribe(resp3 => {
                         console.log('initSensorDataHistory - getBoatHistory');
                         this.isLoading = false;
                         this.dataLoaded = true;
@@ -181,19 +184,32 @@ export class DataService {
                                 }
                             }
                         }
+                        if (!this.minMaxGps[idDevice]) {
+                            this.minMaxGps[idDevice] = {};
+                            for (const idInterval in this.historyIntervalData) {
+                                this.minMaxGps[idDevice][idInterval] = {};
+                                for (const field of this.gpsFieldKeys) {
+                                    if (this.gpsFieldMap[field].datatype === 'float') {
+                                        this.minMaxGps[idDevice][idInterval][field] = {};
+                                        // this.minMaxGps[idDevice][interval.id][field] = {min: {}, max: {}};
+                                    }
+                                }
+                            }
+                        }
                         this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
                         this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
                         millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
                         for (const idEvent in this.boatHistory[idDevice].sensor_data) {
                             const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
-                            eventTime.setMinutes(0);
-                            eventTime.setHours(0);
-                            eventTime.setSeconds(0);
-                            eventTime.setMilliseconds(0);
+                            this.boatHistory[idDevice].sensor_data[idEvent].date = eventTime;
+                            // eventTime.setMinutes(0);
+                            // eventTime.setHours(0);
+                            // eventTime.setSeconds(0);
+                            // eventTime.setMilliseconds(0);
                             this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
                             const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
                             for (const idInterval in this.historyIntervalData) {
-                                if (this.historyIntervalData[idInterval].days < (daysPast)) {
+                                if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
                                 } else {
                                     for (const field of this.sensorFieldKeys) {
@@ -235,8 +251,61 @@ export class DataService {
                                 this.historyIntervalData[idInterval].sensorData.sliceStop = +idEvent;
                             }
                         }
+                        for (const idEvent in this.boatHistory[idDevice].position_data) {
+                            const eventTime = new Date(this.boatHistory[idDevice].position_data[idEvent].time);
+                            this.boatHistory[idDevice].position_data[idEvent].date = eventTime;
+                            // eventTime.setMinutes(0);
+                            // eventTime.setHours(0);
+                            // eventTime.setSeconds(0);
+                            // eventTime.setMilliseconds(0);
+                            this.boatHistory[idDevice].position_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
+                            const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
+                            for (const idInterval in this.historyIntervalData) {
+                                if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
+                                    this.historyIntervalData[idInterval].positionData.sliceStart = +idEvent;
+                                } else {
+                                    for (const field of this.gpsFieldKeys) {
+                                        if (!this.minMaxGps[idDevice]) {
+                                            this.minMaxGps[idDevice] = {};
+                                        }
+                                        if (!this.minMaxGps[idDevice][idInterval]) {
+                                            this.minMaxGps[idDevice][idInterval] = {};
+                                        }
+                                        if (!this.minMaxGps[idDevice][idInterval][field]) {
+                                            this.minMaxGps[idDevice][idInterval][field] = {};
+                                        }
+                                        if (!this.minMaxGps[idDevice][idInterval][field].min) {
+                                            this.minMaxGps[idDevice][idInterval][field] = {
+                                                min: {
+                                                    time: this.boatHistory[idDevice].position_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].position_data[idEvent][field]
+                                                },
+                                                max: {
+                                                    time: this.boatHistory[idDevice].position_data[idEvent].time,
+                                                    value: this.boatHistory[idDevice].position_data[idEvent][field]
+                                                }
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].position_data[idEvent][field] < this.minMaxGps[idDevice][idInterval][field].min.value) {
+                                            this.minMaxGps[idDevice][idInterval][field].min = {
+                                                time: this.boatHistory[idDevice].position_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].position_data[idEvent][field]
+                                            };
+                                        }
+                                        if (this.boatHistory[idDevice].position_data[idEvent][field] > this.minMaxGps[idDevice][idInterval][field].max.value) {
+                                            this.minMaxGps[idDevice][idInterval][field].max = {
+                                                time: this.boatHistory[idDevice].position_data[idEvent].time,
+                                                value: this.boatHistory[idDevice].position_data[idEvent][field]
+                                            };
+                                        }
+                                    }
+                                }
+                                this.historyIntervalData[idInterval].positionData.sliceStop = +idEvent;
+                            }
+                        }
                         const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
-                        this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()} ${('0' + time.getHours()).slice(-2)}:${('0' + time.getMinutes()).slice(-2)}:00`;
+                        // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()}`;
+                        // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].date = new Date(time.getFullYear(), (time.getMonth() + 1), (time.getDate() + 1), time.getHours(), time.getMinutes(), time.getSeconds())
                     }
                     console.log('BoatHistory complete');
                 } else {

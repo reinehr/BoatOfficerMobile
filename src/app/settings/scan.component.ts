@@ -1,6 +1,7 @@
 import {Component, ElementRef, OnInit, ViewChild, Inject} from '@angular/core';
 import {ApiService} from '../shared/api.service';
 import {RouterExtensions} from 'nativescript-angular/router';
+import {localize} from "nativescript-localize";
 
 // import {BarcodeScanner} from 'nativescript-barcodescanner';
 
@@ -49,7 +50,7 @@ export class ScanComponent implements OnInit {
                 this.router.navigate(['']);
             } else {
                 const options = {
-                    title: response,
+                    title: localize(response),
                     okButtonText: 'OK'
                 };
                 alert(options);

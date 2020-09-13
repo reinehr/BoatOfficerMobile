@@ -50,7 +50,7 @@ export class EditdevicesettingsComponent implements OnInit {
         console.log('Load index:' + this.idDevice + ' field: ' + this.field);
         const text = '';
         if (this.field == 'name') {
-            this.name = 'Boat name';
+            this.name = 'Boat Name';
             this.description = 'Some name to identify this BoatOfficer-device';
             this.value = this.dataService.deviceData[this.idDevice].name;
             this.icon = 'O';

@@ -1,6 +1,6 @@
 <ActionBar title="Title" class="action-bar bg-darkblue">
-    <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-    <Label text="EDIT DEVICE SETTINGS" class="alarm-text"></Label>
+    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="{{'EDIT DEVICE SETTINGS' | L}}" class="alarm-text"></Label>
 
 </ActionBar>
 
@@ -10,7 +10,7 @@
             <StackLayout class="input-field" padding="10, 10, 0, 10">
                 <Label
                        class="inputlabel"
-                       [text]="name">
+                       [text]="name | L">
                 </Label>
                 <TextField
                         *ngIf="type"
@@ -28,6 +28,6 @@
                         [(ngModel)]="value"
                 ></TextField>
             </StackLayout>
-            <Button text="Save" class="alarm-button alarm-green" (tap)="saveDeviceSetting()"></Button>
+            <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveDeviceSetting()"></Button>
         </StackLayout>
 </StackLayout>

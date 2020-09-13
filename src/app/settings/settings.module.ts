@@ -8,12 +8,14 @@ import {ScanComponent} from './scan.component';
 import {LogoutComponent} from './logout.component';
 import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 import {AlertsettingsComponent} from '~/app/settings/alertsettings.component';
+import {NativeScriptLocalizeModule} from "nativescript-localize/localize.module";
 
 @NgModule({
     imports: [
         NativeScriptCommonModule,
         SettingsRoutingModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        NativeScriptLocalizeModule
     ],
     declarations: [
         SettingsComponent, AuthComponent, ScanComponent, LogoutComponent, AlertsettingsComponent

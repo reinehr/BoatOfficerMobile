@@ -1,6 +1,6 @@
-<ActionBar title="Title" class="action-bar bg-darkblue">
-    <!--    <NavigationButton text="Back" android.systemIcon="ic_menu_back"></NavigationButton>-->
-    <Label text="ALARM HISTORY" class="alarm-text"></Label>
+<ActionBar title="{{ 'ALARM HISTORY' | L }}" class="action-bar bg-darkblue">
+    <!--    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back"></NavigationButton>-->
+    <Label text="{{ 'ALARM HISTORY' | L }}" class="alarm-text"></Label>
 
     <!--    <ActionItem-->
     <!--            ios.position="right"-->
@@ -24,9 +24,9 @@
                             <Image [src]="'' + device.boat_image_small"
                                    class="boatoffice-boat-image"></Image>
                         </GridLayout>
-                        <Label col="1" row="0" [text]="'Boat'" class="c-white t-16 font-weight-bold" height="30"></Label>
+                        <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
                         <Label col="1" row="1" [text]="device.name" class="alarm-blue t-16" height="30"></Label>
-                        <Label col="2" row="0" text="only active" class="c-white t-16" height="30"></Label>
+                        <Label col="2" row="0" text="{{ 'only active' | L }}" class="c-white t-16" height="30"></Label>
                         <Switch col="2" row="1" [checked]="showOnlyOpen" (checkedChange)="onCheckedChange($event)" height="30"
                                 horizontalAlignment="center"></Switch>
                     </GridLayout>
@@ -50,7 +50,7 @@
                                        *ngIf="alarm.status == 'marked_as_ok'"></Label>
                                 <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
                                        *ngIf="alarm.status == 'clear_by_device'"></Label>
-                                <Label col=1 row=0 [text]="alarm.type" class="alarm-gray t-16 font-weight-bold"
+                                <Label col=1 row=0 [text]="alarm.type | L" class="alarm-gray t-16 font-weight-bold"
                                        verticalAlignment="middle"></Label>
                                 <Label col=2 row=0 [text]="' ' + alarm.value + alarmByTypeMap[alarm.type].unit" class="alarm-gray t-16 font-weight-bold"
                                        verticalAlignment="middle" *ngIf="alarm.value"></Label>
@@ -64,13 +64,13 @@
                                                 [backgroundColor]="alarm.loading ? '#a9a9a9' : ''"
                                                 *ngIf="device.harbour_contact">
                                         <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
-                                        <Label col=1 row=0 [text]="'Call Harbour'" class="alarm-text-s"></Label>
+                                        <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
                                     </GridLayout>
                                     <GridLayout col="0" columns="30, *" rows="40" class="alarm-button"
                                                 [backgroundColor]="alarm.loading ? '#a9a9a9' : '#a9a9a9'"
                                                 margin="5" *ngIf="!device.harbour_contact">
                                         <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
-                                        <Label col=1 row=0 [text]="'Call Harbour'" class="alarm-text-s"></Label>
+                                        <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
                                     </GridLayout>
                                     <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
                                     <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#326cb5'"-->
@@ -93,7 +93,7 @@
                                                 margin="5" (tap)="onAlarmOkTap(idDevice, idAlarm)"
                                                 *ngIf="alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)">
                                         <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>
-                                        <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>
+                                        <Label col=1 row=0 [text]="'Mark as solved' | L" class="alarm-text-s"></Label>
                                     </GridLayout>
                                 </GridLayout>
                                 <!--                        <GridLayout row="1" columns="30, *, 10" rows="40" class="alarm-button"-->
@@ -109,22 +109,22 @@
                                         *ngIf="(alarm.status != 'open' && !(alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) ">
                                 <Label col=0 row=0 text="B" class="alarm-symbol-s alarm-blue"
                                        *ngIf="alarm.status != 'open'"></Label>
-                                <Label col=1 row=0 text="Cleared" class="alarm-blue t-16 font-weight-bold"
+                                <Label col=1 row=0 text="{{'Cleared' | L}}" class="alarm-blue t-16 font-weight-bold"
                                        verticalAlignment="middle" *ngIf="alarm.status == 'clear_by_device'"></Label>
-                                <Label col=1 row=0 text="Marked as OK" class="alarm-blue t-16 font-weight-bold"
+                                <Label col=1 row=0 text="{{'Marked as OK' | L}}" class="alarm-blue t-16 font-weight-bold"
                                        verticalAlignment="middle" *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                                <Label col=1 row=0 text="Open (Responsibility clarified)"
+                                <Label col=1 row=0 text="{{'Open (Responsibility clarified)' | L}}"
                                        class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
                                        *ngIf="alarm.status == 'open_someone_responsible'"></Label>
                                 <Label col=1 row=1
-                                       [text]="'by Device on ' + (alarm.clear_by_device_time | date : 'dd.MM.yyyy') + ' at ' + (alarm.clear_by_device_time | date : 'HH:mm')"
+                                       [text]="('by Device on' | L) + ' ' + (alarm.clear_by_device_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarm.clear_by_device_time | date : 'HH:mm')"
                                        class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                        *ngIf="alarm.status == 'clear_by_device'"></Label>
                                 <Label col=1 row=1
-                                       [text]="'by ' + alarm.marked_as_ok_username + ' on ' + (alarm.marked_as_ok_time | date : 'dd.MM.yyyy') + ' at ' + (alarm.marked_as_ok_time | date : 'HH:mm')"
+                                       [text]="('by user on' | L: alarm.marked_as_ok_username) + ' ' + (alarm.marked_as_ok_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarm.marked_as_ok_time | date : 'HH:mm')"
                                        class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                        *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                                <Label col=1 row=1 [text]="'Marked as responsible: ' + alarm.responsible_username"
+                                <Label col=1 row=1 [text]="('Marked as responsible' | L) + ': ' + alarm.responsible_username"
                                        class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                        *ngIf="alarm.status == 'open_someone_responsible'"></Label>
                                 <GridLayout col="3" row="0" rowSpan="2" columns="30, *" rows="40" class="alarm-button"
@@ -134,7 +134,7 @@
                                     <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"
                                            verticalAlignment="center" width="30pt" textAlignment="center"
                                            color="#fdbb94"></Label>
-                                    <Label col=1 row=0 [text]="'Revoke'" class="alarm-text-s"></Label>
+                                    <Label col=1 row=0 [text]="'Revoke' | L" class="alarm-text-s"></Label>
                                 </GridLayout>
                             </GridLayout>
                         </StackLayout>

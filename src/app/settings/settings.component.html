@@ -1,5 +1,5 @@
 <ActionBar title="Title" class="action-bar bg-darkblue">
-    <Label text="SETTINGS" class="alarm-text"></Label>
+    <Label text="{{'SETTINGS'| L}}" class="alarm-text"></Label>
 
 </ActionBar>
 
@@ -7,22 +7,22 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <StackLayout class="page__content">
         <Button *ngIf="!hasKey"
-                text="Log in"
+                text="{{'Log in' | L}}"
                 class="alarm-button"
                 nsRouterLink="../auth"
                 pageTransition="slideLeft"></Button>
         <Button
-                text="Register new device"
+                text="{{'Register new device' | L}}"
                 class="alarm-button"
                 nsRouterLink="../scan"
                 pageTransition="slideLeft"></Button>
         <Button *ngIf="hasKey"
-                text="Log out"
+                text="{{'Log out' | L}}"
                 class="alarm-button"
                 nsRouterLink="../logout"
                 pageTransition="slideLeft"></Button>
         <TextView color="blue" marginTop="10" *ngIf="hasEmail"
-                [text]="'You are logged in as ' + email"
+                [text]="'You are logged in as' | L: email"
         ></TextView>
     </StackLayout>
 </GridLayout>

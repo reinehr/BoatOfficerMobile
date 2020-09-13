@@ -6,6 +6,7 @@ import {ActivatedRoute} from "@angular/router";
 import {DataService} from "~/app/shared/data.service";
 import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
 import {Folder, path, knownFolders} from "tns-core-modules/file-system";
+import { localize } from "nativescript-localize";
 
 
 @Component({
@@ -135,7 +136,7 @@ export class UploadpictureComponent implements OnInit {
         session.on('complete', e => {
             this.status = 'complete';
             const options = {
-                title: 'Upload complete',
+                title: localize('Upload complete'),
                 okButtonText: 'OK'
             };
             this.dataService.refreshBoatStatus();

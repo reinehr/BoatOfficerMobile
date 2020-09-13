@@ -4,6 +4,7 @@ import {AuthService} from '~/app/shared/auth.service';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {DataService} from '~/app/shared/data.service';
 import {alert} from "tns-core-modules/ui/dialogs";
+import {localize} from "nativescript-localize";
 
 @Component({
     selector: 'app-auth',
@@ -36,8 +37,8 @@ export class AuthComponent implements OnInit {
             this.authService.login(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
                 const options = {
-                    title: 'Login successful',
-                    message: 'You are now logged in',
+                    title: localize('Login successful'),
+                    message: localize('You are now logged in'),
                     okButtonText: 'OK'
                 };
                 alert(options).then(() => {
@@ -52,8 +53,8 @@ export class AuthComponent implements OnInit {
             this.authService.signUp(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
                 const options = {
-                    title: 'Registration successful',
-                    message: 'You are now logged in',
+                    title: localize('Registration successful'),
+                    message: localize('You are now logged in'),
                     okButtonText: 'OK'
                 };
                 alert(options).then(() => {

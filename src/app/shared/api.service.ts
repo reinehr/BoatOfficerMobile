@@ -13,6 +13,7 @@ import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {AlarmSettings} from '~/app/shared/interface/alarm';
+import { localize } from "nativescript-localize";
 
 
 const bghttpModule = require('nativescript-background-http');
@@ -108,16 +109,16 @@ export class ApiService {
     private static handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert('This email address exists already');
+                alert({okButtonText: 'OK', title:localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert('Invalid password');
+                alert({okButtonText: 'OK', title:localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert('Invalid email address');
+                alert({okButtonText: 'OK', title:localize('Invalid email address')});
                 break;
             default:
-                alert('Authentication failed');
+                alert({okButtonText: 'OK', title:localize('Authentication failed')});
                 break;
         }
     }

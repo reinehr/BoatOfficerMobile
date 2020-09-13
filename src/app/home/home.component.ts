@@ -3,6 +3,7 @@ import {Page} from 'tns-core-modules/ui/page/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import {Subscription} from "rxjs";
 import {ApiService} from "~/app/shared/api.service";
+import { localize } from "nativescript-localize";
 
 @Component({
     selector: 'Home',

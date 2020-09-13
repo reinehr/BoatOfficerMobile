@@ -1,13 +1,13 @@
 <ActionBar title="Title" class="action-bar bg-darkblue">
-    <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-    <Label text="PICK BOAT IMAGE" class="alarm-text"></Label>
+    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="{{'PICK BOAT IMAGE' | L}}" class="alarm-text"></Label>
 
 </ActionBar>
 
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
 
-    <Button row="0" text="Pick Image" (tap)="onSelectSingleTap()" horizontalAlignment="center" class="alarm-button"></Button>
+    <Button row="0" text="{{'Pick Image' | L}}" (tap)="onSelectSingleTap()" horizontalAlignment="center" class="alarm-button"></Button>
     <Image row="1" [src]="imageSrc" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
-    <Button row="2" text="Upload Image" (tap)="onUploadTap()" horizontalAlignment="center" class="alarm-button alarm-green" *ngIf="imageSrc"></Button>
+    <Button row="2" text="{{'Upload Image' || L}}" (tap)="onUploadTap()" horizontalAlignment="center" class="alarm-button alarm-green" *ngIf="imageSrc"></Button>
 <!--    <Label [text]="status" class="alarm-card" horizontalAlignment="center"></Label>-->
 </StackLayout>

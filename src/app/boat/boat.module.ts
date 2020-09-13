@@ -13,6 +13,7 @@ import {TimeagoModule} from 'ngx-timeago';
 import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
 import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component';
 import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.component";
+import {NativeScriptLocalizeModule} from "nativescript-localize/localize.module";
 
 @NgModule({
     imports: [
@@ -21,7 +22,8 @@ import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.compone
         NativeScriptUIChartModule,
         CommonModule,
         TimeagoModule,
-        NativeScriptFormsModule
+        NativeScriptFormsModule,
+        NativeScriptLocalizeModule
     ],
     declarations: [
         BoatComponent,

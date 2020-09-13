@@ -1,6 +1,6 @@
 <ActionBar title="LOG IN" class="action-bar bg-darkblue">
-    <NavigationButton text="Back" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
-    <Label [text]="(registerMode ? 'SIGN UP' : 'LOG IN')" id="title_log_in" class="alarm-text"></Label>
+    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label [text]="(registerMode ? ('SIGN UP' | L) : ('LOG IN' | L))" id="title_log_in" class="alarm-text"></Label>
 
 </ActionBar>
 
@@ -11,7 +11,7 @@
             <StackLayout class="input-field" padding="10, 10, 0, 10">
                 <Label
                        class="inputlabel"
-                       text="E-Mail">
+                       text="{{'E-Mail' | L}}">
                 </Label>
                 <TextField
                         returnKeyType="next"
@@ -24,7 +24,7 @@
             <StackLayout class="input-field" padding="10, 10, 10, 10">
                 <Label
                         class="inputlabel"
-                        text="Password">
+                        text="{{'Password' | L}}">
                 </Label>
                 <TextField
                         returnKeyType="done"
@@ -35,13 +35,13 @@
                 ></TextField>
             </StackLayout>
             <Button
-                    text="Login"
+                    text="{{'Login' | L}}"
                     class="alarm-button"
                     (tap)="saveForm()"
                     *ngIf="!registerMode && !isLoading"
             ></Button>
             <Button
-                    text="Sign Up"
+                    text="{{'Sign Up' | L}}"
                     class="alarm-button"
                     (tap)="saveForm()"
                     *ngIf="registerMode && !isLoading"
@@ -51,13 +51,13 @@
             <StackLayout>
                 <Button
                         class="alarm-button"
-                        text="Not registered yet? Sign Up!"
+                        text="{{'Not registered yet? Sign Up!' | L}}"
                         *ngIf="!registerMode"
                         (tap)="registerMode = true">
                 </Button>
                 <Button
                         class="alarm-button"
-                        text="Already registered? Login!"
+                        text="{{'Already registered? Login!' | L}}"
                         *ngIf="registerMode"
                         (tap)="registerMode = false">
                 </Button>

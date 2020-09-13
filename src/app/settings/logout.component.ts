@@ -3,6 +3,7 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from "~/app/shared/data.service";
 import { alert } from "tns-core-modules/ui/dialogs";
+import {localize} from "nativescript-localize";
 
 // import {BarcodeScanner} from 'nativescript-barcodescanner';
 
@@ -33,7 +34,7 @@ export class LogoutComponent implements OnInit {
         this.isLoading = true;
         this.authService.logout();
         const options = {
-            title: 'Logout successfull',
+            title: localize('Logout successful'),
             // message: 'Race chosen: Unicorn',
             okButtonText: 'OK'
         };

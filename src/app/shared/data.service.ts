@@ -25,6 +25,9 @@ export interface DeviceAlarmDataFormat {
     'num_guard': number;
     'num_officer': number;
     'num_total': number;
+    'serial_number': string;
+    'firmware_version': string;
+    'product_number': string;
     'alarm': {
         'id': number;
         'type': string,

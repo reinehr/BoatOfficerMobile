@@ -131,6 +131,44 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
+
+                <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                    <StackLayout>
+                        <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold"></Label>
+                        <StackLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray"></Label>
+                                <Label col="2" row="1" text="{{'Serial Number' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="!device.serial_number"
+                                       text="{{'no serial number' | L}}"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                                <Label col="3" row="1" *ngIf="device.serial_number"
+                                       [text]="parseInt(device.serial_number, 16)"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                            </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                <Label col="2" row="1" text="{{'Firmware Version' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="!device.firmware_version"
+                                       text="{{'no berth' | L}}"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                                <Label col="3" row="1" *ngIf="device.firmware_version"
+                                       [text]="device.firmware_version"
+                                       class="alarm-blue pull-right font-weight-bold"></Label>
+                            </GridLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
         </StackLayout>
     </ScrollView>

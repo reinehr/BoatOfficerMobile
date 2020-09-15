@@ -11,7 +11,7 @@
                 class="alarm-button"
                 nsRouterLink="../auth"
                 pageTransition="slideLeft"></Button>
-        <Button *ngIf="!hasKey"
+        <Button *ngIf="hasKey"
                 text="{{'Register new device' | L}}"
                 class="alarm-button"
                 nsRouterLink="../scan"

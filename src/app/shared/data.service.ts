@@ -25,8 +25,11 @@ export interface DeviceAlarmDataFormat {
     'num_guard': number;
     'num_officer': number;
     'num_total': number;
-    'serial_number': string;
-    'firmware_version': string;
+    'serial_number_dec': string;
+    'serial_number_hex': string;
+    'serial_number_str': string;
+    'firmware_version_dec': string;
+    'firmware_version_hex': string;
     'product_number': string;
     'alarm': {
         'id': number;

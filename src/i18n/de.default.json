@@ -138,5 +138,5 @@
   "REGISTRATION_KEY_INVALID": "Registrierungsschlüssel ungültig oder falsch",
   "DEVICE_ALREADY_REGISTERED": "Gerät wurde bereits registriert.",
   "DEVICE_DOES_NOT_EXIST": "Gerät existiert nicht (Falsche Seriennummer)",
-  "UPLOAD COMPLETE": "Upload fertig",
+  "UPLOAD COMPLETE": "Upload fertig"
 }

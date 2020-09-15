@@ -14,6 +14,7 @@
                        text="{{'E-Mail' | L}}">
                 </Label>
                 <TextField
+                        fontSize="18"
                         returnKeyType="next"
                         [autocorrect]="false"
                         autocapitalizationType="none"
@@ -27,10 +28,25 @@
                         text="{{'Password' | L}}">
                 </Label>
                 <TextField
+                        fontSize="18"
                         returnKeyType="done"
                         [autocorrect]="false"
                         autocapitalizationType="none"
                         [(ngModel)]="password"
+                        [secure]="true"
+                ></TextField>
+            </StackLayout>
+            <StackLayout class="input-field" padding="10, 10, 10, 10" *ngIf="registerMode && !isLoading">
+                <Label
+                        class="inputlabel"
+                        text="{{'repeat Password' | L}}">
+                </Label>
+                <TextField
+                        fontSize="18"
+                        returnKeyType="done"
+                        [autocorrect]="false"
+                        autocapitalizationType="none"
+                        [(ngModel)]="password_repeat"
                         [secure]="true"
                 ></TextField>
             </StackLayout>

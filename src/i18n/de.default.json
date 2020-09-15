@@ -139,6 +139,8 @@
   "You are now logged in": "Du bist jetzt angemeldet",
   "Registration successful": "Registrierung erfolgreich",
   "Logout successful": "Logout erfolgreich",
+  "Passwords not identical": "Passwords not identical",
+  "Please re-enter the password": "Please re-enter the password",
   "SUCCESS": "Erfolgreich",
   "REGISTRATION_KEY_INVALID": "Registrierungsschlüssel ungültig oder falsch",
   "DEVICE_ALREADY_REGISTERED": "Gerät wurde bereits registriert.",

@@ -18,6 +18,7 @@ export class AuthComponent implements OnInit {
     isLoading = false;
     email: '';
     password: '';
+    password_repeat: '';
 
     constructor(
         private apiService: ApiService,
@@ -50,21 +51,31 @@ export class AuthComponent implements OnInit {
                 this.isLoading = false;
             });
         } else {
-            this.authService.signUp(this.email, this.password).subscribe(resData => {
-                this.dataService.refreshBoatStatus();
+            if(this.password == this.password_repeat) {
+                this.authService.signUp(this.email, this.password).subscribe(resData => {
+                    this.dataService.refreshBoatStatus();
+                    const options = {
+                        title: localize('Registration successful'),
+                        message: localize('You are now logged in'),
+                        okButtonText: 'OK'
+                    };
+                    alert(options).then(() => {
+                        this.router.navigate([''], {clearHistory: true});
+                    });
+                    this.isLoading = false;
+                }, error => {
+                    console.log(error);
+                    this.isLoading = false;
+                });
+            } else {
+                this.isLoading = false;
                 const options = {
-                    title: localize('Registration successful'),
-                    message: localize('You are now logged in'),
+                    title: localize('Passwords not identical'),
+                    message: localize('Please re-enter the password'),
                     okButtonText: 'OK'
                 };
-                alert(options).then(() => {
-                    this.router.navigate([''], { clearHistory: true });
-                });
-                this.isLoading = false;
-            }, error => {
-                console.log(error);
-                this.isLoading = false;
-            });
+                alert(options);
+            }
         }
     }
 

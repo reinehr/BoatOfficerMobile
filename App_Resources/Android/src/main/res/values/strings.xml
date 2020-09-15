@@ -15,7 +15,6 @@
   <string name="_details_registrationkey_2sojH2">"Gib den Registrierungsschlüssel für das Gerät ein. Dieser befindet sich auf der Verpackung und besteht aus 8 Ziffern und Buchstaben. Bitte beachte: Ein Gerät kann nur von einem Benutzer registriert werden."</string>
   <string name="_Registration_Key_ZS8eok">"Registrierungsschlüssel"</string>
   <string name="_details_serialnumber_1d0hoK">"Gib die Seriennummer der Geräts ein. Diese steht auf der Verpackung, besteht aus 13 Ziffern und Buchstaben und hat das Format 12-34-56-7890-ABC. Du kannst die Bindestriche weg lassen."</string>
-  <string name="_Serial_Number_8rO9v">"Seriennummer"</string>
   <string name="_REGISTER_NEW_DEVICE_ZiQk6l">"NEUES GERÄT REGISTRIEREN"</string>
   <string name="_Log_out_2mMyEo">"abmelden"</string>
   <string name="_By_logging_out_you_will_no_longer_receive_push_notifications_17XsiT">"Wenn du dich abmeldest, wirst du keine Push-Benachrichtigungen mehr erhalten."</string>
@@ -49,6 +48,12 @@
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"GERÄTEEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_EDIT_ALARM_SETTINGS_190vuB">"ALARMEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_____EDIT_SETTINGS_____ZePiMy">""</string>
+  <string name="_Number_of_Sailors_registered_11Jq3R">"Anzahl registrierter Sailors"</string>
+  <string name="_Number_of_Guards_registered_Z1J0z8N">"Anzahl registrierter Guards"</string>
+  <string name="_Product_Number_Z2v9NIX">"Produktnummer"</string>
+  <string name="_Firmware_Version_21dJ4u">"Firmwareversion"</string>
+  <string name="_Serial_Number_8rO9v">"Seriennummer"</string>
+  <string name="INFORMATION">"INFORMATIONEN"</string>
   <string name="Picture">"Bild"</string>
   <string name="_no_contact_number_Z29h9yB">"keine Kontaktnummer"</string>
   <string name="_Harbour_Contact_ZOpY64">"Hafenkontakt"</string>
@@ -74,7 +79,7 @@
   <string name="_Update_Rate_Position_4GuC0">"Aktualisierungsrate für Position"</string>
   <string name="_Update_Rate_General_1FGak9">"generelle Aktualisierungsrate"</string>
   <string name="_Shock_Sensor_ZL7Y1d">"Schock-Sensor"</string>
-  <string name="_Temperature_Low_Level_1K4wtQ">"minimale Temperatut"</string>
+  <string name="_Temperature_Low_Level_1K4wtQ">"minimale Temperatur"</string>
   <string name="_Temperature_High_Level_2vC47s">"maximale Temperatur"</string>
   <string name="_Low_Voltage_2_Level_Zdm9fF">"Lminimale Spannung 2"</string>
   <string name="_High_Voltage_2_Level_Z2n4eHo">"maximale Spannung 2"</string>

@@ -143,5 +143,7 @@
   "REGISTRATION_KEY_INVALID": "Registration key invalid",
   "DEVICE_ALREADY_REGISTERED": "Device already registered",
   "DEVICE_DOES_NOT_EXIST": "Device does not exist (Wrong serial number)",
-  "UPLOAD COMPLETE": "Upload complete"
+  "UPLOAD COMPLETE": "Upload complete",
+  "IMPRESSUM": "IMPRESSUM",
+  "Impressum": "Impressum"
 }

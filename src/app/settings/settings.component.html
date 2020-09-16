@@ -21,6 +21,11 @@
                 class="alarm-button"
                 nsRouterLink="../logout"
                 pageTransition="slideLeft"></Button>
+        <Button
+                text="{{'Impressum' | L}}"
+                class="alarm-button"
+                nsRouterLink="../impressum"
+                pageTransition="slideLeft"></Button>
         <TextView color="blue" marginTop="10" *ngIf="hasEmail"
                 [text]="'You are logged in as' | L: email"
         ></TextView>

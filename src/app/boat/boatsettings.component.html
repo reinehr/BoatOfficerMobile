@@ -156,8 +156,8 @@
                                 <Label col="2" row="1" text="{{'Firmware Version' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.firmware_version_dec"
-                                       [text]="device.firmware_version_dec"
+                                <Label col="3" row="1" *ngIf="device.firmware_version_str"
+                                       [text]="device.firmware_version_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
@@ -168,11 +168,11 @@
                                 <Label col="2" row="1" text="{{'Product Number' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.product_number"
-                                       [text]="device.product_number"
+                                <Label col="3" row="1" *ngIf="device.product_number_str"
+                                       [text]="device.product_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_sailor > 0">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_sailor > 0 && false">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -184,7 +184,7 @@
                                        [text]="device.num_sailor"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_guard > 0">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_guard > 0 && false">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""

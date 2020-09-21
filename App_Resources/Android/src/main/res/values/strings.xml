@@ -1,10 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="Impressum">"Impressum"</string>
+  <string name="IMPRESSUM">"IMPRESSUM"</string>
   <string name="_UPLOAD_COMPLETE_ZE4sD5">"Upload fertig"</string>
   <string name="DEVICE_DOES_NOT_EXIST">"Gerät existiert nicht (Falsche Seriennummer)"</string>
   <string name="DEVICE_ALREADY_REGISTERED">"Gerät wurde bereits registriert."</string>
   <string name="REGISTRATION_KEY_INVALID">"Registrierungsschlüssel ungültig oder falsch"</string>
   <string name="SUCCESS">"Erfolgreich"</string>
+  <string name="_Please_re_enter_the_password_Fx7Sr">"Please re-enter the password"</string>
+  <string name="_Passwords_not_identical_U19vf">"Passwords not identical"</string>
   <string name="_Logout_successful_Z18Pq6A">"Logout erfolgreich"</string>
   <string name="_Registration_successful_1qR5S6">"Registrierung erfolgreich"</string>
   <string name="_You_are_now_logged_in_1b7ehS">"Du bist jetzt angemeldet"</string>
@@ -81,7 +85,7 @@
   <string name="_Shock_Sensor_ZL7Y1d">"Schock-Sensor"</string>
   <string name="_Temperature_Low_Level_1K4wtQ">"minimale Temperatur"</string>
   <string name="_Temperature_High_Level_2vC47s">"maximale Temperatur"</string>
-  <string name="_Low_Voltage_2_Level_Zdm9fF">"Lminimale Spannung 2"</string>
+  <string name="_Low_Voltage_2_Level_Zdm9fF">"minimale Spannung 2"</string>
   <string name="_High_Voltage_2_Level_Z2n4eHo">"maximale Spannung 2"</string>
   <string name="_Low_Voltage_1_Level_Z1gsbol">"minimale Spannung 1"</string>
   <string name="_High_Voltage_1_Level_1E1QWR">"maximale Spannung 1"</string>

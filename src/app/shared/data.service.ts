@@ -205,8 +205,15 @@ export class DataService {
                                 }
                             }
                         }
+                        if (!this.boatHistory[idDevice].sensor_data) {
+                            this.boatHistory[idDevice].sensor_data = [];
+                        }
+                        if (!this.boatHistory[idDevice].position_data) {
+                            this.boatHistory[idDevice].position_data = [];
+                        }
                         this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
                         this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
+
                         millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
                         for (const idEvent in this.boatHistory[idDevice].sensor_data) {
                             const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);

@@ -19,6 +19,8 @@
   "Multi Sensor A 1 Opened": "Multi Sensor A 1 Opened",
   "Multi Sensor A 2 Closed": "Multi Sensor A 2 Closed",
   "Multi Sensor A 2 Opened": "Multi Sensor A 2 Opened",
+  "ACTIVE ALARMS": "ALARM STATUS",
+  "no active alarms": "no active alarms",
 
   "### ALARM ###": "",
   "ALARM HISTORY": "ALARM HISTORY",

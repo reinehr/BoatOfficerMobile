@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {BoatStatus, BoatHistory, Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
+import {BoatStatus, BoatHistory, Sensordata, SensordataTime, WeatherData} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
@@ -18,10 +18,11 @@ import { localize } from "nativescript-localize";
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
-import {Folder, path, knownFolders} from "tns-core-modules/file-system";
+import {Folder, path, knownFolders} from 'tns-core-modules/file-system';
 // const fs = require('file-system');
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
+const OPENWEATHER_API_KEY = 'a9e6d387e0a8e6e2bfbb42a80ff743d2';
 
 @Injectable({
     providedIn: 'root'
@@ -85,6 +86,7 @@ export class ApiService {
     private temperatureHistory =
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
+    private weatherData = new BehaviorSubject<WeatherData>(null);
     private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
     private boatStatusData = new BehaviorSubject<BoatStatus>(null);
     private boatHistoryData = new BehaviorSubject<BoatHistory>(null);
@@ -93,6 +95,7 @@ export class ApiService {
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
+    baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
     // baseUrl = 'https://jakobreinehr3.serverless.social/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
@@ -109,18 +112,30 @@ export class ApiService {
     private static handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert({okButtonText: 'OK', title:localize('This email address exists already')});
+                alert({okButtonText: 'OK', title: localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert({okButtonText: 'OK', title:localize('Invalid password')});
+                alert({okButtonText: 'OK', title: localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert({okButtonText: 'OK', title:localize('Invalid email address')});
+                alert({okButtonText: 'OK', title: localize('Invalid email address')});
                 break;
             default:
-                alert({okButtonText: 'OK', title:localize('Authentication failed')});
+                alert({okButtonText: 'OK', title: localize('Authentication failed')});
                 break;
         }
+    }
+
+    getWeatherData(lat: number, lon: number) {
+        const param: any = {units: 'metric', lat, lon, APPID: OPENWEATHER_API_KEY};
+        return this.httpClient.get<WeatherData>(this.baseUrlWeather + 'weather',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                }),
+            params: param
+            }
+        );
     }
 
     getLatestSensorData() {
@@ -143,6 +158,7 @@ export class ApiService {
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
         const param: any = {limit: 10, only_active: 'false'};
+        const indexTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: new HttpHeaders({
@@ -153,6 +169,27 @@ export class ApiService {
             }
         ).pipe(tap(resData => {
             if (resData) {
+                for (const idDevice in resData) {
+                    if (!indexTypeActive[idDevice]) {
+                        indexTypeActive[idDevice] = [];
+                        resData[idDevice].sum_active_alarm = 0;
+                    }
+                    for (const idAlarm in resData[idDevice].alarm) {
+                        if (!indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type]) {
+                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = 0;
+                        }
+                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
+                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] + 1;
+                            resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
+                            resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
+                        }
+                    }
+                    for (const idAlarm in resData[idDevice].alarm) {
+                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
+                            resData[idDevice].alarm[idAlarm].sum_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
+                        }
+                    }
+                }
                 this.device.next(resData);
             }
         }));

@@ -8,8 +8,8 @@ import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
-import {TimeagoIntl} from "ngx-timeago";
-import {localize} from "nativescript-localize";
+import {TimeagoIntl} from 'ngx-timeago';
+import {localize} from 'nativescript-localize';
 
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -47,7 +47,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     ) {
         // Use the constructor to inject services.
 
-        if(localize('LOCALE') == 'de') {
+        if (localize('LOCALE') === 'de') {
             intl.strings = germanStrings;
         } else {
             intl.strings = englishStrings;
@@ -78,7 +78,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         marker.userData = {index: 1};
         this.mapView.removeAllMarkers();
         this.mapView.addMarker(marker);
-        this.mapView.mapAnimationsEnabled;
+        this.mapView.mapAnimationsEnabled = true;
     }
 
     onCoordinateTapped(args) {

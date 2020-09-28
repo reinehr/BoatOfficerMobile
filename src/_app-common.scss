@@ -27,6 +27,20 @@
     // font-size: 28pt;
 }
 
+.weather-font {
+    display: inline-block;
+    font-family: 'Weather Icons', 'weathericons', 'weathericons-regular-webfont';
+    font-style: normal;
+    line-height: 1;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
 .homeBackgroundImage {
     background-image: url("../src/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png");
     background-repeat: no-repeat;
@@ -68,10 +82,9 @@
     horizontal-align: center;
     vertical-align: center;
     text-align: center;
-    width: 85%;
+    margin: 0,30,0,30;
     height: 200;
     overflow: hidden;
-    margin: 0;
 }
 
 .alarm-card {
@@ -80,6 +93,14 @@
     margin-right: 10;
     margin-bottom: 10;
     border-radius: 10;
+}
+
+.alarm-card-home {
+    @extend .alarm-card;
+    margin-left: 30;
+    margin-right: 30;
+    margin-top: 10;
+    margin-bottom: 0;
 }
 
 $buttons_count: 5;
@@ -107,17 +128,21 @@ $buttons_count: 5;
     font-size: 16pt;
 }
 
+.map-home {
+    margin: 0,30,0,30;
+}
+
 .boat-name {
-    width: 85%;
     background-color: #091525;
     color: white;
     font-weight: 800;
     border-radius: 10, 10, 0, 0;
+    margin: 0,30,0,30;
     height: 44pt;
 }
 
 .alarm-button {
-    width: 85%;
+    margin: 0,30,0,30;
     background-color: #091525;
     color: white;
     font-weight: 800;
@@ -174,7 +199,7 @@ $buttons_count: 5;
 }
 
 .alarm-green {
-    color: lawngreen;
+    color: limegreen;
 }
 
 .alarm-orange {

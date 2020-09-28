@@ -1,7 +1,14 @@
 import {Injectable} from '@angular/core';
 import {Subscription} from 'rxjs';
 import {ApiService} from '~/app/shared/api.service';
-import {boatGpsMap, BoatHistory, BoatStatus, boatStatusMap, historyInterval} from "~/app/shared/interface/sensordata";
+import {
+    boatGpsMap,
+    BoatHistory,
+    BoatStatus,
+    boatStatusMap,
+    historyInterval,
+    WEATHER_ICONS, windSpeedToBeaufort
+} from "~/app/shared/interface/sensordata";
 import {AlarmSettings} from "~/app/shared/interface/alarm";
 
 export interface DataItem {
@@ -34,6 +41,7 @@ export interface DeviceAlarmDataFormat {
     'product_number_dec': string;
     'product_number_hex': string;
     'product_number_str': string;
+    'sum_active_alarm'?: number;
     'alarm': {
         'id': number;
         'type': string,
@@ -46,7 +54,9 @@ export interface DeviceAlarmDataFormat {
         'marked_as_ok_time': string,
         'status': string,
         'i_am_responsible': boolean,
-        'loading': boolean
+        'loading': boolean,
+        'index_type_active'?: number,
+        'sum_type_active'?: number
     }[];
 }
 
@@ -116,6 +126,17 @@ export class DataService {
                                         }
                                     }
                                     // }
+                                }
+                                if (this.boatStatus[idDevice].position_data.latitude) {
+                                    const weather = this.apiService.getWeatherData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
+                                    weather.subscribe(wdata => {
+                                        wdata.weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmneutral[wdata.weather[0].id]);
+                                        const beaufort = windSpeedToBeaufort(wdata.wind.speed);
+                                        wdata.wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
+                                        wdata.wind.direction_icon = String.fromCharCode(0xf0b1);
+                                        this.boatStatus[idDevice].weather = wdata;
+                                        console.log(idDevice + ': ' + wdata.weather[0].id);
+                                    });
                                 }
                             }
                         }
@@ -338,7 +359,7 @@ export class DataService {
         this.apiService.getDeviceData().subscribe(resp1 => {
             console.log('refreshSensorDataHistory - getDeviceData ' + resp1);
         }, error => {
-            console.log('DeviceData not loading');
+            console.log('refreshSensorDataHistory not loading');
             this.isLoading = false;
         });
     }
@@ -361,7 +382,7 @@ export class DataService {
             });
             this.isLoading = false;
         }, error => {
-            console.log('DeviceData not loading');
+            console.log(error);
             this.isLoading = false;
         });
     }

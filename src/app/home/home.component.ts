@@ -1,4 +1,8 @@
-import {Component, OnInit, AfterViewInit} from '@angular/core';
+import {
+    Component,
+    OnInit,
+    AfterViewInit
+} from '@angular/core';
 import {Page} from 'tns-core-modules/ui/page/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
@@ -11,6 +15,14 @@ import {localize} from 'nativescript-localize';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ScrollEventData, ScrollView} from 'tns-core-modules/ui/scroll-view';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
+import {isAndroid } from 'tns-core-modules/platform';
+import { AnimationCurve } from 'tns-core-modules/ui/enums';
+import { getViewById } from 'tns-core-modules/ui/core/view';
+import { EventData } from 'tns-core-modules/data/observable';
+import { Image } from 'tns-core-modules/ui/image';
+import { ImageSource } from 'tns-core-modules/image-source';
+
+import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view';
 
 registerElement('MapView', () => MapView);
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
@@ -33,6 +45,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     padding = [40, 40, 40, 40];
     mapView: MapView;
     alarmByTypeMap = alarmByTypeMap;
+    maxWeather = {0: 3};
+    beaufortAlarmLevel = 7;
+
+    webViewSrc = this.page;
 
     constructor(// private _itemService: DataService,
         private page: Page,
@@ -48,6 +64,54 @@ export class HomeComponent implements OnInit, AfterViewInit {
             intl.strings = englishStrings;
         }
         intl.changes.next();
+        this.dataService.apiService.boatStatus.subscribe( ddata => {
+            if (ddata) {
+                setTimeout( () => {
+                    for (const idDevice in this.dataService.deviceData) {
+                        const level6 = this.page.getViewById('level_1').getViewById('level_2').getViewById('level_3')
+                            .getViewById('level_4')
+                            .getViewById('level_5')
+                            .getViewById('level_6_' + this.dataService.deviceData[idDevice].id);
+                        const level7 = level6.getViewById('level_7_' + this.dataService.deviceData[idDevice].id);
+                        if (level7) {
+                            const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
+                            this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
+                            const marker = new Marker();
+                            marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+                            marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
+                            marker.snippet = 'BoatOfficer';
+                            marker.userData = {index: 1};
+                            marker.zIndex = 10;
+                            this.mapView.removeAllMarkers();
+                            if (false && this.dataService.boatStatus && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id] && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude) {
+                                console.log('Setting a camera marker ...');
+
+                                const imageSource = ImageSource.fromFileSync( '~/assets/video-solid-small.png');
+                                const icon = new Image();
+                                icon.imageSource = imageSource;
+                                const markerWebcam = new Marker();
+                                markerWebcam.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.longitude);
+                                markerWebcam.title = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.name + '';
+                                markerWebcam.snippet = 'Webcam';
+                                markerWebcam.userData = {index: 1};
+                                markerWebcam.zIndex = 9;
+                                markerWebcam.color = 'gray';
+                                markerWebcam.icon = icon;
+                                this.mapView.addMarker(markerWebcam);
+                                this.mapView.mapAnimationsEnabled = true;
+                            } else {
+                                console.log('Setting no camera marker ...');
+                            }
+                            this.mapView.addMarker(marker);
+                            this.mapView.mapAnimationsEnabled = true;
+                        }
+                    }
+                }, 2000);
+            }
+        }
+        );
+        // const pageView = this.page.getViewById<MapView>('mapview_0');
+        // console.log('AFTER INIT longitude: ' + pageView.minZoom);
     }
 
     ngOnInit(): void {
@@ -65,6 +129,9 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
         this.mapView = event.object;
 
+        // const imageSource = ImageSource.fromFileSync( '~/assets/icon.png');
+        // const icon = new Image();
+        // icon.imageSource = imageSource;
 
         console.log('Setting a marker...');
 
@@ -73,7 +140,29 @@ export class HomeComponent implements OnInit, AfterViewInit {
         marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
         marker.userData = {index: 1};
+        // marker.icon = icon;
+        // marker.color = '#356eb4';
+        marker.zIndex = 10;
         this.mapView.removeAllMarkers();
+        if (false && this.dataService.boatStatus && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id] && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude) {
+            console.log('ready Setting a camera marker ...');
+
+            const imageSource = ImageSource.fromFileSync( '~/assets/video-solid-small.png');
+            const icon = new Image();
+            icon.imageSource = imageSource;
+            const markerWebcam = new Marker();
+            markerWebcam.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.longitude);
+            markerWebcam.title = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.name + '';
+            markerWebcam.snippet = 'Webcam';
+            markerWebcam.userData = {index: 1};
+            markerWebcam.zIndex = 9;
+            markerWebcam.color = 'gray';
+            markerWebcam.icon = icon;
+            this.mapView.addMarker(markerWebcam);
+            this.mapView.mapAnimationsEnabled = true;
+        } else {
+            console.log('ready Setting no camera marker ...');
+        }
         this.mapView.addMarker(marker);
         this.mapView.mapAnimationsEnabled = true;
     }
@@ -118,6 +207,84 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     onButtonTap(): void {
         console.log('Button was pressed');
+    }
+
+    onWebViewLoaded(webargs) {
+        const webview = webargs.object;
+        webview.getSettings().scalesPageToFit(false);
+        webview.getSettings().setBuiltInZoomControls(false);
+        webview.getSettings().setDisplayZoomControls(false);
+        webview.getSettings().setInitScale(1);
+        webview.getSettings().setTextZoom(1);
+        webview.getSettings().setDefaultZoom(1);
+        webview.getSettings().setUseWideViewPort(true);
+        webview.getSettings().setLoadWithOverviewMode(true);
+    }
+
+    onLoadStarted(args: LoadEventData) {
+        const webView = args.object as WebView;
+        const wv = args.object;
+
+        if (!args.error) {
+            // console.log('Load Start');
+            // console.log(`EventName: ${args.eventName}`);
+            // console.log(`NavigationType: ${args.navigationType}`);
+            // console.log(`Url: ${args.url}`);
+            webView.flexWrapBefore = true;
+            if (isAndroid && webView) {
+                // console.log('isAndroid');
+                webView.android.getSettings().setBuiltInZoomControls(false);
+                webView.android.getSettings().setDisplayZoomControls(false);
+                webView.android.getSettings().setUseWideViewPort(true);
+                webView.android.getSettings().setLoadWithOverviewMode(true);
+            } else if (webView) {
+                webView.ios.scrollView.minimumZoomScale = 1.0;
+                webView.ios.scrollView.maximumZoomScale = 1.0;
+                webView.ios.scalesPageToFit = false;
+                webView.ios.scrollView.bounces = false;
+    }
+        } else {
+            console.log(`EventName: ${args.eventName}`);
+            console.log(`Error: ${args.error}`);
+        }
+    }
+
+    onLoadFinished(args: LoadEventData) {
+        const webView = args.object as WebView;
+
+        if (!args.error) {
+            // console.log('Load Finished');
+            // console.log(`EventName: ${args.eventName}`);
+            // console.log(`NavigationType: ${args.navigationType}`);
+            // console.log(`Url: ${args.url}`);
+            // console.log(webView.getActualSize().height);
+            // console.log(webView.getActualSize().width);
+            // console.log(webView.getMeasuredHeight());
+            // console.log(webView.getMeasuredWidth());
+            webView.flexWrapBefore = true;
+            webView.height = 480;
+            webView.width = 640;
+            webView.effectiveHeight = 480;
+        } else {
+            console.log(`EventName: ${args.eventName}`);
+            console.log(`Error: ${args.error}`);
+        }
+    }
+
+    onWeatherTap(idDevice: number) {
+        // const grid = args.object;
+        // const idDevice = grid.get('id');
+        if (!this.maxWeather[idDevice] || this.maxWeather[idDevice] <= 3) {
+            this.maxWeather[idDevice]  = 40;
+        } else {
+            this.maxWeather[idDevice] = 3;
+        }
+
+        // grid.animate({
+        //     height: 400,
+        //     duration: 1000,
+        //     curve: AnimationCurve.easeIn
+        // });
     }
 
     refreshList(args) {

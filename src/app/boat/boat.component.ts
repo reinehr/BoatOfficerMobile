@@ -10,6 +10,9 @@ import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from 'ngx-timeago';
 import {localize} from 'nativescript-localize';
+import {ImageSource} from 'tns-core-modules/image-source';
+import {Image} from 'tns-core-modules/ui/image';
+import {Page} from 'tns-core-modules/ui/page';
 
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -40,6 +43,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     private sensorHistoryLoaded: boolean;
 
     constructor(
+        private page: Page,
         private apiService: ApiService,
         private dataService: DataService,
         intl: TimeagoIntl
@@ -53,6 +57,35 @@ export class BoatComponent implements OnInit, AfterViewInit {
             intl.strings = englishStrings;
         }
         intl.changes.next();
+        this.dataService.apiService.boatStatus.subscribe( ddata => {
+            if (ddata) {
+                setTimeout( () => {
+                    for (const idDevice in this.dataService.deviceData) {
+                        const level6 = this.page.getViewById('level_2').getViewById('level_3')
+                            .getViewById('level_4')
+                            .getViewById('level_5')
+                            .getViewById('level_6_' + this.dataService.deviceData[idDevice].id);
+                        const level7 = level6.getViewById('level_7_' + this.dataService.deviceData[idDevice].id);
+                        if (level7) {
+                            const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
+                            this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
+                            const marker = new Marker();
+                            marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+                            marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
+                            marker.snippet = 'BoatOfficer';
+                            marker.userData = {index: 1};
+                            marker.zIndex = 10;
+                            this.mapView.removeAllMarkers();
+                            this.mapView.addMarker(marker);
+                            this.mapView.mapAnimationsEnabled = true;
+                        }
+                    }
+                }, 2000);
+            }
+        }
+        );
+        // const pageView = this.page.getViewById<MapView>('mapview_0');
+        // console.log('AFTER INIT longitude: ' + pageView.minZoom);
     }
 
     ngOnInit(): void {

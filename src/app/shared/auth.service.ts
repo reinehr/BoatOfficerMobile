@@ -6,7 +6,8 @@ import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 // import {User} from '~/app/auth/user.model';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
-import {localize} from "nativescript-localize";
+import {localize} from 'nativescript-localize';
+import {firebase} from 'nativescript-plugin-firebase/firebase-common';
 
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
 
@@ -91,16 +92,16 @@ export class AuthService {
     private handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert({okButtonText: 'OK', title:localize('This email address exists already')});
+                alert({okButtonText: 'OK', title: localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert({okButtonText: 'OK', title:localize('Invalid password')});
+                alert({okButtonText: 'OK', title: localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert({okButtonText: 'OK', title:localize('Invalid email address')});
+                alert({okButtonText: 'OK', title: localize('Invalid email address')});
                 break;
             default:
-                alert({okButtonText: 'OK', title:localize('Authentication failed')});
+                alert({okButtonText: 'OK', title: localize('Authentication failed')});
                 break;
         }
     }

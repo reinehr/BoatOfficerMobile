@@ -32,10 +32,10 @@
     font-family: 'Weather Icons', 'weathericons', 'weathericons-regular-webfont';
     font-style: normal;
     line-height: 1;
-    font-weight: 400;
-    font-size: 24px;
+    font-weight: 200;
+    font-size: 20px;
     text-align: center;
-    width: 50pt;
+    // width: 50pt;
     vertical-align: center;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -52,11 +52,11 @@
 // Custom tabstrip item class
 .navigation__item {
     //margin-top: 5px;
-    Label{color: #326cb5};
+    Label{color: #356eb4};
     background-color: white;
     &:active,
     &:active Label {
-        color: black;
+        color: #091524;
     }
 }
 
@@ -111,8 +111,8 @@ $buttons_count: 5;
     height: 40;
     border-radius: 20;
     border-width: 2;
-    border-color: #326cb5;
-    color: #326cb5;
+    border-color: #356eb4;
+    color: #356eb4;
     font-size: 16pt;
 }
 
@@ -123,7 +123,7 @@ $buttons_count: 5;
     height: 40;
     border-radius: 20;
     border-width: 0;
-    background-color: #091525;
+    background-color: #091524;
     color: #ffffff;
     font-size: 16pt;
 }
@@ -133,7 +133,7 @@ $buttons_count: 5;
 }
 
 .boat-name {
-    background-color: #091525;
+    background-color: #091524;
     color: white;
     font-weight: 800;
     border-radius: 10, 10, 0, 0;
@@ -143,7 +143,7 @@ $buttons_count: 5;
 
 .alarm-button {
     margin: 0,30,0,30;
-    background-color: #091525;
+    background-color: #091524;
     color: white;
     font-weight: 800;
     border-radius: 10;
@@ -151,14 +151,14 @@ $buttons_count: 5;
 }
 
 .action-bar {
-    background-color: #091525;
+    background-color: #091524;
     color: white;
     font-weight: 800;
 }
 
 .alarm-symbol {
     font-family: "BoatOfficer Icons", "boatofficer";
-    // background-color: #091525;
+    // background-color: #091524;
     // color: orange;
     font-weight: 400;
     font-size: 24px;
@@ -169,7 +169,7 @@ $buttons_count: 5;
 
 .alarm-symbol-bo {
     font-family: "BoatOfficer Icons", "boatofficer";
-    // background-color: #091525;
+    // background-color: #091524;
     // color: orange;
     font-weight: 400;
     font-size: 24px;
@@ -189,7 +189,7 @@ $buttons_count: 5;
 
 .alarm-symbol-s {
     font-family: "BoatOfficer Icons", "boatofficer";
-    // background-color: #091525;
+    // background-color: #091524;
     // color: orange;
     font-weight: 400;
     font-size: 18px;
@@ -203,11 +203,11 @@ $buttons_count: 5;
 }
 
 .alarm-orange {
-    color: #fa8b24;
+    color: #fb8b24;
 }
 
 .alarm-blue {
-    color: #326cb5;
+    color: #356eb4;
 }
 
 .alarm-gray {
@@ -215,7 +215,7 @@ $buttons_count: 5;
 }
 
 .bg-darkblue {
-    background-color: #091525;
+    background-color: #091524;
     color: #ffffff;
 }
 
@@ -273,7 +273,7 @@ LineSeries{
 }
 
 LinearAxis {
-    label-text-color: black;
+    label-text-color: #091524;
     line-hidden: false;
     label-size: 10;
     line-thickness: 2;
@@ -299,17 +299,17 @@ RadCartesianChartGrid {
 
 DateTimeContinuousAxis {
     plot-mode: OnTicks;
-    label-text-color: #000000;
+    label-text-color: #091524;
     label-rotation-angle: -1.5707963268;
     label-size: 10;
     label-height: 50;
     line-thickness: 2;
-    line-color: black;
+    line-color: #091524;
 }
 
 TextField {
     background-color: white;
-    color: black;
+    color: #091524;
     font-size: 16;
     height: 40;
 }
@@ -327,7 +327,7 @@ TextView {
 }
 
 .inputlabel {
-    color: black;
+    color: #091524;
     font-size: 16;
     margin: 0,0,0,15;
 

@@ -3,8 +3,8 @@ import {ApiService} from '../shared/api.service';
 import {AuthService} from '~/app/shared/auth.service';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {DataService} from '~/app/shared/data.service';
-import {alert} from "tns-core-modules/ui/dialogs";
-import {localize} from "nativescript-localize";
+import {alert} from 'tns-core-modules/ui/dialogs';
+import {localize} from 'nativescript-localize';
 
 @Component({
     selector: 'app-auth',
@@ -51,7 +51,7 @@ export class AuthComponent implements OnInit {
                 this.isLoading = false;
             });
         } else {
-            if(this.password == this.password_repeat) {
+            if (this.password === this.password_repeat) {
                 this.authService.signUp(this.email, this.password).subscribe(resData => {
                     this.dataService.refreshBoatStatus();
                     const options = {

@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {BoatStatus, BoatHistory, Sensordata, SensordataTime, WeatherData} from '~/app/shared/interface/sensordata';
+import {BoatStatus, BoatHistory, Sensordata, SensordataTime, WeatherData, WeatherForecastData} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
@@ -13,7 +13,7 @@ import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {AlarmSettings} from '~/app/shared/interface/alarm';
-import { localize } from "nativescript-localize";
+import { localize } from 'nativescript-localize';
 
 
 const bghttpModule = require('nativescript-background-http');
@@ -86,7 +86,8 @@ export class ApiService {
     private temperatureHistory =
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
-    private weatherData = new BehaviorSubject<WeatherData>(null);
+    // private weatherData = new BehaviorSubject<WeatherData>(null);
+    // private weatherForecastData = new BehaviorSubject<WeatherForecastData>(null);
     private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
     private boatStatusData = new BehaviorSubject<BoatStatus>(null);
     private boatHistoryData = new BehaviorSubject<BoatHistory>(null);
@@ -129,6 +130,18 @@ export class ApiService {
     getWeatherData(lat: number, lon: number) {
         const param: any = {units: 'metric', lat, lon, APPID: OPENWEATHER_API_KEY};
         return this.httpClient.get<WeatherData>(this.baseUrlWeather + 'weather',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                }),
+            params: param
+            }
+        );
+    }
+
+    getWeatherForecastData(lat: number, lon: number) {
+        const param: any = {units: 'metric', lat, lon, APPID: OPENWEATHER_API_KEY, cnt: 16};
+        return this.httpClient.get<WeatherForecastData>(this.baseUrlWeather + 'forecast',
             {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json'

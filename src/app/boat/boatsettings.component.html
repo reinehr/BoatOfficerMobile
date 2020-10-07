@@ -19,7 +19,7 @@
                     <Label col="1" row="1" [text]="device.name"
                            class="alarm-blue t-16" height="30"></Label>
                 </GridLayout>
-                <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout *ngFor="let field of sensorFieldKeys">
@@ -61,7 +61,7 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
@@ -132,7 +132,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>

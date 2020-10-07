@@ -1,17 +1,17 @@
-<!--<ActionBar backgroundColor="#091525">
+<!--<ActionBar backgroundColor="#091524">
     <Label text="Home" color="white"></Label>
 </ActionBar>-->
 
-<GridLayout class="homeBackgroundImage"
+<GridLayout id="level_1" class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_w_bluesky.png">
-    <PullToRefresh (refresh)="refreshList($event)">
-        <ScrollView orientation="vertical">
-            <GridLayout columns="*" rows="40, 100, 5, *" class="page__content">
+    <PullToRefresh id="level_2" (refresh)="refreshList($event)">
+        <ScrollView id="level_3" orientation="vertical">
+            <GridLayout id="level_4" columns="*" rows="40, 100, 5, *" class="page__content">
                 <Label col=0 row=0 text="" height="40"></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
                 <Label col=0 row=2 text="" height="0"></Label>
-                <StackLayout col=0 row=3 *ngIf="dataService">
-                    <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index">
+                <StackLayout id="level_5" col=0 row=3 *ngIf="dataService">
+                    <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                         <Label text="" height="35"></Label>
                         <StackLayout [class]="device.boat_image_medium && device.boat_image_medium != 'null' ? 'boat-name' : 'alarm-button'" height="30pt">
                             <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
@@ -19,7 +19,7 @@
                         <StackLayout *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
                             <Image class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="10,10,10,10" *ngIf="device.sum_active_alarm > 0">
+                        <StackLayout class="alarm-card-home" padding="5,10,10,10" *ngIf="device.sum_active_alarm > 0">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
                                 <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -43,7 +43,7 @@
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="10,10,10,10" *ngIf="device.sum_active_alarm === 0">
+                        <StackLayout class="alarm-card-home" padding="5,10,10,10" *ngIf="device.sum_active_alarm === 0">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
                                 <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -54,7 +54,7 @@
                                        verticalAlignment="middle"></Label>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="10,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
+                        <StackLayout [id]="'level_7_' + device.id" class="alarm-card-home" padding="5,10,10,10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time && dataService.boatStatus[device.id].position_data.latitude && dataService.boatStatus[device.id].position_data.latitude != 0">
                             <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
                                 <Label col=0 row=0 [text]="'POSITION' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -67,21 +67,99 @@
                                        class="t-12 font-weight-normal"
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
-                            <MapView height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
-                                     [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-                                     [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
-                                     (mapReady)="onMapReady($event, idDevice)"
-                                     (markerSelect)="onMarkerEvent($event)"
-                                     (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
-                            <GridLayout columns="*, *, *, *" rows="40" paddingBottom="-10" *ngIf="dataService.boatStatus[device.id].weather">
-                                <Label col=0 row=0 [text]="(dataService.boatStatus[device.id].weather.main.temp | number: '1.0-0') + '°C'" class="t-16 font-weight-bold"
-                                       verticalAlignment="middle" horizontalAlignment="center"></Label>
-                                <Label col=1 row=0 [text]="dataService.boatStatus[device.id].weather.weather[0].icon" class="weather-font"
-                                        verticalAlignment="middle" horizontalAlignment="center"></Label>
-                                <Label col=2 row=0 [text]="dataService.boatStatus[device.id].weather.wind.beaufort_icon" class="weather-font"
-                                        verticalAlignment="middle" horizontalAlignment="center"></Label>
-                                <Label col=3 row=0 [text]="dataService.boatStatus[device.id].weather.wind.direction_icon" class="weather-font"
-                                        verticalAlignment="middle" horizontalAlignment="center" [rotate]="dataService.boatStatus[device.id].weather.wind.deg + 180"></Label>
+                            <GridLayout [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                                <MapView [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
+                                         [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                                         [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
+                                         (mapReady)="onMapReady($event, idDevice)"
+                                         (markerSelect)="onMarkerEvent($event)"
+                                         (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                            </GridLayout>
+                        </StackLayout>
+                        <StackLayout [id]="device.id" class="alarm-card-home" padding="5,10,10,10"
+                                     *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].weather_forecast && dataService.boatStatus[device.id].weather_forecast.list && dataService.boatStatus[device.id].weather_forecast.list[0]" (tap)="onWeatherTap(device.id)">
+                            <GridLayout columns="*" rows="40" paddingBottom="-10">
+                                <Label col=0 row=0 [text]="'WEATHER ON SITE' | L" class="t-16 font-weight-bold"
+                                       verticalAlignment="middle" horizontalAlignment="left"></Label>
+                            </GridLayout>
+                            <GridLayout *ngIf="dataService.boatStatus[device.id].weather_forecast">
+                                <StackLayout>
+                                    <GridLayout *ngFor="let forecast of dataService.boatStatus[device.id].weather_forecast.list; let idList = index">
+                                        <GridLayout columns="37, *, 37, 42, 42, 37, 32" rows="40" paddingBottom="-10" [color]="forecast.is_night ? '#444444' : '#356eb4'" *ngIf="(maxWeather && maxWeather[device.id]) ? idList < maxWeather[device.id] : idList < 3">
+                                            <Label col=0 row=0 [text]="(((forecast.dt - dataService.boatStatus[device.id].weather_forecast.city.timezone) * 1000) | date: 'EEE') | L" class="t-16 font-weight-bold"
+                                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                            <Label col=1 row=0 [text]="((forecast.dt - dataService.boatStatus[device.id].weather_forecast.city.timezone) * 1000) | date: 'HH:mm'" class="t-16 font-weight-bold"
+                                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                                   verticalAlignment="middle" horizontalAlignment="left"
+                                                    *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user >= forecast.main.temp"></Label>
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                                   verticalAlignment="middle" horizontalAlignment="left"
+                                                    *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device >= forecast.main.temp"></Label>
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                                   verticalAlignment="middle" horizontalAlignment="left"
+                                                    *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user <= forecast.main.temp"></Label>
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                                   verticalAlignment="middle" horizontalAlignment="left"
+                                                    *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device <= forecast.main.temp"></Label>
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                                   verticalAlignment="middle" horizontalAlignment="left"
+                                                    *ngIf="forecast.wind.beaufort >= beaufortAlarmLevel"></Label>
+                                            <Label col=3 row=0 [text]="(forecast.main.temp | number: '1.0-0') + '°C'" [class]="'t-16 font-weight-bold' + (
+                                                    ((
+                                                        dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user >= forecast.main.temp
+                                                    ) || (
+                                                        dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device >= forecast.main.temp
+                                                    ) || (
+                                                        dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user <= forecast.main.temp
+                                                    ) || (
+                                                        dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device <= forecast.main.temp
+                                                    ))
+                                                    ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=4 row=0 [text]="forecast.weather[0].icon" class="weather-font"
+                                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=5 row=0 [text]="forecast.wind.beaufort_icon" [class]="'weather-font' + (forecast.wind.beaufort >= beaufortAlarmLevel ? ' alarm-orange' : '')"
+                                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=6 row=0 [text]="forecast.wind.direction_icon" class="weather-font"
+                                                    verticalAlignment="middle" horizontalAlignment="right" [rotate]="forecast.wind.deg + 180"></Label>
+                                        </GridLayout>
+                                    </GridLayout>
+                                </StackLayout>
+                            </GridLayout>
+                            <GridLayout columns="*, *" rows="40" paddingBottom="-5" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].weather_forecast">
+                                <GridLayout col=0 row=0 columns="40, *" rows="40" horizontalAlignment="center">
+                                    <Label col=0 row=0 [text]="dataService.boatStatus[device.id].weather_forecast.city.icon_sunrise" class="weather-font"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                    <Label col=1 row=0 [text]="(dataService.boatStatus[device.id].weather_forecast.city.sunrise * 1000 | date : 'HH:mm')" class="t-16 font-weight-bold"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                </GridLayout>
+                                <GridLayout col=1 row=0 columns="40, *" rows="40" horizontalAlignment="center">
+                                    <Label col=0 row=0 [text]="dataService.boatStatus[device.id].weather_forecast.city.icon_sunset" class="weather-font"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                    <Label col=1 row=0 [text]="(dataService.boatStatus[device.id].weather_forecast.city.sunset * 1000 | date : 'HH:mm')" class="t-16 font-weight-bold"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                </GridLayout>
+                            </GridLayout>
+                        </StackLayout>
+                        <StackLayout class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
+                            <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
+                                <Label col=0 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
+                                       verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.location_name"
+                                       class="t-12 font-weight-bold"
+                                       verticalAlignment="middle" horizontalAlignment="right"></Label>
+                            </GridLayout>
+                            <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
+                                <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.name"
+                                       class="t-12 font-weight-normal"
+                                       verticalAlignment="middle" horizontalAlignment="right"></Label>
+                            </GridLayout>
+                            <GridLayout columns="*" rows="240" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[device.id].nearest_webcam.url" >
+                                <WebView [src]="dataService.boatStatus[device.id].nearest_webcam.url" stretch="aspectFit"
+                                         (loadStarted)="onLoadStarted($event)"
+                                         (loadFinished)="onLoadFinished($event)">
+                                </WebView>
                             </GridLayout>
                         </StackLayout>
                     </StackLayout>

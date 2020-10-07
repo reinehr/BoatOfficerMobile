@@ -8,8 +8,8 @@ import {
     boatStatusMap,
     historyInterval,
     WEATHER_ICONS, windSpeedToBeaufort
-} from "~/app/shared/interface/sensordata";
-import {AlarmSettings} from "~/app/shared/interface/alarm";
+} from '~/app/shared/interface/sensordata';
+import {AlarmSettings} from '~/app/shared/interface/alarm';
 
 export interface DataItem {
     id: number;
@@ -83,9 +83,9 @@ export class DataService {
     sensorFieldKeys = Object.keys(boatStatusMap);
     gpsFieldMap = boatGpsMap;
     gpsFieldKeys = Object.keys(boatGpsMap);
-    private boatStatusSub: Subscription;
-    boatStatus: BoatStatus;
-    private devicedataSub: Subscription;
+    public boatStatusSub: Subscription;
+    public boatStatus: BoatStatus;
+    public devicedataSub: Subscription;
     public deviceData: DeviceAlarmDataFormat[];
     activeAlarmByField: { [idDevice: number]: { [sensorFieldKey: string]: boolean } };
     private alarmSettingsSub: Subscription;
@@ -99,7 +99,7 @@ export class DataService {
     dataLoaded = false;
 
     constructor(
-        private apiService: ApiService
+        public apiService: ApiService
     ) {
         this.initBoatStatus();
         this.initSensorDataHistory();
@@ -128,14 +128,39 @@ export class DataService {
                                     // }
                                 }
                                 if (this.boatStatus[idDevice].position_data.latitude) {
-                                    const weather = this.apiService.getWeatherData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
-                                    weather.subscribe(wdata => {
-                                        wdata.weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmneutral[wdata.weather[0].id]);
-                                        const beaufort = windSpeedToBeaufort(wdata.wind.speed);
-                                        wdata.wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
-                                        wdata.wind.direction_icon = String.fromCharCode(0xf0b1);
-                                        this.boatStatus[idDevice].weather = wdata;
-                                        console.log(idDevice + ': ' + wdata.weather[0].id);
+                                    // const weather = this.apiService.getWeatherData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
+                                    // weather.subscribe(wdata => {
+                                    //     wdata.weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmneutral[wdata.weather[0].id]);
+                                    //     const beaufort = windSpeedToBeaufort(wdata.wind.speed);
+                                    //     wdata.wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
+                                    //     wdata.wind.direction_icon = String.fromCharCode(0xf0b1);
+                                    //     this.boatStatus[idDevice].weather = wdata;
+                                    // });
+                                    const weatherForecast = this.apiService.getWeatherForecastData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
+                                    weatherForecast.subscribe(wdata => {
+                                        const dateSunset = new Date(wdata.city.sunset * 1000);
+                                        const timeSunset = (dateSunset.getHours() * 60 + dateSunset.getMinutes()) * 60 + dateSunset.getSeconds();
+                                        const dateSunrise = new Date(wdata.city.sunrise * 1000);
+                                        const timeSunrise = (dateSunrise.getHours() * 60 + dateSunrise.getMinutes()) * 60 + dateSunrise.getSeconds();
+                                        wdata.city.icon_sunrise = String.fromCharCode(0xf051);
+                                        wdata.city.icon_sunset = String.fromCharCode(0xf052);
+                                        for (const listKey in wdata.list) {
+                                            wdata.list[listKey].weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmneutral[wdata.list[listKey].weather[0].id]);
+                                            const dateWeather = new Date((wdata.list[listKey].dt - wdata.city.timezone) * 1000);
+                                            const timeWeather = (dateWeather.getHours() * 60 + dateWeather.getMinutes()) * 60 + dateWeather.getSeconds();
+                                            if (timeWeather < timeSunrise || timeWeather > timeSunset) {
+                                                wdata.list[listKey].is_night = true;
+                                                wdata.list[listKey].weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmnight[wdata.list[listKey].weather[0].id]);
+                                            } else {
+                                                wdata.list[listKey].is_night = false;
+                                                wdata.list[listKey].weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmday[wdata.list[listKey].weather[0].id]);
+                                            }
+                                            const beaufort = windSpeedToBeaufort(wdata.list[listKey].wind.speed);
+                                            wdata.list[listKey].wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
+                                            wdata.list[listKey].wind.direction_icon = String.fromCharCode(0xf0b1);
+                                            wdata.list[listKey].wind.beaufort = beaufort;
+                                            this.boatStatus[idDevice].weather_forecast = wdata;
+                                        }
                                     });
                                 }
                             }
@@ -156,6 +181,7 @@ export class DataService {
                 if (asdata) {
                     this.alarmSettings = asdata;
                     this.dataLoaded = true;
+                    console.log('loading alarmSettings');
                 } else {
                     console.log('no alarmSettings');
                 }

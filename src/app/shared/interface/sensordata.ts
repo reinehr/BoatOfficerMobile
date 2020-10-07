@@ -23,12 +23,75 @@ export interface Sensordata {
     counter: number;
 }
 
+
+export interface WeatherForecastData {
+    city: {
+        id: number,
+        name: 'Nymphenburg',
+        coord: {
+            lat: number,
+            lon: number
+        },
+        country: string,
+        population: string,
+        timezone: number,
+        sunrise: number,
+        sunset: number,
+        icon_sunrise?: string,
+        icon_sunset?: string
+    };
+    cod: string;
+    message: number;
+    cnt: number;
+    list: [
+        {
+            dt: number,
+            is_night?: boolean,
+            main: {
+                temp: number,
+                feels_like: number,
+                temp_min: number,
+                temp_max: number,
+                pressure: number,
+                sea_level: number,
+                grnd_level: number,
+                humidity: number,
+                temp_kf: number
+            },
+            weather: [
+                {
+                    id: number,
+                    main: string,
+                    description: string,
+                    icon: string
+                }
+            ],
+            clouds: {
+                all: number
+            },
+            wind: {
+                speed: number,
+                deg: number,
+                beaufort?: number,
+                beaufort_icon?: string,
+                direction_icon?: string
+            },
+            visibility: number,
+            pop: number,
+            sys: {
+                pod: string
+            },
+            dt_txt: string
+        }
+    ];
+}
+
 export interface WeatherData {
     coord: {
         lon: number,
         lat: number
     };
-        weather: [
+    weather: [
         {
             id: number,
             main: string,
@@ -304,8 +367,10 @@ export function windSpeedToBeaufort(speed) {
     return 11;
   } else if (speed >= 32.7 && speed < 42) {
     return 12;
+  } else if (speed >= 42 && speed < 52) {
+    return 13;
   }
-  return 'super typhoon';
+  return 99;
 }
 
 export interface SensordataTime {
@@ -375,6 +440,25 @@ export interface BoatStatus {
             'StatusMultiA2'?: boolean
         },
         'weather'?: WeatherData,
+        'weather_forecast'?: WeatherForecastData,
+        'webcam'?: {
+            'name': string,
+            'location_name': string,
+            'heading': number,
+            'latitude': number,
+            'longitude': number,
+            'url': string,
+            'distance': string,
+        }
+        'nearest_webcam'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
     };
 }
 

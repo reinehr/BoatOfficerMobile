@@ -5,7 +5,7 @@
 </ActionBar>
 
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
-    <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="dataService.alarmSettings[idDevice]" height="200">
+    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[idDevice]" height="200">
         <StackLayout>
             <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
             <StackLayout *ngIf="alarmSettingsMap[field]">

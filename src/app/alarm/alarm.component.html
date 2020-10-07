@@ -73,14 +73,14 @@
                                         <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
                                     </GridLayout>
                                     <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
-                                    <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#326cb5'"-->
+                                    <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#356eb4'"-->
                                     <!--                                        margin="5" (tap)="onAlarmResponsibleTap(idDevice, idAlarm)"-->
                                     <!--                                        *ngIf="alarm.status == 'open'">-->
                                     <!--                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#9cbeda"></Label>-->
                                     <!--                                <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text-s"></Label>-->
                                     <!--                            </GridLayout>-->
                                     <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
-                                    <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fa8b24'"-->
+                                    <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#􏰟􏰎􏰠􏰎􏰐􏰡􏰟􏰎fb8b24'"-->
                                     <!--                                        margin="5" (tap)="onAlarmNotResponsibleTap(idDevice, idAlarm)"-->
                                     <!--                                        *ngIf="alarm.status == 'open_someone_responsible'">-->
                                     <!--                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"-->
@@ -128,7 +128,7 @@
                                        class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
                                        *ngIf="alarm.status == 'open_someone_responsible'"></Label>
                                 <GridLayout col="3" row="0" rowSpan="2" columns="30, *" rows="40" class="alarm-button"
-                                            [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fa8b24'"
+                                            [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fb8b24'"
                                             margin="5" (tap)="onAlarmNotResponsibleTap(idDevice, idAlarm)"
                                             *ngIf="alarm.status == 'open_someone_responsible' && device.role=='officer'">
                                     <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"

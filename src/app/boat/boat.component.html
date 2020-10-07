@@ -12,12 +12,12 @@
 </ActionBar>
 
 
-<GridLayout class="homeBackgroundImage"
+<GridLayout id="level_2" class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <PullToRefresh (refresh)="refreshList($event)">
-        <ScrollView orientation="vertical">
-            <StackLayout>
-                <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
+    <PullToRefresh id="level_3" (refresh)="refreshList($event)">
+        <ScrollView id="level_4" orientation="vertical">
+            <StackLayout id="level_5">
+                <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
                     <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                         <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                             <Image [src]="'' + device.boat_image_small"
@@ -27,7 +27,7 @@
                         <Label col="1" row="1" [text]="device.name"
                                class="alarm-blue t-16" height="30"></Label>
                     </GridLayout>
-                    <StackLayout class="alarm-card" padding="10,10,10,10" *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
+                    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
                         <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10" paddingBottom="-10">
                             <Label col=0 row=0 [text]="'SENSORS' | L" class="t-16 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -73,7 +73,7 @@
                             </StackLayout>
                         </GridLayout>
                     </StackLayout>
-                    <StackLayout class="alarm-card" marginTop="15" padding="10,10,10,10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
+                    <StackLayout [id]="'level_7_' + device.id" class="alarm-card" marginTop="15" padding="5,10,10,10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
                         <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
                             <Label col=0 row=0 [text]="'POSITION' | L" class="t-16 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -86,12 +86,14 @@
                                    class="t-12 font-weight-normal"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
                         </GridLayout>
-                        <MapView height="400" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
-                                 [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-                                 [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
-                                 (mapReady)="onMapReady($event, idDevice)"
-                                 (markerSelect)="onMarkerEvent($event)"
-                                 (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                        <GridLayout [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                            <MapView [id]="'mapview_' + device.id" height="400" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
+                                     [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
+                                     [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
+                                     (mapReady)="onMapReady($event, idDevice)"
+                                     (markerSelect)="onMarkerEvent($event)"
+                                     (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                        </GridLayout>
                         <GridLayout *ngFor="let sensorField of dataService.gpsFieldKeys">
                             <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">
                                 <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"

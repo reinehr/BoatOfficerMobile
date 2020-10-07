@@ -6,22 +6,22 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <StackLayout class="page__content">
-        <Button *ngIf="!hasKey"
+        <Button *ngIf="!hasKey" marginTop="10"
                 text="{{'Log in' | L}}"
                 class="alarm-button"
                 nsRouterLink="../auth"
                 pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey"
+        <Button *ngIf="hasKey" marginTop="10"
                 text="{{'Register new device' | L}}"
                 class="alarm-button"
                 nsRouterLink="../scan"
                 pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey"
+        <Button *ngIf="hasKey" marginTop="10"
                 text="{{'Log out' | L}}"
                 class="alarm-button"
                 nsRouterLink="../logout"
                 pageTransition="slideLeft"></Button>
-        <Button
+        <Button marginTop="10"
                 text="{{'Impressum' | L}}"
                 class="alarm-button"
                 nsRouterLink="../impressum"

@@ -1,20 +1,20 @@
 <BottomNavigation>
     <TabStrip>
-        <TabStripItem class="navigation__item">
-            <!--
-                Note TabStripItem will only accept single Label and/or single Image elements that it
-                will "adopt"; any other layout elements you try to specify will be ignored
-            -->
-            <Label text="&#xf015;" class="fas t-25" verticalAlignment="top"></Label>
+        <!--
+            Note TabStripItem will only accept single Label and/or single Image elements that it
+            will "adopt"; any other layout elements you try to specify will be ignored
+        -->
+        <TabStripItem iconSource="font://&#xf015;" class="navigation__item fas">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
-        <TabStripItem class="navigation__item" margin="0">
-            <Label text="C" class="icon-boatofficer t-25"></Label>
+        <TabStripItem iconSource="font://&#x43;" class="navigation__item icon-boatofficer t-36">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
-        <TabStripItem class="navigation__item">
-            <Label text="O" class="icon-boatofficer t-25"></Label>
+        <TabStripItem iconSource="font://&#x4f;" class="navigation__item icon-boatofficer">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
-        <TabStripItem class="navigation__item">
-            <Label text="M" class="icon-boatofficer t-25"></Label>
+        <TabStripItem iconSource="font://&#x4d;" class="navigation__item icon-boatofficer">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
     </TabStrip>
 
@@ -34,3 +34,13 @@
         <page-router-outlet name="settingsTab"></page-router-outlet>
     </TabContentItem>
 </BottomNavigation>
+<!--
+<TabView class="tab-view" androidTabsPosition="bottom">
+  <StackLayout *tabItem="{title: 'Cats'}">
+    <router-outlet name="homeTab"></router-outlet>
+  </StackLayout>
+  <StackLayout *tabItem="{title: 'Dogs'}">
+    <router-outlet name="alarmTab"></router-outlet>
+  </StackLayout>
+</TabView>
+-->

@@ -51,11 +51,11 @@
 
 // Custom tabstrip item class
 .navigation__item {
-    //margin-top: 5px;
-    Label{color: #356eb4};
+    font-size: 36pt;
+    vertical-align: center;
+    color: #356eb4;
     background-color: white;
-    &:active,
-    &:active Label {
+    &:active {
         color: #091524;
     }
 }

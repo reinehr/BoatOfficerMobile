@@ -73,15 +73,18 @@
                             </StackLayout>
                         </GridLayout>
                     </StackLayout>
-                    <StackLayout [id]="'level_7_' + device.id" class="alarm-card" marginTop="15" padding="5,10,10,10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
-                        <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
+                    <StackLayout [id]="'level_7_' + device.id" class="alarm-card" marginTop="15" padding="5,10,10,10"
+                                 *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
+                        <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10"
+                                 [nsRouterLink]="['../mapdetails', idDevice]">
                             <Label col=0 row=0 [text]="'POSITION' | L" class="t-16 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
                             <Label col=1 row=0 [text]="('Updated' | L) + ' ' + (dataService.boatStatus[device.id].position_data.time | timeago)"
                                    class="t-12 font-weight-bold"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
                         </GridLayout>
-                        <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
+                        <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10"
+                                 [nsRouterLink]="['../mapdetails', idDevice]">
                             <Label col=1 row=0 [text]="'(' + (dataService.boatStatus[device.id].position_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
                                    class="t-12 font-weight-normal"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
@@ -93,6 +96,19 @@
                                      (mapReady)="onMapReady($event, idDevice)"
                                      (markerSelect)="onMarkerEvent($event)"
                                      (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                        </GridLayout>
+                        <GridLayout>
+                            <StackLayout>
+                                <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
+                                            [nsRouterLink]="['../mapdetails', idDevice]"
+                                            borderTopColor="#d3d3d3">
+                                    <Label col=0 row=0 [text]="''"
+                                           [class]="'alarm-symbol-fas  alarm-gray'"></Label>
+                                    <Label col=1 row=0 [text]="'Route' | L" [class]="'t-16 font-weight-bold alarm-blue'"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+
+                                </GridLayout>
+                            </StackLayout>
                         </GridLayout>
                         <GridLayout *ngFor="let sensorField of dataService.gpsFieldKeys">
                             <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">

@@ -35,6 +35,12 @@
   <string name="_Invalid_email_address_Z2keLgK">"ungültige E-Mail-Adresse"</string>
   <string name="_Invalid_password_Z88PyD">"ungültiges Passwort"</string>
   <string name="_This_email_address_exists_already_ZoV3jz">"Diese E-Mail-Adresse wurde bereits registriert"</string>
+  <string name="_We_sent_you_a_reset_link_to_your_E_Mail_address_Z2vBgKu">"Sie erhalten einen Link zum zurücksetzen des Passworts per E-Mail"</string>
+  <string name="_Password_reset_successful_Z1zcj3O">"Passwort zurücksetzen erfogreich"</string>
+  <string name="_Reset_Password_RiqLg">"Passwort zurücksetzen"</string>
+  <string name="_Back_to_registration_Z1owrWh">"Zurück zur Anmeldung"</string>
+  <string name="_Forgot_password__1yJzf9">"Passwort vergessen?"</string>
+  <string name="_RESET_PASSWORD_26WVgV">"PASSWORT ZURÜCKSETZEN"</string>
   <string name="_LOG_IN_Z2pClT6">"ANMELDEN"</string>
   <string name="_SIGN_UP_Z1KvUdX">"REGISTRIEREN"</string>
   <string name="_You_are_logged_in_as_Z1GEmEn">"Du bist als %1$s angemeldet"</string>
@@ -92,6 +98,7 @@
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM EINSTELLUNGEN"</string>
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOOT EINSTELLUNGEN"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
+  <string name="MAP">"KARTENANSICHT"</string>
   <string name="closed">"geschlossen"</string>
   <string name="open">"offen"</string>
   <string name="no">"nein"</string>

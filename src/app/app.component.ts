@@ -26,6 +26,13 @@ export class AppComponent implements OnInit {
 
             onMessageReceivedCallback: (message: firebase.Message) => {
                 console.log('[Firebase] onMessageReceivedCallback:', {message});
+            },
+
+            onAuthStateChanged: (data) => { // optional but useful to immediately re-logon the user when he re-visits your app
+                console.log(data.loggedIn ? "Logged in to firebase" : "Logged out from firebase");
+                if (data.loggedIn) {
+                    console.log("user's email address: " + (data.user.email ? data.user.email : "N/A"));
+                }
             }
         })
             .then(() => {

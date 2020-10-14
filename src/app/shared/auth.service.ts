@@ -1,14 +1,14 @@
 import {Injectable} from '@angular/core';
 import {HttpClient} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {catchError, tap} from 'rxjs/internal/operators';
+import {catchError, tap, timeout} from 'rxjs/internal/operators';
 import {BehaviorSubject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 // import {User} from '~/app/auth/user.model';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 import {localize} from 'nativescript-localize';
 import {firebase} from 'nativescript-plugin-firebase/firebase-common';
-
+require('nativescript-plugin-firebase/firebase-common');
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
 
 interface AuthResponseData {
@@ -43,9 +43,30 @@ export class AuthService {
             tap(resData => {
                 if (resData && resData.idToken) {
                     this.handleLogin(email, resData.idToken, resData.localID, parseInt(resData.expiresIn, 10));
+                    firebase.login(
+                        {
+                            type: firebase.LoginType.PASSWORD,
+                            passwordOptions: {
+                                email,
+                                password
+                            }
+                        }).then( () => {
+                            setTimeout( () => {
+
+                                firebase.sendEmailVerification().then(
+                                    () => {
+                                        console.log('Email verification sent');
+                                    },
+                                    (error) => {
+                                        console.log('Error sending email verification: ' + error);
+                                    }
+                                );
+                            }, 5000);
+                        })
+                        .catch(error => console.log(error));
                 }
             })
-        );
+        ).pipe();
     }
 
     login(email: string, password: string) {
@@ -58,9 +79,27 @@ export class AuthService {
             tap(resData => {
                 if (resData && resData.idToken) {
                     this.handleLogin(email, resData.idToken, resData.localID, parseInt(resData.expiresIn, 10));
+                    firebase.login(
+                        {
+                            type: firebase.LoginType.PASSWORD,
+                            passwordOptions: {
+                                email: email,
+                                password: password
+                            }
+                        })
+                        .then(result => JSON.stringify(result))
+                        .catch(error => console.log(error));
                 }
             })
         );
+    }
+
+    resetPassword(email: string) {
+        firebase.sendPasswordResetEmail(email).then(() => {
+            console.log('Sent email for password reset.');
+        }).catch((error) => {
+            console.log('Error sending email for password reset: ' + error);
+        });
     }
 
     logout() {

@@ -70,7 +70,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
                             const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
                             this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
                             const marker = new Marker();
-                            marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+                            marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
                             marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
                             marker.snippet = 'BoatOfficer';
                             marker.userData = {index: 1};
@@ -105,7 +105,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         console.log('Setting a marker...');
 
         const marker = new Marker();
-        marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+        marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
         marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
         marker.userData = {index: 1};

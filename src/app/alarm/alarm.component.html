@@ -139,6 +139,17 @@
                             </GridLayout>
                         </StackLayout>
                     </StackLayout>
+                    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="!device.alarm || device.alarm.length == 0 || (device.sum_active_alarm === 0 && showOnlyOpen)">
+                        <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
+                            <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
+                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                        </GridLayout>
+                        <GridLayout columns="0, 40, auto, auto" rows="40">
+                            <Label col=1 row=0 text="B" class="alarm-symbol alarm-green"></Label>
+                            <Label col=2 row=0 [text]="('no active alarms' | L)" class="alarm-gray t-16 font-weight-bold"
+                                   verticalAlignment="middle"></Label>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </ScrollView>

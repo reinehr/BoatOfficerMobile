@@ -15,10 +15,11 @@ import {localize} from 'nativescript-localize';
 export class AuthComponent implements OnInit {
 
     registerMode = false;
+    resetMode = false;
     isLoading = false;
     email: '';
     password: '';
-    password_repeat: '';
+    passwordRepeat: '';
 
     constructor(
         private apiService: ApiService,
@@ -34,7 +35,7 @@ export class AuthComponent implements OnInit {
 
     saveForm() {
         this.isLoading = true;
-        if (!this.registerMode) {
+        if (!this.registerMode && !this.resetMode && !(this.email === '') && !(this.password === '')) {
             this.authService.login(this.email, this.password).subscribe(resData => {
                 this.dataService.refreshBoatStatus();
                 const options = {
@@ -50,8 +51,19 @@ export class AuthComponent implements OnInit {
                 console.log(error);
                 this.isLoading = false;
             });
-        } else {
-            if (this.password === this.password_repeat) {
+        } else if (this.resetMode && !(this.email === '')) {
+            this.authService.resetPassword(this.email);
+            const options = {
+                title: localize('Password reset successful'),
+                message: localize('We sent you a reset link to your E-Mail address'),
+                okButtonText: 'OK'
+            };
+            alert(options).then(() => {
+                this.router.navigate([''], { clearHistory: true });
+            });
+            this.isLoading = false;
+        } else if (!(this.email === '') && !(this.password === '')) {
+            if (this.password === this.passwordRepeat) {
                 this.authService.signUp(this.email, this.password).subscribe(resData => {
                     this.dataService.refreshBoatStatus();
                     const options = {
@@ -80,6 +92,10 @@ export class AuthComponent implements OnInit {
     }
 
     goBack() {
-        this.routerExtensions.backToPreviousPage();
+        if (!this.registerMode && !this.resetMode) {
+            this.routerExtensions.backToPreviousPage();
+        }
+        this.resetMode = false;
+        this.registerMode = false;
     }
 }

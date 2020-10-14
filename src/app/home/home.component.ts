@@ -5,7 +5,7 @@ import {
 } from '@angular/core';
 import {Page} from 'tns-core-modules/ui/page/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
-import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
+import {MapView, Marker, Position, Polyline} from 'nativescript-google-maps-sdk';
 import {Subscription} from 'rxjs';
 import {ApiService} from '~/app/shared/api.service';
 import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
@@ -21,8 +21,11 @@ import { getViewById } from 'tns-core-modules/ui/core/view';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Image } from 'tns-core-modules/ui/image';
 import { ImageSource } from 'tns-core-modules/image-source';
+import { Color } from 'tns-core-modules/color';
 
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view';
+import enumerate = Reflect.enumerate;
+declare let android: any; // or even better - use tns-platform-declarations for intelliSense for the native APis
 
 registerElement('MapView', () => MapView);
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
@@ -136,7 +139,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         console.log('Setting a marker...');
 
         const marker = new Marker();
-        marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+        marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
         marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
         marker.userData = {index: 1};
@@ -231,18 +234,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
             // console.log(`NavigationType: ${args.navigationType}`);
             // console.log(`Url: ${args.url}`);
             webView.flexWrapBefore = true;
+            const nativeWebView = webView.nativeView; // equal to webView.android or webView.ios (depending on the platform)
             if (isAndroid && webView) {
                 // console.log('isAndroid');
                 webView.android.getSettings().setBuiltInZoomControls(false);
                 webView.android.getSettings().setDisplayZoomControls(false);
                 webView.android.getSettings().setUseWideViewPort(true);
                 webView.android.getSettings().setLoadWithOverviewMode(true);
+                nativeWebView.getSettings().setAppCacheEnabled(false);
+                nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
             } else if (webView) {
                 webView.ios.scrollView.minimumZoomScale = 1.0;
                 webView.ios.scrollView.maximumZoomScale = 1.0;
-                webView.ios.scalesPageToFit = false;
+                webView.ios.scalesPageToFit = true;
                 webView.ios.scrollView.bounces = false;
-    }
+            }
         } else {
             console.log(`EventName: ${args.eventName}`);
             console.log(`Error: ${args.error}`);
@@ -265,6 +271,21 @@ export class HomeComponent implements OnInit, AfterViewInit {
             webView.height = 480;
             webView.width = 640;
             webView.effectiveHeight = 480;
+            const nativeWebView = webView.nativeView; // equal to webView.android or webView.ios (depending on the platform)
+            if (isAndroid && webView) {
+                // console.log('isAndroid');
+                webView.android.getSettings().setBuiltInZoomControls(false);
+                webView.android.getSettings().setDisplayZoomControls(false);
+                webView.android.getSettings().setUseWideViewPort(true);
+                webView.android.getSettings().setLoadWithOverviewMode(true);
+                nativeWebView.getSettings().setAppCacheEnabled(false);
+                nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
+            } else if (webView) {
+                webView.ios.scrollView.minimumZoomScale = 1.0;
+                webView.ios.scrollView.maximumZoomScale = 1.0;
+                webView.ios.scalesPageToFit = true;
+                webView.ios.scrollView.bounces = false;
+            }
         } else {
             console.log(`EventName: ${args.eventName}`);
             console.log(`Error: ${args.error}`);

@@ -1,23 +1,33 @@
 <ActionBar title="Title" class="action-bar bg-darkblue">
-    <Label text="SETTINGS" class="alarm-text"></Label>
+    <Label text="{{'SETTINGS'| L}}" class="alarm-text"></Label>
 
 </ActionBar>
 
-<StackLayout class="page__content homeBackgroundImage" backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <Button
-            text="Log in"
-            class="btn btn-primary"
-            nsRouterLink="../auth"
-            pageTransition="slideLeft"></Button>
-    <Button
-            text="Register new device"
-            class="btn btn-primary"
-            nsRouterLink="../scan"
-            pageTransition="slideLeft"></Button>
-    <Button
-            text="Log out"
-            class="btn btn-primary"
-            nsRouterLink="../logout"
-            pageTransition="slideLeft"></Button>
-</StackLayout>
-
+<GridLayout class="homeBackgroundImage"
+            backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+    <StackLayout class="page__content">
+        <Button *ngIf="!hasKey" marginTop="10"
+                text="{{'Log in' | L}}"
+                class="alarm-button"
+                nsRouterLink="../auth"
+                pageTransition="slideLeft"></Button>
+        <Button *ngIf="hasKey" marginTop="10"
+                text="{{'Register new device' | L}}"
+                class="alarm-button"
+                nsRouterLink="../scan"
+                pageTransition="slideLeft"></Button>
+        <Button *ngIf="hasKey" marginTop="10"
+                text="{{'Log out' | L}}"
+                class="alarm-button"
+                nsRouterLink="../logout"
+                pageTransition="slideLeft"></Button>
+        <Button marginTop="10"
+                text="{{'Impressum' | L}}"
+                class="alarm-button"
+                nsRouterLink="../impressum"
+                pageTransition="slideLeft"></Button>
+        <TextView color="blue" marginTop="10" *ngIf="hasEmail"
+                [text]="'You are logged in as' | L: email"
+        ></TextView>
+    </StackLayout>
+</GridLayout>

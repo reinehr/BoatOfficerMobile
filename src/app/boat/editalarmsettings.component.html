@@ -1,0 +1,52 @@
+<ActionBar title="Title" class="action-bar bg-darkblue">
+    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back" (tap)="goBack()"></NavigationButton>
+    <Label text="{{'EDIT ALARM SETTINGS' | L}}" class="alarm-text"></Label>
+
+</ActionBar>
+
+<StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
+    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[idDevice]" height="200">
+        <StackLayout>
+            <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
+            <StackLayout *ngIf="alarmSettingsMap[field]">
+                <StackLayout *ngFor="let alarm of [alarmSettingsMap[field][idAlarm]]; let index = index">
+                    <StackLayout *ngIf="dataService.alarmSettings[idDevice][alarm.key]">
+                        <GridLayout rows="5,*" columns="5,40,*,120,5" paddingBottom="10">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 [text]="alarm.icon"
+                                   [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
+                            <Label col="2" row="1" [text]="alarm.name | L"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <!--                                            <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"-->
+                            <!--                                                   [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"-->
+                            <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
+                            <!--                                            <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"-->
+                            <!--                                                   [text]="alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name + ' ' + alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit"-->
+                            <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
+                            <ListPicker #picker col="3" row="1" [width]="listPickerWidth" [minWidth]="listPickerWidth"
+                                        [items]="listPicker"
+                                        [selectedIndex]="originalAlarmSettingIndex"
+                                        [(ngModel)]="originalAlarmSettingIndex"
+                                        (selectedIndexChange)="selectedIndexChanged(picker)"></ListPicker>
+                        </GridLayout>
+<!--                        <GridLayout paddingBottom="5"-->
+<!--                                    *ngIf="dataService.alarmSettings[idDevice][alarm.key].value_user != null && dataService.alarmSettings[idDevice][alarm.key].value_user != dataService.alarmSettings[idDevice][alarm.key].value_device"-->
+<!--                                    marginTop="-10">-->
+<!--                            <Label class="alarm-orange"-->
+<!--                                   [text]="'Value changed to ' + dataService.alarmSettings[idDevice][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[idDevice][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"-->
+<!--                                   horizontalAlignment="center"></Label>-->
+<!--                        </GridLayout>-->
+
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+    <StackLayout>
+        <StackLayout>
+            <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveAlarmSetting()"></Button>
+        </StackLayout>
+    </StackLayout>
+</StackLayout>

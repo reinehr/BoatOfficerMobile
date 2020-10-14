@@ -1,6 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {ActivatedRoute} from '@angular/router';
+import {DecimalPipe} from '@angular/common';
 import {Subscription} from 'rxjs';
 import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 import {ApiService} from '~/app/shared/api.service';
@@ -29,7 +30,14 @@ export class SensordetailsComponent implements OnInit {
 
     public field = '---';
     public idDevice = 0;
-    selectedIntervalId = 3;
+    selectedIntervalId = 2;
+    majorStepY = 5;
+    minorStepY = 1;
+    maxY = 20;
+    minY = 0;
+    height = 0;
+    initialized = true;
+
 
     goBack() {
         this.routerExtensions.backToPreviousPage();
@@ -45,5 +53,7 @@ export class SensordetailsComponent implements OnInit {
 
     setSelectedInterval(id: number) {
         this.selectedIntervalId = id;
+        // this.initialized = !this.initialized;
+        // this.initialized = !this.initialized;
     }
 }

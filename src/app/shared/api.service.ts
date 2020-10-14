@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {BoatStatus, BoatHistory, Sensordata, SensordataTime} from '~/app/shared/interface/sensordata';
+import {BoatStatus, BoatHistory, Sensordata, SensordataTime, WeatherData, WeatherForecastData} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
@@ -13,13 +13,16 @@ import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {AlarmSettings} from '~/app/shared/interface/alarm';
+import { localize } from 'nativescript-localize';
 
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
+import {Folder, path, knownFolders} from 'tns-core-modules/file-system';
 // const fs = require('file-system');
 
-const FIREBASE_API_KEY = '';
+const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
+const OPENWEATHER_API_KEY = 'a9e6d387e0a8e6e2bfbb42a80ff743d2';
 
 @Injectable({
     providedIn: 'root'
@@ -83,6 +86,8 @@ export class ApiService {
     private temperatureHistory =
         new BehaviorSubject<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>(null);
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
+    // private weatherData = new BehaviorSubject<WeatherData>(null);
+    // private weatherForecastData = new BehaviorSubject<WeatherForecastData>(null);
     private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
     private boatStatusData = new BehaviorSubject<BoatStatus>(null);
     private boatHistoryData = new BehaviorSubject<BoatHistory>(null);
@@ -91,7 +96,8 @@ export class ApiService {
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
-    // baseUrl = 'https://bc8a0963.ngrok.io/';
+    baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
+    // baseUrl = 'https://jakobreinehr3.serverless.social/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
@@ -107,18 +113,42 @@ export class ApiService {
     private static handleError(errorMessage: string) {
         switch (errorMessage) {
             case 'EMAIL_EXISTS':
-                alert('This email address exists already');
+                alert({okButtonText: 'OK', title: localize('This email address exists already')});
                 break;
             case 'INVALID_PASSWORD':
-                alert('Invalid password');
+                alert({okButtonText: 'OK', title: localize('Invalid password')});
                 break;
             case 'INVALID_EMAIL':
-                alert('Invalid email address');
+                alert({okButtonText: 'OK', title: localize('Invalid email address')});
                 break;
             default:
-                alert('Authentication failed');
+                alert({okButtonText: 'OK', title: localize('Authentication failed')});
                 break;
         }
+    }
+
+    getWeatherData(lat: number, lon: number) {
+        const param: any = {units: 'metric', lat, lon, APPID: OPENWEATHER_API_KEY};
+        return this.httpClient.get<WeatherData>(this.baseUrlWeather + 'weather',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                }),
+            params: param
+            }
+        );
+    }
+
+    getWeatherForecastData(lat: number, lon: number) {
+        const param: any = {units: 'metric', lat, lon, APPID: OPENWEATHER_API_KEY, cnt: 16};
+        return this.httpClient.get<WeatherForecastData>(this.baseUrlWeather + 'forecast',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json'
+                }),
+            params: param
+            }
+        );
     }
 
     getLatestSensorData() {
@@ -140,7 +170,8 @@ export class ApiService {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
-        const param: any = {limit: 60, only_active: 'false'};
+        const param: any = {limit: 10, only_active: 'false'};
+        const indexTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: new HttpHeaders({
@@ -151,13 +182,37 @@ export class ApiService {
             }
         ).pipe(tap(resData => {
             if (resData) {
+                for (const idDevice in resData) {
+                    if (!indexTypeActive[idDevice]) {
+                        indexTypeActive[idDevice] = [];
+                        resData[idDevice].sum_active_alarm = 0;
+                    }
+                    for (const idAlarm in resData[idDevice].alarm) {
+                        if (!indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type]) {
+                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = 0;
+                        }
+                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
+                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] + 1;
+                            resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
+                            resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
+                        }
+                    }
+                    for (const idAlarm in resData[idDevice].alarm) {
+                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
+                            resData[idDevice].alarm[idAlarm].sum_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
+                        }
+                    }
+                }
                 this.device.next(resData);
             }
         }));
     }
 
     getBoatStatus() {
-        const param: any = {};
+        console.log('push_token: ' + getString('push_token', ''));
+        const param: any = {
+            push_token: getString('push_token', '')
+        };
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
                 headers: new HttpHeaders({
@@ -219,7 +274,7 @@ export class ApiService {
                     idToken: `${getString('token', '')}`
                 })
             }).subscribe(() => {
-                this.getDeviceData().subscribe();
+            this.getDeviceData().subscribe();
         });
     }
 
@@ -318,6 +373,41 @@ export class ApiService {
         );
     }
 
+    saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number) {
+        console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue);
+        this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
+                type: alarmKey,
+                value_user: alarmValue,
+                deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceAlarmSettings().subscribe();
+        });
+    }
+
+    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string) {
+        console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName, ', harbour_contact:' + deviceContact);
+        this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
+                device_name: deviceName,
+                berth: deviceBerth,
+                harbour_contact: deviceContact,
+                id: deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
     saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
         console.log('Selection done: ' + JSON.stringify(imageSrc._android));
         console.log('Selection done: ' + JSON.stringify(imageAssets));
@@ -325,6 +415,10 @@ export class ApiService {
         // const folder = this.fs.knownFolders.documents();
         // const pathOfImage = fs.path.join(imageSrc._android, '');
         // const saved = image.saveToFile(pathOfImage, ".png");
+
+        const folderPath: string = knownFolders.temp().path;
+        const fileName = "temp.jpg";
+        const filePath = path.join(folderPath, fileName);
         const request = {
             url: this.baseDeviceUrl + 'upload_image/',
             method: 'POST',
@@ -342,7 +436,7 @@ export class ApiService {
             {name: 'deviceId', value: deviceId},
             {
                 name: 'boatImage',
-                filename: imageSrc._android,
+                filename: filePath,
                 mimeType: 'image/jpeg',
                 content_type_extra: '{id_device: ' + deviceId + '}'
             }

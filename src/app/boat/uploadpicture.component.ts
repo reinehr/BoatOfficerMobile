@@ -4,6 +4,9 @@ import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "~/app/shared/data.service";
+import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
+import {Folder, path, knownFolders} from "tns-core-modules/file-system";
+import { localize } from "nativescript-localize";
 
 
 @Component({
@@ -78,6 +81,22 @@ export class UploadpictureComponent implements OnInit {
 
                 that.imageAssets = selection;
 
+                const source = new ImageSource();
+                source.fromAsset(that.imageAssets[0])
+                    .then((imageSource: ImageSource) => {
+                        const folderPath: string = knownFolders.temp().path;
+                        const fileName = "temp.jpg";
+                        const filePath = path.join(folderPath, fileName);
+                        const saved: boolean = imageSource.saveToFile(filePath, "jpg");
+                        if (saved) {
+                            console.log("Image saved successfully!");
+                        }
+                    })
+                    .catch((e) => {
+                        console.log("Error: ");
+                        console.log(e);
+                    });
+
             }).catch(e => {
             console.log(e);
         });
@@ -117,7 +136,7 @@ export class UploadpictureComponent implements OnInit {
         session.on('complete', e => {
             this.status = 'complete';
             const options = {
-                title: 'Upload complete',
+                title: localize('Upload complete'),
                 okButtonText: 'OK'
             };
             this.dataService.refreshBoatStatus();

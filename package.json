@@ -2,10 +2,10 @@
   "nativescript": {
     "id": "com.boatofficer.BoatOfficerMobile",
     "tns-ios": {
-      "version": "6.3.0"
+      "version": "6.5.2"
     },
     "tns-android": {
-      "version": "6.4.1"
+      "version": "6.5.3"
     }
   },
   "description": "NativeScript Application",
@@ -33,8 +33,9 @@
     "nativescript-background-http": "^4.2.1",
     "nativescript-google-maps-sdk": "^2.9.1",
     "nativescript-imagepicker": "^7.1.0",
+    "nativescript-localize": "^4.2.1",
     "nativescript-phone": "^2.0.0",
-    "nativescript-plugin-firebase": "^10.5.0",
+    "nativescript-plugin-firebase": "^10.5.2",
     "nativescript-ui-chart": "^7.1.1",
     "ngx-timeago": "^1.0.4",
     "reflect-metadata": "~0.1.12",
@@ -48,7 +49,7 @@
     "@ngtools/webpack": "^9.1.0",
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "^1.5.1",
-    "node-sass": "^4.7.1",
+    "node-sass": "^4.7.2",
     "tslint": "~5.19.0",
     "typescript": "~3.5.3"
   },

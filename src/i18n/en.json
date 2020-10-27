@@ -1,6 +1,6 @@
 {
   "LOCALE": "en",
-  "app.name": "BoatOfficer Test",
+  "app.name": "BoatOfficer",
 
   "### HOME ###": "",
   "Button 1 Pushed": "Button Pushed",
@@ -160,6 +160,8 @@
   "You are now logged in": "You are now logged in",
   "Registration successful": "Registration successful",
   "Logout successful": "Logout successful",
+  "Passwords not identical": "Passwords not identical",
+  "Please re-enter the password": "Please re-enter the password",
   "SUCCESS": "Success",
   "REGISTRATION_KEY_INVALID": "Registration key invalid",
   "DEVICE_ALREADY_REGISTERED": "Device already registered",

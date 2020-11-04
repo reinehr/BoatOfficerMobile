@@ -10,6 +10,7 @@ import {NativeScriptFormsModule} from 'nativescript-angular/forms';
 import {AlertsettingsComponent} from '~/app/settings/alertsettings.component';
 import {NativeScriptLocalizeModule} from "nativescript-localize/localize.module";
 import {ImpressumComponent} from "~/app/settings/impressum.component";
+import {PurchaseComponent} from "~/app/settings/purchase.component";
 
 @NgModule({
     imports: [
@@ -19,7 +20,7 @@ import {ImpressumComponent} from "~/app/settings/impressum.component";
         NativeScriptLocalizeModule
     ],
     declarations: [
-        SettingsComponent, AuthComponent, ScanComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent
+        SettingsComponent, AuthComponent, ScanComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

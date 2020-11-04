@@ -44,8 +44,9 @@ export class EditalarmsettingsComponent implements OnInit {
 
     ngOnInit(): void {
         const alarm = alarmSettingsMap[this.field][this.idAlarm];
+        const isPro = this.dataService.boatStatus[this.idDevice].purchases.is_pro;
         if (!alarmSettingsDatatypeMap[alarm.datatype]) {
-            for (let i = alarm.min; i <= alarm.max; i++) {
+            for (let i = alarm.min; i <= (isPro ? alarm.max_pro : alarm.max); i++) {
                 if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === i) {
                     this.originalAlarmSettingIndex = this.listPicker.length;
                     this.selectedListPickerIndex = this.originalAlarmSettingIndex;
@@ -57,7 +58,7 @@ export class EditalarmsettingsComponent implements OnInit {
                 }
             }
         } else {
-            for (let i = alarm.min; i <= alarm.max; i++) {
+            for (let i = alarm.min; i <= (isPro ? alarm.max_pro : alarm.max); i++) {
                 if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === i) {
                     this.originalAlarmSettingIndex = this.listPicker.length;
                     this.selectedListPickerIndex = this.originalAlarmSettingIndex;

@@ -41,6 +41,11 @@ export interface DeviceAlarmDataFormat {
     'product_number_dec': string;
     'product_number_hex': string;
     'product_number_str': string;
+    'is_pro': boolean,
+    'is_recurrent': boolean,
+    'date_pro': string,
+    'date_pro_end': string,
+    'period_pro': number,
     'sum_active_alarm'?: number;
     'alarm': {
         'id': number;

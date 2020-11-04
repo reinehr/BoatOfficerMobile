@@ -2,13 +2,17 @@
 <resources>
   <string name="Impressum">"Impressum"</string>
   <string name="IMPRESSUM">"IMPRESSUM"</string>
+  <string name="_That_s_included_oeFzz">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordanten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. "</string>
+  <string name="_What_is_included_ISxuJ">"Was bekomme ich dafür?"</string>
+  <string name="PURCHASE">"PRODUKTE"</string>
+  <string name="_Buy_pro_version_1RCDqa">"BoatOfficer Pro"</string>
   <string name="_UPLOAD_COMPLETE_ZE4sD5">"Upload fertig"</string>
   <string name="DEVICE_DOES_NOT_EXIST">"Gerät existiert nicht (Falsche Seriennummer)"</string>
   <string name="DEVICE_ALREADY_REGISTERED">"Gerät wurde bereits registriert."</string>
   <string name="REGISTRATION_KEY_INVALID">"Registrierungsschlüssel ungültig oder falsch"</string>
   <string name="SUCCESS">"Erfolgreich"</string>
-  <string name="_Please_re_enter_the_password_Fx7Sr">"Please re-enter the password"</string>
-  <string name="_Passwords_not_identical_U19vf">"Passwords not identical"</string>
+  <string name="_Please_re_enter_the_password_Fx7Sr">"Bitte Passwort wiederholen"</string>
+  <string name="_Passwords_not_identical_U19vf">"Passwörter stimmen nicht überein"</string>
   <string name="_Logout_successful_Z18Pq6A">"Logout erfolgreich"</string>
   <string name="_Registration_successful_1qR5S6">"Registrierung erfolgreich"</string>
   <string name="_You_are_now_logged_in_1b7ehS">"Du bist jetzt angemeldet"</string>
@@ -98,6 +102,7 @@
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM EINSTELLUNGEN"</string>
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOOT EINSTELLUNGEN"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
+  <string name="_Please_buy_Pro_ZkCpFH">"Diese Ansicht ist nur in der Pro-Version verfügbar."</string>
   <string name="MAP">"KARTENANSICHT"</string>
   <string name="closed">"geschlossen"</string>
   <string name="open">"offen"</string>

@@ -68,6 +68,7 @@
   "open":  "open",
   "closed":  "closed",
   "MAP": "MAP",
+  "Please buy Pro": "This view is only available in the pro version.",
 
   "### BOAT SETTINGS ###": "",
   "BOAT SETTINGS": "BOAT SETTINGS",
@@ -167,6 +168,10 @@
   "DEVICE_ALREADY_REGISTERED": "Device already registered",
   "DEVICE_DOES_NOT_EXIST": "Device does not exist (Wrong serial number)",
   "UPLOAD COMPLETE": "Upload complete",
+  "Buy pro version": "BoatOfficer Pro",
+  "PURCHASE": "PRODUCTS",
+  "What is included": "What's included?",
+  "That's included": "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordanten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. ",
   "IMPRESSUM": "IMPRESSUM",
   "Impressum": "Impressum"
 }

@@ -31,6 +31,7 @@ export class SensordetailsComponent implements OnInit {
     public field = '---';
     public idDevice = 0;
     selectedIntervalId = 2;
+    isPro = false;
     majorStepY = 5;
     minorStepY = 1;
     maxY = 20;

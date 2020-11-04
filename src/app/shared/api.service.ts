@@ -97,9 +97,10 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    // baseUrl = 'https://jakobreinehr3.serverless.social/';
+    // baseUrl = 'https://jakobreinehr2.serverless.social/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
+    baseUserUrl = `${this.baseUrl}api/users/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
     baseDeviceAlarmSettingsUrl = `${this.baseUrl}api/device_alarm_settings/`;
     token = getString('token', '');
@@ -397,6 +398,26 @@ export class ApiService {
                 berth: deviceBerth,
                 harbour_contact: deviceContact,
                 id: deviceId
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
+    savePurchase(identifier: string, transactionDate: Date, period: number, recurring: boolean) {
+        console.log('savePurchase ' + identifier);
+        let dateEnd = (transactionDate.getTime() + (period * 24 * 60 * 60 * 1000));
+        this.httpClient.post<any>(this.baseUserUrl + 'save_purchase/', {
+                is_pro: true,
+                date_pro: transactionDate.getTime(),
+                date_pro_end: dateEnd,
+                period_pro: period,
+                is_recurrent: recurring
             }
             , {
                 headers: new HttpHeaders({

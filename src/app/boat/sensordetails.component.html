@@ -25,7 +25,10 @@
                         <Label [text]="interval.name | L" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
-                <StackLayout orientation="vertical" padding="10" class="alarm-card">
+                <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" [visibility]="selectedIntervalId > 2 && !dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                    <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
+                </StackLayout>
+                <StackLayout orientation="vertical" padding="10" class="alarm-card" [visibility]="selectedIntervalId <= 2 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <RadCartesianChart style="height: 250" id="{{field}}_0" [visibility]="(selectedIntervalId == 0 ? 'visible' : 'collapsed')">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"

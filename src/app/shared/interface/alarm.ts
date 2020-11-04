@@ -1,29 +1,29 @@
 import {localize} from "nativescript-localize";
 
-export const alarmSettingsMap: { [fieldName: string]: { key: string, name: string, icon: string, iconfont: string, datatype: string, unit: string, filter?: string, min: number, max: number } [] } = {
+export const alarmSettingsMap: { [fieldName: string]: { key: string, name: string, icon: string, iconfont: string, datatype: string, unit: string, filter?: string, min: number, max: number, max_pro: number } [] } = {
     ExtBatt1Volt: [
         // {key: 'HighVoltAlarm1', name: 'High Voltage 1', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ''},
-        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60},
+        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60, max_pro: 60},
         // {key: 'LowVoltAlarm1', name: 'Low Voltage 1', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ''},
-        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59},
+        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
         // {key: 'MotorStartAlarm1', name: 'Motor Start', icon: 'h', iconfont: 'bo', datatype: 'bool', unit: '', filter: 'active'},
     ],
     ExtBatt2Volt: [
-        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60},
-        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59},
+        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60, max_pro: 60},
+        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
     ],
     IntTemperature: [
-        {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90},
+        {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90, max_pro: 90},
         // {key: 'HighIntTemperatureAlarmLevel', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C'},
-        {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19},
+        {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19, max_pro: 19},
         // {key: 'LowIntTemperatureAlarmLevel', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C'},
     ],
     ShockSensor: [
-        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3},
+        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3, max_pro: 3},
     ],
     Device: [
-        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16},
-        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16},
+        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
+        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
     ]
 };
 
@@ -67,6 +67,40 @@ export const alarmSettingsDatatypeMap: { [dataTypeKey: string]: { [ttnValue: str
         29: {value: 1, unit: localize('seconds'), name: '30'},
         30: {value: 1, unit: localize('seconds'), name: '20'},
         31: {value: 1, unit: localize('seconds'), name: '10'},
+    },
+    updaterate_pro: {
+        0: {value: 0, unit: localize('hours'), name: '4'},
+        1: {value: 7, unit: localize('days'), name: '7'},
+        2: {value: 5, unit: localize('days'), name: '5'},
+        3: {value: 3, unit: localize('days'), name: '3'},
+        4: {value: 2, unit: localize('days'), name: '2'},
+        5: {value: 1, unit: localize('day'), name: '1'},
+        6: {value: 1, unit: localize('hours'), name: '12'},
+        7: {value: 1, unit: localize('hours'), name: '10'},
+        8: {value: 1, unit: localize('hours'), name: '8'},
+        9: {value: 1, unit: localize('hours'), name: '6'},
+        10: {value: 1, unit: localize('hours'), name: '5'},
+        11: {value: 1, unit: localize('hours'), name: '3'},
+        12: {value: 1, unit: localize('hours'), name: '2'},
+        13: {value: 1, unit: localize('hours'), name: '1,5'},
+        14: {value: 1, unit: localize('hour'), name: '1'},
+        15: {value: 1, unit: localize('minutes'), name: '45'},
+        16: {value: 1, unit: localize('minutes'), name: '30'},
+        17: {value: 1, unit: localize('minutes'), name: '20'},
+        18: {value: 1, unit: localize('minutes'), name: '15'},
+        19: {value: 1, unit: localize('minutes'), name: '10'},
+        20: {value: 1, unit: localize('minutes'), name: '9'},
+        21: {value: 1, unit: localize('minutes'), name: '8'},
+        22: {value: 1, unit: localize('minutes'), name: '7'},
+        23: {value: 1, unit: localize('minutes'), name: '6'},
+        24: {value: 1, unit: localize('minutes'), name: '5'},
+        // 25: {value: 1, unit: localize('minutes'), name: '4'},
+        // 26: {value: 1, unit: localize('minutes'), name: '3'},
+        // 27: {value: 1, unit: localize('minutes'), name: '2'},
+        // 28: {value: 1, unit: localize('minute'), name: '1'},
+        // 29: {value: 1, unit: localize('seconds'), name: '30'},
+        // 30: {value: 1, unit: localize('seconds'), name: '20'},
+        // 31: {value: 1, unit: localize('seconds'), name: '10'},
     }
 };
 

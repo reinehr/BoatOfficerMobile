@@ -8,6 +8,7 @@ import {ScanComponent} from './scan.component';
 import {LogoutComponent} from './logout.component';
 import {AlertsettingsComponent} from '~/app/settings/alertsettings.component';
 import {ImpressumComponent} from "~/app/settings/impressum.component";
+import {PurchaseComponent} from "~/app/settings/purchase.component";
 
 const routes: Routes = [
     { path: 'default', component: SettingsComponent },
@@ -16,6 +17,7 @@ const routes: Routes = [
     { path: 'alertsettings', component: AlertsettingsComponent },
     { path: 'logout', component: LogoutComponent },
     { path: 'impressum', component: ImpressumComponent },
+    { path: 'purchase', component: PurchaseComponent },
 ];
 
 @NgModule({

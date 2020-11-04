@@ -17,6 +17,11 @@
                 nsRouterLink="../scan"
                 pageTransition="slideLeft"></Button>
         <Button *ngIf="hasKey" marginTop="10"
+                text="{{'Buy pro version' | L}}"
+                class="alarm-button"
+                nsRouterLink="../purchase"
+                pageTransition="slideLeft"></Button>
+        <Button *ngIf="hasKey" marginTop="10"
                 text="{{'Log out' | L}}"
                 class="alarm-button"
                 nsRouterLink="../logout"
@@ -26,8 +31,10 @@
                 class="alarm-button"
                 nsRouterLink="../impressum"
                 pageTransition="slideLeft"></Button>
-        <TextView color="blue" marginTop="10" *ngIf="hasEmail"
-                [text]="'You are logged in as' | L: email"
-        ></TextView>
+        <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
+            <TextView color="blue" *ngIf="hasEmail"
+                    [text]="'You are logged in as' | L: email"
+            ></TextView>
+        </StackLayout>
     </StackLayout>
 </GridLayout>

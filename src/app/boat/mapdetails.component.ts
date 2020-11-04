@@ -38,7 +38,7 @@ export class MapdetailsComponent implements OnInit {
 
     public field = '---';
     public idDevice = 0;
-    selectedIntervalId = 2;
+    selectedIntervalId = 0;
     isLoading = false;
     initialized = true;
 

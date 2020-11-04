@@ -459,6 +459,13 @@ export interface BoatStatus {
             'url': string,
             'distance': string,
         }
+        'purchases': {
+            'is_pro': boolean,
+            'is_recurrent': boolean,
+            'date_pro': string,
+            'date_pro_end': string,
+            'period_pro': number
+        }
     };
 }
 

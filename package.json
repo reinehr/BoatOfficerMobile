@@ -2,7 +2,7 @@
   "nativescript": {
     "id": "com.boatofficer.BoatOfficerMobile",
     "tns-ios": {
-      "version": "6.5.2"
+      "version": "6.5.3"
     },
     "tns-android": {
       "version": "6.5.3"
@@ -36,6 +36,7 @@
     "nativescript-localize": "^4.2.1",
     "nativescript-phone": "^2.0.0",
     "nativescript-plugin-firebase": "^10.5.2",
+    "nativescript-purchase": "^2.0.14",
     "nativescript-ui-chart": "^7.1.1",
     "ngx-timeago": "^1.0.4",
     "reflect-metadata": "~0.1.12",
@@ -50,6 +51,8 @@
     "codelyzer": "~4.5.0",
     "nativescript-dev-webpack": "^1.5.1",
     "node-sass": "^4.7.2",
+    "tns-android": "6.5.3",
+    "tns-ios": "6.5.3",
     "tslint": "~5.19.0",
     "typescript": "~3.5.3"
   },

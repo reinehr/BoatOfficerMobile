@@ -2,5 +2,11 @@
 import { platformNativeScriptDynamic } from 'nativescript-angular/platform';
 
 import { AppModule } from './app/app.module';
+import * as purchase from 'nativescript-purchase';
+
+purchase.init([
+    'com.boatofficer.boatofficermobile.abo.month', 'com.boatofficer.boatofficermobile.abo.year',
+    // 'com.boatofficer.boatofficermobile.single.month', 'com.boatofficer.boatofficermobile.single.year'
+]);
 
 platformNativeScriptDynamic().bootstrapModule(AppModule);

@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import * as firebase from 'nativescript-plugin-firebase';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
+import { SelectedIndexChangedEventData, TabStripItemEventData } from "tns-core-modules/ui/bottom-navigation";
+import { RouterExtensions } from "nativescript-angular/router";
 
 @Component({
     selector: 'app-ns',
@@ -10,7 +12,7 @@ import {getString, setString, hasKey, remove} from 'tns-core-modules/application
 })
 export class AppComponent implements OnInit {
 
-    constructor() {
+    constructor(private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject providers.
     }
 
@@ -41,5 +43,10 @@ export class AppComponent implements OnInit {
             .catch(error => {
                 console.log('[Firebase] Initialize', {error});
             });
+    }
+
+    onSelectedIndexChanged(args: SelectedIndexChangedEventData) {
+        this.routerExtensions.navigate([""], { clearHistory: true });
+        console.log(`Selected index has changed ( Old index: ${args.oldIndex} New index: ${args.newIndex} )`);
     }
 }

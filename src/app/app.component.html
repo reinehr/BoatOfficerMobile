@@ -1,4 +1,4 @@
-<BottomNavigation>
+<BottomNavigation #bt selectedIndex="0" (selectedIndexChanged)="onSelectedIndexChanged($event)">
     <TabStrip>
         <!--
             Note TabStripItem will only accept single Label and/or single Image elements that it

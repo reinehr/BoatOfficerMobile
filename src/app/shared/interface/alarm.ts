@@ -2,21 +2,16 @@ import {localize} from "nativescript-localize";
 
 export const alarmSettingsMap: { [fieldName: string]: { key: string, name: string, icon: string, iconfont: string, datatype: string, unit: string, filter?: string, min: number, max: number, max_pro: number } [] } = {
     ExtBatt1Volt: [
-        // {key: 'HighVoltAlarm1', name: 'High Voltage 1', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ''},
-        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60, max_pro: 60},
-        // {key: 'LowVoltAlarm1', name: 'Low Voltage 1', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ''},
+        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
         {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
-        // {key: 'MotorStartAlarm1', name: 'Motor Start', icon: 'h', iconfont: 'bo', datatype: 'bool', unit: '', filter: 'active'},
     ],
     ExtBatt2Volt: [
-        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 5, max: 60, max_pro: 60},
+        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
         {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
     ],
     IntTemperature: [
         {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90, max_pro: 90},
-        // {key: 'HighIntTemperatureAlarmLevel', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C'},
         {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19, max_pro: 19},
-        // {key: 'LowIntTemperatureAlarmLevel', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C'},
     ],
     ShockSensor: [
         {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3, max_pro: 3},

@@ -162,6 +162,8 @@
   "You are now logged in": "Du bist jetzt angemeldet",
   "Registration successful": "Registrierung erfolgreich",
   "Logout successful": "Logout erfolgreich",
+  "Password is too short": "Passwort ist zu kurz",
+  "Length must be at least 8 characters": "Mindestens 8 Zeichen erforderlich",
   "Passwords not identical": "Passwörter stimmen nicht überein",
   "Please re-enter the password": "Bitte Passwort wiederholen",
   "SUCCESS": "Erfolgreich",

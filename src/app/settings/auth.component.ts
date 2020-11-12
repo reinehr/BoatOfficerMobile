@@ -17,9 +17,9 @@ export class AuthComponent implements OnInit {
     registerMode = false;
     resetMode = false;
     isLoading = false;
-    email: '';
-    password: '';
-    passwordRepeat: '';
+    email = '';
+    password = '';
+    passwordRepeat = '';
 
     constructor(
         private apiService: ApiService,
@@ -63,7 +63,15 @@ export class AuthComponent implements OnInit {
             });
             this.isLoading = false;
         } else if (!(this.email === '') && !(this.password === '')) {
-            if (this.password === this.passwordRepeat) {
+            if (this.password.length < 8) {
+                this.isLoading = false;
+                const options = {
+                    title: localize('Password is too short'),
+                    message: localize('Length must be at least 8 characters'),
+                    okButtonText: 'OK'
+                };
+                alert(options);
+            } else if (this.password === this.passwordRepeat) {
                 this.authService.signUp(this.email, this.password).subscribe(resData => {
                     this.dataService.refreshBoatStatus();
                     const options = {

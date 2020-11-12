@@ -71,6 +71,7 @@
   "Please buy Pro": "Diese Ansicht ist nur in der Pro-Version verfügbar.",
 
   "### BOAT SETTINGS ###": "",
+  "Back": "Zurück",
   "BOAT SETTINGS": "BOOT EINSTELLUNGEN",
   "ALARM SETTINGS": "ALARM EINSTELLUNGEN",
   "High Voltage 1 Level": "Maximale Spannung 1",
@@ -125,7 +126,7 @@
 
   "### SETTINGS ###": "",
   "SETTINGS": "EINSTELLUNGEN",
-  "Register new device": "neues Gerät registrieren",
+  "Register new device": "Neues Gerät registrieren",
   "You are logged in as": "Du bist als %s angemeldet",
   "SIGN UP": "REGISTRIEREN",
   "LOG IN": "ANMELDEN",

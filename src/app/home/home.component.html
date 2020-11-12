@@ -5,7 +5,7 @@
 <GridLayout id="level_1" class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_w_bluesky.png">
     <PullToRefresh id="level_2" (refresh)="refreshList($event)">
-        <ScrollView id="level_3" orientation="vertical">
+        <ScrollView id="level_3" orientation="vertical" iosOverflowSafeArea="false">
             <GridLayout id="level_4" columns="*" rows="40, 100, 5, *" class="page__content">
                 <Label col=0 row=0 text="" height="40"></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>

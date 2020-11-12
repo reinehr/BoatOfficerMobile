@@ -15,7 +15,7 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh (refresh)="refreshList($event)">
-        <ScrollView orientation="vertical">
+        <ScrollView orientation="vertical" iosOverflowSafeArea="false">
             <StackLayout>
                 <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
                     <GridLayout columns="120, *, 100" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">

@@ -7,7 +7,7 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh (refresh)="refreshList($event)">
-        <ScrollView orientation="vertical" *ngIf="initialized">
+        <ScrollView orientation="vertical" *ngIf="initialized" iosOverflowSafeArea="false">
             <StackLayout>
                 <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">

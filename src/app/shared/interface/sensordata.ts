@@ -509,7 +509,7 @@ export interface BoatHistory {
 export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, majorStep: number, show_history: boolean } } = {
     time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', majorStep: 0, show_history: false},
     ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', majorStep: 5, show_history: true},
-    // ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', majorStep:   0, show_history: true},
+    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', majorStep:   0, show_history: true},
     IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Intern Battery', majorStep: 1, show_history: true},
     ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', majorStep: 1, show_history: false},
     IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', majorStep: 5, show_history: true},

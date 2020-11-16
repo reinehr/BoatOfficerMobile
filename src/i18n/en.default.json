@@ -19,6 +19,8 @@
   "Multi Sensor A 1 Opened": "Multi Sensor A 1 Opened",
   "Multi Sensor A 2 Closed": "Multi Sensor A 2 Closed",
   "Multi Sensor A 2 Opened": "Multi Sensor A 2 Opened",
+  "no_key": "You are not logged in.\nPlease log in, to see BoatOfficer Data.",
+  "no_boat": "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer to see its data.",
   "ACTIVE ALARMS": "ALARM STATUS",
   "no active alarms": "no active alarms",
   "WEATHER ON SITE": "WEATHER ON SITE",

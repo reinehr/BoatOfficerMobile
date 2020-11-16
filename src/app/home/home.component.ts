@@ -22,6 +22,7 @@ import { EventData } from 'tns-core-modules/data/observable';
 import { Image } from 'tns-core-modules/ui/image';
 import { ImageSource } from 'tns-core-modules/image-source';
 import { Color } from 'tns-core-modules/color';
+import {hasKey, getString} from 'tns-core-modules/application-settings';
 
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view';
 import enumerate = Reflect.enumerate;
@@ -50,6 +51,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     alarmByTypeMap = alarmByTypeMap;
     maxWeather = {0: 3};
     beaufortAlarmLevel = 7;
+    hasKey = hasKey('token');
 
     webViewSrc = this.page;
 
@@ -109,7 +111,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
                             this.mapView.mapAnimationsEnabled = true;
                         }
                     }
+                    this.hasKey = hasKey('token');
                 }, 2000);
+            } else {
+                this.hasKey = hasKey('token');
+                this.dataService.deviceData = [];
             }
         }
         );
@@ -120,6 +126,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     ngOnInit(): void {
         // this.items = this._itemService.getItems();
         this.page.actionBarHidden = true;
+        this.hasKey = hasKey('token');
     }
 
     ngAfterViewInit(): void {
@@ -312,6 +319,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         const pullRefresh = args.object;
         // this.dataService.refreshSensorDataHistory();
         this.dataService.refreshBoatStatus();
+        this.hasKey = hasKey('token');
         pullRefresh.refreshing = false;
     }
 }

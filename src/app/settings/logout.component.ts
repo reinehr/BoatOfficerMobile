@@ -38,7 +38,7 @@ export class LogoutComponent implements OnInit {
             // message: 'Race chosen: Unicorn',
             okButtonText: 'OK'
         };
-        this.dataService.refreshBoatStatus();
+        this.dataService.deviceData = [];
         this.isLoading = false;
         alert(options).then(() => {
             this.router.navigate([''], { clearHistory: true });

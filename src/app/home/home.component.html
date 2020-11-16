@@ -10,6 +10,22 @@
                 <Label col=0 row=0 text="" height="40"></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
                 <Label col=0 row=2 text="" height="0"></Label>
+                <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!hasKey">
+                    <StackLayout class="alarm-card-home" padding="5,10,10,10">
+                        <GridLayout columns="*" rows="auto" padding = "5">
+                            <Label col=0 row=0 [text]="'no_key' | L" class="t-16" textWrap="true"
+                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (!dataService || ! dataService.deviceData || dataService.deviceData.length == 0)">
+                    <StackLayout class="alarm-card-home" padding="5,10,10,10">
+                        <GridLayout columns="*" rows="auto" padding = "5">
+                            <Label col=0 row=0 [text]="'no_boat' | L" class="t-16" textWrap="true"
+                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
                 <StackLayout id="level_5" col=0 row=3 *ngIf="dataService">
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                         <Label text="" height="35"></Label>

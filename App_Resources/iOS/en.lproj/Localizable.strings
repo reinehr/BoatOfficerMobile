@@ -151,6 +151,8 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WEATHER ON SITE";
 "_no_active_alarms_Z1jDuSA" = "no active alarms";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARM STATUS";
+"no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer to see its data.";
+"no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 Opened";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 Closed";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 Opened";

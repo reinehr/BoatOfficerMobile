@@ -3,7 +3,8 @@
 
 </ActionBar>
 
-<GridLayout class="homeBackgroundImage"
+<GridLayout class="homeBackgroundImage" xmlns:android="http://schemas.android.com/apk/res-auto"
+            xmlns:ios="http://uno.ui/ios"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <StackLayout class="page__content">
         <Button *ngIf="!hasKey" marginTop="10"
@@ -32,7 +33,7 @@
                 nsRouterLink="../impressum"
                 pageTransition="slideLeft"></Button>
         <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
-            <TextView color="blue" *ngIf="hasEmail"
+            <TextView color="black" *ngIf="hasEmail"
                     [text]="'You are logged in as' | L: email"
             ></TextView>
         </StackLayout>

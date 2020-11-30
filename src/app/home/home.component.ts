@@ -224,11 +224,15 @@ export class HomeComponent implements OnInit, AfterViewInit {
         webview.getSettings().scalesPageToFit(false);
         webview.getSettings().setBuiltInZoomControls(false);
         webview.getSettings().setDisplayZoomControls(false);
-        webview.getSettings().setInitScale(1);
-        webview.getSettings().setTextZoom(1);
-        webview.getSettings().setDefaultZoom(1);
-        webview.getSettings().setUseWideViewPort(true);
+        webview.android.getSettings().scalesPageToFit(false);
+        webview.android.getSettings().setBuiltInZoomControls(false);
+        webview.android.getSettings().setDisplayZoomControls(false);
+        webview.android.setInitialScale(1);
+        //webview.getSettings().setTextZoom(1);
+        //webview.getSettings().setDefaultZoom(1);
+        //webview.getSettings().setUseWideViewPort(true);
         webview.getSettings().setLoadWithOverviewMode(true);
+        webview.android.getSettings().setLoadWithOverviewMode(true);
     }
 
     onLoadStarted(args: LoadEventData) {
@@ -248,6 +252,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 webView.android.getSettings().setDisplayZoomControls(false);
                 webView.android.getSettings().setUseWideViewPort(true);
                 webView.android.getSettings().setLoadWithOverviewMode(true);
+                webView.android.setInitialScale(1);
                 nativeWebView.getSettings().setAppCacheEnabled(false);
                 nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
             } else if (webView) {
@@ -285,6 +290,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 webView.android.getSettings().setDisplayZoomControls(false);
                 webView.android.getSettings().setUseWideViewPort(true);
                 webView.android.getSettings().setLoadWithOverviewMode(true);
+                webView.android.setInitialScale(1);
                 nativeWebView.getSettings().setAppCacheEnabled(false);
                 nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
             } else if (webView) {

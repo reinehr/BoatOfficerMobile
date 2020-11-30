@@ -18,7 +18,7 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (!dataService || ! dataService.deviceData || dataService.deviceData.length == 0)">
+                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (dataService && dataService.deviceData && dataService.deviceData.length == 0)">
                     <StackLayout class="alarm-card-home" padding="5,10,10,10">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_boat' | L" class="t-16" textWrap="true"

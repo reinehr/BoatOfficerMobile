@@ -229,7 +229,6 @@ export class DataService {
         );
         this.boatHistorySub = this.apiService.boatHistory.subscribe(
             bhdata => {
-                let millisecondsNow = new Date().getTime();
                 if (bhdata) {
                     this.boatHistory = bhdata;
                     for (const idDevice of Object.keys(this.boatHistory)) {
@@ -266,7 +265,6 @@ export class DataService {
                         this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
                         this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
 
-                        millisecondsNow = this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].milliseconds;
                         for (const idEvent in this.boatHistory[idDevice].sensor_data) {
                             const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
                             this.boatHistory[idDevice].sensor_data[idEvent].date = eventTime;
@@ -275,7 +273,6 @@ export class DataService {
                             // eventTime.setSeconds(0);
                             // eventTime.setMilliseconds(0);
                             this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
-                            const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
@@ -327,7 +324,6 @@ export class DataService {
                             // eventTime.setSeconds(0);
                             // eventTime.setMilliseconds(0);
                             this.boatHistory[idDevice].position_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
-                            const daysPast = (millisecondsNow - eventTime.getTime()) / (1000.0 * 60.0 * 60.0 * 24.0);
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].positionData.sliceStart = +idEvent;
@@ -371,7 +367,7 @@ export class DataService {
                                 this.historyIntervalData[idInterval].positionData.sliceStop = +idEvent;
                             }
                         }
-                        const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
+                        //const time = new Date(this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].time);
                         // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].timestring = `${('0' + (time.getDate() + 1)).slice(-2)}/${('0' + (time.getMonth() + 1)).slice(-2)}/${time.getFullYear()}`;
                         // this.boatHistory[idDevice].sensor_data[this.boatHistory[idDevice].sensor_data.length - 1].date = new Date(time.getFullYear(), (time.getMonth() + 1), (time.getDate() + 1), time.getHours(), time.getMinutes(), time.getSeconds())
                     }

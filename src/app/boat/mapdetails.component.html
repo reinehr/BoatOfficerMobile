@@ -6,8 +6,8 @@
 
 <GridLayout [id]="'level_3_' + dataService.deviceData[idDevice].id" class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <ContentView [id]="'level_4_' + dataService.deviceData[idDevice].id" (refresh)="refreshList($event)">
-        <ContentView [id]="'level_5_' + dataService.deviceData[idDevice].id" orientation="vertical" *ngIf="initialized">
+    <StackLayout [id]="'level_4_' + dataService.deviceData[idDevice].id" (refresh)="refreshList($event)">
+        <StackLayout [id]="'level_5_' + dataService.deviceData[idDevice].id" orientation="vertical" *ngIf="initialized">
             <StackLayout [id]="'level_6_' + dataService.deviceData[idDevice].id">
                 <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
@@ -39,6 +39,6 @@
                     </GridLayout>
                 </StackLayout>
             </StackLayout>
-        </ContentView>
-    </ContentView>
+        </StackLayout>
+    </StackLayout>
 </GridLayout>

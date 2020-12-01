@@ -20,9 +20,9 @@
 "_Register_Device_2cMmuN" = "Register Device";
 "_details_devicename_Z2pPIcF" = "Give this BoatOfficer-Device a name. Best practice is to give it the name of the boat it is installed on.";
 "_Device_Name_4Jhsb" = "Device Name";
-"_details_registrationkey_2sojH2" = "Enter the registration key of this device. It's printed on the cardboard box and consists of 8 digits and letters. Please note, that the registration of a device is only possible if the device isn't registered to anybody yet.";
+"_details_registrationkey_2sojH2" = "Enter the registration key of this device. It's printed on the back of the manual and consists of 8 digits and letters. Please note, that the registration of a device is only possible if the device isn't registered to anybody yet.";
 "_Registration_Key_ZS8eok" = "Registration Key";
-"_details_serialnumber_1d0hoK" = "Enter the serial number of this device. It's printed on the cardboard box, consists of 13 digits and letters and has the format 12-34-56-7890-ABC. You can type it without the dashes.";
+"_details_serialnumber_1d0hoK" = "Enter the serial number of this device. It's printed on the back of the manual, consists of 13 digits and letters and has the format 12-34-56-7890-ABC. You can type it without the dashes.";
 "_REGISTER_NEW_DEVICE_ZiQk6l" = "REGISTER NEW DEVICE";
 "_Log_out_2mMyEo" = "Log out";
 "_By_logging_out_you_will_no_longer_receive_push_notifications_17XsiT" = "By logging out you will no longer receive push notifications";

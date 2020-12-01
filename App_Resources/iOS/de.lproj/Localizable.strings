@@ -20,9 +20,9 @@
 "_Register_Device_2cMmuN" = "Gerät registrieren";
 "_details_devicename_Z2pPIcF" = "Gib dem Gerät einen Namen, um mehrere Geräte unterscheiden zu können. Es empfielt sich, hier den Bootsnamen zu verwenden. ";
 "_Device_Name_4Jhsb" = "Name des Geräts";
-"_details_registrationkey_2sojH2" = "Gib den Registrierungsschlüssel für das Gerät ein. Dieser befindet sich auf der Verpackung und besteht aus 8 Ziffern und Buchstaben. Bitte beachte: Ein Gerät kann nur von einem Benutzer registriert werden.";
+"_details_registrationkey_2sojH2" = "Gib den Registrierungsschlüssel für das Gerät ein. Dieser befindet sich hinten auf der Gebrauchsanweisung und besteht aus 8 Ziffern und Buchstaben. Bitte beachte: Ein Gerät kann nur von einem Benutzer registriert werden.";
 "_Registration_Key_ZS8eok" = "Registrierungsschlüssel";
-"_details_serialnumber_1d0hoK" = "Gib die Seriennummer der Gerätes ein. Diese steht auf der Verpackung, besteht aus 13 Ziffern und Buchstaben und hat das Format 12-34-56-7890-ABC. Du kannst die Bindestriche weg lassen.";
+"_details_serialnumber_1d0hoK" = "Gib die Seriennummer der Gerätes ein. Diese steht hinten auf der Gebrauchsanweisung, besteht aus 13 Ziffern und Buchstaben und hat das Format 12-34-56-7890-ABC. Du kannst die Bindestriche weg lassen.";
 "_REGISTER_NEW_DEVICE_ZiQk6l" = "NEUES GERÄT REGISTRIEREN";
 "_Log_out_2mMyEo" = "Abmelden";
 "_By_logging_out_you_will_no_longer_receive_push_notifications_17XsiT" = "Wenn du dich abmeldest, wirst du keine Push-Benachrichtigungen (Alarme) mehr erhalten.";

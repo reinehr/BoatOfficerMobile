@@ -139,6 +139,9 @@ export class AuthService {
             case 'INVALID_EMAIL':
                 alert({okButtonText: 'OK', title: localize('Invalid email address')});
                 break;
+            case 'EMAIL_NOT_FOUND':
+                alert({okButtonText: 'OK', title: localize('E-Mail not found')});
+                break;
             default:
                 alert({okButtonText: 'OK', title: localize('Authentication failed')});
                 break;

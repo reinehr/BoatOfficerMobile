@@ -141,6 +141,7 @@
   "This email address exists already": "Diese E-Mail-Adresse wurde bereits registriert",
   "Invalid password": "ungültiges Passwort",
   "Invalid email address": "Ungültige E-Mail-Adresse",
+  "E-Mail not found": "E-Mail nicht registriert",
   "Authentication failed": "Anmeldung fehlgeschlagen",
   "E-Mail": "E-Mail",
   "Password": "Passwort",

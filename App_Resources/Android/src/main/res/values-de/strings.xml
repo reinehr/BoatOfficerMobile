@@ -22,9 +22,9 @@
   <string name="_Register_Device_2cMmuN">"Gerät registrieren"</string>
   <string name="_details_devicename_Z2pPIcF">"Gib dem Gerät einen Namen, um mehrere Geräte unterscheiden zu können. Es empfielt sich, hier den Bootsnamen zu verwenden. "</string>
   <string name="_Device_Name_4Jhsb">"Name des Geräts"</string>
-  <string name="_details_registrationkey_2sojH2">"Gib den Registrierungsschlüssel für das Gerät ein. Dieser befindet sich auf der Verpackung und besteht aus 8 Ziffern und Buchstaben. Bitte beachte: Ein Gerät kann nur von einem Benutzer registriert werden."</string>
+  <string name="_details_registrationkey_2sojH2">"Gib den Registrierungsschlüssel für das Gerät ein. Dieser befindet sich hinten auf der Gebrauchsanweisung und besteht aus 8 Ziffern und Buchstaben. Bitte beachte: Ein Gerät kann nur von einem Benutzer registriert werden."</string>
   <string name="_Registration_Key_ZS8eok">"Registrierungsschlüssel"</string>
-  <string name="_details_serialnumber_1d0hoK">"Gib die Seriennummer der Gerätes ein. Diese steht auf der Verpackung, besteht aus 13 Ziffern und Buchstaben und hat das Format 12-34-56-7890-ABC. Du kannst die Bindestriche weg lassen."</string>
+  <string name="_details_serialnumber_1d0hoK">"Gib die Seriennummer der Gerätes ein. Diese steht hinten auf der Gebrauchsanweisung, besteht aus 13 Ziffern und Buchstaben und hat das Format 12-34-56-7890-ABC. Du kannst die Bindestriche weg lassen."</string>
   <string name="_REGISTER_NEW_DEVICE_ZiQk6l">"NEUES GERÄT REGISTRIEREN"</string>
   <string name="_Log_out_2mMyEo">"Abmelden"</string>
   <string name="_By_logging_out_you_will_no_longer_receive_push_notifications_17XsiT">"Wenn du dich abmeldest, wirst du keine Push-Benachrichtigungen (Alarme) mehr erhalten."</string>
@@ -38,6 +38,7 @@
   <string name="Password">"Passwort"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
   <string name="_Authentication_failed_1msuLR">"Anmeldung fehlgeschlagen"</string>
+  <string name="_E_Mail_not_found_1QlWhj">"E-Mail nicht registriert"</string>
   <string name="_Invalid_email_address_Z2keLgK">"Ungültige E-Mail-Adresse"</string>
   <string name="_Invalid_password_Z88PyD">"ungültiges Passwort"</string>
   <string name="_This_email_address_exists_already_ZoV3jz">"Diese E-Mail-Adresse wurde bereits registriert"</string>

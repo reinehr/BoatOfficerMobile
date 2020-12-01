@@ -22,9 +22,9 @@
   <string name="_Register_Device_2cMmuN">"Register Device"</string>
   <string name="_details_devicename_Z2pPIcF">"Give this BoatOfficer-Device a name. Best practice is to give it the name of the boat it is installed on."</string>
   <string name="_Device_Name_4Jhsb">"Device Name"</string>
-  <string name="_details_registrationkey_2sojH2">"Enter the registration key of this device. It\'s printed on the cardboard box and consists of 8 digits and letters. Please note, that the registration of a device is only possible if the device isn\'t registered to anybody yet."</string>
+  <string name="_details_registrationkey_2sojH2">"Enter the registration key of this device. It\'s printed on the back of the manual and consists of 8 digits and letters. Please note, that the registration of a device is only possible if the device isn\'t registered to anybody yet."</string>
   <string name="_Registration_Key_ZS8eok">"Registration Key"</string>
-  <string name="_details_serialnumber_1d0hoK">"Enter the serial number of this device. It\'s printed on the cardboard box, consists of 13 digits and letters and has the format 12-34-56-7890-ABC. You can type it without the dashes."</string>
+  <string name="_details_serialnumber_1d0hoK">"Enter the serial number of this device. It\'s printed on the back of the manual, consists of 13 digits and letters and has the format 12-34-56-7890-ABC. You can type it without the dashes."</string>
   <string name="_REGISTER_NEW_DEVICE_ZiQk6l">"REGISTER NEW DEVICE"</string>
   <string name="_Log_out_2mMyEo">"Log out"</string>
   <string name="_By_logging_out_you_will_no_longer_receive_push_notifications_17XsiT">"By logging out you will no longer receive push notifications"</string>
@@ -38,6 +38,7 @@
   <string name="Password">"Password"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
   <string name="_Authentication_failed_1msuLR">"Authentication failed"</string>
+  <string name="_E_Mail_not_found_1QlWhj">"E-Mail not registered"</string>
   <string name="_Invalid_email_address_Z2keLgK">"Invalid email address"</string>
   <string name="_Invalid_password_Z88PyD">"Invalid password"</string>
   <string name="_This_email_address_exists_already_ZoV3jz">"This email address exists already"</string>

@@ -141,6 +141,7 @@
   "This email address exists already": "This email address exists already",
   "Invalid password": "Invalid password",
   "Invalid email address": "Invalid email address",
+  "E-Mail not found": "E-Mail not registered",
   "Authentication failed": "Authentication failed",
   "E-Mail": "E-Mail",
   "Password": "Password",

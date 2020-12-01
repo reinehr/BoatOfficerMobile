@@ -36,6 +36,7 @@
 "Password" = "Passwort";
 "_E_Mail_2nPAU3" = "E-Mail";
 "_Authentication_failed_1msuLR" = "Anmeldung fehlgeschlagen";
+"_E_Mail_not_found_1QlWhj" = "E-Mail nicht registriert";
 "_Invalid_email_address_Z2keLgK" = "Ungültige E-Mail-Adresse";
 "_Invalid_password_Z88PyD" = "ungültiges Passwort";
 "_This_email_address_exists_already_ZoV3jz" = "Diese E-Mail-Adresse wurde bereits registriert";

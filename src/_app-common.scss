@@ -128,6 +128,30 @@ $buttons_count: 5;
     font-size: 16pt;
 }
 
+.interval-button-3 {
+    margin-left: calc((5%)/3);
+    margin-right: calc((5%)/3);
+    width: calc((89%)/3);
+    height: 40;
+    border-radius: 20;
+    border-width: 2;
+    border-color: #356eb4;
+    color: #356eb4;
+    font-size: 16pt;
+}
+
+.interval-button-selected-3 {
+    margin-left: calc((5%)/3);
+    margin-right: calc((5%)/3);
+    width: calc((89%)/3);
+    height: 40;
+    border-radius: 20;
+    border-width: 0;
+    background-color: #091524;
+    color: #ffffff;
+    font-size: 16pt;
+}
+
 .map-home {
     margin: 0,30,0,30;
 }

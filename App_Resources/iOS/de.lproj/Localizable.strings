@@ -152,8 +152,8 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WETTER VOR ORT";
 "_no_active_alarms_Z1jDuSA" = "keine aktiven Alarme";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARMSTATUS";
-"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.";
-"no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.";
+"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät reistrieren\"";
+"no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 geöffnet";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 geschlossen";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 geöffnet";

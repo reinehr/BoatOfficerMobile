@@ -24,6 +24,8 @@ import { ImageSource } from 'tns-core-modules/image-source';
 import { Color } from 'tns-core-modules/color';
 import {hasKey, getString} from 'tns-core-modules/application-settings';
 
+import {HttpClient} from '@angular/common/http';
+import { layout } from "tns-core-modules/utils/utils";
 import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view';
 import enumerate = Reflect.enumerate;
 declare let android: any; // or even better - use tns-platform-declarations for intelliSense for the native APis
@@ -52,6 +54,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
     maxWeather = {0: 3};
     beaufortAlarmLevel = 7;
     hasKey = hasKey('token');
+    webcamHeight = {}; //240;
+    webcamWidth = {}; //295;
+    webcamScale = {}; //1.0;
+    webcamScaled = {}; //false;
 
     webViewSrc = this.page;
 
@@ -59,7 +65,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
         private page: Page,
         private apiService: ApiService,
         private dataService: DataService,
-        intl: TimeagoIntl
+        intl: TimeagoIntl,
+        private httpClient: HttpClient
     ) {
         page.actionBarHidden = true;
 
@@ -70,54 +77,54 @@ export class HomeComponent implements OnInit, AfterViewInit {
         }
         intl.changes.next();
         this.dataService.apiService.boatStatus.subscribe( ddata => {
-            if (ddata) {
-                setTimeout( () => {
-                    for (const idDevice in this.dataService.deviceData) {
-                        const level6 = this.page.getViewById('level_1').getViewById('level_2').getViewById('level_3')
-                            .getViewById('level_4')
-                            .getViewById('level_5')
-                            .getViewById('level_6_' + this.dataService.deviceData[idDevice].id);
-                        const level7 = level6.getViewById('level_7_' + this.dataService.deviceData[idDevice].id);
-                        if (level7) {
-                            const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
-                            this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
-                            const marker = new Marker();
-                            marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
-                            marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
-                            marker.snippet = 'BoatOfficer';
-                            marker.userData = {index: 1};
-                            marker.zIndex = 10;
-                            this.mapView.removeAllMarkers();
-                            if (false && this.dataService.boatStatus && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id] && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude) {
-                                console.log('Setting a camera marker ...');
+                if (ddata) {
+                    setTimeout( () => {
+                        for (const idDevice in this.dataService.deviceData) {
+                            const level6 = this.page.getViewById('level_1').getViewById('level_2').getViewById('level_3')
+                                .getViewById('level_4')
+                                .getViewById('level_5')
+                                .getViewById('level_6_' + this.dataService.deviceData[idDevice].id);
+                            const level7 = level6.getViewById('level_7_' + this.dataService.deviceData[idDevice].id);
+                            if (level7) {
+                                const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
+                                this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
+                                const marker = new Marker();
+                                marker.position = Position.positionFromLatLng(this.mapView.latitude, this.mapView.longitude);
+                                marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
+                                marker.snippet = 'BoatOfficer';
+                                marker.userData = {index: 1};
+                                marker.zIndex = 10;
+                                this.mapView.removeAllMarkers();
+                                if (false && this.dataService.boatStatus && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id] && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam && this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude) {
+                                    console.log('Setting a camera marker ...');
 
-                                const imageSource = ImageSource.fromFileSync( '~/assets/video-solid-small.png');
-                                const icon = new Image();
-                                icon.imageSource = imageSource;
-                                const markerWebcam = new Marker();
-                                markerWebcam.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.longitude);
-                                markerWebcam.title = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.name + '';
-                                markerWebcam.snippet = 'Webcam';
-                                markerWebcam.userData = {index: 1};
-                                markerWebcam.zIndex = 9;
-                                markerWebcam.color = 'gray';
-                                markerWebcam.icon = icon;
-                                this.mapView.addMarker(markerWebcam);
+                                    const imageSource = ImageSource.fromFileSync( '~/assets/video-solid-small.png');
+                                    const icon = new Image();
+                                    icon.imageSource = imageSource;
+                                    const markerWebcam = new Marker();
+                                    markerWebcam.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.longitude);
+                                    markerWebcam.title = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].webcam.name + '';
+                                    markerWebcam.snippet = 'Webcam';
+                                    markerWebcam.userData = {index: 1};
+                                    markerWebcam.zIndex = 9;
+                                    markerWebcam.color = 'gray';
+                                    markerWebcam.icon = icon;
+                                    this.mapView.addMarker(markerWebcam);
+                                    this.mapView.mapAnimationsEnabled = true;
+                                } else {
+                                    console.log('Setting no camera marker ...');
+                                }
+                                this.mapView.addMarker(marker);
                                 this.mapView.mapAnimationsEnabled = true;
-                            } else {
-                                console.log('Setting no camera marker ...');
                             }
-                            this.mapView.addMarker(marker);
-                            this.mapView.mapAnimationsEnabled = true;
                         }
-                    }
+                        this.hasKey = hasKey('token');
+                    }, 2000);
+                } else {
                     this.hasKey = hasKey('token');
-                }, 2000);
-            } else {
-                this.hasKey = hasKey('token');
-                this.dataService.deviceData = [];
+                    this.dataService.deviceData = [];
+                }
             }
-        }
         );
         // const pageView = this.page.getViewById<MapView>('mapview_0');
         // console.log('AFTER INIT longitude: ' + pageView.minZoom);
@@ -220,84 +227,101 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     onWebViewLoaded(webargs) {
-        const webview = webargs.object;
-        webview.getSettings().scalesPageToFit(false);
-        webview.getSettings().setBuiltInZoomControls(false);
-        webview.getSettings().setDisplayZoomControls(false);
-        webview.android.getSettings().scalesPageToFit(false);
-        webview.android.getSettings().setBuiltInZoomControls(false);
-        webview.android.getSettings().setDisplayZoomControls(false);
-        webview.android.setInitialScale(1);
-        //webview.getSettings().setTextZoom(1);
-        //webview.getSettings().setDefaultZoom(1);
-        //webview.getSettings().setUseWideViewPort(true);
-        webview.getSettings().setLoadWithOverviewMode(true);
-        webview.android.getSettings().setLoadWithOverviewMode(true);
     }
 
     onLoadStarted(args: LoadEventData) {
-        const webView = args.object as WebView;
-        const wv = args.object;
-
-        if (!args.error) {
-            // console.log('Load Start');
-            // console.log(`EventName: ${args.eventName}`);
-            // console.log(`NavigationType: ${args.navigationType}`);
-            // console.log(`Url: ${args.url}`);
-            webView.flexWrapBefore = true;
-            const nativeWebView = webView.nativeView; // equal to webView.android or webView.ios (depending on the platform)
-            if (isAndroid && webView) {
-                // console.log('isAndroid');
-                webView.android.getSettings().setBuiltInZoomControls(false);
-                webView.android.getSettings().setDisplayZoomControls(false);
-                webView.android.getSettings().setUseWideViewPort(true);
-                webView.android.getSettings().setLoadWithOverviewMode(true);
-                webView.android.setInitialScale(1);
-                nativeWebView.getSettings().setAppCacheEnabled(false);
-                nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
-            } else if (webView) {
-                webView.ios.scrollView.minimumZoomScale = 1.0;
-                webView.ios.scrollView.maximumZoomScale = 1.0;
-                webView.ios.scalesPageToFit = true;
-                webView.ios.scrollView.bounces = false;
-            }
-        } else {
-            console.log(`EventName: ${args.eventName}`);
-            console.log(`Error: ${args.error}`);
-        }
     }
 
     onLoadFinished(args: LoadEventData) {
         const webView = args.object as WebView;
+        console.log('WEBVIEW Webcams onLoadFinished')
 
         if (!args.error) {
-            // console.log('Load Finished');
-            // console.log(`EventName: ${args.eventName}`);
-            // console.log(`NavigationType: ${args.navigationType}`);
-            // console.log(`Url: ${args.url}`);
-            // console.log(webView.getActualSize().height);
-            // console.log(webView.getActualSize().width);
-            // console.log(webView.getMeasuredHeight());
-            // console.log(webView.getMeasuredWidth());
-            webView.flexWrapBefore = true;
-            webView.height = 480;
-            webView.width = 640;
-            webView.effectiveHeight = 480;
-            const nativeWebView = webView.nativeView; // equal to webView.android or webView.ios (depending on the platform)
+            //console.log(`Url: ${args.url}`);
+
+            let jsStr = `var body = document.body;
+                var html = document.documentElement;
+                Math.max( body.scrollWidth, body.offsetWidth,
+                html.clientWidth, html.scrollWidth, html.offsetWidth);`;
+            if (webView.ios) {
+                //webView.ios.scrollView.scrollEnabled = false;
+                webView.ios.evaluateJavaScriptCompletionHandler(jsStr,
+                    (
+                        result,
+                        error
+                    ) => {
+                        if (error) {
+                            console.log("error...");
+                        } else if (result) {
+                            //webView.parent.effectiveHeight = result;
+                            let id = webView.id;
+                            //console.log(webView.parent.effectiveHeight);
+                            //console.log(webView.height);
+                            if (!this.webcamWidth[id]) {
+                                this.webcamWidth[id] = 295;
+                                this.webcamHeight[id] = 240;
+                                this.webcamScale[id] = 1;
+                                this.webcamScaled[id] = false;
+                                //console.log('result widht: ' + result)
+                                this.webcamScale[id] = webView.getActualSize().width / result;
+                                let height = webView.getActualSize().height / this.webcamScale[id];
+                                //console.log('new height: ' + height)
+                                this.webcamHeight[id] = height;
+                                this.webcamWidth[id] = result;
+                                webView.reload();
+                            } else if (!this.webcamScaled[id]) {
+                                webView.scaleX = this.webcamScale[id];
+                                webView.scaleY = this.webcamScale[id];
+                                webView.translateY = -(this.webcamHeight[id] / 2 - this.webcamHeight[id] * this.webcamScale[id] / 2);
+                                webView.translateX = -(this.webcamWidth[id] / 2 - this.webcamWidth[id] * this.webcamScale[id] / 2);
+                                this.webcamScaled[id] = true;
+                                // this.changeDetectorRef.detectChanges();
+                            }
+                        }
+                    });
+            } else if (webView.android) {
+                // Works only on Android 19 and above
+                // webView.android.evaluateJavascript(
+                //     jsStr,
+                //     new android.webkit.ValueCallback({
+                //         onReceiveValue: (height) => {
+                //             // this.height = layout.toDeviceIndependentPixels(height);
+                //             // this.changeDetectorRef.detectChanges();
+                //         }
+                //     })
+                // );
+            }
+            console.log(webView.getActualSize().height);
+            console.log(webView.getActualSize().width);
+            console.log(webView.getMeasuredHeight());
+            console.log(webView.getMeasuredWidth());
+
             if (isAndroid && webView) {
                 // console.log('isAndroid');
-                webView.android.getSettings().setBuiltInZoomControls(false);
-                webView.android.getSettings().setDisplayZoomControls(false);
                 webView.android.getSettings().setUseWideViewPort(true);
                 webView.android.getSettings().setLoadWithOverviewMode(true);
                 webView.android.setInitialScale(1);
-                nativeWebView.getSettings().setAppCacheEnabled(false);
-                nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
-            } else if (webView) {
-                webView.ios.scrollView.minimumZoomScale = 1.0;
-                webView.ios.scrollView.maximumZoomScale = 1.0;
-                webView.ios.scalesPageToFit = true;
-                webView.ios.scrollView.bounces = false;
+                webView.android.getSettings().setBuiltInZoomControls(true);
+                webView.android.getSettings().setDisplayZoomControls(false);
+                //nativeWebView.getSettings().setAppCacheEnabled(false);
+                //nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
+            } else if (webView && webView.ios) {
+                // webView.ios.zoomScale = 0.5;
+                // webView.ios.scale = 0.5;
+                // webView.ios.width = 120;
+                // webView.ios.height = 160;
+                // webView.ios.scrollView.minimumZoomScale = 0.5;
+                // webView.ios.scrollView.maximumZoomScale = 0.5;
+                // webView.ios.scrollView.zoomScale = 0.5;
+                // webView.ios.scalePageToFit = false;
+                // webView.ios.scrollView.zoom = 0.5;
+                //console.log('WEBVIEW WIDTH ' + webView.ios.scrollView.width);
+                //nativeWebView.scrollView.minimumZoomScale = 1.0;
+                //nativeWebView.scrollView.maximumZoomScale = 1.0;
+                //nativeWebView.scrollView.zoomScale = 1.0;
+                //console.log(nativeWebView.width);
+                //nativeWebView.scrollView.bounces = false;
+                //console.log('WEBVIEW Webcams IOS')
             }
         } else {
             console.log(`EventName: ${args.eventName}`);

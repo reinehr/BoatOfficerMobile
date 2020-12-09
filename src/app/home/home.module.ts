@@ -7,6 +7,8 @@ import { ItemDetailComponent } from './item-detail/item-detail.component';
 import {TimeagoModule} from 'ngx-timeago';
 import {CommonModule} from '@angular/common';
 import {NativeScriptLocalizeModule} from 'nativescript-localize/angular';
+import {MapdetailsComponent} from "~/app/home/mapdetails.component";
+import {WebcamComponent} from "~/app/home/webcam.component";
 
 @NgModule({
     imports: [
@@ -18,7 +20,9 @@ import {NativeScriptLocalizeModule} from 'nativescript-localize/angular';
     ],
     declarations: [
         HomeComponent,
-        ItemDetailComponent
+        ItemDetailComponent,
+        MapdetailsComponent,
+        WebcamComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

@@ -154,8 +154,8 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WETTER VOR ORT"</string>
   <string name="_no_active_alarms_Z1jDuSA">"keine aktiven Alarme"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARMSTATUS"</string>
-  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen."</string>
-  <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen."</string>
+  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät reistrieren\""</string>
+  <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\""</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi Sensor A 2 geöffnet"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi Sensor A 2 geschlossen"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi Sensor A 1 geöffnet"</string>

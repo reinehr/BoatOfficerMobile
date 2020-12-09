@@ -1,7 +1,6 @@
 <!--<ActionBar backgroundColor="#091524">
     <Label text="Home" color="white"></Label>
 </ActionBar>-->
-
 <GridLayout id="level_1" class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_w_bluesky.png">
     <PullToRefresh id="level_2" (refresh)="refreshList($event)">
@@ -18,7 +17,7 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (dataService && dataService.deviceData && dataService.deviceData.length == 0)">
+                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (dataService && dataService.deviceData && dataService.deviceData.length == 0 && isLoading == false)">
                     <StackLayout class="alarm-card-home" padding="5,10,10,10">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_boat' | L" class="t-16" textWrap="true"
@@ -90,6 +89,7 @@
                                          (mapReady)="onMapReady($event, idDevice)"
                                          (markerSelect)="onMarkerEvent($event)"
                                          (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                                <GridLayout [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                             </GridLayout>
                         </StackLayout>
                         <StackLayout [id]="device.id" class="alarm-card-home" padding="5,10,10,10"
@@ -172,10 +172,14 @@
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
                             <GridLayout columns="*" rows="240" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[device.id].nearest_webcam.url" >
-                                <WebView [src]="dataService.boatStatus[device.id].nearest_webcam.url" stretch="aspectFit"
-                                         (loadStarted)="onLoadStarted($event)"
-                                         (loadFinished)="onLoadFinished($event)">
-                                </WebView>
+                                <GridLayout id="GridLayout-webcam" [columns]="webcamWidth[device.id] ? webcamWidth[device.id] : '*'" [rows]="webcamHeight[device.id] ? webcamHeight[device.id] : 240">
+                                    <WebView [id]="device.id" [src]="'' +
+                                    dataService.boatStatus[device.id].nearest_webcam.url"
+                                             (loadStarted)="onLoadStarted($event)"
+                                             (loadFinished)="onLoadFinished($event)">
+                                    </WebView>
+                                </GridLayout>
+                                <GridLayout [nsRouterLink]="['../webcam', idDevice]"></GridLayout>
                             </GridLayout>
                         </StackLayout>
                     </StackLayout>

@@ -459,6 +459,51 @@ export interface BoatStatus {
             'url': string,
             'distance': string,
         }
+        'nearest_webcam1'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
+        'nearest_webcam2'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
+        'nearest_webcam3'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
+        'nearest_webcam4'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
+        'nearest_webcam5'?: {
+            'name': string,
+            'location_name': string,
+            'heading': string,
+            'latitude': string,
+            'longitude': string,
+            'url': string,
+            'distance': string,
+        }
         'purchases': {
             'is_pro': boolean,
             'is_recurrent': boolean,

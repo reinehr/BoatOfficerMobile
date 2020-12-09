@@ -98,6 +98,7 @@
                                      (mapReady)="onMapReady($event, idDevice)"
                                      (markerSelect)="onMarkerEvent($event)"
                                      (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                            <GridLayout [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                         </GridLayout>
                         <GridLayout>
                             <StackLayout>

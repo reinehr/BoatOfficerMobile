@@ -127,6 +127,7 @@ export class WebcamComponent implements OnInit {
     setSelectedInterval(id: number) {
         this.selectedIntervalId = id;
         this.webcamWidth = {};
+        this.webcamHeight = {};
         this.webcamScaled = {};
     }
 }

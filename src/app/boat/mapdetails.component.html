@@ -20,7 +20,7 @@
                 </GridLayout>
                 <StackLayout orientation="horizontal" height="60">
                     <GridLayout
-                            class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="center" horizontalAlignment="center"
+                            class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="top" horizontalAlignment="center"
                             (tap)="setSelectedInterval(interval.id)" *ngFor="let interval of dataService.historyIntervalData">
                         <Label [text]="interval.name | L" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
@@ -28,7 +28,7 @@
                 <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" [visibility]="selectedIntervalId > 0 && !dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>
-                <StackLayout [id]="'level_7_' + dataService.deviceData[idDevice].id" orientation="vertical" padding="10" class="alarm-card" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                <StackLayout [id]="'level_7_' + dataService.deviceData[idDevice].id" orientation="vertical"  backgroundColor="white" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <GridLayout [id]="'level_8_' + dataService.deviceData[idDevice].id" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.latitude != 0">
                         <MapView [id]="'mapview_' + dataService.deviceData[idDevice].id" #mapView [latitude]="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.latitude" [longitude]="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.longitude"
                                  [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"

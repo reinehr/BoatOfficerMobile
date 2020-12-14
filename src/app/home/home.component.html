@@ -158,30 +158,35 @@
                                 </GridLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
-                            <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
-                                <Label col=0 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
-                                       verticalAlignment="middle" horizontalAlignment="left"></Label>
-                                <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.location_name"
-                                       class="t-12 font-weight-bold"
-                                       verticalAlignment="middle" horizontalAlignment="right"></Label>
-                            </GridLayout>
-                            <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
-                                <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.name"
-                                       class="t-12 font-weight-normal"
-                                       verticalAlignment="middle" horizontalAlignment="right"></Label>
-                            </GridLayout>
-                            <GridLayout columns="*" rows="240" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[device.id].nearest_webcam.url" >
-                                <GridLayout id="GridLayout-webcam" [columns]="webcamWidth[device.id] ? webcamWidth[device.id] : '*'" [rows]="webcamHeight[device.id] ? webcamHeight[device.id] : 240">
-                                    <WebView [id]="device.id" [src]="'' +
-                                    dataService.boatStatus[device.id].nearest_webcam.url"
-                                             (loadStarted)="onLoadStarted($event)"
-                                             (loadFinished)="onLoadFinished($event)">
-                                    </WebView>
+                        <GridLayout>
+                            <StackLayout class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
+                                <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
+                                    <Label col=0 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
+                                           verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                    <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.location_name"
+                                           class="t-12 font-weight-bold"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
                                 </GridLayout>
-                                <GridLayout [nsRouterLink]="['../webcam', idDevice]"></GridLayout>
-                            </GridLayout>
-                        </StackLayout>
+                                <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
+                                    <Label col=1 row=0 [text]="dataService.boatStatus[device.id].nearest_webcam.name"
+                                           class="t-12 font-weight-normal"
+                                           verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                </GridLayout>
+                                <GridLayout columns="*" rows="240" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[device.id].nearest_webcam.url" >
+                                    <GridLayout id="GridLayout-webcam" [columns]="webcamWidth[device.id] ? webcamWidth[device.id] : '*'" [rows]="webcamHeight[device.id] ? webcamHeight[device.id] : 240">
+                                        <WebView [id]="device.id"
+                                                 [src]="'' +
+                                        dataService.boatStatus[device.id].nearest_webcam.url"
+                                                 (loadStarted)="onLoadStarted($event)"
+                                                 (loadFinished)="onLoadFinished($event)">
+                                        </WebView>
+                                    </GridLayout>
+                                    <GridLayout [nsRouterLink]="['../webcam', idDevice]"></GridLayout>
+                                </GridLayout>
+                            </StackLayout>
+                            <StackLayout [visibility]="(webcamScaled[device.id] ? 'collapsed' : 'visible')" class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
+                            </StackLayout>
+                        </GridLayout>
                     </StackLayout>
                 </StackLayout>
             </GridLayout>

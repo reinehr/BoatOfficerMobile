@@ -221,14 +221,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
         console.log('scrollY: ' + args.scrollY);
     }
 
-
-    onButtonTap(): void {
-        console.log('Button was pressed');
-    }
-
-    onWebViewLoaded(webargs) {
-    }
-
     onLoadStarted(args: LoadEventData) {
     }
 
@@ -280,6 +272,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                         }
                     });
             } else if (webView.android) {
+                this.webcamScaled[webView.id] = true;
                 // Works only on Android 19 and above
                 // webView.android.evaluateJavascript(
                 //     jsStr,
@@ -291,10 +284,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 //     })
                 // );
             }
-            console.log(webView.getActualSize().height);
-            console.log(webView.getActualSize().width);
-            console.log(webView.getMeasuredHeight());
-            console.log(webView.getMeasuredWidth());
+            // console.log(webView.getActualSize().height);
+            // console.log(webView.getActualSize().width);
+            // console.log(webView.getMeasuredHeight());
+            // console.log(webView.getMeasuredWidth());
 
             if (isAndroid && webView) {
                 // console.log('isAndroid');
@@ -347,6 +340,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     refreshList(args) {
         const pullRefresh = args.object;
+        this.webcamWidth = {};
+        this.webcamScaled = {};
         // this.dataService.refreshSensorDataHistory();
         this.dataService.refreshBoatStatus();
         this.hasKey = hasKey('token');

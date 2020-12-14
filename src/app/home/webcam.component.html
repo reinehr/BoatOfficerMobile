@@ -45,10 +45,12 @@
                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                     </GridLayout>
                     <GridLayout columns="*" rows="*" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" >
-                        <WebView [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" stretch="aspectFit" zoomScale="1" scaleX="1" scaleY="1"
-                                 (loadStarted)="onLoadStarted($event)"
-                                 (loadFinished)="onLoadFinished($event)">
-                        </WebView>
+                        <GridLayout id="GridLayout-webcam1" [columns]="webcamWidth[1] ? webcamWidth[1] : '*'" [rows]="webcamHeight[1] ? webcamHeight[1] : '*'">
+                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url"
+                                     (loadStarted)="onLoadStarted($event)"
+                                     (loadFinished)="onLoadFinished($event, 1)">
+                            </WebView>
+                        </GridLayout>
                     </GridLayout>
                 </StackLayout>
                 <StackLayout class="alarm-card" padding="5,10,10,10" marginBottom="10" *ngIf="selectedIntervalId==1 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
@@ -68,10 +70,12 @@
                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                     </GridLayout>
                     <GridLayout columns="*" rows="*" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" >
-                        <WebView [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" stretch="aspectFit" zoomScale="1" scaleX="1" scaleY="1"
-                                 (loadStarted)="onLoadStarted($event)"
-                                 (loadFinished)="onLoadFinished($event)">
-                        </WebView>
+                        <GridLayout id="GridLayout-webcam2" [columns]="webcamWidth[2] ? webcamWidth[2] : '*'" [rows]="webcamHeight[2] ? webcamHeight[2] : '*'">
+                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url"
+                                     (loadStarted)="onLoadStarted($event)"
+                                     (loadFinished)="onLoadFinished($event, 2)">
+                            </WebView>
+                        </GridLayout>
                     </GridLayout>
                 </StackLayout>
                 <StackLayout class="alarm-card" padding="5,10,10,10" marginBottom="10" *ngIf="selectedIntervalId==2 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
@@ -91,10 +95,12 @@
                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                     </GridLayout>
                     <GridLayout columns="*" rows="*" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" >
-                        <WebView [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" stretch="aspectFit" zoomScale="1" scaleX="1" scaleY="1"
-                                 (loadStarted)="onLoadStarted($event)"
-                                 (loadFinished)="onLoadFinished($event)">
-                        </WebView>
+                        <GridLayout id="GridLayout-webcam3" [columns]="webcamWidth[3] ? webcamWidth[3] : '*'" [rows]="webcamHeight[3] ? webcamHeight[3] : '*'">
+                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url"
+                                     (loadStarted)="onLoadStarted($event)"
+                                     (loadFinished)="onLoadFinished($event, 3)">
+                            </WebView>
+                        </GridLayout>
                     </GridLayout>
                 </StackLayout>
             </StackLayout>

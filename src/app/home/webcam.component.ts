@@ -38,6 +38,11 @@ export class WebcamComponent implements OnInit {
     isLoading = false;
     initialized = true;
 
+    webcamHeight = {}; //240;
+    webcamWidth = {}; //295;
+    webcamScale = {}; //1.0;
+    webcamScaled = {}; //false;
+
     latitude = -23.86;
     longitude = 151.20;
     minZoom = 0;
@@ -53,51 +58,65 @@ export class WebcamComponent implements OnInit {
 
     ngOnInit(): void {}
 
-    onWebViewLoaded(webargs) {
-    }
-
     onLoadStarted(args: LoadEventData) {
     }
 
 
-    onLoadFinished(args: LoadEventData) {
+    onLoadFinished(args: LoadEventData, order: number) {
         const webView = args.object as WebView;
-        console.log('WEBVIEW Webcams onLoadFinished')
+        console.log('WEBVIEW Webcam onLoadFinished')
 
+        let jsStr = `var body = document.body;
+                var html = document.documentElement;
+                Math.max( body.scrollWidth, body.offsetWidth,
+                html.clientWidth, html.scrollWidth, html.offsetWidth);`;
+        if (webView.ios) {
+            //webView.ios.scrollView.scrollEnabled = false;
+            webView.ios.evaluateJavaScriptCompletionHandler(jsStr,
+                (
+                    result,
+                    error
+                ) => {
+                    if (error) {
+                        console.log("error...");
+                    } else if (result) {
+                        //webView.parent.effectiveHeight = result;
+                        let id = webView.id;
+                        //console.log(webView.parent.effectiveHeight);
+                        //console.log(webView.height);
+                        if (!this.webcamWidth[order]) {
+                            this.webcamWidth[order] = 295;
+                            this.webcamHeight[order] = 240;
+                            this.webcamScale[order] = 1;
+                            this.webcamScaled[order] = false;
+                            //console.log('result widht: ' + result)
+                            this.webcamScale[order] = webView.getActualSize().width / result;
+                            let height = webView.getActualSize().height / this.webcamScale[order];
+                            //console.log('new height: ' + height)
+                            this.webcamHeight[order] = height;
+                            this.webcamWidth[order] = result;
+                            webView.reload();
+                        } else if (!this.webcamScaled[order]) {
+                            webView.scaleX = this.webcamScale[order];
+                            webView.scaleY = this.webcamScale[order];
+                            webView.translateY = -(this.webcamHeight[order] / 2 - this.webcamHeight[order] * this.webcamScale[order] / 2);
+                            webView.translateX = -(this.webcamWidth[order] / 2 - this.webcamWidth[order] * this.webcamScale[order] / 2);
+                            this.webcamScaled[order] = true;
+                            // this.changeDetectorRef.detectChanges();
+                        }
+                    }
+                });
+        } else if (webView.android) {
+            this.webcamScaled[order] = true;
+        }
         if (!args.error) {
-            // console.log('Load Finished');
-            // console.log(`EventName: ${args.eventName}`);
-            // console.log(`NavigationType: ${args.navigationType}`);
-            // console.log(`Url: ${args.url}`);
-            // console.log(webView.getActualSize().height);
-            // console.log(webView.getActualSize().width);
-            // console.log(webView.getMeasuredHeight());
-            // console.log(webView.getMeasuredWidth());
-            //webView.height = 240;
-            //webView.width = 320;
-            //webView.effectiveHeight = 240;
-            //const nativeWebView = webView.nativeView; // equal to webView.android or webView.ios (depending on the platform)
             if (isAndroid && webView) {
-                // console.log('isAndroid');
                 webView.android.getSettings().setUseWideViewPort(true);
                 webView.android.getSettings().setLoadWithOverviewMode(true);
                 webView.android.setInitialScale(1);
                 webView.android.getSettings().setBuiltInZoomControls(true);
                 webView.android.getSettings().setDisplayZoomControls(false);
-                //nativeWebView.getSettings().setAppCacheEnabled(false);
-                //nativeWebView.getSettings().setCacheMode(android.webkit.WebSettings.LOAD_NO_CACHE);
             } else if (webView && webView.ios) {
-                webView.ios.zoomScale = 1;
-                //webView.ios.scrollView.minimumZoomScale = 10.0;
-                //webView.ios.scrollView.maximumZoomScale = 10.0;
-                webView.ios.scrollView.zoomScale = 1;
-
-                //nativeWebView.scrollView.minimumZoomScale = 1.0;
-                //nativeWebView.scrollView.maximumZoomScale = 1.0;
-                //nativeWebView.scrollView.zoomScale = 1.0;
-                //console.log(nativeWebView.width);
-                //nativeWebView.scrollView.bounces = false;
-                console.log('WEBVIEW Webcams IOS')
             }
         } else {
             console.log(`EventName: ${args.eventName}`);
@@ -107,5 +126,7 @@ export class WebcamComponent implements OnInit {
 
     setSelectedInterval(id: number) {
         this.selectedIntervalId = id;
+        this.webcamWidth = {};
+        this.webcamScaled = {};
     }
 }

@@ -1,8 +1,15 @@
+"_Privacy_Policy_Z1gery6" = "Datenschutzerklärung";
+"_Terms_of_Use_17jxBW" = "Nutzungsbedingungen";
 "Impressum" = "Impressum";
 "IMPRESSUM" = "IMPRESSUM";
-"_That_s_included_oeFzz" = "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. ";
+"_That_s_included_oeFzz" = "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. ";
 "_What_is_included_ISxuJ" = "Was bekomme ich dafür?";
-"PURCHASE" = "PRODUKTE";
+"_Disclaimer_Recurring_Abo_Zmfdfh" = "Diese Abos verlängern sich nach Ablauf automatisch, sofern sie nicht vorher gekündigt werden.";
+"_com_boatofficer_boatofficermobile_abo_year_interval_206wvw" = "Jahr";
+"_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q" = "Monat";
+"_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo" = "Jahresabo (wiederkehrend)";
+"_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm" = "Monatsabo (wiederkehrend)";
+"PURCHASE" = "BOATOFFICER PRO";
 "_Buy_pro_version_1RCDqa" = "BoatOfficer Pro";
 "_UPLOAD_COMPLETE_ZE4sD5" = "Upload fertig";
 "DEVICE_DOES_NOT_EXIST" = "Gerät existiert nicht (Falsche Seriennummer)";
@@ -152,7 +159,7 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WETTER VOR ORT";
 "_no_active_alarms_Z1jDuSA" = "keine aktiven Alarme";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARMSTATUS";
-"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät reistrieren\"";
+"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät registrieren\"";
 "no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 geöffnet";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 geschlossen";

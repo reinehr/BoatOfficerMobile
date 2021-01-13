@@ -175,9 +175,16 @@
   "DEVICE_DOES_NOT_EXIST": "Device does not exist (Wrong serial number)",
   "UPLOAD COMPLETE": "Upload complete",
   "Buy pro version": "BoatOfficer Pro",
-  "PURCHASE": "PRODUCTS",
+  "PURCHASE": "BOATOFFICER PRO",
+  "com.boatofficer.boatofficermobile.abo.month.localizedTitle": "Monthly subscription (recurring)",
+  "com.boatofficer.boatofficermobile.abo.year.localizedTitle": "Annual subscription (recurring)",
+  "com.boatofficer.boatofficermobile.abo.month.interval": "Month",
+  "com.boatofficer.boatofficermobile.abo.year.interval": "Year",
+  "Disclaimer Recurring Abo": "These subscriptions are automatically renewed after they have expired unless canceled beforehand.",
   "What is included": "What's included?",
-  "That's included": "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. ",
+  "That's included": "With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes.",
   "IMPRESSUM": "IMPRESSUM",
-  "Impressum": "Impressum"
+  "Impressum": "Impressum",
+  "Terms of Use": "Terms of Use",
+  "Privacy Policy": "Privacy Policy"
 }

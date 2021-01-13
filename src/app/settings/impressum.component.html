@@ -16,6 +16,16 @@
 ('Germany' | L)+'\n'+
 ('info@boatofficer.com' | L)}}">
             </TextView>
+            <TextView
+                    (tap)="tapTerms()"
+                    class="inputlink"
+                    text="{{'Terms of Use' | L}}">
+            </TextView>
+            <TextView
+                    (tap)="tapPrivacy()"
+                    class="inputlink"
+                    text="{{'Privacy Policy' | L}}">
+            </TextView>
         </StackLayout>
         <ActivityIndicator [busy]="isLoading">
         </ActivityIndicator>

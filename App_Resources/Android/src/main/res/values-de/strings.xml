@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="_Privacy_Policy_Z1gery6">"Datenschutzerklärung"</string>
+  <string name="_Terms_of_Use_17jxBW">"Nutzungsbedingungen"</string>
   <string name="Impressum">"Impressum"</string>
   <string name="IMPRESSUM">"IMPRESSUM"</string>
-  <string name="_That_s_included_oeFzz">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. "</string>
+  <string name="_That_s_included_oeFzz">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. "</string>
   <string name="_What_is_included_ISxuJ">"Was bekomme ich dafür?"</string>
-  <string name="PURCHASE">"PRODUKTE"</string>
+  <string name="_Disclaimer_Recurring_Abo_Zmfdfh">"Diese Abos verlängern sich nach Ablauf automatisch, sofern sie nicht vorher gekündigt werden."</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_interval_206wvw">"Jahr"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q">"Monat"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo">"Jahresabo (wiederkehrend)"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm">"Monatsabo (wiederkehrend)"</string>
+  <string name="PURCHASE">"BOATOFFICER PRO"</string>
   <string name="_Buy_pro_version_1RCDqa">"BoatOfficer Pro"</string>
   <string name="_UPLOAD_COMPLETE_ZE4sD5">"Upload fertig"</string>
   <string name="DEVICE_DOES_NOT_EXIST">"Gerät existiert nicht (Falsche Seriennummer)"</string>
@@ -154,7 +161,7 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WETTER VOR ORT"</string>
   <string name="_no_active_alarms_Z1jDuSA">"keine aktiven Alarme"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARMSTATUS"</string>
-  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät reistrieren\""</string>
+  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät registrieren\""</string>
   <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\""</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi Sensor A 2 geöffnet"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi Sensor A 2 geschlossen"</string>

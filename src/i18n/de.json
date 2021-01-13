@@ -20,7 +20,7 @@
   "Multi Sensor A 2 Closed": "Multi Sensor A 2 geschlossen",
   "Multi Sensor A 2 Opened": "Multi Sensor A 2 geöffnet",
   "no_key": "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"",
-  "no_boat": "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät reistrieren\"",
+  "no_boat": "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät registrieren\"",
   "ACTIVE ALARMS": "ALARMSTATUS",
   "no active alarms": "keine aktiven Alarme",
   "WEATHER ON SITE": "WETTER VOR ORT",
@@ -175,9 +175,16 @@
   "DEVICE_DOES_NOT_EXIST": "Gerät existiert nicht (Falsche Seriennummer)",
   "UPLOAD COMPLETE": "Upload fertig",
   "Buy pro version": "BoatOfficer Pro",
-  "PURCHASE": "PRODUKTE",
+  "PURCHASE": "BOATOFFICER PRO",
+  "com.boatofficer.boatofficermobile.abo.month.localizedTitle": "Monatsabo (wiederkehrend)",
+  "com.boatofficer.boatofficermobile.abo.year.localizedTitle": "Jahresabo (wiederkehrend)",
+  "com.boatofficer.boatofficermobile.abo.month.interval": "Monat",
+  "com.boatofficer.boatofficermobile.abo.year.interval": "Jahr",
+  "Disclaimer Recurring Abo": "Diese Abos verlängern sich nach Ablauf automatisch, sofern sie nicht vorher gekündigt werden.",
   "What is included": "Was bekomme ich dafür?",
-  "That's included": "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. ",
+  "That's included": "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. ",
   "IMPRESSUM": "IMPRESSUM",
-  "Impressum": "Impressum"
+  "Impressum": "Impressum",
+  "Terms of Use": "Nutzungsbedingungen",
+  "Privacy Policy": "Datenschutzerklärung"
 }

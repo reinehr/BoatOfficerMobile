@@ -1,10 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="_Privacy_Policy_Z1gery6">"Privacy Policy"</string>
+  <string name="_Terms_of_Use_17jxBW">"Terms of Use"</string>
   <string name="Impressum">"Impressum"</string>
   <string name="IMPRESSUM">"IMPRESSUM"</string>
-  <string name="_That_s_included_oeFzz">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten erhöhen. "</string>
+  <string name="_That_s_included_oeFzz">"With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes."</string>
   <string name="_What_is_included_ISxuJ">"What\'s included?"</string>
-  <string name="PURCHASE">"PRODUCTS"</string>
+  <string name="_Disclaimer_Recurring_Abo_Zmfdfh">"These subscriptions are automatically renewed after they have expired unless canceled beforehand."</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_interval_206wvw">"Year"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q">"Month"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo">"Annual subscription (recurring)"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm">"Monthly subscription (recurring)"</string>
+  <string name="PURCHASE">"BOATOFFICER PRO"</string>
   <string name="_Buy_pro_version_1RCDqa">"BoatOfficer Pro"</string>
   <string name="_UPLOAD_COMPLETE_ZE4sD5">"Upload complete"</string>
   <string name="DEVICE_DOES_NOT_EXIST">"Device does not exist (Wrong serial number)"</string>

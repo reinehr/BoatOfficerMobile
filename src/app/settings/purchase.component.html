@@ -8,19 +8,24 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
         <StackLayout paddingTop="10">
+            <StackLayout class="alarm-card t-16" padding="10, 10, 0, 10" opacity="0.5">
+                <GridLayout padding="5" rows="auto, auto" columns="*" *ngIf="dataService">
+                    <Label row="0" col="0" class="h2" textWrap="true" text="{{ 'What is included' | L }}"></Label>
+                    <Label row="1" col="0" text="{{ 'That\'s included' | L }}" textWrap="true" color="#000000"></Label>
+                </GridLayout>
+            </StackLayout>
             <StackLayout *ngFor="let item of items" class="alarm-card t-16" padding="10, 10, 0, 10" color="white" backgroundColor="#356eb4" opacity="1" borderWidth="2">
                 <GridLayout rows="auto, *" columns="*, auto" padding="5" (tap)="saveForm(item)">
-                    <Label row="0" col="0" class="h2" textWrap="true" text="{{ item.localizedTitle }}" color="white"></Label>
+                    <Label row="0" col="0" class="h2" textWrap="true" text="{{ (item.productIdentifier + '.localizedTitle') | L }}" color="white"></Label>
                     <Label row="1" col="0" text="{{ item.localizedDescription }}" textWrap="true" color="white"></Label>
-                    <Label text="{{ item.priceFormatted }}" row="0" rowSpan="2" col="1" class="h1" style="margin-left: 5" color="white"></Label>
+                    <Label text="{{ item.priceFormatted + ' / ' + ((item.productIdentifier + '.interval') | L) }}" row="0" rowSpan="2" col="1" class="h2" style="margin-left: 5" color="white"></Label>
                 </GridLayout>
                 <!--<ActivityIndicator [busy]="isLoading" height="0">
                 </ActivityIndicator>-->
             </StackLayout>
             <StackLayout class="alarm-card t-16" padding="10, 10, 0, 10" opacity="0.5">
-                <GridLayout padding="5" rows="auto, auto" columns="*" *ngIf="dataService">
-                    <Label row="0" col="0" class="h2" textWrap="true" text="{{ 'What is included' | L }}"></Label>
-                    <Label row="1" col="0" text="{{ 'That\'s included' | L }}" textWrap="true" color="#000000"></Label>
+                <GridLayout padding="5" rows="auto" columns="*" *ngIf="dataService">
+                    <Label row="0" col="0" text="{{ 'Disclaimer Recurring Abo' | L }}" textWrap="true" color="#000000"></Label>
                 </GridLayout>
             </StackLayout>
         </StackLayout>

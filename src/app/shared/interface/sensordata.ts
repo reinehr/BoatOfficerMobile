@@ -23,6 +23,15 @@ export interface Sensordata {
     counter: number;
 }
 
+export interface WebcamData {
+    'name': string,
+    'location_name': string,
+    'heading': number,
+    'latitude': number,
+    'longitude': number,
+    'url': string,
+    'distance': string,
+}
 
 export interface WeatherForecastData {
     city: {
@@ -333,13 +342,6 @@ export const WEATHER_ICONS = {
   }
 };
 
-export const WIND_DIRECTIONS = [
-  'North', 'North-northeast', 'Northeast',
-  'East-northeast', 'East', 'East-southeast', 'Southeast',
-  'South-southeast', 'South', 'South-southwest', 'Southwest',
-  'West-southwest', 'West', 'West-northwest', 'Northwest', 'North-northwest'
-];
-
 export function windSpeedToBeaufort(speed) {
   if (speed < 0.3) {
     return 0;
@@ -441,76 +443,20 @@ export interface BoatStatus {
         },
         'weather'?: WeatherData,
         'weather_forecast'?: WeatherForecastData,
-        'webcam'?: {
-            'name': string,
-            'location_name': string,
-            'heading': number,
-            'latitude': number,
-            'longitude': number,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam1'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam2'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam3'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam4'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
-        'nearest_webcam5'?: {
-            'name': string,
-            'location_name': string,
-            'heading': string,
-            'latitude': string,
-            'longitude': string,
-            'url': string,
-            'distance': string,
-        }
+        'webcam'?: WebcamData,
+        'nearest_webcam'?: WebcamData,
+        'nearest_webcam1'?: WebcamData,
+        'nearest_webcam2'?: WebcamData,
+        'nearest_webcam3'?: WebcamData,
+        'nearest_webcam4'?: WebcamData,
+        'nearest_webcam5'?: WebcamData,
         'purchases': {
             'is_pro': boolean,
             'is_recurrent': boolean,
             'date_pro': string,
             'date_pro_end': string,
             'period_pro': number
-        }
+        },
     };
 }
 

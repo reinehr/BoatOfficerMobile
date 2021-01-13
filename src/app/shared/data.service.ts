@@ -121,6 +121,13 @@ export class DataService {
                         console.log('boatStatus loading');
                         for (const idDevice of Object.keys(this.activeAlarmByField)) {
                             if (this.boatStatus && this.boatStatus[idDevice]) {
+                                let timestamp = + new Date();
+                                this.boatStatus[idDevice].nearest_webcam.url = (this.boatStatus[idDevice].nearest_webcam.url + (this.boatStatus[idDevice].nearest_webcam.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                this.boatStatus[idDevice].nearest_webcam1.url = (this.boatStatus[idDevice].nearest_webcam1.url + (this.boatStatus[idDevice].nearest_webcam1.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                this.boatStatus[idDevice].nearest_webcam2.url = (this.boatStatus[idDevice].nearest_webcam2.url + (this.boatStatus[idDevice].nearest_webcam2.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                this.boatStatus[idDevice].nearest_webcam3.url = (this.boatStatus[idDevice].nearest_webcam3.url + (this.boatStatus[idDevice].nearest_webcam3.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                this.boatStatus[idDevice].nearest_webcam4.url = (this.boatStatus[idDevice].nearest_webcam4.url + (this.boatStatus[idDevice].nearest_webcam4.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                this.boatStatus[idDevice].nearest_webcam5.url = (this.boatStatus[idDevice].nearest_webcam5.url + (this.boatStatus[idDevice].nearest_webcam5.url.indexOf('?')>-1 ? '&' : '?') + timestamp)
                                 this.boatStatus[idDevice].alarm_active = {};
                                 for (const mapKey of this.sensorFieldKeys) {
                                     // if (mapKey in this.boatStatus[idDevice].alarm_active) {

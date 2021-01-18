@@ -61,7 +61,10 @@
   "Voltage Intern Battery": "Voltage Intern Battery",
   "Charging active": "Charging active",
   "Intern Temperature": "Intern Temperature",
+  "### MAP  ###": "",
   "POSITION": "POSITION",
+  "GPS Reception": "GPS Reception",
+  "SOS active!": "SOS active!",
   "Speed": "Speed",
   "Position Accuracy": "Position Accuracy",
   "Direction": "Direction",
@@ -71,6 +74,7 @@
   "closed":  "closed",
   "MAP": "MAP",
   "Please buy Pro": "This view is only available in the pro version.",
+  "bad_gps_reception_explained": "Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception.",
 
   "### BOAT SETTINGS ###": "",
   "Back": "Back",

@@ -111,6 +111,7 @@
 "_BOAT_SETTINGS_ZCbOd5" = "BOAT SETTINGS";
 "Back" = "Back";
 "_____BOAT_SETTINGS_____ZxHRag" = "";
+"bad_gps_reception_explained" = "Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception.";
 "_Please_buy_Pro_ZkCpFH" = "This view is only available in the pro version.";
 "MAP" = "MAP";
 "closed" = "closed";
@@ -120,7 +121,10 @@
 "Direction" = "Direction";
 "_Position_Accuracy_ZR79bU" = "Position Accuracy";
 "Speed" = "Speed";
+"_SOS_active__2g0HDW" = "SOS active!";
+"_GPS_Reception_Z1yTsh" = "GPS Reception";
 "POSITION" = "POSITION";
+"_____MAP______Z2fjHjq" = "";
 "_Intern_Temperature_ZF40Gb" = "Intern Temperature";
 "_Charging_active_ZbDBT5" = "Charging active";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Voltage Intern Battery";

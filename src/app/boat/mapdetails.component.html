@@ -25,6 +25,12 @@
                         <Label [text]="interval.name | L" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
+                <StackLayout orientation="horizontal"
+                             *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].sensor_data.PosMessageSubstitute == true">
+                    <GridLayout verticalAlignment="top" horizontalAlignment="center" padding="10">
+                        <Label class="" textWrap="true" [text]="'bad_gps_reception_explained' | L" verticalAlignment="middle" horizontalAlignment="center"></Label>
+                    </GridLayout>
+                </StackLayout>
                 <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" [visibility]="selectedIntervalId > 0 && !dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>

@@ -224,7 +224,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
     onLoadStarted(args: LoadEventData) {
     }
 
-    onLoadFinished(args: LoadEventData) {
+    onLoadFinishedWebView(args: LoadEventData) {
         const webView = args.object as WebView;
         console.log('WEBVIEW Webcams onLoadFinished')
 

@@ -100,7 +100,7 @@ export class DataService {
     historyIntervalData = historyInterval;
     minMax: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
     minMaxGps: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
-    private isLoading = false;
+    public isLoading = false;
     dataLoaded = false;
 
     constructor(

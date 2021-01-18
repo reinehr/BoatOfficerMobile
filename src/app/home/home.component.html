@@ -28,11 +28,30 @@
                 <StackLayout id="level_5" col=0 row=3 *ngIf="dataService">
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                         <Label text="" height="35"></Label>
-                        <StackLayout [class]="device.boat_image_medium && device.boat_image_medium != 'null' ? 'boat-name' : 'alarm-button'" height="30pt">
-                            <Label [text]="device.name" marginLeft="10" marginTop="3"></Label>
+                        <StackLayout class="only-boat-name" *ngIf="!device.boat_image_medium || device.boat_image_medium == 'null'">
+                            <GridLayout>
+                                <GridLayout columns="*, 40" rows="30" class="bg-darkblue">
+                                    <Label col="0" row="0" class="boat-name-in-button" [text]="device.name"></Label>
+                                    <Label col="1" row="0" class="role-symbol-in-button"
+                                           [text]="''" *ngIf="device.role == 'sailor'"></Label>
+                                    <Label col="1" row="0" class="role-symbol-in-button"
+                                           [text]="''" *ngIf="device.role == 'guard'"></Label>
+                                </GridLayout>
+                            </GridLayout>
+
                         </StackLayout>
                         <StackLayout *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
-                            <Image class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
+                            <GridLayout>
+                                <GridLayout columns="*, 40" rows="*, 50" class="boatoffice-boat-image-container">
+                                    <Image col="0" row="0" rowSpan="2" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
+                                    <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>
+                                    <Label col="0" row="1" class="text-overlay-bottom-left" [text]="device.name"></Label>
+                                    <Label col="1" row="1" [text]="''"
+                                           class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'sailor'"></Label>
+                                    <Label col="1" row="1" [text]="''"
+                                           class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'guard'"></Label>
+                                </GridLayout>
+                            </GridLayout>
                         </StackLayout>
                         <StackLayout class="alarm-card-home" padding="5,10,10,10" *ngIf="device.sum_active_alarm > 0">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
@@ -77,18 +96,33 @@
                                        class="t-12 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
-                            <GridLayout columns="*, auto, 10" rows="20" paddingBottom="10">
-                                <Label col=1 row=0 [text]="'(' + (dataService.boatStatus[device.id].position_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
+                            <GridLayout columns="17, *, auto, 10" rows="20" paddingBottom="10">
+                                <Label col=0 row=0 [text]="''"
+                                       class="bad-gps-symbol alarm-orange"
+                                       *ngIf="dataService.boatStatus[device.id].sensor_data.PosMessageSubstitute == true"></Label>
+                                <Label col=1 row=0 [text]="('GPS Reception' | L)"
+                                       class="t-12 font-weight-normal alarm-orange"
+                                       verticalAlignment="middle" horizontalAlignment="left"
+                                       *ngIf="dataService.boatStatus[device.id].sensor_data.PosMessageSubstitute == true"></Label>
+                                <Label col=2 row=0 [text]="'(' + (dataService.boatStatus[device.id].position_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
                                        class="t-12 font-weight-normal"
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
-                            <GridLayout [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
-                                <MapView [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
+                            <GridLayout columns="*, 40" rows="*, 50" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                                <MapView col="0" row="0" rowSpan="2" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                          [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                          [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
                                          (mapReady)="onMapReady($event, idDevice)"
                                          (markerSelect)="onMarkerEvent($event)"
                                          (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
+                                <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-red" *ngIf="device.role == 'sos'"></Label>
+                                <Label col="0" row="1" class="text-overlay-bottom-left" [text]="('SOS active!') | L" *ngIf="device.role == 'sos'"></Label>
+                                <Label col="1" row="1" [text]="''"
+                                       class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'sos'"></Label>
+                                <Label col="1" row="1" [text]="''"
+                                       class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'race'"></Label>
+                                <Label col="1" row="1" [text]="''"
+                                       class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'mapping'"></Label>
                                 <GridLayout [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                             </GridLayout>
                         </StackLayout>
@@ -178,7 +212,7 @@
                                                  [src]="'' +
                                         dataService.boatStatus[device.id].nearest_webcam.url"
                                                  (loadStarted)="onLoadStarted($event)"
-                                                 (loadFinished)="onLoadFinished($event)">
+                                                 (loadFinished)="onLoadFinishedWebView($event)">
                                         </WebView>
                                     </GridLayout>
                                     <GridLayout [nsRouterLink]="['../webcam', idDevice]"></GridLayout>

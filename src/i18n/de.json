@@ -61,7 +61,10 @@
   "Voltage Intern Battery": "Spannung interner Akku",
   "Charging active": "Akku wird geladen",
   "Intern Temperature": "Interne Temperatur",
+  "### MAP  ###": "",
   "POSITION": "POSITION",
+  "GPS Reception": "GPS Empfang",
+  "SOS active!": "SOS aktiv!",
   "Speed": "Geschwindigkeit",
   "Position Accuracy": "Genauigkeit der Position",
   "Direction": "Richtung",
@@ -71,6 +74,7 @@
   "closed":  "geschlossen",
   "MAP": "KARTENANSICHT",
   "Please buy Pro": "Diese Ansicht ist nur in der Pro-Version verfügbar.",
+  "bad_gps_reception_explained": "Schlechter GPS Empfang: GPS Sensor ist zu stark verdeckt (gewesen). Abdeckung, insbesondere durch Metall, bitte vermeiden. Ggf. verbessert auch ein kürzeres Positionsintervall den GPS Empfang.",
 
   "### BOAT SETTINGS ###": "",
   "Back": "Zurück",

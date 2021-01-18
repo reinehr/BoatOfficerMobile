@@ -74,15 +74,27 @@
     vertical-align: center;
 }
 
-.boatoffice-boat-image-home {
-    // height: 100%;
-    border-radius: 0,0,10,10;
+
+.boatoffice-boat-image-container{
     display: block;
     stretch: aspectFill;
     horizontal-align: center;
     vertical-align: center;
     text-align: center;
+    height: 200;
+    overflow: hidden;
+    border: 1px solid black;
     margin: 0,30,0,30;
+}
+
+.boatoffice-boat-image-home {
+    // height: 100%;
+    border-radius: 10,10,10,10;
+    display: block;
+    stretch: aspectFill;
+    horizontal-align: center;
+    vertical-align: center;
+    text-align: center;
     height: 200;
     overflow: hidden;
 }
@@ -163,6 +175,77 @@ $buttons_count: 5;
     border-radius: 10, 10, 0, 0;
     margin: 0,30,0,30;
     height: 44pt;
+}
+
+.only-boat-name{
+    margin: 0,30,0,30;
+    background-color: #091524;
+    color: white;
+    font-weight: 800;
+    border-radius: 10;
+    height: 40pt;
+    padding: 5;
+}
+
+.boat-name-in-button{
+    color: white;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+    margin: 0,10,0,10;
+}
+
+.role-symbol-in-button{
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-size: 20px;
+    text-align: right;
+    width: 50pt;
+    vertical-align: center;
+    color: white;
+    margin: 0,50,0,30;
+}
+
+.bottom-border-radius {
+    border-radius: 0 0 10 10;
+}
+
+.shadow-overlay-bottom-blue {
+    background: linear-gradient(rgba(9,21,36,0), rgba(9,21,36,1) 10%, rgba(9,21,36,1) 70%);
+}
+
+.shadow-overlay-bottom-alarm-orange {
+    background: linear-gradient(rgba(251,139,36,0), rgba(251,139,36,1) 10%, rgba(251,139,36,1) 70%);
+}
+
+.shadow-overlay-bottom-alarm-red {
+    background: linear-gradient(rgba(233,50,0,0), rgba(233,50,0,1) 10%, rgba(233,50,0,1) 70%);
+}
+
+.text-overlay-bottom-left {
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: bottom;
+    margin: 0,10,7,10;
+}
+
+.fa-symbol-overlay-bottom-right {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-size: 14px;
+    text-align: right;
+    width: 50pt;
+    vertical-align: bottom;
+    color: white;
+    margin: 0,50,7,30;
+}
+
+.bad-gps-symbol {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-size: 12px;
+    text-align: left;
+    width: 20pt;
+    vertical-align: middle;
 }
 
 .alarm-button {
@@ -249,6 +332,16 @@ $buttons_count: 5;
 
 .alarm-gray-dark {
     color: #aaaaaa;
+}
+
+.user-role-symbol {
+    font-family: "Font Awesome 5 Free", "fa-solid-900";
+    font-weight: 400;
+    font-size: 20px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+    color: #356eb4;
 }
 
 .bg-darkblue {

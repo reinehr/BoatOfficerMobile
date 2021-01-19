@@ -393,7 +393,7 @@ export interface SensordataTime {
     hdop: { value: number, time: Date };
     isMultiGnssUsed: { value: boolean, time: Date };
     latitude: { value: number, time: Date };
-    longitude: { value: number, time: Date };onMessageReceivedCallback
+    longitude: { value: number, time: Date };
     portNo: { value: number, time: Date };
     raw: { value: string, time: Date };
     time: { value: string, time: Date };

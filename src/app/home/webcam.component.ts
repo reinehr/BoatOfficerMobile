@@ -38,6 +38,7 @@ export class WebcamComponent implements OnInit {
     isLoading = false;
     initialized = true;
 
+    timestamp = + new Date();
     webcamHeight = {}; //240;
     webcamWidth = {}; //295;
     webcamScale = {}; //1.0;

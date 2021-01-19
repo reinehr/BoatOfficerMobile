@@ -30,7 +30,7 @@
                         <Label text="" height="35"></Label>
                         <StackLayout class="only-boat-name" *ngIf="!device.boat_image_medium || device.boat_image_medium == 'null'">
                             <GridLayout>
-                                <GridLayout columns="*, 40" rows="30" class="bg-darkblue">
+                                <GridLayout columns="*, 40" class="bg-darkblue">
                                     <Label col="0" row="0" class="boat-name-in-button" [text]="device.name"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'sailor'"></Label>
@@ -96,7 +96,7 @@
                                        class="t-12 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
-                            <GridLayout columns="17, *, auto, 10" rows="20" paddingBottom="10">
+                            <GridLayout columns="19, *, auto, 10" paddingBottom="10">
                                 <Label col=0 row=0 [text]="''"
                                        class="bad-gps-symbol alarm-orange"
                                        *ngIf="dataService.boatStatus[device.id].sensor_data.PosMessageSubstitute == true"></Label>

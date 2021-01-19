@@ -3,6 +3,7 @@ import * as firebase from 'nativescript-plugin-firebase';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 import { SelectedIndexChangedEventData, TabStripItemEventData } from "tns-core-modules/ui/bottom-navigation";
 import { RouterExtensions } from "nativescript-angular/router";
+import {alert} from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: 'app-ns',
@@ -27,6 +28,7 @@ export class AppComponent implements OnInit {
             },
 
             onMessageReceivedCallback: (message: firebase.Message) => {
+                alert({okButtonText: 'OK', message: message.body, title: message.title});
                 console.log('[Firebase] onMessageReceivedCallback:', {message});
             },
 

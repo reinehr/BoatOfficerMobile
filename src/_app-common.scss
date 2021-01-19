@@ -190,6 +190,7 @@ $buttons_count: 5;
 .boat-name-in-button{
     color: white;
     font-weight: bold;
+    vertical-align: middle;
     font-size: 20px;
     text-align: left;
     margin: 0,10,0,10;
@@ -210,15 +211,15 @@ $buttons_count: 5;
 }
 
 .shadow-overlay-bottom-blue {
-    background: linear-gradient(rgba(9,21,36,0), rgba(9,21,36,1) 10%, rgba(9,21,36,1) 70%);
+    background: linear-gradient(rgba(9,21,36,0) 0%, rgba(9,21,36,1) 70%);
 }
 
 .shadow-overlay-bottom-alarm-orange {
-    background: linear-gradient(rgba(251,139,36,0), rgba(251,139,36,1) 10%, rgba(251,139,36,1) 70%);
+    background: linear-gradient(rgba(251,139,36,0) 0%, rgba(251,139,36,1) 70%);
 }
 
 .shadow-overlay-bottom-alarm-red {
-    background: linear-gradient(rgba(233,50,0,0), rgba(233,50,0,1) 10%, rgba(233,50,0,1) 70%);
+    background: linear-gradient(rgba(233,50,0,0) 0%, rgba(233,50,0,1) 70%);
 }
 
 .text-overlay-bottom-left {

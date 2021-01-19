@@ -42,7 +42,7 @@
                         </StackLayout>
                         <StackLayout *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
                             <GridLayout>
-                                <GridLayout columns="*, 40" rows="*, 50" class="boatoffice-boat-image-container">
+                                <GridLayout columns="*, 40" rows="*, 40" class="boatoffice-boat-image-container">
                                     <Image col="0" row="0" rowSpan="2" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                                     <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>
                                     <Label col="0" row="1" class="text-overlay-bottom-left" [text]="device.name"></Label>
@@ -108,7 +108,7 @@
                                        class="t-12 font-weight-normal"
                                        verticalAlignment="middle" horizontalAlignment="right"></Label>
                             </GridLayout>
-                            <GridLayout columns="*, 40" rows="*, 50" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                            <GridLayout columns="*, 40" rows="*, 30" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
                                 <MapView col="0" row="0" rowSpan="2" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                          [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                          [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"

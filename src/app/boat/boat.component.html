@@ -101,7 +101,7 @@
                                    class="t-12 font-weight-normal"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
                         </GridLayout>
-                        <GridLayout columns="*, 40" rows="*, 50" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                        <GridLayout columns="*, 40" rows="*, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
                             <MapView col="0" row="0" rowSpan="2" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                      [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                      [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"

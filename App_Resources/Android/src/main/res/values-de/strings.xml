@@ -113,6 +113,7 @@
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOOT EINSTELLUNGEN"</string>
   <string name="Back">"Zurück"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
+  <string name="bad_gps_reception_explained">"Schlechter GPS Empfang: GPS Sensor ist zu stark verdeckt (gewesen). Abdeckung, insbesondere durch Metall, bitte vermeiden. Ggf. verbessert auch ein kürzeres Positionsintervall den GPS Empfang."</string>
   <string name="_Please_buy_Pro_ZkCpFH">"Diese Ansicht ist nur in der Pro-Version verfügbar."</string>
   <string name="MAP">"KARTENANSICHT"</string>
   <string name="closed">"geschlossen"</string>
@@ -122,7 +123,10 @@
   <string name="Direction">"Richtung"</string>
   <string name="_Position_Accuracy_ZR79bU">"Genauigkeit der Position"</string>
   <string name="Speed">"Geschwindigkeit"</string>
+  <string name="_SOS_active__2g0HDW">"SOS aktiv!"</string>
+  <string name="_GPS_Reception_Z1yTsh">"GPS Empfang"</string>
   <string name="POSITION">"POSITION"</string>
+  <string name="_____MAP______Z2fjHjq">""</string>
   <string name="_Intern_Temperature_ZF40Gb">"Interne Temperatur"</string>
   <string name="_Charging_active_ZbDBT5">"Akku wird geladen"</string>
   <string name="_Voltage_Intern_Battery_Z1PhXWl">"Spannung interner Akku"</string>

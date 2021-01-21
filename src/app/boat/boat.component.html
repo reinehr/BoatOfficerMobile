@@ -92,11 +92,11 @@
                         <GridLayout columns="19, *, auto, 10" paddingBottom="10">
                             <Label col=0 row=0 [text]="''"
                                    class="bad-gps-symbol alarm-orange"
-                                   *ngIf="dataService.boatStatus[device.id].sensor_data.PosMessageSubstitute == true"></Label>
+                                   *ngIf="device.bad_gps_signal == true"></Label>
                             <Label col=1 row=0 [text]="('GPS Reception' | L)"
                                    class="t-12 font-weight-normal alarm-orange"
                                    verticalAlignment="middle" horizontalAlignment="left"
-                                   *ngIf="dataService.boatStatus[device.id].sensor_data.PosMessageSubstitute == true"></Label>
+                                   *ngIf="device.bad_gps_signal == true"></Label>
                             <Label col=2 row=0 [text]="'(' + (dataService.boatStatus[device.id].position_data.time | date:'dd.MM.yyyy HH:mm z') + ')'"
                                    class="t-12 font-weight-normal"
                                    verticalAlignment="middle" horizontalAlignment="right"></Label>
@@ -108,14 +108,15 @@
                                      (mapReady)="onMapReady($event, idDevice)"
                                      (markerSelect)="onMarkerEvent($event)"
                                      (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
-                            <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-red" *ngIf="device.role == 'sos'"></Label>
-                            <Label col="0" row="1" class="text-overlay-bottom-left" [text]="('SOS active!') | L" *ngIf="device.role == 'sos'"></Label>
+                            <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-red"  *ngIf="device.mode == 'SOS' || device.mode == 'Unacknowledged Movement'"></Label>
+                            <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-blue" *ngIf="device.mode != 'SOS' && device.mode != 'Unacknowledged Movement' && device.mode != ''"></Label>
+                            <Label col="0" row="1" class="text-overlay-bottom-left" [text]="(device.mode + ' active!') | L" *ngIf="device.mode != ''"></Label>
                             <Label col="1" row="1" [text]="''"
-                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'sos'"></Label>
+                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'SOS'"></Label>
                             <Label col="1" row="1" [text]="''"
-                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'race'"></Label>
+                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'Race Mode'"></Label>
                             <Label col="1" row="1" [text]="''"
-                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'mapping'"></Label>
+                                   class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'Mapping'"></Label>
                             <GridLayout [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                         </GridLayout>
                         <GridLayout>

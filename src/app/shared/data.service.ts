@@ -32,6 +32,10 @@ export interface DeviceAlarmDataFormat {
     'num_guard': number;
     'num_officer': number;
     'num_total': number;
+    'mode': string,
+    'time_mode_changed': string,
+    'bad_gps_signal': boolean,
+    'time_bad_gps_signal': string,
     'serial_number_dec': string;
     'serial_number_hex': string;
     'serial_number_str': string;

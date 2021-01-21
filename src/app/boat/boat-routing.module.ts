@@ -11,6 +11,7 @@ import {MapdetailsComponent} from '~/app/boat/mapdetails.component';
 import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
 import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component';
 import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.component";
+import {EditusersComponent} from "~/app/boat/editusers.component";
 
 const routes: Routes = [
     {path: 'default', component: BoatComponent},
@@ -21,6 +22,7 @@ const routes: Routes = [
     {path: 'mapdetails/:idDevice', component: MapdetailsComponent},
     {path: 'editalarmsettings/:idDevice/:field/:idAlarm', component: EditalarmsettingsComponent},
     {path: 'editdevicesettings/:idDevice/:field', component: EditdevicesettingsComponent},
+    {path: 'editusers/:idDevice/:roleOrRequests', component: EditusersComponent},
     // {path: 'home', component: HomeComponent, outlet: 'homeTab'}
 ];
 

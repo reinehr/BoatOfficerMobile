@@ -28,6 +28,7 @@ export interface DeviceAlarmDataFormat {
     'harbour_contact': string;
     'berth': string;
     'role': string;
+    'num_candidate': number;
     'num_sailor': number;
     'num_guard': number;
     'num_officer': number;
@@ -51,6 +52,13 @@ export interface DeviceAlarmDataFormat {
     'date_pro_end': string,
     'period_pro': number,
     'sum_active_alarm'?: number;
+    'device_users': {
+        'id': number,
+        'role': string,
+        'user_id': number,
+        'fb_id': string,
+        'email': string,
+    }
     'alarm': {
         'id': number;
         'type': string,

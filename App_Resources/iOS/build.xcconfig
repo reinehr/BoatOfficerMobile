@@ -1,7 +1,7 @@
 
 ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 DEVELOPMENT_TEAM = 44B8RQJHNP
-CODE_SIGN_IDENTITY = iOS Developer
+CODE_SIGN_IDENTITY = iPhone Developer
 
 CODE_SIGN_ENTITLEMENTS = BoatOfficerMobile/BoatOfficerMobile.entitlements
 

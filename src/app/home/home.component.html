@@ -141,19 +141,19 @@
                                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
                                             <Label col=1 row=0 [text]="((forecast.dt - dataService.boatStatus[device.id].weather_forecast.city.timezone) * 1000) | date: 'HH:mm'" class="t-16 font-weight-bold"
                                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
-                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol-weather alarm-orange"
                                                    verticalAlignment="middle" horizontalAlignment="left"
                                                     *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user >= forecast.main.temp"></Label>
-                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol-weather alarm-orange"
                                                    verticalAlignment="middle" horizontalAlignment="left"
                                                     *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingLowInDegreesC'].value_device >= forecast.main.temp"></Label>
-                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol-weather alarm-orange"
                                                    verticalAlignment="middle" horizontalAlignment="left"
                                                     *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user <= forecast.main.temp"></Label>
-                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol-weather alarm-orange"
                                                    verticalAlignment="middle" horizontalAlignment="left"
                                                     *ngIf="dataService.alarmSettings && dataService.alarmSettings[device.id] && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'] && !dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_user && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device && dataService.alarmSettings[device.id]['UserCfg_IntTemperatureAlarmSettingHighInDegreesC'].value_device <= forecast.main.temp"></Label>
-                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol alarm-orange"
+                                            <Label col=2 row=0 [text]="'C'" class="alarm-symbol-weather alarm-orange"
                                                    verticalAlignment="middle" horizontalAlignment="left"
                                                     *ngIf="forecast.wind.beaufort >= beaufortAlarmLevel"></Label>
                                             <Label col=3 row=0 [text]="(forecast.main.temp | number: '1.0-0') + '°C'" [class]="'t-16 font-weight-bold' + (

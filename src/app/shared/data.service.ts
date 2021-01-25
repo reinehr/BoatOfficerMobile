@@ -33,10 +33,10 @@ export interface DeviceAlarmDataFormat {
     'num_guard': number;
     'num_officer': number;
     'num_total': number;
-    'mode': string,
-    'time_mode_changed': string,
-    'bad_gps_signal': boolean,
-    'time_bad_gps_signal': string,
+    'mode': string;
+    'time_mode_changed': string;
+    'bad_gps_signal': boolean;
+    'time_bad_gps_signal': string;
     'serial_number_dec': string;
     'serial_number_hex': string;
     'serial_number_str': string;
@@ -46,11 +46,11 @@ export interface DeviceAlarmDataFormat {
     'product_number_dec': string;
     'product_number_hex': string;
     'product_number_str': string;
-    'is_pro': boolean,
-    'is_recurrent': boolean,
-    'date_pro': string,
-    'date_pro_end': string,
-    'period_pro': number,
+    'is_pro': boolean;
+    'is_recurrent': boolean;
+    'date_pro': string;
+    'date_pro_end': string;
+    'period_pro': number;
     'sum_active_alarm'?: number;
     'device_users': {
         'id': number,
@@ -58,7 +58,7 @@ export interface DeviceAlarmDataFormat {
         'user_id': number,
         'fb_id': string,
         'email': string,
-    }
+    }[];
     'alarm': {
         'id': number;
         'type': string,

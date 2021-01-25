@@ -76,6 +76,7 @@
 
 
 .boatoffice-boat-image-container{
+    width: 100%;
     display: block;
     stretch: aspectFill;
     horizontal-align: center;
@@ -84,11 +85,13 @@
     height: 200;
     overflow: hidden;
     border: 1px solid black;
-    margin: 0,30,0,30;
+    padding: 0,30,0,30;
+
 }
 
 .boatoffice-boat-image-home {
     // height: 100%;
+    width: 100%;
     border-radius: 10,10,10,10;
     display: block;
     stretch: aspectFill;

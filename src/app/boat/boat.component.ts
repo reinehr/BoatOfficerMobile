@@ -34,7 +34,6 @@ export class BoatComponent implements OnInit, AfterViewInit {
     maxZoom = 22;
     bearing = 0;
     tilt = 0;
-    padding = [40, 40, 40, 40];
     mapView: MapView;
     private sensordataSub: Subscription;
     now = new Date();

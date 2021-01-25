@@ -48,7 +48,6 @@ export class HomeComponent implements OnInit, AfterViewInit {
     maxZoom = 22;
     bearing = 0;
     tilt = 0;
-    padding = [40, 40, 40, 40];
     mapView: MapView;
     alarmByTypeMap = alarmByTypeMap;
     maxWeather = {0: 3};

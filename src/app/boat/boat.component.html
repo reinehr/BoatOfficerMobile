@@ -104,7 +104,7 @@
                         <GridLayout columns="*, 40" rows="*, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
                             <MapView col="0" row="0" rowSpan="2" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                      [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
-                                     [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
+                                     [tilt]="tilt" padding="5, 5, 5, 5" [mapAnimationsEnabled]="false"
                                      (mapReady)="onMapReady($event, idDevice)"
                                      (markerSelect)="onMarkerEvent($event)"
                                      (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
@@ -116,7 +116,7 @@
                                    class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'race'"></Label>
                             <Label col="1" row="1" [text]="''"
                                    class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'mapping'"></Label>
-                            <GridLayout [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
+                            <GridLayout col="0" row="0" rowSpan="2" colSpan="2" [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                         </GridLayout>
                         <GridLayout>
                             <StackLayout>

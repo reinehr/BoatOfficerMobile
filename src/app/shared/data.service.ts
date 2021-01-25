@@ -58,6 +58,7 @@ export interface DeviceAlarmDataFormat {
         'user_id': number,
         'fb_id': string,
         'email': string,
+        'lifeguard': boolean,
     }[];
     'alarm': {
         'id': number;

@@ -130,6 +130,9 @@
   <string name="Direction">"Direction"</string>
   <string name="_Position_Accuracy_ZR79bU">"Position Accuracy"</string>
   <string name="Speed">"Speed"</string>
+  <string name="_Mapping_active__Z1mKSfR">"Mapping active!"</string>
+  <string name="_Race_Mode_active__2ubaso">"Race Mode active!"</string>
+  <string name="_Unacknowledged_Movement_active__Z1Sne4f">"Unacknowledged Movement!"</string>
   <string name="_SOS_active__2g0HDW">"SOS active!"</string>
   <string name="_GPS_Reception_Z1yTsh">"GPS Reception"</string>
   <string name="POSITION">"POSITION"</string>

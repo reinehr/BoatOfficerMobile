@@ -3,7 +3,7 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {DataService} from '~/app/shared/data.service';
-import {alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
+import {alarmSettingsDatatypeMap, alarmSettingsDatatypeMapOrderedByIndex, alarmSettingsMap} from '~/app/shared/interface/alarm';
 import {stringify} from "@angular/compiler/src/util";
 
 
@@ -40,6 +40,7 @@ export class EditalarmsettingsComponent implements OnInit {
     selectedListPickerIndex = 0;
     selectedAlarmValue = 0;
     listPickerWidth = 50;
+    selectedIndexAtOpen = 0;
 
 
     ngOnInit(): void {
@@ -59,11 +60,12 @@ export class EditalarmsettingsComponent implements OnInit {
             }
         } else {
             for (let i = alarm.min; i <= (isPro ? alarm.max_pro : alarm.max); i++) {
-                if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === i) {
+                if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === alarmSettingsDatatypeMapOrderedByIndex[alarm.datatype][i].value) {
                     this.originalAlarmSettingIndex = this.listPicker.length;
                     this.selectedListPickerIndex = this.originalAlarmSettingIndex;
+                    console.log('value_device: ' + i + ' originalSettingIndex: ' + this.originalAlarmSettingIndex);
                 }
-                const listPickerString = stringify(alarmSettingsDatatypeMap[alarm.datatype][i].name) + ' ' + alarmSettingsDatatypeMap[alarm.datatype][i].unit;
+                const listPickerString = stringify(alarmSettingsDatatypeMapOrderedByIndex[alarm.datatype][i].name) + ' ' + alarmSettingsDatatypeMapOrderedByIndex[alarm.datatype][i].unit;
                 this.listPicker.push(listPickerString);
                 if (listPickerString.length * 15 > this.listPickerWidth) {
                     this.listPickerWidth = listPickerString.length * 15;
@@ -84,8 +86,16 @@ export class EditalarmsettingsComponent implements OnInit {
     selectedIndexChanged(picker) {
         const alarm = alarmSettingsMap[this.field][this.idAlarm];
         console.log('picker selection: ' + picker.selectedIndex);
-        this.selectedListPickerIndex = picker.selectedIndex;
-        this.selectedAlarmValue = picker.selectedIndex + alarm.min;
+        if (-1 != picker.selectedIndex)
+        {
+            this.selectedListPickerIndex = picker.selectedIndex;
+            if (!alarmSettingsDatatypeMap[alarm.datatype]) {
+                this.selectedAlarmValue = picker.selectedIndex + alarm.min;
+            } else {
+                this.selectedAlarmValue = alarmSettingsDatatypeMapOrderedByIndex[alarm.datatype][picker.selectedIndex].value;
+            }
+            console.log('selected alarm value: ' + this.selectedAlarmValue);
+        }
     }
 
     goBack() {

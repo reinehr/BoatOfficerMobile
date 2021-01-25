@@ -13,6 +13,7 @@ import {TimeagoModule} from 'ngx-timeago';
 import {UploadpictureComponent} from '~/app/boat/uploadpicture.component';
 import {EditalarmsettingsComponent} from '~/app/boat/editalarmsettings.component';
 import {EditdevicesettingsComponent} from '~/app/boat/editdevicesettings.component';
+import {EditusersComponent} from '~/app/boat/editusers.component';
 import {NativeScriptLocalizeModule} from 'nativescript-localize/localize.module';
 import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
 
@@ -34,7 +35,8 @@ import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
         BoatsettingsComponent,
         UploadpictureComponent,
         EditalarmsettingsComponent,
-        EditdevicesettingsComponent
+        EditdevicesettingsComponent,
+        EditusersComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

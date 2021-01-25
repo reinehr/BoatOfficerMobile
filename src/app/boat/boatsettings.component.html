@@ -176,33 +176,72 @@
                                        [text]="device.product_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_sailor > 0 && false">
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+
+                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                    <StackLayout>
+                        <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold"></Label>
+                        <StackLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'officer'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
-                                <Label col="2" row="1" text="{{'Number of Sailors registered' | L}}"
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray"></Label>
+                                <Label col="2" row="1" text="{{'Captain' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
-                                       [text]="device.num_sailor"
+                                <Label col="3" row="1" *ngIf="device.serial_number_dec"
+                                       [text]="device.serial_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_guard > 0 && false">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                                        *ngIf="device.role == 'officer'"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'rolerequests'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                <Label col="2" row="1" text="{{'Requests' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1" *ngIf="true"
+                                       [text]="'TODO'"
+                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_guard > 0 || true"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editusers', idDevice, 'guard'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
                                        class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
-                                <Label col="2" row="1" text="{{'Number of Guards registered' | L}}"
+                                <Label col="2" row="1" text="{{'Guards' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
                                 <Label col="3" row="1"
                                        [text]="device.num_guard"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_sailor > 0 || true"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'sailor' ? ['../editusers', idDevice, 'sailor'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                <Label col="2" row="1" text="{{'Sailors' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1"
+                                       [text]="device.num_sailor"
+                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            </GridLayout>
+
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
+
             </StackLayout>
         </StackLayout>
     </ScrollView>

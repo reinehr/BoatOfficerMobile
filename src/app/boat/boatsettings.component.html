@@ -9,7 +9,7 @@
     <ScrollView orientation="vertical">
         <StackLayout *ngIf="dataService.dataLoaded">
             <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
-                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
                                 *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                         <Image [src]="'' + device.boat_image_small"
@@ -31,7 +31,7 @@
                                 <StackLayout *ngIf="alarmSettingsMap[field]">
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="dataService.alarmSettings[device.id][alarm.key]">
-                                            <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="10"
+                                            <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5"
                                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editalarmsettings', device.id, field, index] : []">
                                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -48,8 +48,7 @@
                                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                                             </GridLayout>
                                             <GridLayout paddingBottom="5"
-                                                        *ngIf="dataService.alarmSettings[device.id][alarm.key].value_user != null && dataService.alarmSettings[device.id][alarm.key].value_user != dataService.alarmSettings[device.id][alarm.key].value_device"
-                                                        marginTop="-10">
+                                                        *ngIf="dataService.alarmSettings[device.id][alarm.key].value_user != null && dataService.alarmSettings[device.id][alarm.key].value_user != dataService.alarmSettings[device.id][alarm.key].value_device">
                                                 <Label class="alarm-orange" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
                                                        [text]="('Value changed to' | L) + ' ' + dataService.alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
                                                        horizontalAlignment="center"></Label>
@@ -65,11 +64,12 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" padding="5,10,10,10"
+                             *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'name'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -85,7 +85,7 @@
                                        [text]="device.name"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'berth'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -101,7 +101,7 @@
                                        [text]="device.berth"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'contact'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -117,9 +117,9 @@
                                        [text]="device.harbour_contact"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="5"
                                         [nsRouterLink]="device.role == 'officer' ? ['../uploadpicture', device.id] : []"
-                                        pageTransition="slideLeft">
+                                        pageTransition="slideLeft" *ngIf="(device.role == 'officer')">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 [text]="'i'"
@@ -136,11 +136,13 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" padding="5,10,10,10"
+                             *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        *ngIf="(device.role == 'officer' || device.role == 'guard')">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -152,7 +154,7 @@
                                        [text]="device.serial_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -164,7 +166,8 @@
                                        [text]="device.firmware_version_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        *ngIf="(device.role == 'officer' || device.role == 'guard')">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -184,7 +187,7 @@
                     <StackLayout>
                         <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'officer'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -197,7 +200,7 @@
                                        [text]="device.serial_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10"
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         *ngIf="device.role == 'officer'"
                                         [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'rolerequests'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
@@ -211,8 +214,9 @@
                                        [text]="'TODO'"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_guard > 0 || true"
-                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editusers', idDevice, 'guard'] : []">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        *ngIf="device.num_guard > 0 || true"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'guard'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -224,8 +228,9 @@
                                        [text]="device.num_guard"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="10" *ngIf="device.num_sailor > 0 || true"
-                                        [nsRouterLink]="device.role == 'officer' || device.role == 'sailor' ? ['../editusers', idDevice, 'sailor'] : []">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        *ngIf="device.num_sailor > 0 || true"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'sailor'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""

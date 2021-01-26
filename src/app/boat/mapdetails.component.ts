@@ -120,6 +120,9 @@ export class MapdetailsComponent implements OnInit {
                 case 4:
                     maxDays = 91;
                     break;
+                case 5:
+                    maxDays = 365;
+                    break;
             }
             const halftime = maxDays / 3.0;
             const base = Math.pow(0.5, 1 / halftime);
@@ -235,6 +238,9 @@ export class MapdetailsComponent implements OnInit {
                         break;
                     case 4:
                         maxDays = 91;
+                        break;
+                    case 5:
+                        maxDays = 365;
                         break;
                 }
                 const halftime = maxDays / 3.0;

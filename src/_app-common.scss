@@ -118,11 +118,11 @@
     margin-bottom: 0;
 }
 
-$buttons_count: 5;
+$buttons_count: 6;
 .interval-button {
     margin-left: calc((5%)/#{$buttons_count});
-    margin-right: calc((5%)/#{$buttons_count});
-    width: calc((89%)/#{$buttons_count});
+    margin-right: calc((1%)/#{$buttons_count});
+    width: calc((94%)/#{$buttons_count});
     height: 40;
     border-radius: 20;
     border-width: 2;

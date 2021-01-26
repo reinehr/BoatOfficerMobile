@@ -234,7 +234,7 @@ export class DataService {
                         }
                     }
                     // console.log(this.activeAlarmByField);
-                    this.apiService.getBoatHistory(92).subscribe(resp3 => {
+                    this.apiService.getBoatHistory(365).subscribe(resp3 => {
                         console.log('initSensorDataHistory - getBoatHistory');
                         this.isLoading = false;
                         this.dataLoaded = true;

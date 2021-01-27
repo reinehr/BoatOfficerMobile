@@ -187,8 +187,7 @@
                     <StackLayout>
                         <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'officer'] : []">
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -196,12 +195,12 @@
                                 <Label col="2" row="1" text="{{'Captain' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.serial_number_dec"
-                                       [text]="device.serial_number_str"
+                                <Label col="3" row="1"
+                                       [text]="device.officermail"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        *ngIf="device.role == 'officer'"
+                                        *ngIf="device.role == 'officer' && 0 != device.num_candidate"
                                         [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'rolerequests'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -210,12 +209,11 @@
                                 <Label col="2" row="1" text="{{'Requests' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="true"
-                                       [text]="'TODO'"
+                                <Label col="3" row="1"
+                                       [text]="device.num_candidate"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        *ngIf="device.num_guard > 0 || true"
                                         [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'guard'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -229,7 +227,6 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        *ngIf="device.num_sailor > 0 || true"
                                         [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'sailor'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -242,11 +239,30 @@
                                        [text]="device.num_sailor"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'lifeguard'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                <Label col="2" row="1" text="{{'Lifeguards' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1"
+                                       [text]="device.num_lifeguard"
+                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            </GridLayout>
+
 
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-
+                <Button
+                        text="{{'Leave this boat' | L}}"
+                        class="wide-button"
+                        *ngIf="device.role != 'officer'"
+                        (tap)="leaveThisBoat(device.id, device.name)">
+                </Button>
             </StackLayout>
         </StackLayout>
     </ScrollView>

@@ -32,6 +32,7 @@ export interface DeviceAlarmDataFormat {
     'num_sailor': number;
     'num_guard': number;
     'num_officer': number;
+    'num_lifeguard': number;
     'num_total': number;
     'mode': string;
     'time_mode_changed': string;

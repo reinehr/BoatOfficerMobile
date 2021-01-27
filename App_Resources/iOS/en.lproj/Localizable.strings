@@ -71,6 +71,15 @@
 "_EDIT_DEVICE_SETTINGS_Z1uqdFy" = "EDIT DEVICE SETTINGS";
 "_EDIT_ALARM_SETTINGS_190vuB" = "EDIT ALARM SETTINGS";
 "_____EDIT_SETTINGS_____ZePiMy" = "";
+"_Log_History_1QKQ5c" = "Log History";
+"_Sensor_History_hGvGy" = "Sensor History";
+"Note" = "Note";
+"Permissions" = "Permissions";
+"upgrade_to_pro_for_feature" = "This is a Pro Feature. Please upgrade your app to Pro, to make use of this feature.";
+"please_test_sos_before_usage" = "Please test this feature before first usage. It is an additional help, it is no guaranteed means for the saving of boat and lifes.";
+"users_listed_here_sos" = "Users listed here will receive a SOS push notification, when you activate the SOS function by a long button push on the device (red light starts continuous blinking until deactivation by another long button push).";
+"_Leave_this_boat_ZMQkmx" = "Leave this boat";
+"Lifeguards" = "First Aid Contacts";
 "Sailors" = "Sailors";
 "Guards" = "Guards";
 "_2nd_Officers_1olXkg" = "2nd Officers";

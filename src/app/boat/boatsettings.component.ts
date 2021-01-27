@@ -8,6 +8,7 @@ import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from "ngx-timeago";
 import {localize} from "nativescript-localize";
+import {confirm} from "tns-core-modules/ui/dialogs";
 
 @Component({
     selector: 'app-boatsettings',
@@ -37,6 +38,15 @@ export class BoatsettingsComponent implements OnInit {
     }
 
     ngOnInit(): void {
+        for (const idDevice in this.dataService.deviceData) {
+            for (let user of this.dataService.deviceData[idDevice].device_users) {
+                if (user.role == 'officer')
+                {
+                    this.dataService.deviceData[idDevice]['officermail'] = user.email;
+                    break;
+                }
+            }
+        }
     }
 
     showDialog() {
@@ -45,6 +55,18 @@ export class BoatsettingsComponent implements OnInit {
 
     closeDialog() {
         this.dialogOpen = false;
+    }
+
+    leaveThisBoat(boatid, boatname)
+    {
+        const options = {
+            title: "Do you really want to leave this boat ("+boatname+")? (TODO not supported yet)",
+            okButtonText: "Yes, Leave",
+            cancelButtonText: "Cancel",
+        };
+        confirm(options).then( result => {
+            // TODO
+        });
     }
 
     goBack() {

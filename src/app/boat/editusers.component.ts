@@ -32,7 +32,6 @@ export class EditusersComponent implements OnInit {
     sensorFieldKeys = Object.keys(alarmSettingsMap);
     public idDevice = 0;
     public roleOrRequests = '';
-    public guards = ['Hendrik', 'Jakob', 'Matthias', 'Steffi'];
     private isLoading = false;
     // listPicker: {[ttnValue: number]: string} = {0: '0V', 1: '1V', 2: '2V'};
     listPicker: Array<string> = [];
@@ -45,21 +44,40 @@ export class EditusersComponent implements OnInit {
 
     ngOnInit(): void {
 
-
     }
 
-    changeUserRole() {
-
-    }
-
-    deleteUserRole(username) {
+    changeUserRole(userid, useremail) {
         const options = {
-            title: "Delete "+username+"?",
-            okButtonText: "Yes, Delete",
+            title: "Change role of "+useremail+"? (TODO not supported yet)",
+            okButtonText: "Yes",
+            cancelButtonText: "Cancel",
+        };
+        confirm(options).then( result => {
+            // TODO
+        });
+    }
+
+    offboardUser(userid, useremail)
+    {
+        const options = {
+            title: "Send "+useremail+" aboard? (TODO not supported yet)",
+            okButtonText: "Yes",
             cancelButtonText: "Cancel",
         };
         confirm(options).then( result => {
                 // TODO
+        });
+    }
+
+    revokeLifeguardStatus(userid, useremail)
+    {
+        const options = {
+            title: "Discharge "+useremail+" as first aid contact? (TODO not supported yet)",
+            okButtonText: "Yes, Delete",
+            cancelButtonText: "Cancel",
+        };
+        confirm(options).then( result => {
+            // TODO
         });
     }
 

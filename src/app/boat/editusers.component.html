@@ -5,43 +5,85 @@
 </ActionBar>
 
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
-    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'officer'">
+    <ScrollView orientation="vertical" iosOverflowSafeArea="false">
         <StackLayout>
-            <Label text="{{'Captain' | L}}" class="t-16 font-weight-bold"></Label>
-            <Label text="{{ dataService.deviceData[idDevice].name }}"></Label>
-        </StackLayout>
-    </StackLayout>
-    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'rolerequests'">
-        <StackLayout >
-            <Label text="{{'Requests' | L}}" class="t-16 font-weight-bold"></Label>
-
-        </StackLayout>
-    </StackLayout>
-    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'guard'">
-        <StackLayout>
-            <Label text="{{'Guards' | L}}" class="t-16 font-weight-bold"></Label>
-            <Label text="{{ dataService.deviceData[idDevice].name }}" class="t-12" marginBottom="10"></Label>
-            <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index">
-                <StackLayout *ngFor="let user of guards" >
-                    <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
-                                borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5">
-                        <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user }}"></Label>
-                        <Label col=0 row=1 verticalAlignment="center" text="{{ user }}@boatofficer.com"></Label>
-                        <Label col=1 rowspan=2 text=""
-                               class="alarm-symbol-fas alarm-gray"></Label>
-                        <Label col=2 rowspan=2 text=""
-                               (tap)="deleteUserRole(user)"
-                               class="alarm-symbol-fas alarm-gray"></Label>
-                    </GridLayout>
+            <StackLayout class="alarm-card" padding="5,10,10,10">
+                <StackLayout>
+                    <Label text="{{'Captain' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'officer'"></Label>
+                    <Label text="{{'Requests' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'rolerequests'"></Label>
+                    <Label text="{{'Guards' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'guard'"></Label>
+                    <Label text="{{'Sailors' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'sailor'"></Label>
+                    <Label text="{{'Lifeguards' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'lifeguard'"></Label>
+                    <Label text="{{ dataService.deviceData[idDevice].name }}" class="t-12" marginBottom="10"></Label>
+                    <StackLayout *ngFor="let user of dataService.deviceData[idDevice].device_users" >
+                        <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
+                                    borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
+                                    *ngIf="user.role == roleOrRequests || (user.lifeguard && 'lifeguard' == roleOrRequests)">
+                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
+                            <Label col=0 row=1 verticalAlignment="center" text=" {{ user.email }}"></Label>
+                            <Label col=1 rowspan=2 text=""
+                                   (tap)="changeUserRole(user.id, user.email)"
+                                   *ngIf="roleOrRequests != 'lifeguard'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col=2 rowspan=2 text=""
+                                   (tap)="offboardUser(user.id, user.email)"
+                                   *ngIf="roleOrRequests != 'lifeguard'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col=2 rowspan=2 text=""
+                                   (tap)="revokeLifeguardStatus(user.id, user.email)"
+                                   *ngIf="roleOrRequests == 'lifeguard'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
+            </StackLayout>
+            <StackLayout class="alarm-card" padding="5,10,10,10">
+                <StackLayout *ngIf="roleOrRequests != 'lifeguard'">
+                    <Label text="{{'Permissions' | L}}" class="t-16 font-weight-bold"
+                           marginBottom="5"></Label>
+                    <Label text="{{'Note' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'lifeguard'"></Label>
+                    <StackLayout>
+                        <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 text=""
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" text="{{'Sensor History' |L}}"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <Label col="3" row="1"
+                                   [text]="'TODO'"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                        </GridLayout>
+                        <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 text=""
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" text="{{'Log History' |L}}"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <Label col="3" row="1"
+                                   [text]="'TODO'"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout *ngIf="roleOrRequests == 'lifeguard'">
+                    <Label text="{{'Note' | L}}" class="t-16 font-weight-bold"
+                           marginBottom="5"></Label>
+                    <Label text="{{'users_listed_here_sos' | L}}" textWrap="true" class="t-12"
+                           marginBottom="5">
+                    </Label>
+                    <Label text="{{'please_test_sos_before_usage' | L}}" textWrap="true" class="t-12"
+                           marginBottom="5">
+                    </Label>
+                    <Label text="{{'upgrade_to_pro_for_feature' | L}}" textWrap="true" class="t-12"
+                           marginBottom="5"
+                           *ngIf="!dataService.deviceData[idDevice].is_pro"></Label>
+                </StackLayout>
+            </StackLayout>
         </StackLayout>
-    </StackLayout>
-    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'sailor'">
-        <StackLayout >
-            <Label text="{{'Sailors' | L}}" class="t-16 font-weight-bold"></Label>
-
-        </StackLayout>
-    </StackLayout>
-
+    </ScrollView>
 
 </StackLayout>

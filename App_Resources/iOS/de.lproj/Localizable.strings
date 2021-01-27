@@ -137,9 +137,9 @@
 "Direction" = "Richtung";
 "_Position_Accuracy_ZR79bU" = "Genauigkeit der Position";
 "Speed" = "Geschwindigkeit";
-"_Mapping_active__Z1mKSfR" = "Mapping aktiv!";
-"_Race_Mode_active__2ubaso" = "Race Mode aktiv!";
-"_Unacknowledged_Movement_active__Z1Sne4f" = "Unerlaubte Bewegung!";
+"_Mapping_active_Z11Jbk2" = "Mapping aktiv";
+"_Race_Mode_active_Z23aCLA" = "Race Mode";
+"_Unacknowledged_Movement_active_Z1wLyuo" = "Unbestätigte Bewegung";
 "_SOS_active__2g0HDW" = "SOS aktiv!";
 "_GPS_Reception_Z1yTsh" = "GPS Empfang";
 "POSITION" = "POSITION";

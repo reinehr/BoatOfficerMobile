@@ -133,8 +133,9 @@
   "upgrade_to_pro_for_feature": "This is a Pro Feature. Please upgrade your app to Pro, to make use of this feature.",
   "Permissions": "Permissions",
   "Note": "Note",
-  "Sensor History": "Sensor History",
-  "Log History": "Log History",
+  "View Sensor History": "View Sensor History",
+  "View Log History": "View Log History",
+  "View Nearest Webcams": "View Nearest Webcams",
 
   "### EDIT SETTINGS ###": "",
   "EDIT ALARM SETTINGS": "EDIT ALARM SETTINGS",

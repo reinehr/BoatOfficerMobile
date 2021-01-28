@@ -18,6 +18,8 @@
                     <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
                     <Label col="1" row="1" [text]="device.name"
                            class="alarm-blue t-16" height="30"></Label>
+                    <Label col="2" row="0" rowSpan="2" [text]="''"
+                           class="user-role-symbol" *ngIf="device.role == 'officer'"></Label>
                     <Label col="2" row="0" rowSpan="2" [text]="''"
                            class="user-role-symbol" *ngIf="device.role == 'sailor'"></Label>
                     <Label col="2" row="0" rowSpan="2" [text]="''"
@@ -90,7 +92,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Berth' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -158,7 +160,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Firmware Version' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -171,7 +173,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Product Number' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -205,7 +207,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Requests' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -218,7 +220,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Guards' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -231,7 +233,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Sailors' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
@@ -244,7 +246,7 @@
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
-                                       class="alarm-symbol-fas alarm-gray" fontSize="22"></Label>
+                                       class="alarm-symbol-fas alarm-gray"></Label>
                                 <Label col="2" row="1" text="{{'Lifeguards' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>

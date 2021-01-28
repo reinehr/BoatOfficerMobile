@@ -9,7 +9,7 @@
     <ScrollView orientation="vertical">
         <StackLayout *ngIf="dataService.dataLoaded">
             <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
-                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue">
+                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue" marginBottom="10">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
                                 *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                         <Image [src]="'' + device.boat_image_small"

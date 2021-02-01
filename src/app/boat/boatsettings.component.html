@@ -25,6 +25,7 @@
                     <Label col="2" row="0" rowSpan="2" [text]="''"
                            class="user-role-symbol" *ngIf="device.role == 'guard'"></Label>
                 </GridLayout>
+                <GridLayout rows="10"></GridLayout>
                 <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
@@ -203,7 +204,7 @@
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         *ngIf="device.role == 'officer' && 0 != device.num_candidate"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'rolerequests'] : []">
+                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""

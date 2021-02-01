@@ -10,7 +10,7 @@
             <StackLayout class="alarm-card" padding="5,10,10,10">
                 <StackLayout>
                     <Label text="{{'Captain' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'officer'"></Label>
-                    <Label text="{{'Requests' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'rolerequests'"></Label>
+                    <Label text="{{'Requests' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'candidate'"></Label>
                     <Label text="{{'Guards' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'guard'"></Label>
                     <Label text="{{'Sailors' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'sailor'"></Label>
                     <Label text="{{'Lifeguards' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'lifeguard'"></Label>
@@ -22,15 +22,23 @@
                             <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=0 row=1 verticalAlignment="center" text=" {{ user.email }}"></Label>
                             <Label col=1 rowspan=2 text=""
-                                   (tap)="changeUserRole(user.id, user.email)"
+                                   (tap)="changeUserRole(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   *ngIf="roleOrRequests == 'candidate'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col=1 rowspan=2 text=""
+                                   (tap)="changeSailorToGuard(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   *ngIf="roleOrRequests == 'sailor'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col=1 rowspan=2 text=""
+                                   (tap)="changeGuardToSailor(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   *ngIf="roleOrRequests == 'guard'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col=2 rowspan=2 text=""
+                                   (tap)="offboardUser(user.user_id, user.email, dataService.deviceData[idDevice].id)"
                                    *ngIf="roleOrRequests != 'lifeguard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col=2 rowspan=2 text=""
-                                   (tap)="offboardUser(user.id, user.email)"
-                                   *ngIf="roleOrRequests != 'lifeguard'"
-                                   class="alarm-symbol-fas alarm-gray"></Label>
-                            <Label col=2 rowspan=2 text=""
-                                   (tap)="revokeLifeguardStatus(user.id, user.email)"
+                                   (tap)="revokeLifeguardStatus(user.user_id, user.email, dataService.deviceData[idDevice].id, user.role)"
                                    *ngIf="roleOrRequests == 'lifeguard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                         </GridLayout>
@@ -93,6 +101,24 @@
                     <Label text="{{'upgrade_to_pro_for_feature' | L}}" textWrap="true" class="t-12"
                            marginBottom="5"
                            *ngIf="!dataService.deviceData[idDevice].is_pro"></Label>
+                </StackLayout>
+            </StackLayout>
+            <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'lifeguard'">
+                <StackLayout>
+                    <Label text="{{'Not Lifeguards' | L}}" class="t-16 font-weight-bold"></Label>
+                    <Label text="{{ dataService.deviceData[idDevice].name }}" class="t-12" marginBottom="10"></Label>
+                    <StackLayout *ngFor="let user of dataService.deviceData[idDevice].device_users" >
+                        <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
+                                    borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
+                                    *ngIf="(!user.lifeguard && 'lifeguard' == roleOrRequests)">
+                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
+                            <Label col=0 row=1 verticalAlignment="center" text=" {{ user.email }}"></Label>
+                            <Label col=2 rowspan=2 text=""
+                                   (tap)="grantLifeguardStatus(user.user_id, user.email, dataService.deviceData[idDevice].id, user.role)"
+                                   *ngIf="roleOrRequests == 'lifeguard'"
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                        </GridLayout>
+                    </StackLayout>
                 </StackLayout>
             </StackLayout>
         </StackLayout>

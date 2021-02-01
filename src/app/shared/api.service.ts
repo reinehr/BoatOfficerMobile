@@ -102,6 +102,7 @@ export class ApiService {
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
+    baseDeviceUserUrl = `${this.baseUrl}api/device_user/`;
     baseDeviceAlarmSettingsUrl = `${this.baseUrl}api/device_alarm_settings/`;
     token = getString('token', '');
 
@@ -271,6 +272,24 @@ export class ApiService {
                 id: idAlarm,
                 marked_as_ok: markedAsOk,
                 marked_as_responsible: markedAsResponsible
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
+    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {
+        console.log('Change User ' + idUser + ' ' + idDevice + ' ' + role + ' ' + lifeguard);
+        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
+                device_id: idDevice,
+                user_id: idUser,
+                role: role,
+                lifeguard: lifeguard
             }
             , {
                 headers: new HttpHeaders({

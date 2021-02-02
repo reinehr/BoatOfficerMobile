@@ -49,6 +49,11 @@ export class SignonaboatComponent implements OnInit {
         this.apiService.addDeviceCandidate(serialNumberHex, apiKey).subscribe(response => {
             console.log('sign up as candidate... ', response);
             if (response === 'SUCCESS') {
+                const options = {
+                    title: localize("Application is send."),
+                    okButtonText: 'OK'
+                };
+                alert(options);
                 this.router.navigate(['']);
             } else {
                 const options = {

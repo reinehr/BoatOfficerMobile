@@ -48,10 +48,10 @@ export class EditusersComponent implements OnInit {
 
     changeSailorToGuard(userid, useremail, deviceid, lifeguard) {
         const options = {
-            title: "Change role",
-            message: "Change role of "+useremail+" from Sailor to Guard?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel",
+            title: localize("Change role"),
+            message: localize("Change role of ")+useremail+localize(" from Sailor to Guard")+"?",
+        okButtonText: localize("Yes"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {
@@ -62,10 +62,10 @@ export class EditusersComponent implements OnInit {
 
     changeGuardToSailor(userid, useremail, deviceid, lifeguard) {
         const options = {
-            title: "Change role",
-            message: "Change role of "+useremail+" from Guard to Sailor?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel",
+            title: localize("Change role"),
+            message: localize("Change role of ")+useremail+localize(" from Guard to Sailor")+"?",
+            okButtonText: localize("Yes"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {
@@ -76,14 +76,24 @@ export class EditusersComponent implements OnInit {
 
     changeUserRole(userid, useremail, deviceid, lifeguard) {
         const options = {
-            title: "Change role of "+useremail+"?",
+            title: localize("Change role of ")+useremail+"?",
             message: "",
-            cancelButtonText: "Cancel",
-            actions: ["guard", "sailor"]
+            cancelButtonText: localize("Cancel"),
+            actions: [localize('Guard'), localize('Sailor')]
         };
         action(options).then( result => {
-            if(result=='guard' || result=='sailor' || result=='aboard') {
-                this.apiService.setDeviceUserData(deviceid, userid, false, result);
+            console.log(localize(result));
+            let newrole = "";
+            if(result==localize('Guard') || result == localize('Sailor')) {
+                console.log("Set user to new role: " + result);
+                if (result==localize("Sailor")) {
+                    newrole = "sailor";
+                    this.apiService.setDeviceUserData(deviceid, userid, false, newrole);
+                }
+                else if (result==localize("Guard")){
+                    newrole = "guard";
+                    this.apiService.setDeviceUserData(deviceid, userid, false, newrole);
+                }
             }
         });
     }
@@ -91,10 +101,10 @@ export class EditusersComponent implements OnInit {
     offboardUser(userid, useremail, deviceid)
     {
         const options = {
-            title: "Send aboard",
-            message: "Send "+useremail+" aboard?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel",
+            title: localize("Send aboard"),
+            message: localize("Send ")+useremail+localize(" aboard?"),
+            okButtonText: localize("Yes"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {

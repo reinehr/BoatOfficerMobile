@@ -64,9 +64,9 @@ export class BoatsettingsComponent implements OnInit {
     leaveThisBoat(deviceid, boatname)
     {
         const options = {
-            title: "Do you really want to leave this boat ("+boatname+")?",
-            okButtonText: "Yes, Leave",
-            cancelButtonText: "Cancel",
+            title: localize("Do you really want to leave this boat")+" ("+boatname+")?",
+            okButtonText: localize("Yes, Leave"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {

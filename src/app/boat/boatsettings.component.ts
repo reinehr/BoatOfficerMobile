@@ -64,7 +64,7 @@ export class BoatsettingsComponent implements OnInit {
     leaveThisBoat(deviceid, boatname)
     {
         const options = {
-            title: "Do you really want to leave this boat ("+boatname+")? (TODO not supported yet)",
+            title: "Do you really want to leave this boat ("+boatname+")?",
             okButtonText: "Yes, Leave",
             cancelButtonText: "Cancel",
         };

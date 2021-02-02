@@ -284,12 +284,26 @@ export class ApiService {
     }
 
     setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {
-        console.log('Change User ' + idUser + ' ' + idDevice + ' ' + role + ' ' + lifeguard);
         let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
                 device_id: idDevice,
                 user_id: idUser,
                 role: role,
                 lifeguard: lifeguard
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
+    leaveUserDevice(idDevice: number) {
+        console.log('Leave Device ' + idDevice);
+        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'leave_device/', {
+                device_id: idDevice
             }
             , {
                 headers: new HttpHeaders({
@@ -384,6 +398,21 @@ export class ApiService {
     registerDevice(serialNumber: string, registrationKey: string, deviceName: string) {
         return this.httpClient.post<string>(this.baseDeviceUrl + 'register_device/',
             {serialNumber, registrationKey, device_name: deviceName}, {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }
+        ).pipe(catchError(errorRes => {
+                ApiService.handleError(errorRes.error.error.message);
+                return throwError(errorRes);
+            })
+        );
+    }
+
+    addDeviceCandidate(serialNumber: string, urlKey: string) {
+        return this.httpClient.post<string>(this.baseDeviceUserUrl + 'add_candidate/',
+            {serialNumber, urlKey}, {
                 headers: new HttpHeaders({
                     'Content-Type': 'application/json',
                     idToken: `${getString('token', '')}`

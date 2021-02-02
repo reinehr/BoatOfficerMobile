@@ -26,6 +26,10 @@
   <string name="_Registration_successful_1qR5S6">"Registration successful"</string>
   <string name="_You_are_now_logged_in_1b7ehS">"You are now logged in"</string>
   <string name="_Login_successful_1U3M0J">"Login successful"</string>
+  <string name="_Send_Application_Z2rw7Rz">"Send Application"</string>
+  <string name="_details_boatofficerid_23Ilbw">"Type or paste in the BoatOfficer ID, that the Captain gave you."</string>
+  <string name="_BoatOfficer_ID_1jOWlM">"BoatOfficer ID"</string>
+  <string name="_SIGN_ON_A_BOAT_Z1kwSe6">"SIGN ON A BOAT"</string>
   <string name="_Register_Device_2cMmuN">"Register Device"</string>
   <string name="_details_devicename_Z2pPIcF">"Give this BoatOfficer-Device a name. Best practice is to give it the name of the boat it is installed on."</string>
   <string name="_Device_Name_4Jhsb">"Device Name"</string>
@@ -58,6 +62,7 @@
   <string name="_LOG_IN_Z2pClT6">"LOG IN"</string>
   <string name="_SIGN_UP_Z1KvUdX">"SIGN UP"</string>
   <string name="_You_are_logged_in_as_Z1GEmEn">"You are logged in as %1$s"</string>
+  <string name="_Sign_on_a_Boat_ZIAXjF">"Sign on a Boat"</string>
   <string name="_Register_new_device_1xIGNi">"Register new device"</string>
   <string name="SETTINGS">"SETTINGS"</string>
   <string name="_____SETTINGS_____2rJ01w">""</string>
@@ -103,6 +108,7 @@
   <string name="_no_boat_name_83Bnd">"no boat name"</string>
   <string name="_Boat_Name_sj2Tz">"Boat Name"</string>
   <string name="_OTHER_SETTINGS_Z2fMNTg">"OTHER SETTINGS"</string>
+  <string name="_Show_2nd_Battery_Z1GQiaL">"Show 2nd Battery"</string>
   <string name="_Waiting_for_device_to_sync_Z17dWs5">"Waiting for device to sync"</string>
   <string name="_Value_changed_to_1mR1Ep">"Value changed to"</string>
   <string name="seconds">"seconds"</string>

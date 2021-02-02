@@ -61,7 +61,7 @@ export class BoatsettingsComponent implements OnInit {
 
     }
 
-    leaveThisBoat(boatid, boatname)
+    leaveThisBoat(deviceid, boatname)
     {
         const options = {
             title: "Do you really want to leave this boat ("+boatname+")? (TODO not supported yet)",
@@ -69,7 +69,9 @@ export class BoatsettingsComponent implements OnInit {
             cancelButtonText: "Cancel",
         };
         confirm(options).then( result => {
-            // TODO
+            if(result) {
+                this.apiService.leaveUserDevice(deviceid);
+            }
         });
     }
 

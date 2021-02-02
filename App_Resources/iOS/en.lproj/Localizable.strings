@@ -24,6 +24,10 @@
 "_Registration_successful_1qR5S6" = "Registration successful";
 "_You_are_now_logged_in_1b7ehS" = "You are now logged in";
 "_Login_successful_1U3M0J" = "Login successful";
+"_Send_Application_Z2rw7Rz" = "Send Application";
+"_details_boatofficerid_23Ilbw" = "Type or paste in the BoatOfficer ID, that the Captain gave you.";
+"_BoatOfficer_ID_1jOWlM" = "BoatOfficer ID";
+"_SIGN_ON_A_BOAT_Z1kwSe6" = "SIGN ON A BOAT";
 "_Register_Device_2cMmuN" = "Register Device";
 "_details_devicename_Z2pPIcF" = "Give this BoatOfficer-Device a name. Best practice is to give it the name of the boat it is installed on.";
 "_Device_Name_4Jhsb" = "Device Name";
@@ -56,6 +60,7 @@
 "_LOG_IN_Z2pClT6" = "LOG IN";
 "_SIGN_UP_Z1KvUdX" = "SIGN UP";
 "_You_are_logged_in_as_Z1GEmEn" = "You are logged in as %1$@";
+"_Sign_on_a_Boat_ZIAXjF" = "Sign on a Boat";
 "_Register_new_device_1xIGNi" = "Register new device";
 "SETTINGS" = "SETTINGS";
 "_____SETTINGS_____2rJ01w" = "";
@@ -101,6 +106,7 @@
 "_no_boat_name_83Bnd" = "no boat name";
 "_Boat_Name_sj2Tz" = "Boat Name";
 "_OTHER_SETTINGS_Z2fMNTg" = "OTHER SETTINGS";
+"_Show_2nd_Battery_Z1GQiaL" = "Show 2nd Battery";
 "_Waiting_for_device_to_sync_Z17dWs5" = "Waiting for device to sync";
 "_Value_changed_to_1mR1Ep" = "Value changed to";
 "seconds" = "seconds";

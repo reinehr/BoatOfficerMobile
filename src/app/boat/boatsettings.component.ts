@@ -57,6 +57,10 @@ export class BoatsettingsComponent implements OnInit {
         this.dialogOpen = false;
     }
 
+    changed2ndBatteryOption() {
+
+    }
+
     leaveThisBoat(boatid, boatname)
     {
         const options = {

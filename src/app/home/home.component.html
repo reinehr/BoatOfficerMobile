@@ -33,8 +33,6 @@
                                 <GridLayout columns="*, 40" class="bg-darkblue">
                                     <Label col="0" row="0" class="boat-name-in-button" [text]="device.name"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
-                                           [text]="''" *ngIf="device.role == 'officer'"></Label>
-                                    <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'sailor'"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'guard'"></Label>
@@ -48,8 +46,6 @@
                                     <Image col="0" row="0" rowSpan="2" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                                     <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>
                                     <Label col="0" row="1" class="text-overlay-bottom-left" [text]="device.name"></Label>
-                                    <Label col="1" row="1" [text]="''"
-                                           class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'officer'"></Label>
                                     <Label col="1" row="1" [text]="''"
                                            class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'sailor'"></Label>
                                     <Label col="1" row="1" [text]="''"

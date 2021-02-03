@@ -18,8 +18,6 @@
                     <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
                     <Label col="1" row="1" [text]="device.name"
                            class="alarm-blue t-16" height="30"></Label>
-                    <Label col="2" row="0" rowSpan="2" [text]="''"
-                           class="user-role-symbol" *ngIf="device.role == 'officer'"></Label>
                     <Label col="2" row="0" rowSpan="2" [text]="''"
                            class="user-role-symbol" *ngIf="device.role == 'sailor'"></Label>
                     <Label col="2" row="0" rowSpan="2" [text]="''"
@@ -280,6 +278,12 @@
                         class="wide-button"
                         *ngIf="device.role != 'officer'"
                         (tap)="leaveThisBoat(device.id, device.name)">
+                </Button>
+                <Button
+                        text="{{'Invite Crew' | L}}"
+                        class="wide-button"
+                        *ngIf="device.role == 'officer'"
+                        (tap)="invitePersonsOnBoard()">
                 </Button>
             </StackLayout>
         </StackLayout>

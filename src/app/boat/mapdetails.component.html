@@ -9,15 +9,7 @@
     <StackLayout [id]="'level_4_' + dataService.deviceData[idDevice].id" (refresh)="refreshList($event)">
         <StackLayout [id]="'level_5_' + dataService.deviceData[idDevice].id" orientation="vertical" *ngIf="initialized">
             <StackLayout [id]="'level_6_' + dataService.deviceData[idDevice].id">
-                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
-                        <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
-                               class="boatoffice-boat-image"></Image>
-                    </GridLayout>
-                    <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
-                    <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
-                           class="alarm-blue t-16" height="30"></Label>
-                </GridLayout>
+                <boat-header [boatname]="dataService.deviceData[idDevice].name" [boat_image_small]="dataService.deviceData[idDevice].boat_image_small" [role]="dataService.deviceData[idDevice].role"></boat-header>
                 <StackLayout orientation="horizontal" height="60">
                     <GridLayout
                             class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="top" horizontalAlignment="center"

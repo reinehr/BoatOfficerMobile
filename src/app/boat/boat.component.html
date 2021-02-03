@@ -18,19 +18,7 @@
         <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
-                    <GridLayout columns="120, *, 40" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                        <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
-                            <Image [src]="'' + device.boat_image_small"
-                                   class="boatoffice-boat-image"></Image>
-                        </GridLayout>
-                        <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
-                        <Label col="1" row="1" [text]="device.name"
-                               class="alarm-blue t-16" height="30"></Label>
-                        <Label col="2" row="0" rowSpan="2" [text]="''"
-                               class="user-role-symbol" *ngIf="device.role == 'sailor'"></Label>
-                        <Label col="2" row="0" rowSpan="2" [text]="''"
-                               class="user-role-symbol" *ngIf="device.role == 'guard'"></Label>
-                    </GridLayout>
+                    <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                     <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
                         <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10" paddingBottom="-10">
                             <Label col=0 row=0 [text]="'SENSORS' | L" class="t-16 font-weight-bold"

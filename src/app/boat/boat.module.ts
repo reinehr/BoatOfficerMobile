@@ -16,6 +16,7 @@ import {EditdevicesettingsComponent} from '~/app/boat/editdevicesettings.compone
 import {EditusersComponent} from '~/app/boat/editusers.component';
 import {NativeScriptLocalizeModule} from 'nativescript-localize/localize.module';
 import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
+import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.component";
 
 @NgModule({
     imports: [
@@ -36,7 +37,8 @@ import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
         UploadpictureComponent,
         EditalarmsettingsComponent,
         EditdevicesettingsComponent,
-        EditusersComponent
+        EditusersComponent,
+        BoatHeaderComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

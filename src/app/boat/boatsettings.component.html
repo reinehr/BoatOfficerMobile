@@ -9,20 +9,7 @@
     <ScrollView orientation="vertical">
         <StackLayout *ngIf="dataService.dataLoaded">
             <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
-                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue" marginBottom="10">
-                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
-                                *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
-                        <Image [src]="'' + device.boat_image_small"
-                               class="boatoffice-boat-image"></Image>
-                    </GridLayout>
-                    <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
-                    <Label col="1" row="1" [text]="device.name"
-                           class="alarm-blue t-16" height="30"></Label>
-                    <Label col="2" row="0" rowSpan="2" [text]="''"
-                           class="user-role-symbol" *ngIf="device.role == 'sailor'"></Label>
-                    <Label col="2" row="0" rowSpan="2" [text]="''"
-                           class="user-role-symbol" *ngIf="device.role == 'guard'"></Label>
-                </GridLayout>
+                <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                 <GridLayout rows="10"></GridLayout>
                 <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>

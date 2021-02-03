@@ -8,7 +8,9 @@ import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from "ngx-timeago";
 import {localize} from "nativescript-localize";
-import {confirm} from "tns-core-modules/ui/dialogs";
+import {alert, confirm} from "tns-core-modules/ui/dialogs";
+//import {setText} from "nativescript-clipboard";
+//import * as SocialShare from "nativescript-social-share";
 
 @Component({
     selector: 'app-boatsettings',
@@ -64,7 +66,7 @@ export class BoatsettingsComponent implements OnInit {
     leaveThisBoat(deviceid, boatname)
     {
         const options = {
-            title: localize("Do you really want to leave this boat")+" ("+boatname+")?",
+            title: localize("Do you really want to leave this boat (%s)?", boatname),
             okButtonText: localize("Yes, Leave"),
             cancelButtonText: localize("Cancel"),
         };
@@ -73,6 +75,19 @@ export class BoatsettingsComponent implements OnInit {
                 this.apiService.leaveUserDevice(deviceid);
             }
         });
+    }
+
+    invitePersonsOnBoard() {
+        console.log("Start sharing of BoatOfficer ID");
+        //SocialShare.shareText("BoatOfficer ID copied to clipboard.");
+        // this.clipboard.setText("TODO Test Copy to Clipboard.");
+        // const options = {
+        //     title: localize('BoatOfficer ID copied'),
+        //     message: localize('Paste the BoatOfficer ID in an e-mail or messenger to send it to your friends.'),
+        //     okButtonText: 'OK'
+        // };
+        // alert(options).then();
+
     }
 
     goBack() {

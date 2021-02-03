@@ -49,7 +49,7 @@ export class EditusersComponent implements OnInit {
     changeSailorToGuard(userid, useremail, deviceid, lifeguard) {
         const options = {
             title: localize("Change role"),
-            message: localize("Change role of ")+useremail+localize(" from Sailor to Guard")+"?",
+            message: localize("Change role of %s from Sailor to Guard?", useremail),
         okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -63,7 +63,7 @@ export class EditusersComponent implements OnInit {
     changeGuardToSailor(userid, useremail, deviceid, lifeguard) {
         const options = {
             title: localize("Change role"),
-            message: localize("Change role of ")+useremail+localize(" from Guard to Sailor")+"?",
+            message: localize("Change role of %s from Guard to Sailor?", useremail),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -102,7 +102,7 @@ export class EditusersComponent implements OnInit {
     {
         const options = {
             title: localize("Send aboard"),
-            message: localize("Send ")+useremail+localize(" aboard?"),
+            message: localize("Send %s aboard?", useremail),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };

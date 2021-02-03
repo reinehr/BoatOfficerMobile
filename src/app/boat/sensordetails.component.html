@@ -9,7 +9,7 @@
     <PullToRefresh (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" *ngIf="initialized" iosOverflowSafeArea="false">
             <StackLayout>
-                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+                <GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue" marginBottom="10">
                     <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
                         <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
                                class="boatoffice-boat-image"></Image>
@@ -17,6 +17,10 @@
                     <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
                     <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
                            class="alarm-blue t-16" height="30"></Label>
+                    <Label col="2" row="0" rowSpan="2" [text]="''"
+                           class="user-role-symbol" *ngIf="dataService.deviceData[idDevice].role == 'sailor'"></Label>
+                    <Label col="2" row="0" rowSpan="2" [text]="''"
+                           class="user-role-symbol" *ngIf="dataService.deviceData[idDevice].role == 'guard'"></Label>
                 </GridLayout>
                 <StackLayout orientation="horizontal" height="60">
                     <GridLayout
@@ -59,10 +63,27 @@
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
                                     strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
                     <RadCartesianChart style="height: 250" id="{{field}}_1" [visibility]="(selectedIntervalId == 1 ? 'visible' : 'collapsed')">
@@ -95,10 +116,27 @@
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
                                     strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
                     <RadCartesianChart style="height: 250" id="{{field}}_2" [visibility]="(selectedIntervalId == 2 ? 'visible' : 'collapsed')">
@@ -131,10 +169,27 @@
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
                                     strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
                     <RadCartesianChart style="height: 250" id="{{field}}_3" [visibility]="(selectedIntervalId == 3 ? 'visible' : 'collapsed')">
@@ -167,10 +222,27 @@
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
                                     strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
                     <RadCartesianChart style="height: 250" id="{{field}}_4" [visibility]="(selectedIntervalId == 4 ? 'visible' : 'collapsed')">
@@ -201,11 +273,28 @@
                         <LineSeries tkCartesianSeries
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
-                                    color="#ff0000"
+                                    strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
                     <RadCartesianChart style="height: 250" id="{{field}}_5" [visibility]="(selectedIntervalId == 5 ? 'visible' : 'collapsed')">
@@ -236,11 +325,28 @@
                         <LineSeries tkCartesianSeries
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
-                                    color="#ff0000"
+                                    strokeColor="#356eb4"
+                                    seriesName="dataLine"
                                     [valueProperty]="field"></LineSeries>
-                        <Palette tkCartesianPalette>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineHigh"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <LineSeries tkCartesianSeries
+                                    [items]="alarmLineLow"
+                                    categoryProperty="date"
+                                    strokeColor="red"
+                                    seriesName="alarmLine"
+                                    valueProperty="alarmValue"></LineSeries>
+                        <Palette tkCartesianPalette seriesName="dataLine">
                             <PaletteEntry tkCartesianPaletteEntry
-                                strokeColor="#356eb4"></PaletteEntry>
+                                          strokeColor="#356eb4"></PaletteEntry>
+                        </Palette>
+                        <Palette tkCartesianPalette seriesName="alarmLine">
+                            <PaletteEntry tkCartesianPaletteEntry
+                                          strokeColor="red"></PaletteEntry>
                         </Palette>
                     </RadCartesianChart>
 

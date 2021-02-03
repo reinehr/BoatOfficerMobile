@@ -30,6 +30,8 @@ export class SensordetailsComponent implements OnInit {
 
     public field = '---';
     public idDevice = 0;
+    public alarmLineHigh = [];
+    public alarmLineLow = [];
     selectedIntervalId = 2;
     isPro = false;
     majorStepY = 5;
@@ -39,12 +41,28 @@ export class SensordetailsComponent implements OnInit {
     height = 0;
     initialized = true;
 
-
     goBack() {
         this.routerExtensions.backToPreviousPage();
     }
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        console.log("Called alarm field: "+this.field);
+        if (alarmSettingsMap[this.field])
+        {
+            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key].value_device});
+            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key].value_device});
+            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][1].key].value_device});
+            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][1].key].value_device});
+        }
+
+        if (this.field == 'IntBattVolt')
+        {
+            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 4.2});
+            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 4.2});
+            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.1});
+            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.1});
+        }
+    }
 
     refreshList(args) {
         const pullRefresh = args.object;

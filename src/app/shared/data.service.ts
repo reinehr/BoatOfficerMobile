@@ -27,6 +27,7 @@ export interface DeviceAlarmDataFormat {
     'name': string;
     'harbour_contact': string;
     'berth': string;
+    'url_key': string;
     'role': string;
     'num_candidate': number;
     'num_sailor': number;

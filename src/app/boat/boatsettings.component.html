@@ -270,7 +270,7 @@
                         text="{{'Invite Crew' | L}}"
                         class="wide-button"
                         *ngIf="device.role == 'officer'"
-                        (tap)="invitePersonsOnBoard()">
+                        (tap)="invitePersonsOnBoard(idDevice)">
                 </Button>
             </StackLayout>
         </StackLayout>

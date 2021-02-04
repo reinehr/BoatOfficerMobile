@@ -77,10 +77,10 @@ export class BoatsettingsComponent implements OnInit {
         });
     }
 
-    invitePersonsOnBoard() {
-        let boatofficer_id = "TODO_12345_ABCDE";
-        console.log("Start sharing of BoatOfficer ID");
+    invitePersonsOnBoard(deviceIndex) {
+        let boatofficer_id = "";
         //SocialShare.shareText("BoatOfficer ID copied to clipboard.", "Was willst du tun?");
+        boatofficer_id = this.dataService.deviceData[deviceIndex].serial_number_hex.substring(2).toUpperCase()+"-"+this.dataService.deviceData[deviceIndex].url_key.toUpperCase();
         Clipboard.setText(boatofficer_id);
         const options = {
             title: localize('BoatOfficer ID copied'),

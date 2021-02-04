@@ -20,7 +20,7 @@
                                     borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
                                     *ngIf="user.role == roleOrRequests || (user.lifeguard && 'lifeguard' == roleOrRequests)">
                             <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
-                            <Label col=0 row=1 verticalAlignment="center" text=" {{ user.email }}"></Label>
+                            <Label col=0 row=1 verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=1 rowspan=2 text=""
                                    (tap)="changeUserRole(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
                                    *ngIf="roleOrRequests == 'candidate'"

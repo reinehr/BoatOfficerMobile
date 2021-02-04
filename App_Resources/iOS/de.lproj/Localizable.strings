@@ -99,11 +99,11 @@
 "_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr" = "Setze nun die BoatOfficer ID (%1$@) in einer E-Mail oder einem Messenger ein, um sie deinen Freunden zu senden.";
 "_BoatOfficer_ID_copied_RHX1P" = "BoatOfficer ID kopiert";
 "_Invite_Crew_7xG4K" = "Besatzung anheuern";
-"_Send__s_aboard__ZaFX3v" = "Send %1$@ aboard?";
-"_Send_aboard_17jR23" = "Send aboard";
+"_Send__s_aboard__ZaFX3v" = "%1$@ von Bord weisen?";
+"_Send_aboard_17jR23" = "Von Bord weisen";
 "_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE" = "Rolle von %1$@ von Matrose zu Wachmann ändern?";
 "_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8" = "Rolle von %1$@ von Wachmann zu Matrose ändern?";
-"_Change_role_Z3ex2u" = "Change role";
+"_Change_role_Z3ex2u" = "Rolle ändern";
 "Lifeguards" = "Notfall Kontakte";
 "Sailors" = "Matrosen";
 "Sailor" = "Matrose";

@@ -9,7 +9,7 @@ import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from "ngx-timeago";
 import {localize} from "nativescript-localize";
 import {alert, confirm} from "tns-core-modules/ui/dialogs";
-//import {setText} from "nativescript-clipboard";
+import * as Clipboard from "nativescript-clipboard";
 //import * as SocialShare from "nativescript-social-share";
 
 @Component({
@@ -78,15 +78,16 @@ export class BoatsettingsComponent implements OnInit {
     }
 
     invitePersonsOnBoard() {
+        let boatofficer_id = "TODO_12345_ABCDE";
         console.log("Start sharing of BoatOfficer ID");
-        //SocialShare.shareText("BoatOfficer ID copied to clipboard.");
-        // this.clipboard.setText("TODO Test Copy to Clipboard.");
-        // const options = {
-        //     title: localize('BoatOfficer ID copied'),
-        //     message: localize('Paste the BoatOfficer ID in an e-mail or messenger to send it to your friends.'),
-        //     okButtonText: 'OK'
-        // };
-        // alert(options).then();
+        //SocialShare.shareText("BoatOfficer ID copied to clipboard.", "Was willst du tun?");
+        Clipboard.setText(boatofficer_id);
+        const options = {
+            title: localize('BoatOfficer ID copied'),
+            message: localize('Now, paste the BoatOfficer ID (%s) in an e-mail or messenger to send it to your friends.', boatofficer_id),
+            okButtonText: 'OK'
+        };
+        alert(options).then();
 
     }
 

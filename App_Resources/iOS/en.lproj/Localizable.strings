@@ -96,7 +96,7 @@
 "Yes" = "Yes";
 "_Leave_this_boat_ZMQkmx" = "Leave this boat";
 "_Do_you_really_want_to_leave_this_boat___s___Z2ezym8" = "Do you really want to leave this boat (%1$@)?";
-"_Paste_the_BoatOfficer_ID_in_an_e_mail_or_messenger_to_send_it_to_your_friends__1rH3dw" = "Paste the BoatOfficer ID in an e-mail or messenger to send it to your friends.";
+"_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr" = "Now, paste the BoatOfficer ID (%1$@) in an e-mail or messenger to send it to your friends.";
 "_BoatOfficer_ID_copied_RHX1P" = "BoatOfficer ID copied";
 "_Invite_Crew_7xG4K" = "Invite Crew";
 "_Send__s_aboard__ZaFX3v" = "Send %1$@ aboard?";
@@ -104,7 +104,7 @@
 "_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE" = "Change role of %1$@ from Sailor to Guard?";
 "_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8" = "Change role of %1$@ from Guard to Sailor?";
 "_Change_role_Z3ex2u" = "Change role";
-"Lifeguards" = "First Aid Contacts";
+"Lifeguards" = "Emergency Contacts";
 "Sailors" = "Sailors";
 "Sailor" = "Sailor";
 "Guards" = "Guards";

@@ -82,9 +82,14 @@ export class BoatsettingsComponent implements OnInit {
         //SocialShare.shareText("BoatOfficer ID copied to clipboard.", "Was willst du tun?");
         boatofficer_id = this.dataService.deviceData[deviceIndex].serial_number_hex.substring(2).toUpperCase()+"-"+this.dataService.deviceData[deviceIndex].url_key.toUpperCase();
         Clipboard.setText(boatofficer_id);
+        let messagetext = localize('Now, paste the BoatOfficer ID (%s) in an e-mail or messenger to send it to your friends.', boatofficer_id);
+        if (!this.dataService.deviceData[deviceIndex].is_pro)
+        {
+            messagetext = messagetext+" "+localize("Note: Without PRO Upgrade, you can only hire one guard.");
+        }
         const options = {
             title: localize('BoatOfficer ID copied'),
-            message: localize('Now, paste the BoatOfficer ID (%s) in an e-mail or messenger to send it to your friends.', boatofficer_id),
+            message: messagetext,
             okButtonText: 'OK'
         };
         alert(options).then();

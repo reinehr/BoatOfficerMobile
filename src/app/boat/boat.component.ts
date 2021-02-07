@@ -13,6 +13,7 @@ import {localize} from 'nativescript-localize';
 import {ImageSource} from 'tns-core-modules/image-source';
 import {Image} from 'tns-core-modules/ui/image';
 import {Page} from 'tns-core-modules/ui/page';
+import {StackLayout} from "tns-core-modules/ui/layouts/stack-layout";
 
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -37,6 +38,8 @@ export class BoatComponent implements OnInit, AfterViewInit {
     mapView: MapView;
     private sensordataSub: Subscription;
     now = new Date();
+    scrollLayout: ScrollView = null;
+    contentContainer: StackLayout = null;
 
     lastCamera: string;
     private sensorHistoryLoaded: boolean;
@@ -85,6 +88,9 @@ export class BoatComponent implements OnInit, AfterViewInit {
         );
         // const pageView = this.page.getViewById<MapView>('mapview_0');
         // console.log('AFTER INIT longitude: ' + pageView.minZoom);
+        this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
+        this.contentContainer = this.page.getViewById("level_5") as StackLayout;
+
     }
 
     ngOnInit(): void {
@@ -155,6 +161,79 @@ export class BoatComponent implements OnInit, AfterViewInit {
         // this.dataService.refreshSensorDataHistory();
         this.dataService.refreshBoatStatus();
         pullRefresh.refreshing = false;
+    }
+
+    toggleBoatDetails(deviceId) {
+        console.log("Boat Tapped No: "+deviceId);
+        const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
+        // if (boatDetailsView.isCollapsed)
+        // {
+        //     boatDetailsView.translateY = -boatDetailsView.getMeasuredHeight();
+        //     boatDetailsView.visibility = "visible";
+        //     boatDetailsView.animate({
+        //         translate: { x: 0, y: boatDetailsView.getMeasuredHeight()},
+        //         duration: 1000
+        //     }).then();
+        // }
+        // else
+        // {
+        //     boatDetailsView.animate({
+        //         translate: { x: 0, y: -boatDetailsView.getMeasuredHeight()},
+        //         duration: 1000
+        //     }).then(() => {
+        //         boatDetailsView.visibility='collapse';
+        //         boatDetailsView.translateY = boatDetailsView.getMeasuredHeight();
+        //     }, (err) => {});
+        // }
+
+        // if (boatDetailsView.isCollapsed)
+        // {
+        //     boatDetailsView.height = 0;
+        //     boatDetailsView.visibility = "visible";
+        //     boatDetailsView.animate({
+        //         height: 1000,
+        //         duration: 1000
+        //     }).then();
+        // }
+        // else
+        // {
+        //     boatDetailsView.animate({
+        //         opacity: 0,
+        //         duration: 250
+        //     }).then(() => {
+        //         boatDetailsView.visibility='collapse';
+        //     }, (err) => {});
+        // }
+
+        if (boatDetailsView.isCollapsed)
+        {
+            boatDetailsView.opacity = 0;
+            boatDetailsView.visibility = "visible";
+            boatDetailsView.animate({
+                opacity: 1,
+                duration: 100
+            }).then();
+
+        }
+        else
+        {
+            boatDetailsView.animate({
+                opacity: 0,
+                duration: 100
+            }).then(() => {
+                boatDetailsView.visibility='collapse';
+            }, (err) => {});
+        }
+        //boatDetailsView.visibility = boatDetailsView.isCollapsed ? "visible" : "collapse";
+    }
+
+    toggleAllBoatDetails(args) {
+        console.log("Boat Status tapped");
+        for (const idDevice in this.dataService.deviceData)
+        {
+            const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+            boatDetailsView.visibility = boatDetailsView.isCollapsed ? "visible" : "collapse";
+        }
     }
 
     click_gear() {

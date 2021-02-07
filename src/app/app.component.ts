@@ -13,6 +13,8 @@ import {alert} from "tns-core-modules/ui/dialogs";
 })
 export class AppComponent implements OnInit {
 
+    currentIndex = -1;
+
     constructor(private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject providers.
     }
@@ -50,5 +52,11 @@ export class AppComponent implements OnInit {
     onSelectedIndexChanged(args: SelectedIndexChangedEventData) {
         this.routerExtensions.navigate([""], { clearHistory: true });
         console.log(`Selected index has changed ( Old index: ${args.oldIndex} New index: ${args.newIndex} )`);
+        this.currentIndex = args.newIndex;
+    }
+
+    onBoatMenuTap(args){
+        this.routerExtensions.navigate([""], { clearHistory: true });
+        console.log("boat status tapped again");
     }
 }

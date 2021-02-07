@@ -40,6 +40,8 @@ export class BoatComponent implements OnInit, AfterViewInit {
     now = new Date();
     scrollLayout: ScrollView = null;
     contentContainer: StackLayout = null;
+    scrollBase = null;
+    allboatsvisible = false;
 
     lastCamera: string;
     private sensorHistoryLoaded: boolean;
@@ -82,21 +84,24 @@ export class BoatComponent implements OnInit, AfterViewInit {
                             this.mapView.mapAnimationsEnabled = true;
                         }
                     }
+                    // TODO is this the right place for the following commands? ask Jakob.
+                    this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
+                    this.contentContainer = this.page.getViewById("level_5") as StackLayout;
+                    this.scrollBase = this.page.getViewById("level_5") as StackLayout;
+                    this.applyDefaultBoatDetailsVisibility();
                 }, 2000);
             }
         }
         );
         // const pageView = this.page.getViewById<MapView>('mapview_0');
         // console.log('AFTER INIT longitude: ' + pageView.minZoom);
-        this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
-        this.contentContainer = this.page.getViewById("level_5") as StackLayout;
-
     }
 
     ngOnInit(): void {
     }
 
     ngAfterViewInit(): void {
+
     }
 
 
@@ -166,54 +171,21 @@ export class BoatComponent implements OnInit, AfterViewInit {
     toggleBoatDetails(deviceId) {
         console.log("Boat Tapped No: "+deviceId);
         const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
-        // if (boatDetailsView.isCollapsed)
-        // {
-        //     boatDetailsView.translateY = -boatDetailsView.getMeasuredHeight();
-        //     boatDetailsView.visibility = "visible";
-        //     boatDetailsView.animate({
-        //         translate: { x: 0, y: boatDetailsView.getMeasuredHeight()},
-        //         duration: 1000
-        //     }).then();
-        // }
-        // else
-        // {
-        //     boatDetailsView.animate({
-        //         translate: { x: 0, y: -boatDetailsView.getMeasuredHeight()},
-        //         duration: 1000
-        //     }).then(() => {
-        //         boatDetailsView.visibility='collapse';
-        //         boatDetailsView.translateY = boatDetailsView.getMeasuredHeight();
-        //     }, (err) => {});
-        // }
-
-        // if (boatDetailsView.isCollapsed)
-        // {
-        //     boatDetailsView.height = 0;
-        //     boatDetailsView.visibility = "visible";
-        //     boatDetailsView.animate({
-        //         height: 1000,
-        //         duration: 1000
-        //     }).then();
-        // }
-        // else
-        // {
-        //     boatDetailsView.animate({
-        //         opacity: 0,
-        //         duration: 250
-        //     }).then(() => {
-        //         boatDetailsView.visibility='collapse';
-        //     }, (err) => {});
-        // }
 
         if (boatDetailsView.isCollapsed)
         {
+            const scrollTarget = this.page.getViewById("level_6_"+deviceId) as StackLayout;
+
             boatDetailsView.opacity = 0;
             boatDetailsView.visibility = "visible";
             boatDetailsView.animate({
                 opacity: 1,
                 duration: 100
-            }).then();
-
+            }).then( () => {
+                    this.scrollLayout.scrollToVerticalOffset(scrollTarget.getLocationRelativeTo(this.scrollBase).y, true);
+                });
+            // not exactly true, but collapse of all is desired at tap on Title Bar
+            this.allboatsvisible = true;
         }
         else
         {
@@ -232,8 +204,50 @@ export class BoatComponent implements OnInit, AfterViewInit {
         for (const idDevice in this.dataService.deviceData)
         {
             const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
-            boatDetailsView.visibility = boatDetailsView.isCollapsed ? "visible" : "collapse";
+            boatDetailsView.visibility = this.allboatsvisible ? "collapse" : "visible";
+            boatDetailsView.opacity = 1;
         }
+        this.allboatsvisible = !this.allboatsvisible;
+        this.scrollLayout.scrollToVerticalOffset(0, true);
+    }
+
+    applyDefaultBoatDetailsVisibility(){
+        if (3 > this.dataService.deviceData.length)
+        {
+            for (const idDevice in this.dataService.deviceData)
+            {
+                const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+                boatDetailsView.visibility = "visible";
+                boatDetailsView.opacity = 1;
+            }
+            this.allboatsvisible = true;
+        }
+        else
+        {
+            let numberOfOfficerBoats = 0;
+            for (const idDevice in this.dataService.deviceData)
+            {
+                if ('officer' == this.dataService.deviceData[idDevice].role)
+                {
+                    numberOfOfficerBoats++;
+                }
+            }
+            if (3 > numberOfOfficerBoats)
+            {
+                for (const idDevice in this.dataService.deviceData)
+                {
+                    if ('officer' == this.dataService.deviceData[idDevice].role)
+                    {
+                        const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+                        boatDetailsView.visibility = "visible";
+                        boatDetailsView.opacity = 1;
+                    }
+                }
+                // not exactly true, but collapse of all is desired at tap on Title Bar
+                this.allboatsvisible = true;
+            }
+        }
+
     }
 
     click_gear() {

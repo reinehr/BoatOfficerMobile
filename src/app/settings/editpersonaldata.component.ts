@@ -24,6 +24,11 @@ export class EditpersonaldataComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.apiService.getUserData().subscribe(resData => {
+            this.firstname = resData.firstname;
+            this.name = resData.name
+            this.phonenumber = resData.phone
+        })
     }
 
 
@@ -31,6 +36,12 @@ export class EditpersonaldataComponent implements OnInit {
         console.log('Saving personal data ... ');
 
         this.isLoading = true;
+        this.apiService.editUserData(this.firstname, this.name, this.phonenumber).subscribe(
+            resData => {
+                this.isLoading = false;
+                this.router.backToPreviousPage();
+            }
+        );
 
 
     }

@@ -375,6 +375,19 @@ export function windSpeedToBeaufort(speed) {
   return 99;
 }
 
+export interface UserData {
+    id: number
+    is_pro: boolean,
+    name: string,
+    firstname: string,
+    phone: string,
+    email: string,
+    fb_is: string,
+    date_pro: string,
+    date_pro_end: string,
+    period_pro: number
+}
+
 export interface SensordataTime {
     device: { value: number, time: Date };
     ChargingActive: { value: boolean, time: Date };

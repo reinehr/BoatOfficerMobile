@@ -1,7 +1,15 @@
 import {Injectable} from '@angular/core';
 import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http';
 // import {CookieService} from 'ngx-cookie-service';
-import {BoatStatus, BoatHistory, Sensordata, SensordataTime, WeatherData, WeatherForecastData} from '~/app/shared/interface/sensordata';
+import {
+    BoatStatus,
+    BoatHistory,
+    Sensordata,
+    SensordataTime,
+    WeatherData,
+    WeatherForecastData,
+    UserData
+} from '~/app/shared/interface/sensordata';
 import {AuthService} from '~/app/shared/auth.service';
 import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
@@ -171,6 +179,17 @@ export class ApiService {
         }));
     }
 
+    getUserData() {
+        return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
+            {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            }
+        );
+    }
+
     getDeviceData() {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
@@ -284,7 +303,7 @@ export class ApiService {
     }
 
     setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {
-        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
+        this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
                 device_id: idDevice,
                 user_id: idUser,
                 role: role,
@@ -538,5 +557,20 @@ export class ApiService {
                         return throwError(errorRes);
                     })
                 );*/
+    }
+
+    editUserData(firstname: string, lastname :string, phone) {
+
+        return this.httpClient.post<any>(this.baseUserUrl + 'update_user/', {
+                firstname: firstname,
+                name: lastname,
+                phone: phone
+            }
+            , {
+                headers: new HttpHeaders({
+                    'Content-Type': 'application/json',
+                    idToken: `${getString('token', '')}`
+                })
+            });
     }
 }

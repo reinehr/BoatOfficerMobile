@@ -17,9 +17,12 @@ export class AuthComponent implements OnInit {
     registerMode = false;
     resetMode = false;
     isLoading = false;
+    firstname = '';
+    lastname = '';
     email = '';
     password = '';
     passwordRepeat = '';
+    phone= '';
 
     constructor(
         private apiService: ApiService,
@@ -72,21 +75,51 @@ export class AuthComponent implements OnInit {
                 };
                 alert(options);
             } else if (this.password === this.passwordRepeat) {
-                this.authService.signUp(this.email, this.password).subscribe(resData => {
-                    this.dataService.refreshBoatStatus();
+                if (!(this.firstname === '') && !(this.lastname === '')) {
+                    this.authService.signUp(this.email, this.password).subscribe(resData => {
+                        this.apiService.getDeviceData().subscribe(resp1 => {
+                            console.log('refreshBoatStatus - getDeviceData');
+                            this.apiService.getBoatStatus().subscribe(resp2 => {
+                                this.apiService.editUserData(this.firstname, this.lastname, this.phone).subscribe();
+                                console.log('refreshBoatStatus - getBoatStatus');
+                                this.isLoading = false;
+                            }, error => {
+                                console.log(error);
+                                this.isLoading = false;
+                            });
+                            this.apiService.getDeviceAlarmSettings().subscribe(response => {
+                                console.log('refreshBoatStatus - getDeviceAlarmSettings');
+                            }, error => {
+                                console.log('AlarmSettings not loading');
+                            });
+                            this.isLoading = false;
+                        }, error => {
+                            console.log(error);
+                            this.isLoading = false;
+                        });
+                        const options = {
+                            title: localize('Registration successful'),
+                            message: localize('You are now logged in'),
+                            okButtonText: 'OK'
+                        };
+                        alert(options).then(() => {
+                            this.router.navigate([''], {clearHistory: true});
+                        });
+
+                        this.isLoading = false;
+                    }, error => {
+                        console.log(error);
+                        this.isLoading = false;
+                    });
+                } else {
+                    this.isLoading = false;
                     const options = {
-                        title: localize('Registration successful'),
-                        message: localize('You are now logged in'),
+                        title: localize('Name missing'),
+                        message: localize('Please enter first and last name'),
                         okButtonText: 'OK'
                     };
-                    alert(options).then(() => {
-                        this.router.navigate([''], {clearHistory: true});
-                    });
-                    this.isLoading = false;
-                }, error => {
-                    console.log(error);
-                    this.isLoading = false;
-                });
+                    alert(options);
+                }
             } else {
                 this.isLoading = false;
                 const options = {

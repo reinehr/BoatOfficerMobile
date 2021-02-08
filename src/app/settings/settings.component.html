@@ -41,5 +41,10 @@
                     [text]="'You are logged in as' | L: email"
             ></TextView>
         </StackLayout>
+        <Button *ngIf="hasKey" marginTop="10"
+                text="{{'Edit personal data' | L}}"
+                class="alarm-button"
+                nsRouterLink="../editpersonaldata"
+                pageTransition="slideLeft"></Button>
     </StackLayout>
 </GridLayout>

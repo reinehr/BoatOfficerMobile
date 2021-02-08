@@ -12,6 +12,7 @@ import {NativeScriptLocalizeModule} from "nativescript-localize/localize.module"
 import {ImpressumComponent} from "~/app/settings/impressum.component";
 import {PurchaseComponent} from "~/app/settings/purchase.component";
 import {SignonaboatComponent} from "~/app/settings/signonaboat.component";
+import {EditpersonaldataComponent} from "~/app/settings/editpersonaldata.component";
 
 @NgModule({
     imports: [
@@ -21,7 +22,7 @@ import {SignonaboatComponent} from "~/app/settings/signonaboat.component";
         NativeScriptLocalizeModule
     ],
     declarations: [
-        SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent
+        SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

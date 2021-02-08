@@ -10,6 +10,7 @@ import {AlertsettingsComponent} from '~/app/settings/alertsettings.component';
 import {ImpressumComponent} from "~/app/settings/impressum.component";
 import {PurchaseComponent} from "~/app/settings/purchase.component";
 import {SignonaboatComponent} from "~/app/settings/signonaboat.component";
+import {EditpersonaldataComponent} from "~/app/settings/editpersonaldata.component";
 
 const routes: Routes = [
     { path: 'default', component: SettingsComponent },
@@ -20,6 +21,7 @@ const routes: Routes = [
     { path: 'logout', component: LogoutComponent },
     { path: 'impressum', component: ImpressumComponent },
     { path: 'purchase', component: PurchaseComponent },
+    { path: 'editpersonaldata', component: EditpersonaldataComponent },
 ];
 
 @NgModule({

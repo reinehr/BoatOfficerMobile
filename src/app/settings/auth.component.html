@@ -7,8 +7,8 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
-        <StackLayout class="form">
-            <StackLayout class="input-field" padding="10, 10, 0, 10" *ngIf="!resetMode">
+        <StackLayout class="form" paddingTop="10">
+            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
                 <TextField
                         fontSize="18"
                         returnKeyType="next"
@@ -19,7 +19,7 @@
                         hint="{{'First Name' | L}}"
                 ></TextField>
             </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="!resetMode">
+            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
                 <TextField
                         fontSize="18"
                         returnKeyType="next"
@@ -42,7 +42,7 @@
                         hint="{{'E-Mail' | L}}">
                 ></TextField>
             </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10">
+            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
                 <TextField
                         fontSize="18"
                         returnKeyType="next"

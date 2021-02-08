@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="_Save_Data_2vImsS">"Daten ändern"</string>
+  <string name="_Phone_Number_Z1HamqP">"Telefonnummer"</string>
+  <string name="_Edit_personal_data_pc5AK">"Persönliche Daten ändern"</string>
+  <string name="_EDIT_PERSONAL_DATA_1wMqbe">"PERS. DATEN ÄNDERN"</string>
   <string name="_Privacy_Policy_Z1gery6">"Datenschutzerklärung"</string>
   <string name="_Terms_of_Use_17jxBW">"Nutzungsbedingungen"</string>
   <string name="Impressum">"Impressum"</string>
@@ -18,6 +22,8 @@
   <string name="DEVICE_ALREADY_REGISTERED">"Gerät wurde bereits registriert."</string>
   <string name="REGISTRATION_KEY_INVALID">"Registrierungsschlüssel ungültig oder falsch"</string>
   <string name="SUCCESS">"Erfolgreich"</string>
+  <string name="_Please_enter_first_and_last_name_Z1VDfxB">"Bitte gebe deinen Vor- und Nachnamen an"</string>
+  <string name="_Name_missing_Z2vWqqE">"Name fehlt"</string>
   <string name="_Please_re_enter_the_password_Fx7Sr">"Bitte Passwort wiederholen"</string>
   <string name="_Passwords_not_identical_U19vf">"Passwörter stimmen nicht überein"</string>
   <string name="_Length_must_be_at_least_8_characters_1PfVf7">"Mindestens 8 Zeichen erforderlich"</string>
@@ -54,7 +60,10 @@
   <string name="_Log_in_Z2npWid">"Anmelden"</string>
   <string name="_repeat_Password_2hW7n9">"Passwort wiederholen"</string>
   <string name="Password">"Passwort"</string>
+  <string name="_Phone_number_ZC0clO">"Telefonnummer"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
+  <string name="_Last_Name_ZokKlg">"Nachname"</string>
+  <string name="_First_Name_264Jlh">"Vorname"</string>
   <string name="_Authentication_failed_1msuLR">"Anmeldung fehlgeschlagen"</string>
   <string name="_E_Mail_not_found_1QlWhj">"E-Mail nicht registriert"</string>
   <string name="_Invalid_email_address_Z2keLgK">"Ungültige E-Mail-Adresse"</string>
@@ -85,6 +94,9 @@
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"GERÄTEEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_EDIT_ALARM_SETTINGS_190vuB">"ALARMEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_____EDIT_SETTINGS_____ZePiMy">""</string>
+  <string name="_Same_as_captain_YV6hk">"Wie Kapitän"</string>
+  <string name="_Edit_alarms_Z1pcu08">"Alarme ändern"</string>
+  <string name="_Acknowledge_alarms_G3GjI">"Alarme bestätigen"</string>
   <string name="_View_Nearest_Webcams_83REv">"Nächste Webcams sehen"</string>
   <string name="_View_Log_History_ZhyGrL">"Log Historie ansehen"</string>
   <string name="_View_Sensor_History_Z1BeqKL">"Sensor Historie ansehen"</string>
@@ -92,21 +104,25 @@
   <string name="Permissions">"Berechtigungen"</string>
   <string name="upgrade_to_pro_for_feature">"Dies ist eine Pro Funktion. Bitte upgrade deine App zu Pro, um diese Funktion zu nutzen."</string>
   <string name="please_test_sos_before_usage">"Bitte teste diese Funktion vor der ersten Nutzung. Es ist eine Unterstützung, kein garantiertes Hilfsmittel um Boot und Leben zu retten."</string>
-  <string name="users_listed_here_sos">"Hier aufgelistete Nutzer werden eine SOS Push-Nachricht bekommen, wenn du die SOS Funktion durch einen langen Knopfdruck am Gerät aktivierst (die rote LED blinkt dann bis zur Deaktivierung durch einen erneuten langen Tastendruck)."</string>
+  <string name="users_listed_here_sos">"Oben aufgelistete Nutzer werden eine SOS Push-Nachricht bekommen, wenn du die SOS Funktion durch einen langen Knopfdruck am Gerät aktivierst (die rote LED blinkt dann bis zur Deaktivierung durch einen erneuten langen Tastendruck)."</string>
   <string name="Cancel">"Abbrechen"</string>
   <string name="_Yes__Leave_25v2J7">"Ja, ich gehe"</string>
-  <string name="Yes">"Ja"</string>
   <string name="_Leave_this_boat_ZMQkmx">"Von Bord gehen"</string>
   <string name="_Do_you_really_want_to_leave_this_boat___s___Z2ezym8">"Möchtest du wirklich dieses Boot (%1$s) verlassen?"</string>
   <string name="_Note__Without_PRO_Upgrade__you_can_only_hire_one_guard__Z1RPRx">"Hinweis: Ohne PRO Upgrade kannst du nur einen Wachmann zum Boot hinzufügen."</string>
   <string name="_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr">"Setze nun die BoatOfficer ID (%1$s) in einer E-Mail oder einem Messenger ein, um sie deinen Freunden zu senden."</string>
   <string name="_BoatOfficer_ID_copied_RHX1P">"BoatOfficer ID kopiert"</string>
   <string name="_Invite_Crew_7xG4K">"Besatzung anheuern"</string>
+  <string name="_Discharge__s_as_emergency_contact__1FXbHp">"%1$s als Notfall Kontakt entlassen? Kontakt bleibt weiterhin Wachmann oder Matrose."</string>
+  <string name="_Discharge_Emergency_Contact_1XG0Lm">"Notfall Kontakt beenden"</string>
+  <string name="_List__s_as_emergency_contact__ZAwUpz">"%1$s als Notfall Kontakt hinzufügen?"</string>
+  <string name="_Add_Emergency_Contact_Z2oDKnw">"Notfall Kontakt hinzufügen"</string>
   <string name="_Send__s_aboard__ZaFX3v">"%1$s von Bord weisen?"</string>
   <string name="_Send_aboard_17jR23">"Von Bord weisen"</string>
   <string name="_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE">"Rolle von %1$s von Matrose zu Wachmann ändern?"</string>
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Rolle von %1$s von Wachmann zu Matrose ändern?"</string>
   <string name="_Change_role_Z3ex2u">"Rolle ändern"</string>
+  <string name="_Not_Lifeguards_Z1O8KgQ">"Keine Notfall Kontakte"</string>
   <string name="Lifeguards">"Notfall Kontakte"</string>
   <string name="Sailors">"Matrosen"</string>
   <string name="Sailor">"Matrose"</string>
@@ -163,6 +179,8 @@
   <string name="MAP">"KARTENANSICHT"</string>
   <string name="closed">"geschlossen"</string>
   <string name="open">"offen"</string>
+  <string name="No">"Nein"</string>
+  <string name="Yes">"Ja"</string>
   <string name="no">"nein"</string>
   <string name="yes">"ja"</string>
   <string name="Direction">"Richtung"</string>

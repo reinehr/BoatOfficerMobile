@@ -1,5 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="_Save_Data_2vImsS">"Save Data"</string>
+  <string name="_Phone_Number_Z1HamqP">"Phone Number"</string>
+  <string name="_Edit_personal_data_pc5AK">"Edit personal data"</string>
+  <string name="_EDIT_PERSONAL_DATA_1wMqbe">"EDIT PERSONAL DATA"</string>
   <string name="_Privacy_Policy_Z1gery6">"Privacy Policy"</string>
   <string name="_Terms_of_Use_17jxBW">"Terms of Use"</string>
   <string name="Impressum">"Impressum"</string>
@@ -18,6 +22,8 @@
   <string name="DEVICE_ALREADY_REGISTERED">"Device already registered"</string>
   <string name="REGISTRATION_KEY_INVALID">"Registration key invalid"</string>
   <string name="SUCCESS">"Success"</string>
+  <string name="_Please_enter_first_and_last_name_Z1VDfxB">"Please enter first and last name"</string>
+  <string name="_Name_missing_Z2vWqqE">"Name missing"</string>
   <string name="_Please_re_enter_the_password_Fx7Sr">"Please re-enter the password"</string>
   <string name="_Passwords_not_identical_U19vf">"Passwords not identical"</string>
   <string name="_Length_must_be_at_least_8_characters_1PfVf7">"Length must be at least 8 characters"</string>
@@ -54,7 +60,10 @@
   <string name="_Log_in_Z2npWid">"Log in"</string>
   <string name="_repeat_Password_2hW7n9">"repeat Password"</string>
   <string name="Password">"Password"</string>
+  <string name="_Phone_number_ZC0clO">"Phone number"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
+  <string name="_Last_Name_ZokKlg">"Last Name"</string>
+  <string name="_First_Name_264Jlh">"First Name"</string>
   <string name="_Authentication_failed_1msuLR">"Authentication failed"</string>
   <string name="_E_Mail_not_found_1QlWhj">"E-Mail not registered"</string>
   <string name="_Invalid_email_address_Z2keLgK">"Invalid email address"</string>
@@ -85,6 +94,9 @@
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"EDIT DEVICE SETTINGS"</string>
   <string name="_EDIT_ALARM_SETTINGS_190vuB">"EDIT ALARM SETTINGS"</string>
   <string name="_____EDIT_SETTINGS_____ZePiMy">""</string>
+  <string name="_Acknowledge_alarms_G3GjI">"Acknowledge alarms"</string>
+  <string name="_Same_as_captain_YV6hk">"Same as captain"</string>
+  <string name="_Edit_alarms_Z1pcu08">"Edit alarms"</string>
   <string name="_View_Nearest_Webcams_83REv">"View Nearest Webcams"</string>
   <string name="_View_Log_History_ZhyGrL">"View Log History"</string>
   <string name="_View_Sensor_History_Z1BeqKL">"View Sensor History"</string>
@@ -92,21 +104,25 @@
   <string name="Permissions">"Permissions"</string>
   <string name="upgrade_to_pro_for_feature">"This is a Pro Feature. Please upgrade your app to Pro, to make use of this feature."</string>
   <string name="please_test_sos_before_usage">"Please test this feature before first usage. It is an additional help, it is no guaranteed means for the saving of boat and lifes."</string>
-  <string name="users_listed_here_sos">"Users listed here will receive a SOS push notification, when you activate the SOS function by a long button push on the device (red light starts continuous blinking until deactivation by another long button push)."</string>
+  <string name="users_listed_here_sos">"Users listed above will receive a SOS push notification, when you activate the SOS function by a long button push on the device (red light starts continuous blinking until deactivation by another long button push)."</string>
   <string name="Cancel">"Cancel"</string>
   <string name="_Yes__Leave_25v2J7">"Yes, Leave"</string>
-  <string name="Yes">"Yes"</string>
   <string name="_Leave_this_boat_ZMQkmx">"Leave this boat"</string>
   <string name="_Do_you_really_want_to_leave_this_boat___s___Z2ezym8">"Do you really want to leave this boat (%1$s)?"</string>
   <string name="_Note__Without_PRO_Upgrade__you_can_only_hire_one_guard__Z1RPRx">"Note: Without PRO Upgrade, you can only hire one guard."</string>
   <string name="_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr">"Now, paste the BoatOfficer ID (%1$s) in an e-mail or messenger to send it to your friends."</string>
   <string name="_BoatOfficer_ID_copied_RHX1P">"BoatOfficer ID copied"</string>
   <string name="_Invite_Crew_7xG4K">"Invite Crew"</string>
+  <string name="_Discharge__s_as_emergency_contact__1FXbHp">"Discharge %1$s as emergency contact? Contact remains guard or sailor."</string>
+  <string name="_Discharge_Emergency_Contact_1XG0Lm">"Discharge Emergency Contact"</string>
+  <string name="_List__s_as_emergency_contact__ZAwUpz">"List %1$s as emergency contact?"</string>
+  <string name="_Add_Emergency_Contact_Z2oDKnw">"Add Emergency Contact"</string>
   <string name="_Send__s_aboard__ZaFX3v">"Send %1$s aboard?"</string>
   <string name="_Send_aboard_17jR23">"Send aboard"</string>
   <string name="_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE">"Change role of %1$s from Sailor to Guard?"</string>
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Change role of %1$s from Guard to Sailor?"</string>
   <string name="_Change_role_Z3ex2u">"Change role"</string>
+  <string name="_Not_Lifeguards_Z1O8KgQ">"Not Emergency Contacts"</string>
   <string name="Lifeguards">"Emergency Contacts"</string>
   <string name="Sailors">"Sailors"</string>
   <string name="Sailor">"Sailor"</string>
@@ -163,6 +179,8 @@
   <string name="MAP">"MAP"</string>
   <string name="closed">"closed"</string>
   <string name="open">"open"</string>
+  <string name="No">"No"</string>
+  <string name="Yes">"Yes"</string>
   <string name="no">"no"</string>
   <string name="yes">"yes"</string>
   <string name="Direction">"Direction"</string>

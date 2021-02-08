@@ -49,7 +49,6 @@
                 <StackLayout *ngIf="roleOrRequests != 'lifeguard'">
                     <Label text="{{'Permissions' | L}}" class="t-16 font-weight-bold"
                            marginBottom="5"></Label>
-                    <Label text="{{'Note' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'lifeguard'"></Label>
                     <StackLayout>
                         <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
                             <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
@@ -60,7 +59,7 @@
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
                             <Label col="3" row="1"
-                                   [text]="'TODO'"
+                                   text="{{'Same as captain' |L}}"
                                    class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                         </GridLayout>
                         <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
@@ -72,7 +71,7 @@
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
                             <Label col="3" row="1"
-                                   [text]="'TODO'"
+                                   text="{{'Same as captain' |L}}"
                                    class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                         </GridLayout>
                         <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
@@ -84,7 +83,37 @@
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
                             <Label col="3" row="1"
-                                   [text]="'TODO'"
+                                   text="{{'Same as captain' |L}}"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                        </GridLayout>
+                        <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 text=""
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" text="{{'Edit alarms' |L}}"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <Label col="3" row="1" *ngIf="roleOrRequests == 'guard'"
+                                   text="{{'Same as captain' |L}}"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            <Label col="3" row="1" *ngIf="roleOrRequests == 'sailor'"
+                                   text="{{'No' |L}}"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                        </GridLayout>
+                        <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
+                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                        borderTopColor="#d3d3d3"></GridLayout>
+                            <Label col=1 row=1 text=""
+                                   class="alarm-symbol-fas alarm-gray"></Label>
+                            <Label col="2" row="1" text="{{'Acknowledge alarms' |L}}"
+                                   class="alarm-blue font-weight-bold"
+                                   verticalAlignment="center"></Label>
+                            <Label col="3" row="1" *ngIf="roleOrRequests == 'guard'"
+                                   text="{{'Same as captain' |L}}"
+                                   class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            <Label col="3" row="1" *ngIf="roleOrRequests == 'sailor'"
+                                   text="{{'No' |L}}"
                                    class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                         </GridLayout>
                     </StackLayout>

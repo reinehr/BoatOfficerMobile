@@ -116,10 +116,10 @@ export class EditusersComponent implements OnInit {
     revokeLifeguardStatus(userid, useremail, deviceid, role)
     {
         const options = {
-            title: "Discharge lifeguard",
-            message: "Discharge "+useremail+" as first aid contact?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel",
+            title: localize("Discharge Emergency Contact"),
+            message: localize("Discharge %s as emergency contact?", useremail),
+            okButtonText: localize("Yes"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {
@@ -131,10 +131,10 @@ export class EditusersComponent implements OnInit {
     grantLifeguardStatus(userid, useremail, deviceid, role)
     {
         const options = {
-            title: "Add lifeguard",
-            message: "List "+useremail+" as first aid contact?",
-            okButtonText: "Yes",
-            cancelButtonText: "Cancel",
+            title: localize("Add Emergency Contact"),
+            message: localize("List %s as emergency contact?",useremail),
+            okButtonText: localize("Yes"),
+            cancelButtonText: localize("Cancel"),
         };
         confirm(options).then( result => {
             if(result) {

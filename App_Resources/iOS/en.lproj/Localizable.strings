@@ -1,7 +1,5 @@
 "_Save_Data_2vImsS" = "Save Data";
 "_Phone_Number_Z1HamqP" = "Phone Number";
-"_Last_Name_ZokKlg" = "Last Name";
-"_First_Name_264Jlh" = "First Name";
 "_Edit_personal_data_pc5AK" = "Edit personal data";
 "_EDIT_PERSONAL_DATA_1wMqbe" = "EDIT PERSONAL DATA";
 "_Privacy_Policy_Z1gery6" = "Privacy Policy";
@@ -22,6 +20,8 @@
 "DEVICE_ALREADY_REGISTERED" = "Device already registered";
 "REGISTRATION_KEY_INVALID" = "Registration key invalid";
 "SUCCESS" = "Success";
+"_Please_enter_first_and_last_name_Z1VDfxB" = "Please enter first and last name";
+"_Name_missing_Z2vWqqE" = "Name missing";
 "_Please_re_enter_the_password_Fx7Sr" = "Please re-enter the password";
 "_Passwords_not_identical_U19vf" = "Passwords not identical";
 "_Length_must_be_at_least_8_characters_1PfVf7" = "Length must be at least 8 characters";
@@ -58,7 +58,10 @@
 "_Log_in_Z2npWid" = "Log in";
 "_repeat_Password_2hW7n9" = "repeat Password";
 "Password" = "Password";
+"_Phone_number_ZC0clO" = "Phone number";
 "_E_Mail_2nPAU3" = "E-Mail";
+"_Last_Name_ZokKlg" = "Last Name";
+"_First_Name_264Jlh" = "First Name";
 "_Authentication_failed_1msuLR" = "Authentication failed";
 "_E_Mail_not_found_1QlWhj" = "E-Mail not registered";
 "_Invalid_email_address_Z2keLgK" = "Invalid email address";

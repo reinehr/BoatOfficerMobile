@@ -1,7 +1,5 @@
 "_Save_Data_2vImsS" = "Daten ändern";
 "_Phone_Number_Z1HamqP" = "Telefonnummer";
-"_Last_Name_ZokKlg" = "Nachname";
-"_First_Name_264Jlh" = "Vorname";
 "_Edit_personal_data_pc5AK" = "Persönliche Daten ändern";
 "_EDIT_PERSONAL_DATA_1wMqbe" = "PERS. DATEN ÄNDERN";
 "_Privacy_Policy_Z1gery6" = "Datenschutzerklärung";
@@ -22,6 +20,8 @@
 "DEVICE_ALREADY_REGISTERED" = "Gerät wurde bereits registriert.";
 "REGISTRATION_KEY_INVALID" = "Registrierungsschlüssel ungültig oder falsch";
 "SUCCESS" = "Erfolgreich";
+"_Please_enter_first_and_last_name_Z1VDfxB" = "Bitte gebe deinen Vor- und Nachnamen an";
+"_Name_missing_Z2vWqqE" = "Name fehlt";
 "_Please_re_enter_the_password_Fx7Sr" = "Bitte Passwort wiederholen";
 "_Passwords_not_identical_U19vf" = "Passwörter stimmen nicht überein";
 "_Length_must_be_at_least_8_characters_1PfVf7" = "Mindestens 8 Zeichen erforderlich";
@@ -58,7 +58,10 @@
 "_Log_in_Z2npWid" = "Anmelden";
 "_repeat_Password_2hW7n9" = "Passwort wiederholen";
 "Password" = "Passwort";
+"_Phone_number_ZC0clO" = "Telefonnummer";
 "_E_Mail_2nPAU3" = "E-Mail";
+"_Last_Name_ZokKlg" = "Nachname";
+"_First_Name_264Jlh" = "Vorname";
 "_Authentication_failed_1msuLR" = "Anmeldung fehlgeschlagen";
 "_E_Mail_not_found_1QlWhj" = "E-Mail nicht registriert";
 "_Invalid_email_address_Z2keLgK" = "Ungültige E-Mail-Adresse";

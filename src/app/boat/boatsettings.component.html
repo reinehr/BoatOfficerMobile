@@ -50,7 +50,7 @@
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout>
+                        <StackLayout *ngIf="false && 'Auskommentiert, weil sich dahinter noch keine Funktion verbirgt. '">
                             <StackLayout *ngIf="device.role == 'officer' || device.role == 'guard'">
                                 <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
                                     <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
@@ -199,7 +199,7 @@
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
                                 <Label col="3" row="1"
-                                       [text]="device.officermail"
+                                       [text]="((device.device_officer.firstname || device.device_officer.name) ? device.device_officer.firstname + ' ' + device.device_officer.name : device.device_officer.email)"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"

@@ -46,10 +46,10 @@ export class EditusersComponent implements OnInit {
 
     }
 
-    changeSailorToGuard(userid, useremail, deviceid, lifeguard) {
+    changeSailorToGuard(userid, username, deviceid, lifeguard) {
         const options = {
             title: localize("Change role"),
-            message: localize("Change role of %s from Sailor to Guard?", useremail),
+            message: localize("Change role of %s from Sailor to Guard?", username),
         okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -60,10 +60,10 @@ export class EditusersComponent implements OnInit {
         });
     }
 
-    changeGuardToSailor(userid, useremail, deviceid, lifeguard) {
+    changeGuardToSailor(userid, username, deviceid, lifeguard) {
         const options = {
             title: localize("Change role"),
-            message: localize("Change role of %s from Guard to Sailor?", useremail),
+            message: localize("Change role of %s from Guard to Sailor?", username),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -74,9 +74,9 @@ export class EditusersComponent implements OnInit {
         });
     }
 
-    changeUserRole(userid, useremail, deviceid, lifeguard) {
+    changeUserRole(userid, username, deviceid, lifeguard) {
         const options = {
-            title: localize("Change role of ")+useremail+"?",
+            title: localize("Change role of ")+username+"?",
             message: "",
             cancelButtonText: localize("Cancel"),
             actions: [localize('Guard'), localize('Sailor')]
@@ -98,11 +98,11 @@ export class EditusersComponent implements OnInit {
         });
     }
 
-    offboardUser(userid, useremail, deviceid)
+    offboardUser(userid, username, deviceid)
     {
         const options = {
             title: localize("Send aboard"),
-            message: localize("Send %s aboard?", useremail),
+            message: localize("Send %s aboard?", username),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -113,11 +113,11 @@ export class EditusersComponent implements OnInit {
         });
     }
 
-    revokeLifeguardStatus(userid, useremail, deviceid, role)
+    revokeLifeguardStatus(userid, username, deviceid, role)
     {
         const options = {
             title: localize("Discharge Emergency Contact"),
-            message: localize("Discharge %s as emergency contact?", useremail),
+            message: localize("Discharge %s as emergency contact?", username),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };
@@ -128,11 +128,11 @@ export class EditusersComponent implements OnInit {
         });
     }
 
-    grantLifeguardStatus(userid, useremail, deviceid, role)
+    grantLifeguardStatus(userid, username, deviceid, role)
     {
         const options = {
             title: localize("Add Emergency Contact"),
-            message: localize("List %s as emergency contact?",useremail),
+            message: localize("List %s as emergency contact?",username),
             okButtonText: localize("Yes"),
             cancelButtonText: localize("Cancel"),
         };

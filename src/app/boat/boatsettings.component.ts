@@ -40,15 +40,6 @@ export class BoatsettingsComponent implements OnInit {
     }
 
     ngOnInit(): void {
-        for (const idDevice in this.dataService.deviceData) {
-            for (let user of this.dataService.deviceData[idDevice].device_users) {
-                if (user.role == 'officer')
-                {
-                    this.dataService.deviceData[idDevice]['officermail'] = user.email;
-                    break;
-                }
-            }
-        }
     }
 
     showDialog() {

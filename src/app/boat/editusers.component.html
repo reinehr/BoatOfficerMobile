@@ -19,26 +19,26 @@
                         <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
                                     borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
                                     *ngIf="user.role == roleOrRequests || (user.lifeguard && 'lifeguard' == roleOrRequests)">
-                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
+                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email) }}"></Label>
                             <Label col=0 row=1 verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=1 rowspan=2 text=""
-                                   (tap)="changeUserRole(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   (tap)="changeUserRole(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id, user.lifeguard)"
                                    *ngIf="roleOrRequests == 'candidate'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col=1 rowspan=2 text=""
-                                   (tap)="changeSailorToGuard(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   (tap)="changeSailorToGuard(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id, user.lifeguard)"
                                    *ngIf="roleOrRequests == 'sailor'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col=1 rowspan=2 text=""
-                                   (tap)="changeGuardToSailor(user.user_id, user.email, dataService.deviceData[idDevice].id, user.lifeguard)"
+                                   (tap)="changeGuardToSailor(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id, user.lifeguard)"
                                    *ngIf="roleOrRequests == 'guard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col=2 rowspan=2 text=""
-                                   (tap)="offboardUser(user.user_id, user.email, dataService.deviceData[idDevice].id)"
+                                   (tap)="offboardUser(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id)"
                                    *ngIf="roleOrRequests != 'lifeguard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col=2 rowspan=2 text=""
-                                   (tap)="revokeLifeguardStatus(user.user_id, user.email, dataService.deviceData[idDevice].id, user.role)"
+                                   (tap)="revokeLifeguardStatus(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id, user.role)"
                                    *ngIf="roleOrRequests == 'lifeguard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                         </GridLayout>
@@ -140,10 +140,10 @@
                         <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
                                     borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
                                     *ngIf="(!user.lifeguard && 'lifeguard' == roleOrRequests)">
-                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ user.email }}"></Label>
-                            <Label col=0 row=1 verticalAlignment="center" text=" {{ user.email }}"></Label>
+                            <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email) }}"></Label>
+                            <Label col=0 row=1 verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=2 rowspan=2 text=""
-                                   (tap)="grantLifeguardStatus(user.user_id, user.email, dataService.deviceData[idDevice].id, user.role)"
+                                   (tap)="grantLifeguardStatus(user.user_id, ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email), dataService.deviceData[idDevice].id, user.role)"
                                    *ngIf="roleOrRequests == 'lifeguard'"
                                    class="alarm-symbol-fas alarm-gray"></Label>
                         </GridLayout>

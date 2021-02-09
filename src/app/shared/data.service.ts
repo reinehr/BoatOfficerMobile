@@ -54,12 +54,26 @@ export interface DeviceAlarmDataFormat {
     'date_pro_end': string;
     'period_pro': number;
     'sum_active_alarm'?: number;
+    'device_officer': {
+        'id': number,
+        'role': string,
+        'user_id': number,
+        'fb_id': string,
+        'email': string,
+        'firstname': string,
+        'name': string,
+        'phone': string,
+        'lifeguard': boolean,
+    };
     'device_users': {
         'id': number,
         'role': string,
         'user_id': number,
         'fb_id': string,
         'email': string,
+        'firstname': string,
+        'name': string,
+        'phone': string,
         'lifeguard': boolean,
     }[];
     'alarm': {

@@ -121,9 +121,12 @@
   <string name="_Send_aboard_17jR23">"Von Bord weisen"</string>
   <string name="_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE">"Rolle von %1$s von Matrose zu Wachmann ändern?"</string>
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Rolle von %1$s von Wachmann zu Matrose ändern?"</string>
+  <string name="_Change_role_of__s__1R3UFA">"Rolle von %1$s ändern?"</string>
   <string name="_Change_role_Z3ex2u">"Rolle ändern"</string>
-  <string name="_Not_Lifeguards_Z1O8KgQ">"Keine Notfall Kontakte"</string>
-  <string name="Lifeguards">"Notfall Kontakte"</string>
+  <string name="_You_are_not_included_Jz5dA">"ohne dich"</string>
+  <string name="_You_are_included_Z29hpN1">"incl. dich"</string>
+  <string name="_Not_Lifeguards_Z1O8KgQ">"Keine Notfallkontakte"</string>
+  <string name="Lifeguards">"Notfallkontakte"</string>
   <string name="Sailors">"Matrosen"</string>
   <string name="Sailor">"Matrose"</string>
   <string name="Guards">"Wachmänner"</string>

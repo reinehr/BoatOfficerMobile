@@ -18,7 +18,7 @@
                     <StackLayout *ngFor="let user of dataService.deviceData[idDevice].device_users" >
                         <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
                                     borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
-                                    *ngIf="user.role == roleOrRequests || (user.lifeguard && 'lifeguard' == roleOrRequests)">
+                                    *ngIf="user.role == roleOrRequests || (user.lifeguard && 'lifeguard' == roleOrRequests && (user.role == 'sailor' || user.role == 'guard' || user.role == 'officer'))">
                             <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email) }}"></Label>
                             <Label col=0 row=1 verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=1 rowspan=2 text=""
@@ -139,7 +139,7 @@
                     <StackLayout *ngFor="let user of dataService.deviceData[idDevice].device_users" >
                         <GridLayout columns="*,45,45" rows="20,20" borderTopWidth="1"
                                     borderTopColor="#d3d3d3" paddingTop="5" paddingBottom="5"
-                                    *ngIf="(!user.lifeguard && 'lifeguard' == roleOrRequests)">
+                                    *ngIf="(!user.lifeguard && 'lifeguard' == roleOrRequests && (user.role == 'sailor' || user.role == 'guard' || user.role == 'officer'))">
                             <Label col=0 row=0 class="alarm-blue font-weight-bold" verticalAlignment="center" text="{{ ((user.firstname || user.name) ? user.firstname + ' ' + user.name : user.email) }}"></Label>
                             <Label col=0 row=1 verticalAlignment="center" text="{{ user.email }}"></Label>
                             <Label col=2 rowspan=2 text=""

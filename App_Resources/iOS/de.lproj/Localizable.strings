@@ -119,6 +119,7 @@
 "_Send_aboard_17jR23" = "Von Bord weisen";
 "_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE" = "Rolle von %1$@ von Matrose zu Wachmann ändern?";
 "_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8" = "Rolle von %1$@ von Wachmann zu Matrose ändern?";
+"_Change_role_of__s__1R3UFA" = "Rolle von %1$@ ändern?";
 "_Change_role_Z3ex2u" = "Rolle ändern";
 "_Not_Lifeguards_Z1O8KgQ" = "Keine Notfall Kontakte";
 "Lifeguards" = "Notfall Kontakte";

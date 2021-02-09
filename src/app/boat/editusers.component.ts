@@ -76,7 +76,7 @@ export class EditusersComponent implements OnInit {
 
     changeUserRole(userid, username, deviceid, lifeguard) {
         const options = {
-            title: localize("Change role of ")+username+"?",
+            title: localize("Change role of %s?",username),
             message: "",
             cancelButtonText: localize("Cancel"),
             actions: [localize('Guard'), localize('Sailor')]

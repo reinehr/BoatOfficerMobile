@@ -119,6 +119,7 @@
 "_Send_aboard_17jR23" = "Send aboard";
 "_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE" = "Change role of %1$@ from Sailor to Guard?";
 "_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8" = "Change role of %1$@ from Guard to Sailor?";
+"_Change_role_of__s__1R3UFA" = "Change role of %1$@?";
 "_Change_role_Z3ex2u" = "Change role";
 "_Not_Lifeguards_Z1O8KgQ" = "Not Emergency Contacts";
 "Lifeguards" = "Emergency Contacts";

@@ -134,6 +134,7 @@
   "Lifeguards": "Notfall Kontakte",
   "Not Lifeguards" : "Keine Notfall Kontakte",
   "Change role": "Rolle ändern",
+  "Change role of %s?": "Rolle von %s ändern?",
   "Change role of %s from Guard to Sailor?": "Rolle von %s von Wachmann zu Matrose ändern?",
   "Change role of %s from Sailor to Guard?": "Rolle von %s von Matrose zu Wachmann ändern?",
   "Send aboard": "Von Bord weisen",

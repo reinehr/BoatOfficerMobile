@@ -133,6 +133,8 @@
   "Sailors": "Sailors",
   "Lifeguards": "Emergency Contacts",
   "Not Lifeguards" : "Not Emergency Contacts",
+  "You are included": "incl. you",
+  "You are not included": "not incl. you",
   "Change role": "Change role",
   "Change role of %s?": "Change role of %s?",
   "Change role of %s from Guard to Sailor?": "Change role of %s from Guard to Sailor?",

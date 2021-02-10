@@ -29,6 +29,7 @@ export interface DeviceAlarmDataFormat {
     'berth': string;
     'url_key': string;
     'role': string;
+    'lifeguard': boolean;
     'num_candidate': number;
     'num_sailor': number;
     'num_guard': number;

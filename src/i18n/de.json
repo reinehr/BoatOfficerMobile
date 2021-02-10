@@ -78,7 +78,7 @@
   "open":  "offen",
   "closed":  "geschlossen",
   "MAP": "KARTENANSICHT",
-  "Please buy Pro": "Diese Ansicht ist nur in der Pro-Version verfügbar.",
+  "Please buy Pro": "Diese Ansicht ist nur verfügbar, wenn der Kapitän dieses Bootes die Pro-Version der App nutzt (In-App Kauf).",
   "bad_gps_reception_explained": "Schlechter GPS Empfang: GPS Sensor ist zu stark verdeckt (gewesen). Abdeckung, insbesondere durch Metall, bitte vermeiden. Ggf. verbessert auch ein kürzeres Positionsintervall den GPS Empfang.",
 
   "### BOAT SETTINGS ###": "",

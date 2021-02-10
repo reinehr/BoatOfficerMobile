@@ -4,6 +4,7 @@ import {getString, setString, hasKey, remove} from 'tns-core-modules/application
 import { SelectedIndexChangedEventData, TabStripItemEventData } from "tns-core-modules/ui/bottom-navigation";
 import { RouterExtensions } from "nativescript-angular/router";
 import {alert} from "tns-core-modules/ui/dialogs";
+import {AnimationCurve} from "tns-core-modules/ui/enums";
 
 @Component({
     selector: 'app-ns',
@@ -55,8 +56,31 @@ export class AppComponent implements OnInit {
         this.currentIndex = args.newIndex;
     }
 
+    onHomeMenuTap(args){
+        if (0 == this.currentIndex)
+        {
+            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+        }
+    }
+
+    onAlarmsMenuTap(args){
+        if (1 == this.currentIndex)
+        {
+            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+        }
+    }
+
     onBoatMenuTap(args){
-        this.routerExtensions.navigate([""], { clearHistory: true });
-        console.log("boat status tapped again");
+        if (2 == this.currentIndex)
+        {
+            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+        }
+    }
+
+    onSettingsMenuTap(args){
+        if (3 == this.currentIndex)
+        {
+            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+        }
     }
 }

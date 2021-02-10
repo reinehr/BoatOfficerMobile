@@ -30,7 +30,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][0][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][0][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[0].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
@@ -83,7 +83,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][1][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][1][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[1].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
@@ -136,7 +136,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][2][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][2][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[2].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
@@ -189,7 +189,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][3][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][3][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[3].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
@@ -242,7 +242,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][4][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][4][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[4].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     [majorStepUnit]="dataService.historyIntervalData[4].stepUnit"
@@ -294,7 +294,7 @@
                                     [maximum]="(dataService.minMax[dataService.deviceData[idDevice].id][5][field].max ? ((((dataService.minMax[dataService.deviceData[idDevice].id][5][field].max.value + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="20"
+                                    labelMargin="5"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[5].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     [majorStepUnit]="dataService.historyIntervalData[5].stepUnit"

@@ -121,8 +121,8 @@
 "_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8" = "Rolle von %1$@ von Wachmann zu Matrose ändern?";
 "_Change_role_of__s__1R3UFA" = "Rolle von %1$@ ändern?";
 "_Change_role_Z3ex2u" = "Rolle ändern";
-"_You_are_not_included_Jz5dA" = "ohne dich";
-"_You_are_included_Z29hpN1" = "incl. dich";
+"_You_are_not_included_Jz5dA" = "ohne dir";
+"_You_are_included_Z29hpN1" = "inkl. dir";
 "_Not_Lifeguards_Z1O8KgQ" = "Keine Notfallkontakte";
 "Lifeguards" = "Notfallkontakte";
 "Sailors" = "Matrosen";
@@ -232,8 +232,8 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WETTER VOR ORT";
 "_no_active_alarms_Z1jDuSA" = "keine aktiven Alarme";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARMSTATUS";
-"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät registrieren\"";
-"no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"";
+"no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts).";
+"no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\".";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 geöffnet";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 geschlossen";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 geöffnet";

@@ -176,7 +176,7 @@
 "Back" = "Back";
 "_____BOAT_SETTINGS_____ZxHRag" = "";
 "bad_gps_reception_explained" = "Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception.";
-"_Please_buy_Pro_ZkCpFH" = "This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase).";
+"_Please_buy_Pro_ZkCpFH" = "This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase)n.";
 "MAP" = "MAP";
 "closed" = "closed";
 "open" = "open";
@@ -232,8 +232,8 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WEATHER ON SITE";
 "_no_active_alarms_Z1jDuSA" = "no active alarms";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARM STATUS";
-"no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer to see its data.\nTo do this, go to the settings and tap on \"Register new device\"";
-"no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\"";
+"no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right).";
+"no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\".";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 Opened";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 Closed";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 Opened";

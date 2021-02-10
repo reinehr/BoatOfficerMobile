@@ -67,6 +67,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         intl: TimeagoIntl,
         private httpClient: HttpClient
     ) {
+        this.isLoading = true;
         page.actionBarHidden = true;
 
         if (localize('LOCALE') === 'de') {
@@ -117,9 +118,11 @@ export class HomeComponent implements OnInit, AfterViewInit {
                                 this.mapView.mapAnimationsEnabled = true;
                             }
                         }
+                        this.isLoading = false;
                         this.hasKey = hasKey('token');
                     }, 2000);
                 } else {
+                    this.isLoading = false;
                     this.hasKey = hasKey('token');
                     this.dataService.deviceData = [];
                 }

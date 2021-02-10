@@ -174,7 +174,7 @@
 "Back" = "Zurück";
 "_____BOAT_SETTINGS_____ZxHRag" = "";
 "bad_gps_reception_explained" = "Schlechter GPS Empfang: GPS Sensor ist zu stark verdeckt (gewesen). Abdeckung, insbesondere durch Metall, bitte vermeiden. Ggf. verbessert auch ein kürzeres Positionsintervall den GPS Empfang.";
-"_Please_buy_Pro_ZkCpFH" = "Diese Ansicht ist nur in der Pro-Version verfügbar.";
+"_Please_buy_Pro_ZkCpFH" = "Diese Ansicht ist nur verfügbar, wenn der Kapitän dieses Bootes die Pro-Version der App nutzt (In-App Kauf).";
 "MAP" = "KARTENANSICHT";
 "closed" = "geschlossen";
 "open" = "offen";

@@ -121,6 +121,7 @@
   <string name="_Send_aboard_17jR23">"Send aboard"</string>
   <string name="_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE">"Change role of %1$s from Sailor to Guard?"</string>
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Change role of %1$s from Guard to Sailor?"</string>
+  <string name="_Change_role_of__s__1R3UFA">"Change role of %1$s?"</string>
   <string name="_Change_role_Z3ex2u">"Change role"</string>
   <string name="_Not_Lifeguards_Z1O8KgQ">"Not Emergency Contacts"</string>
   <string name="Lifeguards">"Emergency Contacts"</string>
@@ -175,7 +176,7 @@
   <string name="Back">"Back"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
   <string name="bad_gps_reception_explained">"Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception."</string>
-  <string name="_Please_buy_Pro_ZkCpFH">"This view is only available in the pro version."</string>
+  <string name="_Please_buy_Pro_ZkCpFH">"This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase)."</string>
   <string name="MAP">"MAP"</string>
   <string name="closed">"closed"</string>
   <string name="open">"open"</string>

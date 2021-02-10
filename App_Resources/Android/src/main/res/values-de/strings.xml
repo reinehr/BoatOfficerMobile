@@ -121,6 +121,7 @@
   <string name="_Send_aboard_17jR23">"Von Bord weisen"</string>
   <string name="_Change_role_of__s_from_Sailor_to_Guard__ZnNCwE">"Rolle von %1$s von Matrose zu Wachmann ändern?"</string>
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Rolle von %1$s von Wachmann zu Matrose ändern?"</string>
+  <string name="_Change_role_of__s__1R3UFA">"Rolle von %1$s ändern?"</string>
   <string name="_Change_role_Z3ex2u">"Rolle ändern"</string>
   <string name="_Not_Lifeguards_Z1O8KgQ">"Keine Notfall Kontakte"</string>
   <string name="Lifeguards">"Notfall Kontakte"</string>
@@ -175,7 +176,7 @@
   <string name="Back">"Zurück"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
   <string name="bad_gps_reception_explained">"Schlechter GPS Empfang: GPS Sensor ist zu stark verdeckt (gewesen). Abdeckung, insbesondere durch Metall, bitte vermeiden. Ggf. verbessert auch ein kürzeres Positionsintervall den GPS Empfang."</string>
-  <string name="_Please_buy_Pro_ZkCpFH">"Diese Ansicht ist nur in der Pro-Version verfügbar."</string>
+  <string name="_Please_buy_Pro_ZkCpFH">"Diese Ansicht ist nur verfügbar, wenn der Kapitän dieses Bootes die Pro-Version der App nutzt (In-App Kauf)."</string>
   <string name="MAP">"KARTENANSICHT"</string>
   <string name="closed">"geschlossen"</string>
   <string name="open">"offen"</string>

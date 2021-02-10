@@ -174,7 +174,7 @@
 "Back" = "Back";
 "_____BOAT_SETTINGS_____ZxHRag" = "";
 "bad_gps_reception_explained" = "Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception.";
-"_Please_buy_Pro_ZkCpFH" = "This view is only available in the pro version.";
+"_Please_buy_Pro_ZkCpFH" = "This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase).";
 "MAP" = "MAP";
 "closed" = "closed";
 "open" = "open";

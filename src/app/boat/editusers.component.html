@@ -46,7 +46,7 @@
                 </StackLayout>
             </StackLayout>
             <StackLayout class="alarm-card" padding="5,10,10,10">
-                <StackLayout *ngIf="roleOrRequests != 'lifeguard'">
+                <StackLayout *ngIf="(roleOrRequests != 'lifeguard') && (roleOrRequests != 'candidate')">
                     <Label text="{{'Permissions' | L}}" class="t-16 font-weight-bold"
                            marginBottom="5"></Label>
                     <StackLayout>

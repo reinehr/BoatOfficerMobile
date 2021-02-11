@@ -5,6 +5,9 @@ import {RouterExtensions} from 'nativescript-angular/router';
 import {DataService} from '~/app/shared/data.service';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {localize} from 'nativescript-localize';
+import { registerElement } from "nativescript-angular";
+registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager").PreviousNextView);
+
 
 @Component({
     selector: 'app-auth',

@@ -58,7 +58,7 @@
   <string name="_Sign_Up_ZD9lNk">"Sign Up"</string>
   <string name="Login">"Log in"</string>
   <string name="_Log_in_Z2npWid">"Log in"</string>
-  <string name="_repeat_Password_2hW7n9">"repeat Password"</string>
+  <string name="_Repeat_Password_16VATN">"Repeat Password"</string>
   <string name="Password">"Password"</string>
   <string name="_Phone_number_ZC0clO">"Phone number"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
@@ -178,7 +178,7 @@
   <string name="Back">"Back"</string>
   <string name="_____BOAT_SETTINGS_____ZxHRag">""</string>
   <string name="bad_gps_reception_explained">"Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception."</string>
-  <string name="_Please_buy_Pro_ZkCpFH">"This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase)."</string>
+  <string name="_Please_buy_Pro_ZkCpFH">"This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase)n."</string>
   <string name="MAP">"MAP"</string>
   <string name="closed">"closed"</string>
   <string name="open">"open"</string>
@@ -234,8 +234,8 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WEATHER ON SITE"</string>
   <string name="_no_active_alarms_Z1jDuSA">"no active alarms"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARM STATUS"</string>
-  <string name="no_boat">"You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer to see its data.\nTo do this, go to the settings and tap on \"Register new device\""</string>
-  <string name="no_key">"You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\""</string>
+  <string name="no_boat">"You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right)."</string>
+  <string name="no_key">"You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\"."</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi Sensor A 2 Opened"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi Sensor A 2 Closed"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi Sensor A 1 Opened"</string>

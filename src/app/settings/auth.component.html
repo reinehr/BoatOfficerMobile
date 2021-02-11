@@ -8,76 +8,80 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
         <StackLayout class="form" paddingTop="10">
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="next"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="firstname"
-                        id="first_name"
-                        hint="{{'First Name' | L}}"
-                ></TextField>
-            </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="next"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="lastname"
-                        id="name"
-                        hint="{{'Last Name' | L}}">
-                ></TextField>
-            </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="next"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="email"
-                        keyboardType="email"
-                        id="email"
-                        hint="{{'E-Mail' | L}}">
-                ></TextField>
-            </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="next"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="phone"
-                        keyboardType="phone"
-                        id="email"
-                        hint="{{'Phone number' | L}}">
-                ></TextField>
-            </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="!resetMode">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="done"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="password"
-                        [secure]="true"
-                        id="password"
-                        hint="{{'Password' | L}}">
-                ></TextField>
-            </StackLayout>
-            <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode && !isLoading">
-                <TextField
-                        fontSize="18"
-                        returnKeyType="done"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="passwordRepeat"
-                        [secure]="true"
-                        id="password"
-                        hint="{{'repeat Password' | L}}">
-                ></TextField>
-            </StackLayout>
+            <PreviousNextView>
+                <StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="next"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="firstname"
+                                id="first_name"
+                                hint="{{'First Name' | L}}"
+                        ></TextField>
+                    </StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="next"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="lastname"
+                                id="name"
+                                hint="{{'Last Name' | L}}">
+                        ></TextField>
+                    </StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="next"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="email"
+                                keyboardType="email"
+                                id="email"
+                                hint="{{'E-Mail' | L}}">
+                        ></TextField>
+                    </StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="next"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="phone"
+                                keyboardType="phone"
+                                id="phone"
+                                hint="{{'Phone number' | L}}">
+                        ></TextField>
+                    </StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="!resetMode">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="next"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="password"
+                                [secure]="true"
+                                id="password"
+                                hint="{{'Password' | L}}">
+                        ></TextField>
+                    </StackLayout>
+                    <StackLayout class="input-field" padding="0, 10, 0, 10" *ngIf="registerMode && !isLoading">
+                        <TextField
+                                fontSize="18"
+                                returnKeyType="done"
+                                [autocorrect]="false"
+                                autocapitalizationType="none"
+                                [(ngModel)]="passwordRepeat"
+                                [secure]="true"
+                                id="password"
+                                hint="{{'Repeat Password' | L}}">
+                        ></TextField>
+                    </StackLayout>
+                </StackLayout>
+            </PreviousNextView>
             <Button
                     marginTop="10"
                     text="{{'Login' | L}}"

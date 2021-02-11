@@ -58,7 +58,7 @@
   <string name="_Sign_Up_ZD9lNk">"Registrieren"</string>
   <string name="Login">"Anmelden"</string>
   <string name="_Log_in_Z2npWid">"Anmelden"</string>
-  <string name="_repeat_Password_2hW7n9">"Passwort wiederholen"</string>
+  <string name="_Repeat_Password_16VATN">"Passwort wiederholen"</string>
   <string name="Password">"Passwort"</string>
   <string name="_Phone_number_ZC0clO">"Telefonnummer"</string>
   <string name="_E_Mail_2nPAU3">"E-Mail"</string>
@@ -123,8 +123,8 @@
   <string name="_Change_role_of__s_from_Guard_to_Sailor__Z13uuw8">"Rolle von %1$s von Wachmann zu Matrose ändern?"</string>
   <string name="_Change_role_of__s__1R3UFA">"Rolle von %1$s ändern?"</string>
   <string name="_Change_role_Z3ex2u">"Rolle ändern"</string>
-  <string name="_You_are_not_included_Jz5dA">"ohne dich"</string>
-  <string name="_You_are_included_Z29hpN1">"incl. dich"</string>
+  <string name="_You_are_not_included_Jz5dA">"ohne dir"</string>
+  <string name="_You_are_included_Z29hpN1">"inkl. dir"</string>
   <string name="_Not_Lifeguards_Z1O8KgQ">"Keine Notfallkontakte"</string>
   <string name="Lifeguards">"Notfallkontakte"</string>
   <string name="Sailors">"Matrosen"</string>
@@ -234,8 +234,8 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WETTER VOR ORT"</string>
   <string name="_no_active_alarms_Z1jDuSA">"keine aktiven Alarme"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARMSTATUS"</string>
-  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Neues Gerät registrieren\""</string>
-  <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\""</string>
+  <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts)."</string>
+  <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"."</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi Sensor A 2 geöffnet"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi Sensor A 2 geschlossen"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi Sensor A 1 geöffnet"</string>

@@ -4,6 +4,8 @@ import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from "~/app/shared/data.service";
 import { alert } from "tns-core-modules/ui/dialogs";
 import {localize} from "nativescript-localize";
+import {ApiService} from "~/app/shared/api.service";
+import {hasKey, remove} from "tns-core-modules/application-settings";
 
 // import {BarcodeScanner} from 'nativescript-barcodescanner';
 
@@ -19,6 +21,7 @@ export class LogoutComponent implements OnInit {
 
     constructor(
         private authService: AuthService,
+        private apiService: ApiService,
         private router: RouterExtensions,
         private dataService: DataService,
     ) {
@@ -27,21 +30,19 @@ export class LogoutComponent implements OnInit {
     ngOnInit() {
     }
 
-    // scanBarcode() {
-    //     new BarcodeScanner().scan({});
-    // }
     saveForm() {
         this.isLoading = true;
-        this.authService.logout();
-        const options = {
-            title: localize('Logout successful'),
-            // message: 'Race chosen: Unicorn',
-            okButtonText: 'OK'
-        };
-        this.dataService.deviceData = [];
-        this.isLoading = false;
-        alert(options).then(() => {
-            this.router.navigate([''], { clearHistory: true });
+        this.apiService.logout().subscribe(resData => {
+            this.authService.logout();
+            const options = {
+                title: localize('Logout successful'),
+                okButtonText: 'OK'
+            };
+            this.dataService.deviceData = [];
+            this.isLoading = false;
+            alert(options).then(() => {
+                this.router.navigate([''], { clearHistory: true });
+            });
         });
     }
 

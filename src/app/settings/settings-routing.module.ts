@@ -11,6 +11,7 @@ import {ImpressumComponent} from "~/app/settings/impressum.component";
 import {PurchaseComponent} from "~/app/settings/purchase.component";
 import {SignonaboatComponent} from "~/app/settings/signonaboat.component";
 import {EditpersonaldataComponent} from "~/app/settings/editpersonaldata.component";
+import {TtnmapperviewComponent} from "~/app/settings/ttnmapperview.component";
 
 const routes: Routes = [
     { path: 'default', component: SettingsComponent },
@@ -22,6 +23,7 @@ const routes: Routes = [
     { path: 'impressum', component: ImpressumComponent },
     { path: 'purchase', component: PurchaseComponent },
     { path: 'editpersonaldata', component: EditpersonaldataComponent },
+    { path: 'ttnmapperview', component: TtnmapperviewComponent},
 ];
 
 @NgModule({

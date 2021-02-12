@@ -262,5 +262,6 @@
   "First Name": "Vorname",
   "Last Name": "Nachname",
   "Phone Number": "Telefonnummer",
-  "Save Data": "Daten ändern"
+  "Save Data": "Daten ändern",
+  "Show TTN Mapper": "TTN Mapper anzeigen"
 }

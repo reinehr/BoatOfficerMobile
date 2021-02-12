@@ -22,6 +22,7 @@ import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 import {alert} from 'tns-core-modules/ui/dialogs';
 import {AlarmSettings} from '~/app/shared/interface/alarm';
 import { localize } from 'nativescript-localize';
+import {device} from 'tns-core-modules/platform';
 
 
 const bghttpModule = require('nativescript-background-http');
@@ -105,7 +106,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    //baseUrl = 'https://41feaf91c9f6.ngrok.io/';
+    //baseUrl = 'https://8dca120ca791.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -113,11 +114,24 @@ export class ApiService {
     baseDeviceUserUrl = `${this.baseUrl}api/device_user/`;
     baseDeviceAlarmSettingsUrl = `${this.baseUrl}api/device_alarm_settings/`;
     token = getString('token', '');
-
-    headers = new HttpHeaders({
+    uuid = device.uuid
+    language = device.language
+    standardHeader = new HttpHeaders({
         'Content-Type': 'application/json',
-        idToken: `${getString('token', '')}`
-    });
+        idToken: `${getString('token', '')}`,
+        uuid: this.uuid,
+        language: this.language,
+        logout: 'false'
+        });
+    logoutHeader = new HttpHeaders({
+        'Content-Type': 'application/json',
+        idToken: `${getString('token', '')}`,
+        uuid: this.uuid,
+        language: this.language,
+        logout: 'true'
+        });
+
+    headers = this.standardHeader;
     result: Sensordata;
 
     private static handleError(errorMessage: string) {
@@ -167,10 +181,7 @@ export class ApiService {
     getLatestSensorData() {
         return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest_depricated/', {device: 1},
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -182,10 +193,15 @@ export class ApiService {
     getUserData() {
         return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
+            }
+        );
+    }
+
+    logout() {
+        return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
+            {
+                headers: this.logoutHeader
             }
         );
     }
@@ -198,10 +214,7 @@ export class ApiService {
         const indexTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                }),
+                headers: this.standardHeader,
                 params: param
             }
         ).pipe(tap(resData => {
@@ -239,10 +252,7 @@ export class ApiService {
         };
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                }),
+                headers: this.standardHeader,
                 params: param
             }
         ).pipe(tap(resData => {
@@ -256,10 +266,7 @@ export class ApiService {
         const param: any = {};
         return this.httpClient.get<AlarmSettings>(this.baseDeviceAlarmSettingsUrl + '',
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                }),
+                headers: this.standardHeader,
                 params: param
             }
         ).pipe(tap(resData => {
@@ -273,10 +280,7 @@ export class ApiService {
         const param: any = {days};
         return this.httpClient.get<BoatHistory>(this.baseSensorUrl + 'get_history/',
             {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                }),
+                headers: this.standardHeader,
                 params: param
             }
         ).pipe(tap(resData => {
@@ -293,10 +297,7 @@ export class ApiService {
                 marked_as_responsible: markedAsResponsible
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -310,10 +311,7 @@ export class ApiService {
                 lifeguard: lifeguard
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -325,10 +323,7 @@ export class ApiService {
                 device_id: idDevice
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -343,10 +338,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -368,10 +360,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -402,10 +391,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -417,10 +403,7 @@ export class ApiService {
     registerDevice(serialNumber: string, registrationKey: string, deviceName: string) {
         return this.httpClient.post<string>(this.baseDeviceUrl + 'register_device/',
             {serialNumber, registrationKey, device_name: deviceName}, {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(catchError(errorRes => {
                 ApiService.handleError(errorRes.error.error.message);
@@ -432,10 +415,7 @@ export class ApiService {
     addDeviceCandidate(serialNumber: string, urlKey: string) {
         return this.httpClient.post<string>(this.baseDeviceUserUrl + 'add_candidate/',
             {serialNumber, urlKey}, {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }
         ).pipe(catchError(errorRes => {
                 ApiService.handleError(errorRes.error.error.message);
@@ -452,10 +432,7 @@ export class ApiService {
                 deviceId
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceAlarmSettings().subscribe();
         });
@@ -470,10 +447,7 @@ export class ApiService {
                 id: deviceId
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -490,10 +464,7 @@ export class ApiService {
                 is_recurrent: recurring
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -567,10 +538,7 @@ export class ApiService {
                 phone: phone
             }
             , {
-                headers: new HttpHeaders({
-                    'Content-Type': 'application/json',
-                    idToken: `${getString('token', '')}`
-                })
+                headers: this.standardHeader
             });
     }
 }

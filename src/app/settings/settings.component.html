@@ -5,51 +5,53 @@
 
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <StackLayout class="page__content">
-        <Button *ngIf="!hasKey" marginTop="10"
-                text="{{'Log in' | L}}"
-                class="alarm-button"
-                nsRouterLink="../auth"
-                pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey" marginTop="10"
-                text="{{'Register new device' | L}}"
-                class="alarm-button"
-                nsRouterLink="../scan"
-                pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey" marginTop="10"
-                text="{{'Sign on a Boat' | L}}"
-                class="alarm-button"
-                nsRouterLink="../signonaboat"
-                pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey" marginTop="10"
-                text="{{'Buy pro version' | L}}"
-                class="alarm-button"
-                nsRouterLink="../purchase"
-                pageTransition="slideLeft"></Button>
-        <Button *ngIf="hasKey" marginTop="10"
-                text="{{'Log out' | L}}"
-                class="alarm-button"
-                nsRouterLink="../logout"
-                pageTransition="slideLeft"></Button>
-        <Button marginTop="10"
-                text="{{'Impressum' | L}}"
-                class="alarm-button"
-                nsRouterLink="../impressum"
-                pageTransition="slideLeft"></Button>
-        <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
-            <TextView color="black" *ngIf="hasEmail"
-                    [text]="'You are logged in as' | L: email"
-            ></TextView>
+    <ScrollView>
+        <StackLayout class="page__content">
+            <Button *ngIf="!hasKey" marginTop="10"
+                    text="{{'Log in' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../auth"
+                    pageTransition="slideLeft"></Button>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Register new device' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../scan"
+                    pageTransition="slideLeft"></Button>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Sign on a Boat' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../signonaboat"
+                    pageTransition="slideLeft"></Button>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Buy pro version' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../purchase"
+                    pageTransition="slideLeft"></Button>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Log out' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../logout"
+                    pageTransition="slideLeft"></Button>
+            <Button marginTop="10"
+                    text="{{'Impressum' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../impressum"
+                    pageTransition="slideLeft"></Button>
+            <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
+                <TextView color="black" *ngIf="hasEmail"
+                        [text]="'You are logged in as' | L: email"
+                ></TextView>
+            </StackLayout>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Edit personal data' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../editpersonaldata"
+                    pageTransition="slideLeft"></Button>
+            <Button marginTop="10"
+                    text="{{'Show TTN Mapper' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../ttnmapperview"
+                    pageTransition="slideLeft"></Button>
         </StackLayout>
-        <Button *ngIf="hasKey" marginTop="10"
-                text="{{'Edit personal data' | L}}"
-                class="alarm-button"
-                nsRouterLink="../editpersonaldata"
-                pageTransition="slideLeft"></Button>
-        <Button marginTop="10"
-                text="{{'Show TTN Mapper' | L}}"
-                class="alarm-button"
-                nsRouterLink="../ttnmapperview"
-                pageTransition="slideLeft"></Button>
-    </StackLayout>
+    </ScrollView>
 </GridLayout>

@@ -263,5 +263,8 @@
   "Last Name": "Last Name",
   "Phone Number": "Phone Number",
   "Save Data": "Save Data",
-  "Show TTN Mapper": "Show TTN Mapper"
+  "Show TTN Mapper": "Show TTN Mapper",
+  "About TTN Mapper": "About TTN Mapper",
+  "ttnmapper_info_text": "TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.\n(http://ttnmapper.org)"
+
 }

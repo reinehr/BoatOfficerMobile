@@ -263,5 +263,7 @@
   "Last Name": "Nachname",
   "Phone Number": "Telefonnummer",
   "Save Data": "Daten ändern",
-  "Show TTN Mapper": "TTN Mapper anzeigen"
+  "Show TTN Mapper": "TTN Mapper anzeigen",
+  "About TTN Mapper": "Über TTN Mapper",
+  "ttnmapper_info_text": "TTN Mapper ist ein Drittanbieter Service. Er zeigt ungefähr an, wo mit LoRaWAN Abdeckung vom TheThingsNetwork (TTN) zu rechnen ist. BoatOfficer nutzt das TTN Netzwerk.\n(http://ttnmapper.org)"
 }

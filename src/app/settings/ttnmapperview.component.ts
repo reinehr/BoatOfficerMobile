@@ -32,6 +32,12 @@ export class TtnmapperviewComponent implements OnInit {
     }
 
     ngOnInit() {
+        const options = {
+            title: localize('About TTN Mapper'),
+            message: localize('ttnmapper_info_text'),
+            okButtonText: 'OK'
+        };
+        alert(options).then();
         console.log("Show TTN Mapper: "+this.ttnmapperurl);
         geolocation.enableLocationRequest()
             .then(() => {
@@ -43,7 +49,7 @@ export class TtnmapperviewComponent implements OnInit {
                     }
 
                     // MUST pass empty object!!
-                    geolocation.getCurrentLocation({timeout: 5000})
+                    geolocation.getCurrentLocation({timeout: 7000})
                         .then(result => {
                             this.currentPosition = result;
                             this.ttnmapperurl = this.ttnmapperurl+"heatmap/?lat="+this.currentPosition.latitude+"&lon="+this.currentPosition.longitude+"&zoom=12";

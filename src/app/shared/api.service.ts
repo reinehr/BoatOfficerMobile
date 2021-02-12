@@ -131,8 +131,17 @@ export class ApiService {
         logout: 'true'
         });
 
-    headers = this.standardHeader;
     result: Sensordata;
+
+    private getHeader<HttpHeaders>(logout = false) {
+        return new HttpHeaders({
+            'Content-Type': 'application/json',
+            idToken: `${getString('token', '')}`,
+            uuid: this.uuid,
+            language: this.language,
+            logout: (logout ? 'true' : 'false')
+        });
+    }
 
     private static handleError(errorMessage: string) {
         switch (errorMessage) {
@@ -181,7 +190,7 @@ export class ApiService {
     getLatestSensorData() {
         return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest_depricated/', {device: 1},
             {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -193,7 +202,7 @@ export class ApiService {
     getUserData() {
         return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
             {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         );
     }
@@ -201,7 +210,7 @@ export class ApiService {
     logout() {
         return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
             {
-                headers: this.logoutHeader
+                headers: this.getHeader(true)
             }
         );
     }
@@ -214,7 +223,7 @@ export class ApiService {
         const indexTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
-                headers: this.standardHeader,
+                headers: this.getHeader(),
                 params: param
             }
         ).pipe(tap(resData => {
@@ -252,7 +261,7 @@ export class ApiService {
         };
         return this.httpClient.get<BoatStatus>(this.baseSensorUrl + 'get_latest/',
             {
-                headers: this.standardHeader,
+                headers: this.getHeader(),
                 params: param
             }
         ).pipe(tap(resData => {
@@ -266,7 +275,7 @@ export class ApiService {
         const param: any = {};
         return this.httpClient.get<AlarmSettings>(this.baseDeviceAlarmSettingsUrl + '',
             {
-                headers: this.standardHeader,
+                headers: this.getHeader(),
                 params: param
             }
         ).pipe(tap(resData => {
@@ -280,7 +289,7 @@ export class ApiService {
         const param: any = {days};
         return this.httpClient.get<BoatHistory>(this.baseSensorUrl + 'get_history/',
             {
-                headers: this.standardHeader,
+                headers: this.getHeader(),
                 params: param
             }
         ).pipe(tap(resData => {
@@ -297,7 +306,7 @@ export class ApiService {
                 marked_as_responsible: markedAsResponsible
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -311,7 +320,7 @@ export class ApiService {
                 lifeguard: lifeguard
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -323,7 +332,7 @@ export class ApiService {
                 device_id: idDevice
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -338,7 +347,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -360,7 +369,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -391,7 +400,7 @@ export class ApiService {
                 push_token: getString('push_token', '')
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(tap(resData => {
             if (resData) {
@@ -403,7 +412,7 @@ export class ApiService {
     registerDevice(serialNumber: string, registrationKey: string, deviceName: string) {
         return this.httpClient.post<string>(this.baseDeviceUrl + 'register_device/',
             {serialNumber, registrationKey, device_name: deviceName}, {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(catchError(errorRes => {
                 ApiService.handleError(errorRes.error.error.message);
@@ -415,7 +424,7 @@ export class ApiService {
     addDeviceCandidate(serialNumber: string, urlKey: string) {
         return this.httpClient.post<string>(this.baseDeviceUserUrl + 'add_candidate/',
             {serialNumber, urlKey}, {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }
         ).pipe(catchError(errorRes => {
                 ApiService.handleError(errorRes.error.error.message);
@@ -432,7 +441,7 @@ export class ApiService {
                 deviceId
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceAlarmSettings().subscribe();
         });
@@ -447,7 +456,7 @@ export class ApiService {
                 id: deviceId
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -464,7 +473,7 @@ export class ApiService {
                 is_recurrent: recurring
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             }).subscribe(() => {
             this.getDeviceData().subscribe();
         });
@@ -538,7 +547,7 @@ export class ApiService {
                 phone: phone
             }
             , {
-                headers: this.standardHeader
+                headers: this.getHeader()
             });
     }
 }

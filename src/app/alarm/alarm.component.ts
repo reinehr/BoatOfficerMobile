@@ -8,7 +8,7 @@ import * as TNSPhone from 'nativescript-phone';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Switch } from 'tns-core-modules/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
-import { requestPremissions, setBadge, removeBadge } from 'nativescript-plugin-badge';
+import { LocalNotifications } from 'nativescript-local-notifications';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -46,7 +46,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         const pullRefresh = args.object;
         this.dataService.refreshBoatStatus();
         pullRefresh.refreshing = false;
-        this.updateAlarmBadge();
+        //this.updateAlarmBadge();
     }
 
     onButtonTap() {
@@ -66,9 +66,6 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     onAlarmOkTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
         this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, true);
-        // TODO wait for data update?!
-        //this.dataService.refreshBoatStatus();
-        //this.updateAlarmBadge();
     }
 
     onCallTap(idDevice: number) {
@@ -82,6 +79,11 @@ export class AlarmComponent implements OnInit, AfterViewInit {
 
     updateAlarmBadge(){
         console.log("Update Alarm Number Badge");
+        LocalNotifications.requestPermission().then(
+            function(granted) {
+                console.log("Permission granted? "+ granted);
+            }
+        )
         let numberOfActiveAlarms = 0;
         for (let device of this.dataService.deviceData)
         {
@@ -108,9 +110,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         }
         console.log("Number of active alarms: "+numberOfActiveAlarms);
         if (numberOfActiveAlarms){
-            setBadge(numberOfActiveAlarms);
-        } else {
-            removeBadge();
+            LocalNotifications.schedule([{badge: numberOfActiveAlarms, sound: null}]);
         }
     }
 

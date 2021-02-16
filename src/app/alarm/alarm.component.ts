@@ -8,6 +8,7 @@ import * as TNSPhone from 'nativescript-phone';
 import { EventData } from 'tns-core-modules/data/observable';
 import { Switch } from 'tns-core-modules/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
+import { requestPremissions, setBadge, removeBadge } from 'nativescript-plugin-badge';
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -45,6 +46,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         const pullRefresh = args.object;
         this.dataService.refreshBoatStatus();
         pullRefresh.refreshing = false;
+        this.updateAlarmBadge();
     }
 
     onButtonTap() {
@@ -64,6 +66,9 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     onAlarmOkTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
         this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, true);
+        // TODO wait for data update?!
+        //this.dataService.refreshBoatStatus();
+        //this.updateAlarmBadge();
     }
 
     onCallTap(idDevice: number) {
@@ -74,4 +79,39 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         const sw = args.object as Switch;
         this.showOnlyOpen = sw.checked;
     }
+
+    updateAlarmBadge(){
+        console.log("Update Alarm Number Badge");
+        let numberOfActiveAlarms = 0;
+        for (let device of this.dataService.deviceData)
+        {
+            if ((device.role == 'officer') || (device.role == 'guard'))
+            {
+                for (let alarm of device.alarm)
+                {
+                    if (alarm.status == 'open')
+                    {
+                        numberOfActiveAlarms++;
+                    }
+                }
+            }
+            if (device.lifeguard){
+                for (let alarm of device.alarm)
+                {
+                    if ((alarm.type == 'SOS Activated') && (alarm.status == 'open'))
+                    {
+                        numberOfActiveAlarms++;
+                        console.log("SOS Alarm active.");
+                    }
+                }
+            }
+        }
+        console.log("Number of active alarms: "+numberOfActiveAlarms);
+        if (numberOfActiveAlarms){
+            setBadge(numberOfActiveAlarms);
+        } else {
+            removeBadge();
+        }
+    }
+
 }

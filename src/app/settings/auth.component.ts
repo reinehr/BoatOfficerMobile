@@ -132,6 +132,14 @@ export class AuthComponent implements OnInit {
                 };
                 alert(options);
             }
+        } else {
+            this.isLoading = false;
+            const options = {
+                title: localize('Email missing'),
+                message: localize('Please enter a valid email address'),
+                okButtonText: 'OK'
+            };
+            alert(options);
         }
     }
 

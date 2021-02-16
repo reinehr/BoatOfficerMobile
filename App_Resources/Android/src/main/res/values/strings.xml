@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="ttnmapper_info_text">"TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.\n(http://ttnmapper.org)"</string>
+  <string name="_About_TTN_Mapper_1BcfjW">"About TTN Mapper"</string>
   <string name="_Show_TTN_Mapper_vBTfI">"Show TTN Mapper"</string>
   <string name="_Save_Data_2vImsS">"Save Data"</string>
   <string name="_Phone_Number_Z1HamqP">"Phone Number"</string>

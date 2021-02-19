@@ -9,8 +9,8 @@
   <string name="_EDIT_PERSONAL_DATA_1wMqbe">"EDIT PERSONAL DATA"</string>
   <string name="_Privacy_Policy_Z1gery6">"Privacy Policy"</string>
   <string name="_Terms_of_Use_17jxBW">"Terms of Use"</string>
-  <string name="Impressum">"Impressum"</string>
-  <string name="IMPRESSUM">"IMPRESSUM"</string>
+  <string name="Impressum">"Imprint"</string>
+  <string name="IMPRESSUM">"IMPRINT"</string>
   <string name="_That_s_included_oeFzz">"With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes."</string>
   <string name="_What_is_included_ISxuJ">"What\'s included?"</string>
   <string name="_Disclaimer_Recurring_Abo_Zmfdfh">"These subscriptions are automatically renewed after they have expired unless canceled beforehand."</string>
@@ -208,6 +208,7 @@
   <string name="Time">"Time"</string>
   <string name="SENSORS">"SENSORS"</string>
   <string name="_BOAT_STATUS_Z1zRXlh">"BOAT STATUS"</string>
+  <string name="Settings">"Settings"</string>
   <string name="_____BOAT_____ZvFJh2">""</string>
   <string name="Revoke">"Revoke"</string>
   <string name="_Marked_as_responsible_Z25qt0K">"Marked as responsible"</string>

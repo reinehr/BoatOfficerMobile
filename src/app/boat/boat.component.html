@@ -3,13 +3,13 @@
     <Label text="{{'BOAT STATUS' | L}}" class="alarm-text"
         (tap)="toggleAllBoatDetails($event)"></Label>
 
-    <ActionItem
+<!--    <ActionItem
             ios.position="right"
             android.position="right">
         <Label class="alarm-symbol alarm-blue"
                text="M" [nsRouterLink]="'../settings'" pageTransition="slideLeft">
         </Label>
-    </ActionItem>
+    </ActionItem>-->
 </ActionBar>
 
 
@@ -23,6 +23,13 @@
                         <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
+                        <GridLayout class="boat-control-bar" columns="10, 40, 70, *, 10" rows="45">
+                            <Label col="1" class="alarm-symbol"
+                                   text="M" pageTransition="slideLeft"
+                                   [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+                            <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
+                                   [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+                        </GridLayout>
                         <StackLayout class="alarm-card" padding="5,10,10,10" marginTop="15"
                                      *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
                             <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10" paddingBottom="-10">

@@ -52,6 +52,7 @@
   "Revoke": "Revoke",
 
   "### BOAT ###": "",
+  "Settings": "Settings",
   "BOAT STATUS": "BOAT STATUS",
   "SENSORS": "SENSORS",
   "Time": "Time",
@@ -255,8 +256,8 @@
   "Disclaimer Recurring Abo": "These subscriptions are automatically renewed after they have expired unless canceled beforehand.",
   "What is included": "What's included?",
   "That's included": "With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes.",
-  "IMPRESSUM": "IMPRESSUM",
-  "Impressum": "Impressum",
+  "IMPRESSUM": "IMPRINT",
+  "Impressum": "Imprint",
   "Terms of Use": "Terms of Use",
   "Privacy Policy": "Privacy Policy",
   "EDIT PERSONAL DATA": "EDIT PERSONAL DATA",

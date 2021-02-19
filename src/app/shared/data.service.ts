@@ -91,8 +91,48 @@ export interface DeviceAlarmDataFormat {
         'i_am_responsible': boolean,
         'loading': boolean,
         'index_type_active'?: number,
+        'hidden'?: boolean,
         'sum_type_active'?: number
     }[];
+    'alarm_summarized'?: {[type: string]: {
+        'count_open'?: number;
+        'count_closed'?: number;
+        'type'?: string,
+        'status'?: string,
+        'loading'?: boolean,
+        'active'?: boolean,
+        'index_type_active'?: number,
+        'sum_type_active'?: number,
+        'alarm_newest'?: {
+            'id': number;
+            'type': string,
+            'time': string,
+            'column_sensor_data': string,
+            'value': string,
+            'marked_as_ok_username': string,
+            'responsible_username': string,
+            'clear_by_device_time': string,
+            'marked_as_ok_time': string,
+            'status': string,
+            'i_am_responsible': boolean,
+        },
+        'alarm'?: {
+            'id': number;
+            'type': string,
+            'time': string,
+            'column_sensor_data': string,
+            'value': string,
+            'marked_as_ok_username': string,
+            'responsible_username': string,
+            'clear_by_device_time': string,
+            'marked_as_ok_time': string,
+            'status': string,
+            'i_am_responsible': boolean,
+            'hidden'?: boolean,
+        }[]
+    };
+    }[];
+    'keyTypeActive'?: string[];
 }
 
 export interface SensorDataHistory {

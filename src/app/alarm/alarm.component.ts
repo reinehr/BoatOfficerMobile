@@ -49,23 +49,49 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         //this.updateAlarmBadge();
     }
 
-    onButtonTap() {
-        console.log('Button was pressed');
-    }
-
     onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, null);
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, null);
+    }
+
+    onAlarmTypeResponsibleTap(idDevice: number, alarmType: string) {
+        let idAlarm = [];
+        for (let alarm of this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm) {
+            if(alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) {
+                idAlarm.push(alarm.id);
+            }
+        }
+        this.apiService.setAlarmData(idAlarm, true, null);
     }
 
     onAlarmNotResponsibleTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, false, null);
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], false, null);
+    }
+
+    onAlarmTypeNotResponsibleTap(idDevice: number, alarmType: string) {
+        let idAlarm = [];
+        for (let alarm of this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm) {
+            if(alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) {
+                idAlarm.push(alarm.id);
+            }
+        }
+        this.apiService.setAlarmData(idAlarm, false, null);
     }
 
     onAlarmOkTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData(idAlarm = this.dataService.deviceData[idDevice].alarm[idAlarm].id, true, true);
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, true);
+    }
+
+    onAlarmTypeOkTap(idDevice: number, alarmType: string) {
+        let idAlarm = [];
+        for (let alarm of this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm) {
+            if(alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) {
+                idAlarm.push(alarm.id);
+            }
+        }
+        this.apiService.setAlarmData(idAlarm, true, true);
     }
 
     onCallTap(idDevice: number) {
@@ -114,4 +140,9 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         }
     }
 
+    hideAlarm(idDevice: number, alarmType: string, idAlarm: number) {
+        console.log('hide');
+        this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm[idAlarm].hidden =
+            !this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm[idAlarm].hidden;
+    }
 }

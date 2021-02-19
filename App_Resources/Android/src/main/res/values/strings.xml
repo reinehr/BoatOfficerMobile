@@ -27,6 +27,8 @@
   <string name="SUCCESS">"Success"</string>
   <string name="_Please_enter_first_and_last_name_Z1VDfxB">"Please enter first and last name"</string>
   <string name="_Name_missing_Z2vWqqE">"Name missing"</string>
+  <string name="_Please_enter_a_valid_email_address_1pRUYc">"Please enter a valid email address"</string>
+  <string name="_Email_missing_ZcIBmb">"Email missing"</string>
   <string name="_Please_re_enter_the_password_Fx7Sr">"Please re-enter the password"</string>
   <string name="_Passwords_not_identical_U19vf">"Passwords not identical"</string>
   <string name="_Length_must_be_at_least_8_characters_1PfVf7">"Length must be at least 8 characters"</string>

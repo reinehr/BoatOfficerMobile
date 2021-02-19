@@ -106,7 +106,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    //baseUrl = 'https://8dca120ca791.ngrok.io/';
+    //baseUrl = 'https://02dd1ec92366.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -116,6 +116,7 @@ export class ApiService {
     token = getString('token', '');
     uuid = device.uuid
     language = device.language
+    keyTypeActive = []
     standardHeader = new HttpHeaders({
         'Content-Type': 'application/json',
         idToken: `${getString('token', '')}`,
@@ -219,8 +220,9 @@ export class ApiService {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
-        const param: any = {limit: 10, only_active: 'false'};
+        const param: any = {limit: 99, only_active: 'false'};
         const indexTypeActive = [];
+        this.keyTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: this.getHeader(),
@@ -237,10 +239,38 @@ export class ApiService {
                         if (!indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type]) {
                             indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = 0;
                         }
+                        if (!resData[idDevice].alarm_summarized) {
+                            resData[idDevice].keyTypeActive = [];
+                            resData[idDevice].alarm_summarized = [];
+                        }
+                        if (!resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type]) {
+                            resData[idDevice].keyTypeActive.push(resData[idDevice].alarm[idAlarm].type);
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type] = {};
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].type = resData[idDevice].alarm[idAlarm].type;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm_newest = resData[idDevice].alarm[idAlarm];
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active = false;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].status = resData[idDevice].alarm[idAlarm].status;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm = [];
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open = 0;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_closed = 0;
+                            //console.log('.')
+                        }
                         if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
                             indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] + 1;
                             resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
                             resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open = resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open + 1;
+                            resData[idDevice].alarm[idAlarm].hidden = true;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm.push(resData[idDevice].alarm[idAlarm]);
+                            if (!resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active) {
+                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active = true;
+                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm_newest = resData[idDevice].alarm[idAlarm];
+                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].status = resData[idDevice].alarm[idAlarm].status;
+                            }
+                        } else {
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_closed = resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open + 1;
+                            resData[idDevice].alarm[idAlarm].hidden = true;
+                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm.push(resData[idDevice].alarm[idAlarm]);
                         }
                     }
                     for (const idAlarm in resData[idDevice].alarm) {
@@ -299,17 +329,23 @@ export class ApiService {
         }));
     }
 
-    setAlarmData(idAlarm: number, markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
-        this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
-                id: idAlarm,
-                marked_as_ok: markedAsOk,
-                marked_as_responsible: markedAsResponsible
-            }
-            , {
-                headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+    setAlarmData(idAlarms: number[], markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
+        let numSuccess = 0
+        for (let idAlarm of idAlarms) {
+            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
+                    id: idAlarm,
+                    marked_as_ok: markedAsOk,
+                    marked_as_responsible: markedAsResponsible
+                }
+                , {
+                    headers: this.getHeader()
+                }).subscribe(() => {
+                    numSuccess = numSuccess+1;
+                    if(numSuccess==idAlarms.length) {
+                        this.getDeviceData().subscribe();
+                    }
+            });
+        }
     }
 
     setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {

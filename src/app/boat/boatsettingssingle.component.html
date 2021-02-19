@@ -20,7 +20,7 @@
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="dataService.alarmSettings[device.id][alarm.key]">
                                             <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5"
-                                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editalarmsettings', device.id, field, index] : []">
+                                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editalarmsettings', device.id, field, index] : []">
                                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                                             borderTopColor="#d3d3d3"></GridLayout>
                                                 <Label col=1 row=1 [text]="alarm.icon"

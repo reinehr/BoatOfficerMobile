@@ -17,6 +17,7 @@ import {EditusersComponent} from '~/app/boat/editusers.component';
 import {NativeScriptLocalizeModule} from 'nativescript-localize/localize.module';
 import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
 import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.component";
+import {BoatsettingssingleComponent} from "~/app/boat/boatsettingssingle.component";
 
 @NgModule({
     imports: [
@@ -34,6 +35,7 @@ import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.compo
         GpsdetailsComponent,
         MapdetailsComponent,
         BoatsettingsComponent,
+        BoatsettingssingleComponent,
         UploadpictureComponent,
         EditalarmsettingsComponent,
         EditdevicesettingsComponent,

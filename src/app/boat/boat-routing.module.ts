@@ -4,6 +4,7 @@ import {NativeScriptRouterModule} from 'nativescript-angular/router';
 
 import {BoatComponent} from './boat.component';
 import {BoatsettingsComponent} from '~/app/boat/boatsettings.component';
+import {BoatsettingssingleComponent} from "~/app/boat/boatsettingssingle.component";
 import {HomeComponent} from '~/app/home/home.component';
 import {SensordetailsComponent} from '~/app/boat/sensordetails.component';
 import {GpsdetailsComponent} from '~/app/boat/gpsdetails.component';
@@ -16,6 +17,7 @@ import {EditusersComponent} from "~/app/boat/editusers.component";
 const routes: Routes = [
     {path: 'default', component: BoatComponent},
     {path: 'settings', component: BoatsettingsComponent},
+    {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent},
     {path: 'uploadpicture/:idDevice', component: UploadpictureComponent},
     {path: 'sensordetails/:idDevice/:field', component: SensordetailsComponent},
     {path: 'gpsdetails/:idDevice/:field', component: GpsdetailsComponent},

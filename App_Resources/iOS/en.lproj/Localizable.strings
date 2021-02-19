@@ -7,8 +7,8 @@
 "_EDIT_PERSONAL_DATA_1wMqbe" = "EDIT PERSONAL DATA";
 "_Privacy_Policy_Z1gery6" = "Privacy Policy";
 "_Terms_of_Use_17jxBW" = "Terms of Use";
-"Impressum" = "Impressum";
-"IMPRESSUM" = "IMPRESSUM";
+"Impressum" = "Imprint";
+"IMPRESSUM" = "IMPRINT";
 "_That_s_included_oeFzz" = "With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes.";
 "_What_is_included_ISxuJ" = "What's included?";
 "_Disclaimer_Recurring_Abo_Zmfdfh" = "These subscriptions are automatically renewed after they have expired unless canceled beforehand.";
@@ -206,6 +206,7 @@
 "Time" = "Time";
 "SENSORS" = "SENSORS";
 "_BOAT_STATUS_Z1zRXlh" = "BOAT STATUS";
+"Settings" = "Settings";
 "_____BOAT_____ZvFJh2" = "";
 "Revoke" = "Revoke";
 "_Marked_as_responsible_Z25qt0K" = "Marked as responsible";

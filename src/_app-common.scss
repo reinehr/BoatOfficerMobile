@@ -102,6 +102,15 @@
     overflow: hidden;
 }
 
+.boat-control-bar {
+    width: 100%;
+    padding: 5px;
+    line-height: 100%;
+    vertical-align: middle;
+    color: #aaaaaa;
+    background-color: #d3d3d3;
+}
+
 .alarm-card {
     background-color: white;
     margin-left: 10;
@@ -363,6 +372,18 @@ $buttons_count: 6;
 
 .alarm-gray {
     color: #d3d3d3;
+}
+
+.ci-darkblue {
+    color: #091524;
+}
+
+.ci-gray {
+    color: #d3d3d3;
+}
+
+.ci-dark-gray {
+    color: #aaaaaa;
 }
 
 .alarm-gray-dark {

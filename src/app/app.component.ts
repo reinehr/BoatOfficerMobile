@@ -1,4 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
+import { Theme } from "@nativescript/theme";
+import { isAndroid } from 'tns-core-modules/platform';
 import * as firebase from 'nativescript-plugin-firebase';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
 import { SelectedIndexChangedEventData, TabStripItemEventData } from "tns-core-modules/ui/bottom-navigation";
@@ -15,6 +17,7 @@ import {AnimationCurve} from "tns-core-modules/ui/enums";
 export class AppComponent implements OnInit {
 
     currentIndex = -1;
+    themeMode = "unknown"
 
     constructor(private routerExtensions: RouterExtensions) {
         // Use the component constructor to inject providers.
@@ -48,6 +51,15 @@ export class AppComponent implements OnInit {
             .catch(error => {
                 console.log('[Firebase] Initialize', {error});
             });
+
+        if (isAndroid)
+        {
+            try {
+                Theme.setMode(Theme.Light);
+            } catch (e) {
+                console.log("Error setting Theme to light mode", e);
+            }
+        }
     }
 
     onSelectedIndexChanged(args: SelectedIndexChangedEventData) {

@@ -27,6 +27,8 @@
   <string name="SUCCESS">"Erfolgreich"</string>
   <string name="_Please_enter_first_and_last_name_Z1VDfxB">"Bitte gebe deinen Vor- und Nachnamen an"</string>
   <string name="_Name_missing_Z2vWqqE">"Name fehlt"</string>
+  <string name="_Please_enter_a_valid_email_address_1pRUYc">"Bitte eine gültige E-Mail-Adresse eingeben"</string>
+  <string name="_Email_missing_ZcIBmb">"E-Mail-Adresse fehlt"</string>
   <string name="_Please_re_enter_the_password_Fx7Sr">"Bitte Passwort wiederholen"</string>
   <string name="_Passwords_not_identical_U19vf">"Passwörter stimmen nicht überein"</string>
   <string name="_Length_must_be_at_least_8_characters_1PfVf7">"Mindestens 8 Zeichen erforderlich"</string>

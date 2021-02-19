@@ -238,6 +238,8 @@
   "Length must be at least 8 characters": "Mindestens 8 Zeichen erforderlich",
   "Passwords not identical": "Passwörter stimmen nicht überein",
   "Please re-enter the password": "Bitte Passwort wiederholen",
+  "Email missing": "E-Mail-Adresse fehlt",
+  "Please enter a valid email address": "Bitte eine gültige E-Mail-Adresse eingeben",
   "Name missing": "Name fehlt",
   "Please enter first and last name": "Bitte gebe deinen Vor- und Nachnamen an",
   "SUCCESS": "Erfolgreich",

@@ -23,7 +23,7 @@
                         <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
-                        <GridLayout class="boat-control-bar" columns="10, 40, 70, *, 10" rows="45">
+                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *, 10" rows="45">
                             <Label col="1" class="alarm-symbol"
                                    text="M" pageTransition="slideLeft"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>

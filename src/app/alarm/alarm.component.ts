@@ -9,6 +9,8 @@ import { EventData } from 'tns-core-modules/data/observable';
 import { Switch } from 'tns-core-modules/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
 import { LocalNotifications } from 'nativescript-local-notifications';
+import {StackLayout} from "tns-core-modules/ui/layouts/stack-layout";
+import {Page} from "tns-core-modules/ui/page";
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -23,10 +25,16 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     showOnlyOpen = true;
     alarmByTypeMap = alarmByTypeMap;
 
+    scrollLayout: ScrollView = null;
+    scrollBase = null;
+    allboatsvisible = true;
+
     constructor(
+        private page: Page,
         private apiService: ApiService,
         private dataService: DataService,
     ) {
+
     }
 
     onScroll(args: ScrollEventData) {
@@ -40,6 +48,9 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
+        this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
+        this.scrollBase = this.page.getViewById("level_5") as StackLayout;
+        //this.applyDefaultBoatDetailsVisibility(); // TODO needs "Data available" or loading finished trigger
     }
 
     refreshList(args) {
@@ -145,4 +156,89 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm[idAlarm].hidden =
             !this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm[idAlarm].hidden;
     }
+
+    toggleAllBoatDetails(args) {
+        console.log("Boat Alarms tapped");
+        for (const idDevice in this.dataService.deviceData)
+        {
+            const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+            boatDetailsView.visibility = this.allboatsvisible ? "collapse" : "visible";
+            boatDetailsView.opacity = 1;
+        }
+        this.allboatsvisible = !this.allboatsvisible;
+        this.scrollLayout.scrollToVerticalOffset(0, true);
+    }
+
+    toggleBoatDetails(deviceId) {
+        console.log("Boat Tapped No: "+deviceId);
+        const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
+
+        if (boatDetailsView.isCollapsed)
+        {
+            const scrollTarget = this.page.getViewById("level_6_"+deviceId) as StackLayout;
+
+            boatDetailsView.opacity = 0;
+            boatDetailsView.visibility = "visible";
+            boatDetailsView.animate({
+                opacity: 1,
+                duration: 100
+            }).then( () => {
+                this.scrollLayout.scrollToVerticalOffset(scrollTarget.getLocationRelativeTo(this.scrollBase).y, true);
+            });
+            // not exactly true, but collapse of all is desired at tap on Title Bar
+            this.allboatsvisible = true;
+        }
+        else
+        {
+            boatDetailsView.animate({
+                opacity: 0,
+                duration: 100
+            }).then(() => {
+                boatDetailsView.visibility='collapse';
+            }, (err) => {});
+        }
+        //boatDetailsView.visibility = boatDetailsView.isCollapsed ? "visible" : "collapse";
+    }
+
+    applyDefaultBoatDetailsVisibility(){
+        console.log("Number of boats: "+this.dataService.deviceData.length);
+        if (3 > this.dataService.deviceData.length)
+        {
+            console.log("less than 3 boats")
+            for (const idDevice in this.dataService.deviceData)
+            {
+                const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+                boatDetailsView.visibility = "visible";
+                boatDetailsView.opacity = 1;
+            }
+            this.allboatsvisible = true;
+        }
+        else
+        {
+            let numberOfOfficerBoats = 0;
+            for (const idDevice in this.dataService.deviceData)
+            {
+                if ('officer' == this.dataService.deviceData[idDevice].role)
+                {
+                    numberOfOfficerBoats++;
+                }
+            }
+            if (3 > numberOfOfficerBoats)
+            {
+                for (const idDevice in this.dataService.deviceData)
+                {
+                    if ('officer' == this.dataService.deviceData[idDevice].role)
+                    {
+                        const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+                        boatDetailsView.visibility = "visible";
+                        boatDetailsView.opacity = 1;
+                    }
+                }
+                // not exactly true, but collapse of all is desired at tap on Title Bar
+                this.allboatsvisible = true;
+            }
+        }
+
+    }
+
 }

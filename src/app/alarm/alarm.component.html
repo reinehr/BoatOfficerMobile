@@ -1,6 +1,7 @@
 <ActionBar title="{{ 'ALARM HISTORY' | L }}" class="action-bar bg-darkblue">
     <!--    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back"></NavigationButton>-->
-    <Label text="{{ 'ALARM HISTORY' | L }}" class="alarm-text"></Label>
+    <Label text="{{ 'ALARM HISTORY' | L }}" class="alarm-text"
+           (tap)="toggleAllBoatDetails($event)"></Label>
 
     <!--    <ActionItem-->
     <!--            ios.position="right"-->
@@ -15,10 +16,11 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh (refresh)="refreshList($event)">
-        <ScrollView orientation="vertical" iosOverflowSafeArea="false">
-            <StackLayout>
-                <StackLayout *ngFor="let device of dataService.deviceData; let idDevice = index" paddingBottom="15">
-                    <GridLayout columns="120, *, 100" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
+        <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
+            <StackLayout id="level_5">
+                <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
+                    <GridLayout columns="120, *, 100" rows="30, 30" padding="5" class="bg-darkblue"
+                                (tap)="toggleBoatDetails(device.id)">
                         <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
                                     *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
                             <Image [src]="'' + device.boat_image_small"
@@ -30,161 +32,163 @@
                         <Switch col="2" row="1" [checked]="showOnlyOpen" (checkedChange)="onCheckedChange($event)" height="30"
                                 horizontalAlignment="center"></Switch>
                     </GridLayout>
-                    <StackLayout *ngFor="let alarmType of device.keyTypeActive">
-                        <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">
-                            <StackLayout class="alarm-card"
-                                         *ngIf="!showOnlyOpen || alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)">
+                    <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="visible">
+                        <StackLayout *ngFor="let alarmType of device.keyTypeActive">
+                            <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">
+                                <StackLayout class="alarm-card"
+                                             *ngIf="!showOnlyOpen || alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)">
 
-                                <GridLayout columns="40, auto, auto" rows="40">
-                                    <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
-                                           *ngIf="alarm.status == 'open'"></Label>
-                                    <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
-                                           *ngIf="alarm.status == 'open_someone_responsible'"></Label>
-                                    <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                                           *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                                    <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                                           *ngIf="alarm.status == 'clear_by_device'"></Label>
-                                    <Label col=1 row=0 [text]="alarm.type | L" class="alarm-gray t-16 font-weight-bold"
-                                           verticalAlignment="middle"></Label>
-                                    <Label col=2 row=0 [text]="' ' + alarm.value + alarmByTypeMap[alarm.type].unit" class="alarm-gray t-16 font-weight-bold"
-                                           verticalAlignment="middle" *ngIf="alarm.value"></Label>
-                                </GridLayout>
-                                <StackLayout *ngFor="let alarmMulti of alarm.alarm; let idAlarm = index">
-                                    <GridLayout columns="40, auto, 55, auto" rows="40"
-                                                *ngIf="!showOnlyOpen && !(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible))"
-                                                (tap)="hideAlarm(idDevice, alarmType, idAlarm)">
-                                        <Label col=0 row=0 text="S" class="alarm-symbol alarm-gray"></Label>
-                                        <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold alarm-gray"
+                                    <GridLayout columns="40, auto, auto" rows="40">
+                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
+                                               *ngIf="alarm.status == 'open'"></Label>
+                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
+                                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                               *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                               *ngIf="alarm.status == 'clear_by_device'"></Label>
+                                        <Label col=1 row=0 [text]="alarm.type | L" class="alarm-gray t-16 font-weight-bold"
                                                verticalAlignment="middle"></Label>
-                                        <Label col=2 row=0 text="o" class="alarm-symbol alarm-gray" marginLeft="15"></Label>
-                                        <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold alarm-gray"
-                                               verticalAlignment="middle"></Label>
+                                        <Label col=2 row=0 [text]="' ' + alarm.value + alarmByTypeMap[alarm.type].unit" class="alarm-gray t-16 font-weight-bold"
+                                               verticalAlignment="middle" *ngIf="alarm.value"></Label>
+                                    </GridLayout>
+                                    <StackLayout *ngFor="let alarmMulti of alarm.alarm; let idAlarm = index">
+                                        <GridLayout columns="40, auto, 55, auto" rows="40"
+                                                    *ngIf="!showOnlyOpen && !(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible))"
+                                                    (tap)="hideAlarm(idDevice, alarmType, idAlarm)">
+                                            <Label col=0 row=0 text="S" class="alarm-symbol alarm-gray"></Label>
+                                            <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold alarm-gray"
+                                                   verticalAlignment="middle"></Label>
+                                            <Label col=2 row=0 text="o" class="alarm-symbol alarm-gray" marginLeft="15"></Label>
+                                            <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold alarm-gray"
+                                                   verticalAlignment="middle"></Label>
+                                        </GridLayout>
+                                        <GridLayout columns="40, auto, 10, *, 10" rows="40, auto"
+                                                    *ngIf="!showOnlyOpen && !(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible)) && !alarmMulti.hidden">
+                                            <Label col=0 row=0 text="B" class="alarm-symbol-s alarm-blue"
+                                                   *ngIf="alarmMulti.status != 'open'"></Label>
+                                            <Label col=1 row=0 text="{{'Cleared' | L}}" class="alarm-blue t-16 font-weight-bold"
+                                                   verticalAlignment="middle" *ngIf="alarmMulti.status == 'clear_by_device'"></Label>
+                                            <Label col=1 row=0 text="{{'Marked as OK' | L}}" class="alarm-blue t-16 font-weight-bold"
+                                                   verticalAlignment="middle" *ngIf="alarmMulti.status == 'marked_as_ok'"></Label>
+                                            <Label col=1 row=0 text="{{'Open (Responsibility clarified)' | L}}"
+                                                   class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
+                                                   *ngIf="alarmMulti.status == 'open_someone_responsible'"></Label>
+                                            <Label col=1 row=1
+                                                   [text]="('by Device on' | L) + ' ' + (alarmMulti.clear_by_device_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarmMulti.clear_by_device_time | date : 'HH:mm')"
+                                                   class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
+                                                   *ngIf="alarmMulti.status == 'clear_by_device'"></Label>
+                                            <Label col=1 row=1
+                                                   [text]="('by user on' | L: alarmMulti.marked_as_ok_username) + ' ' + (alarmMulti.marked_as_ok_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarmMulti.marked_as_ok_time | date : 'HH:mm')"
+                                                   class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
+                                                   *ngIf="alarmMulti.status == 'marked_as_ok'"></Label>
+                                            <Label col=1 row=1 [text]="('Marked as responsible' | L) + ': ' + alarmMulti.responsible_username"
+                                                   class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
+                                                   *ngIf="alarmMulti.status == 'open_someone_responsible'"></Label>
+                                            <GridLayout col="3" row="0" rowSpan="2" columns="30, *" rows="40" class="alarm-button"
+                                                        [backgroundColor]="alarmMulti.loading ? '#a9a9a9' : '#fb8b24'"
+                                                        margin="5" (tap)="onAlarmTypeNotResponsibleTap(idDevice, alarmType)"
+                                                        *ngIf="alarmMulti.status == 'open_someone_responsible' && device.role=='officer'">
+                                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"
+                                                       verticalAlignment="center" width="30pt" textAlignment="center"
+                                                       color="#fdbb94"></Label>
+                                                <Label col=1 row=0 [text]="'Revoke' | L" class="alarm-text-s"></Label>
+                                            </GridLayout>
+                                        </GridLayout>
+                                        <GridLayout columns="40, auto, 55, auto" rows="40" *ngIf="(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible))">
+                                            <Label col=0 row=0 text="S" class="alarm-symbol alarm-blue"></Label>
+                                            <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold"
+                                                   verticalAlignment="middle"></Label>
+                                            <Label col=2 row=0 text="o" class="alarm-symbol alarm-blue" marginLeft="15"></Label>
+                                            <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold"
+                                                   verticalAlignment="middle"></Label>
+                                        </GridLayout>
+                                    </StackLayout>
+                                    <GridLayout rows="auto, auto">
+                                        <GridLayout row="0" columns="*, 10, *"
+                                                    *ngIf="((alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) && device.role != 'sailor')"
+                                                    padding="10">
+                                            <GridLayout col="0" columns="30, *" rows="40" (tap)="onCallTap(idDevice)"
+                                                        class="alarm-button" margin="5"
+                                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : ''"
+                                                        *ngIf="device.harbour_contact">
+                                                <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
+                                                <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
+                                            </GridLayout>
+                                            <GridLayout col="0" columns="30, *" rows="40" class="alarm-button"
+                                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#a9a9a9'"
+                                                        margin="5" *ngIf="!device.harbour_contact">
+                                                <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
+                                                <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
+                                            </GridLayout>
+                                            <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
+                                            <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#356eb4'"-->
+                                            <!--                                        margin="5" (tap)="onAlarmTypeResponsibleTap(idDevice, alarmType)"-->
+                                            <!--                                        *ngIf="alarm.status == 'open'">-->
+                                            <!--                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#9cbeda"></Label>-->
+                                            <!--                                <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text-s"></Label>-->
+                                            <!--                            </GridLayout>-->
+                                            <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
+                                            <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#􏰟􏰎􏰠􏰎􏰐􏰡􏰟􏰎fb8b24'"-->
+                                            <!--                                        margin="5" (tap)="onAlarmTypeNotResponsibleTap(idDevice, alarmType)"-->
+                                            <!--                                        *ngIf="alarm.status == 'open_someone_responsible'">-->
+                                            <!--                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"-->
+                                            <!--                                       verticalAlignment="center" width="30pt" textAlignment="center"-->
+                                            <!--                                       color="#fdbb94"></Label>-->
+                                            <!--                                <Label col=1 row=0 [text]="'Make me not resp.'" class="alarm-text-s"></Label>-->
+                                            <!--                            </GridLayout>-->
+                                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"
+                                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"
+                                                        margin="5" (tap)="onAlarmTypeOkTap(idDevice, alarmType)"
+                                                        *ngIf="alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)">
+                                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>
+                                                <Label col=1 row=0 [text]="'Mark as solved' | L" class="alarm-text-s"></Label>
+                                            </GridLayout>
+                                        </GridLayout>
+                                        <!--                        <GridLayout row="1" columns="30, *, 10" rows="40" class="alarm-button"-->
+                                        <!--                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"-->
+                                        <!--                                    marginBottom="10" marginTop="-5" marginLeft="25" marginRight="25"-->
+                                        <!--                                    (tap)="onAlarmTypeOkTap(idDevice, alarmType)"-->
+                                        <!--                                    *ngIf="alarm.status == 'open_someone_responsible' && alarm.i_am_responsible">-->
+                                        <!--                            <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>-->
+                                        <!--                            <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>-->
+                                        <!--                        </GridLayout>-->
                                     </GridLayout>
                                     <GridLayout columns="40, auto, 10, *, 10" rows="40, auto"
-                                                *ngIf="!showOnlyOpen && !(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible)) && !alarmMulti.hidden">
+                                                *ngIf="(alarm.status != 'open' && !(alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) ">
                                         <Label col=0 row=0 text="B" class="alarm-symbol-s alarm-blue"
-                                               *ngIf="alarmMulti.status != 'open'"></Label>
+                                               *ngIf="alarm.status != 'open'"></Label>
                                         <Label col=1 row=0 text="{{'Cleared' | L}}" class="alarm-blue t-16 font-weight-bold"
-                                               verticalAlignment="middle" *ngIf="alarmMulti.status == 'clear_by_device'"></Label>
+                                               verticalAlignment="middle" *ngIf="alarm.status == 'clear_by_device'"></Label>
                                         <Label col=1 row=0 text="{{'Marked as OK' | L}}" class="alarm-blue t-16 font-weight-bold"
-                                               verticalAlignment="middle" *ngIf="alarmMulti.status == 'marked_as_ok'"></Label>
+                                               verticalAlignment="middle" *ngIf="alarm.status == 'marked_as_ok'"></Label>
                                         <Label col=1 row=0 text="{{'Open (Responsibility clarified)' | L}}"
                                                class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
-                                               *ngIf="alarmMulti.status == 'open_someone_responsible'"></Label>
-                                        <Label col=1 row=1
-                                               [text]="('by Device on' | L) + ' ' + (alarmMulti.clear_by_device_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarmMulti.clear_by_device_time | date : 'HH:mm')"
-                                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
-                                               *ngIf="alarmMulti.status == 'clear_by_device'"></Label>
-                                        <Label col=1 row=1
-                                               [text]="('by user on' | L: alarmMulti.marked_as_ok_username) + ' ' + (alarmMulti.marked_as_ok_time | date : 'dd.MM.yyyy') + ' ' + ('at' | L) + ' ' + (alarmMulti.marked_as_ok_time | date : 'HH:mm')"
-                                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
-                                               *ngIf="alarmMulti.status == 'marked_as_ok'"></Label>
-                                        <Label col=1 row=1 [text]="('Marked as responsible' | L) + ': ' + alarmMulti.responsible_username"
-                                               class="alarm-gray t-12" verticalAlignment="middle" marginTop="-11"
-                                               *ngIf="alarmMulti.status == 'open_someone_responsible'"></Label>
+                                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
                                         <GridLayout col="3" row="0" rowSpan="2" columns="30, *" rows="40" class="alarm-button"
-                                                    [backgroundColor]="alarmMulti.loading ? '#a9a9a9' : '#fb8b24'"
+                                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fb8b24'"
                                                     margin="5" (tap)="onAlarmTypeNotResponsibleTap(idDevice, alarmType)"
-                                                    *ngIf="alarmMulti.status == 'open_someone_responsible' && device.role=='officer'">
+                                                    *ngIf="alarm.status == 'open_someone_responsible' && device.role=='officer'">
                                             <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"
                                                    verticalAlignment="center" width="30pt" textAlignment="center"
                                                    color="#fdbb94"></Label>
                                             <Label col=1 row=0 [text]="'Revoke' | L" class="alarm-text-s"></Label>
                                         </GridLayout>
                                     </GridLayout>
-                                    <GridLayout columns="40, auto, 55, auto" rows="40" *ngIf="(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible))">
-                                        <Label col=0 row=0 text="S" class="alarm-symbol alarm-blue"></Label>
-                                        <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold"
-                                               verticalAlignment="middle"></Label>
-                                        <Label col=2 row=0 text="o" class="alarm-symbol alarm-blue" marginLeft="15"></Label>
-                                        <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold"
-                                               verticalAlignment="middle"></Label>
-                                    </GridLayout>
                                 </StackLayout>
-                                <GridLayout rows="auto, auto">
-                                    <GridLayout row="0" columns="*, 10, *"
-                                                *ngIf="((alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) && device.role != 'sailor')"
-                                                padding="10">
-                                        <GridLayout col="0" columns="30, *" rows="40" (tap)="onCallTap(idDevice)"
-                                                    class="alarm-button" margin="5"
-                                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : ''"
-                                                    *ngIf="device.harbour_contact">
-                                            <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
-                                            <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
-                                        </GridLayout>
-                                        <GridLayout col="0" columns="30, *" rows="40" class="alarm-button"
-                                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#a9a9a9'"
-                                                    margin="5" *ngIf="!device.harbour_contact">
-                                            <Label col=0 row=0 text="T" class="alarm-symbol-s alarm-gray"></Label>
-                                            <Label col=1 row=0 [text]="'Call Harbour' | L" class="alarm-text-s"></Label>
-                                        </GridLayout>
-                                        <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
-                                        <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#356eb4'"-->
-                                        <!--                                        margin="5" (tap)="onAlarmTypeResponsibleTap(idDevice, alarmType)"-->
-                                        <!--                                        *ngIf="alarm.status == 'open'">-->
-                                        <!--                                <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#9cbeda"></Label>-->
-                                        <!--                                <Label col=1 row=0 [text]="'Make me resp.'" class="alarm-text-s"></Label>-->
-                                        <!--                            </GridLayout>-->
-                                        <!--                            <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"-->
-                                        <!--                                        [backgroundColor]="alarm.loading ? '#a9a9a9' : '#􏰟􏰎􏰠􏰎􏰐􏰡􏰟􏰎fb8b24'"-->
-                                        <!--                                        margin="5" (tap)="onAlarmTypeNotResponsibleTap(idDevice, alarmType)"-->
-                                        <!--                                        *ngIf="alarm.status == 'open_someone_responsible'">-->
-                                        <!--                                <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"-->
-                                        <!--                                       verticalAlignment="center" width="30pt" textAlignment="center"-->
-                                        <!--                                       color="#fdbb94"></Label>-->
-                                        <!--                                <Label col=1 row=0 [text]="'Make me not resp.'" class="alarm-text-s"></Label>-->
-                                        <!--                            </GridLayout>-->
-                                        <GridLayout col="2" columns="30, *" rows="40" class="alarm-button"
-                                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"
-                                                    margin="5" (tap)="onAlarmTypeOkTap(idDevice, alarmType)"
-                                                    *ngIf="alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)">
-                                            <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>
-                                            <Label col=1 row=0 [text]="'Mark as solved' | L" class="alarm-text-s"></Label>
-                                        </GridLayout>
-                                    </GridLayout>
-                                    <!--                        <GridLayout row="1" columns="30, *, 10" rows="40" class="alarm-button"-->
-                                    <!--                                    [backgroundColor]="alarm.loading ? '#a9a9a9' : '#228b22'"-->
-                                    <!--                                    marginBottom="10" marginTop="-5" marginLeft="25" marginRight="25"-->
-                                    <!--                                    (tap)="onAlarmTypeOkTap(idDevice, alarmType)"-->
-                                    <!--                                    *ngIf="alarm.status == 'open_someone_responsible' && alarm.i_am_responsible">-->
-                                    <!--                            <Label col=0 row=0 text="B" class="alarm-symbol-s" color="#99cd99"></Label>-->
-                                    <!--                            <Label col=1 row=0 [text]="'Mark as solved'" class="alarm-text-s"></Label>-->
-                                    <!--                        </GridLayout>-->
-                                </GridLayout>
-                                <GridLayout columns="40, auto, 10, *, 10" rows="40, auto"
-                                            *ngIf="(alarm.status != 'open' && !(alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) ">
-                                    <Label col=0 row=0 text="B" class="alarm-symbol-s alarm-blue"
-                                           *ngIf="alarm.status != 'open'"></Label>
-                                    <Label col=1 row=0 text="{{'Cleared' | L}}" class="alarm-blue t-16 font-weight-bold"
-                                           verticalAlignment="middle" *ngIf="alarm.status == 'clear_by_device'"></Label>
-                                    <Label col=1 row=0 text="{{'Marked as OK' | L}}" class="alarm-blue t-16 font-weight-bold"
-                                           verticalAlignment="middle" *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                                    <Label col=1 row=0 text="{{'Open (Responsibility clarified)' | L}}"
-                                           class="alarm-blue t-16 font-weight-bold" verticalAlignment="middle"
-                                           *ngIf="alarm.status == 'open_someone_responsible'"></Label>
-                                    <GridLayout col="3" row="0" rowSpan="2" columns="30, *" rows="40" class="alarm-button"
-                                                [backgroundColor]="alarm.loading ? '#a9a9a9' : '#fb8b24'"
-                                                margin="5" (tap)="onAlarmTypeNotResponsibleTap(idDevice, alarmType)"
-                                                *ngIf="alarm.status == 'open_someone_responsible' && device.role=='officer'">
-                                        <Label col=0 row=0 text="&#xf057;" class="fas t-18 font-weight-bold"
-                                               verticalAlignment="center" width="30pt" textAlignment="center"
-                                               color="#fdbb94"></Label>
-                                        <Label col=1 row=0 [text]="'Revoke' | L" class="alarm-text-s"></Label>
-                                    </GridLayout>
-                                </GridLayout>
                             </StackLayout>
                         </StackLayout>
-                    </StackLayout>
-                    <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="!device.alarm || device.alarm.length == 0 || (device.sum_active_alarm === 0 && showOnlyOpen)">
-                        <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
-                            <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
-                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
-                        </GridLayout>
-                        <GridLayout columns="0, 40, auto, auto" rows="40">
-                            <Label col=1 row=0 text="B" class="alarm-symbol alarm-green"></Label>
-                            <Label col=2 row=0 [text]="('no active alarms' | L)" class="alarm-gray t-16 font-weight-bold"
-                                   verticalAlignment="middle"></Label>
-                        </GridLayout>
+                        <StackLayout class="alarm-card" *ngIf="!device.alarm || device.alarm.length == 0 || (device.sum_active_alarm === 0 && showOnlyOpen)">
+                            <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
+                                <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
+                                       verticalAlignment="middle" horizontalAlignment="left"></Label>
+                            </GridLayout>
+                            <GridLayout columns="0, 40, auto, auto" rows="40">
+                                <Label col=1 row=0 text="B" class="alarm-symbol alarm-green"></Label>
+                                <Label col=2 row=0 [text]="('no active alarms' | L)" class="alarm-gray t-16 font-weight-bold"
+                                       verticalAlignment="middle"></Label>
+                            </GridLayout>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

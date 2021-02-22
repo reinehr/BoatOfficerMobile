@@ -1,13 +1,13 @@
 <BottomNavigation #bt selectedIndex="0" (selectedIndexChanged)="onSelectedIndexChanged($event)">
-    <TabStrip>
+    <TabStrip id="tabstrip">
         <!--
             Note TabStripItem will only accept single Label and/or single Image elements that it
             will "adopt"; any other layout elements you try to specify will be ignored
         -->
-        <TabStripItem iconSource="font://&#xf015;" class="navigation__item fas" (tap)="onHomeMenuTap($event)">
+        <TabStripItem id="tabItemHome" iconSource="font://&#xf015;" class="navigation__item fas" (tap)="onHomeMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
-        <TabStripItem iconSource="font://&#x43;" class="navigation__item icon-boatofficer t-36" (tap)="onAlarmsMenuTap($event)">
+        <TabStripItem id="tabItemAlarm" iconSource="font://&#x43;" class="navigation__item icon-boatofficer t-36" (tap)="onAlarmsMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
         <TabStripItem iconSource="font://&#x4f;" class="navigation__item icon-boatofficer" (tap)="onBoatMenuTap($event)">
@@ -19,28 +19,18 @@
     </TabStrip>
 
     <TabContentItem>
-        <page-router-outlet name="homeTab"></page-router-outlet>
+        <page-router-outlet name="home"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="alarmTab"></page-router-outlet>
+        <page-router-outlet name="alarm"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="boatTab"></page-router-outlet>
+        <page-router-outlet name="boat"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>
-        <page-router-outlet name="settingsTab"></page-router-outlet>
+        <page-router-outlet name="settings"></page-router-outlet>
     </TabContentItem>
 </BottomNavigation>
-<!--
-<TabView class="tab-view" androidTabsPosition="bottom">
-  <StackLayout *tabItem="{title: 'Cats'}">
-    <router-outlet name="homeTab"></router-outlet>
-  </StackLayout>
-  <StackLayout *tabItem="{title: 'Dogs'}">
-    <router-outlet name="alarmTab"></router-outlet>
-  </StackLayout>
-</TabView>
--->

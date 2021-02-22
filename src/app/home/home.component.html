@@ -55,7 +55,7 @@
                                 </GridLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0">
+                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0" nsRouterLink="../alarm">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
                                 <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold c-black"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>

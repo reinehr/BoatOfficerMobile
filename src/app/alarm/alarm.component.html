@@ -97,10 +97,10 @@
                                         </GridLayout>
                                         <GridLayout columns="40, auto, 55, auto" rows="40" *ngIf="(alarmMulti.status == 'open' || (alarmMulti.status == 'open_someone_responsible' && alarmMulti.i_am_responsible))">
                                             <Label col=0 row=0 text="S" class="alarm-symbol alarm-blue"></Label>
-                                            <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold"
+                                            <Label col=1 row=0 [text]="alarmMulti.time | date : 'dd.MM.yyy'" class="t-16 font-weight-bold c-black"
                                                    verticalAlignment="middle"></Label>
                                             <Label col=2 row=0 text="o" class="alarm-symbol alarm-blue" marginLeft="15"></Label>
-                                            <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold"
+                                            <Label col=3 row=0 [text]="alarmMulti.time | date : 'HH:mm'" class="t-16 font-weight-bold c-black"
                                                    verticalAlignment="middle"></Label>
                                         </GridLayout>
                                     </StackLayout>

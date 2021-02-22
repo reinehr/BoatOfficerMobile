@@ -12,7 +12,7 @@
                 </ActivityIndicator>
                 <Label col=0 row=2 text="" height="0"></Label>
                 <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!hasKey">
-                    <StackLayout class="alarm-card-home" padding="5,10,10,10">
+                    <StackLayout class="alarm-card-home">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_key' | L" class="t-16" textWrap="true"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -20,7 +20,7 @@
                     </StackLayout>
                 </StackLayout>
                 <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (dataService && dataService.deviceData && dataService.deviceData.length == 0 && isLoading == false)">
-                    <StackLayout class="alarm-card-home" padding="5,10,10,10">
+                    <StackLayout class="alarm-card-home">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_boat' | L" class="t-16" textWrap="true"
                                    verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -55,7 +55,7 @@
                                 </GridLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="5,10,10,10" *ngIf="device.sum_active_alarm > 0">
+                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
                                 <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -79,7 +79,7 @@
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" padding="5,10,10,10" *ngIf="device.sum_active_alarm === 0">
+                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm === 0">
                             <GridLayout columns="0, *, auto, 10" rows="30" paddingBottom="-1">
                                 <Label col=1 row=0 [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -90,7 +90,7 @@
                                        verticalAlignment="middle"></Label>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout [id]="'level_7_' + device.id" class="alarm-card-home" padding="5,10,10,10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time && dataService.boatStatus[device.id].position_data.latitude && dataService.boatStatus[device.id].position_data.latitude != 0">
+                        <StackLayout [id]="'level_7_' + device.id" class="alarm-card-home" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time && dataService.boatStatus[device.id].position_data.latitude && dataService.boatStatus[device.id].position_data.latitude != 0">
                             <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
                                 <Label col=0 row=0 [text]="'POSITION' | L" class="t-16 font-weight-bold"
                                        verticalAlignment="middle" horizontalAlignment="left"></Label>
@@ -129,7 +129,7 @@
                                 <GridLayout col="0" row="0" rowSpan="2" colSpan="2" [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout [id]="device.id" class="alarm-card-home" padding="5,10,10,10"
+                        <StackLayout [id]="device.id" class="alarm-card-home"
                                      *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].weather_forecast && dataService.boatStatus[device.id].weather_forecast.list && dataService.boatStatus[device.id].weather_forecast.list[0]" (tap)="onWeatherTap(device.id)">
                             <GridLayout columns="*" rows="40" paddingBottom="-10">
                                 <Label col=0 row=0 [text]="'WEATHER ON SITE' | L" class="t-16 font-weight-bold"
@@ -196,7 +196,7 @@
                             </GridLayout>
                         </StackLayout>
                         <GridLayout>
-                            <StackLayout class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
+                            <StackLayout class="alarm-card-home" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
                                 <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10">
                                     <Label col=0 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
                                            verticalAlignment="middle" horizontalAlignment="left"></Label>

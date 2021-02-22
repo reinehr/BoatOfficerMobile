@@ -11,7 +11,7 @@
             <StackLayout paddingBottom="15">
                 <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                 <GridLayout rows="10"></GridLayout>
-                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout *ngFor="let field of sensorFieldKeys">
@@ -67,7 +67,7 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card" padding="5,10,10,10"
+                <StackLayout class="alarm-card"
                              *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
@@ -139,7 +139,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card" padding="5,10,10,10"
+                <StackLayout class="alarm-card"
                              *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold"></Label>
@@ -186,7 +186,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>

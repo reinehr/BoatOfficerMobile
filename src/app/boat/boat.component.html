@@ -30,7 +30,7 @@
                             <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>
                         </GridLayout>
-                        <StackLayout class="alarm-card" padding="5,10,10,10" marginTop="15"
+                        <StackLayout class="alarm-card"
                                      *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
                             <GridLayout columns="*, auto, 10" rows="40" paddingLeft="10" paddingBottom="-10">
                                 <Label col=0 row=0 [text]="'SENSORS' | L" class="t-16 font-weight-bold"
@@ -79,7 +79,7 @@
                                 </StackLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout [id]="'level_7_' + device.id" class="alarm-card" marginTop="10" padding="5,10,10,10"
+                        <StackLayout [id]="'level_7_' + device.id" class="alarm-card"
                                      *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data && dataService.boatStatus[device.id].position_data.time">
                             <GridLayout columns="*, auto, 10" rows="40" paddingBottom="-10"
                                      [nsRouterLink]="['../mapdetails', idDevice]">

@@ -7,7 +7,7 @@
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
     <ScrollView orientation="vertical" iosOverflowSafeArea="false">
         <StackLayout>
-            <StackLayout class="alarm-card" padding="5,10,10,10">
+            <StackLayout class="alarm-card">
                 <StackLayout>
                     <Label text="{{'Captain' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'officer'"></Label>
                     <Label text="{{'Requests' | L}}" class="t-16 font-weight-bold" *ngIf="roleOrRequests == 'candidate'"></Label>
@@ -45,7 +45,7 @@
                     </StackLayout>
                 </StackLayout>
             </StackLayout>
-            <StackLayout class="alarm-card" padding="5,10,10,10">
+            <StackLayout class="alarm-card">
                 <StackLayout *ngIf="(roleOrRequests != 'lifeguard') && (roleOrRequests != 'candidate')">
                     <Label text="{{'Permissions' | L}}" class="t-16 font-weight-bold"
                            marginBottom="5"></Label>
@@ -132,7 +132,7 @@
                            *ngIf="!dataService.deviceData[idDevice].is_pro"></Label>
                 </StackLayout>
             </StackLayout>
-            <StackLayout class="alarm-card" padding="5,10,10,10" *ngIf="roleOrRequests == 'lifeguard'">
+            <StackLayout class="alarm-card" *ngIf="roleOrRequests == 'lifeguard'">
                 <StackLayout>
                     <Label text="{{'Not Lifeguards' | L}}" class="t-16 font-weight-bold"></Label>
                     <Label text="{{ dataService.deviceData[idDevice].name }}" class="t-12" marginBottom="10"></Label>

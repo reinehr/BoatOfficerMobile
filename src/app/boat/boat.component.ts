@@ -39,7 +39,6 @@ export class BoatComponent implements OnInit, AfterViewInit {
     private sensordataSub: Subscription;
     now = new Date();
     scrollLayout: ScrollView = null;
-    contentContainer: StackLayout = null;
     scrollBase = null;
     allboatsvisible = false;
 
@@ -84,10 +83,6 @@ export class BoatComponent implements OnInit, AfterViewInit {
                             this.mapView.mapAnimationsEnabled = true;
                         }
                     }
-                    // TODO is this the right place for the following commands? ask Jakob.
-                    this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
-                    this.contentContainer = this.page.getViewById("level_5") as StackLayout;
-                    this.scrollBase = this.page.getViewById("level_5") as StackLayout;
                     this.applyDefaultBoatDetailsVisibility();
                 }, 2000);
             }
@@ -101,7 +96,8 @@ export class BoatComponent implements OnInit, AfterViewInit {
     }
 
     ngAfterViewInit(): void {
-
+        this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
+        this.scrollBase = this.page.getViewById("level_5") as StackLayout;
     }
 
 

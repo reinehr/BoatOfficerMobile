@@ -50,21 +50,6 @@
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout *ngIf="false && 'Auskommentiert, weil sich dahinter noch keine Funktion verbirgt. '">
-                            <StackLayout *ngIf="device.role == 'officer' || device.role == 'guard'">
-                                <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5">
-                                    <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                                borderTopColor="#d3d3d3"></GridLayout>
-                                    <Label col=1 row=1 [text]="'K'"
-                                           [class]="'alarm-symbol-bo alarm-gray'"></Label>
-                                    <Label col="2" row="1" [text]="'Show 2nd Battery' | L"
-                                           class="alarm-blue font-weight-bold"
-                                           verticalAlignment="center"></Label>
-                                    <Switch col="3" colspan="2" row="1" checked="true" (checkedChange)="changed2ndBatteryOption($event)"
-                                            backgroundColor="#356EB4"></Switch>
-                                </GridLayout>
-                            </StackLayout>
-                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
                 <StackLayout class="alarm-card"
@@ -73,7 +58,7 @@
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'name'] : []">
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'name'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text="O"
@@ -89,7 +74,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'berth'] : []">
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'berth'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -105,7 +90,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../editdevicesettings', idDevice, 'contact'] : []">
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'contact'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text="T"
@@ -121,7 +106,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../uploadpicture', device.id] : []"
+                                        [nsRouterLink]="device.role == 'officer' ? ['../../uploadpicture', device.id] : []"
                                         pageTransition="slideLeft" *ngIf="(device.role == 'officer')">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
@@ -204,7 +189,7 @@
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
                                         *ngIf="device.role == 'officer' && 0 != device.num_candidate"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []">
+                                        [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'candidate'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -217,7 +202,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'guard'] : []">
+                                        [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'guard'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -230,7 +215,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'sailor'] : []">
+                                        [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'sailor'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""
@@ -243,7 +228,7 @@
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
                             <GridLayout rows="5,*" columns="5,40,*,50,5" paddingBottom="5"
-                                        [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'lifeguard'] : []">
+                                        [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'lifeguard'] : []">
                                 <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
                                             borderTopColor="#d3d3d3"></GridLayout>
                                 <Label col=1 row=1 text=""

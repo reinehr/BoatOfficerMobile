@@ -6,28 +6,50 @@
 
 <StackLayout class="homeBackgroundImage"
              backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
-        <StackLayout class="form">
-            <StackLayout class="input-field" padding="10, 10, 0, 10">
-                <Label
-                       class="inputlabel"
-                       [text]="name | L">
-                </Label>
-                <TextField
-                        *ngIf="type"
-                        returnKeyType="done"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="value"
-                        [keyboardType]="type"
-                ></TextField>
-                <TextField
-                        *ngIf="!type"
-                        returnKeyType="done"
-                        [autocorrect]="false"
-                        autocapitalizationType="none"
-                        [(ngModel)]="value"
-                ></TextField>
-            </StackLayout>
-            <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveDeviceSetting()"></Button>
+    <StackLayout class="form" *ngIf="!cableSettingsDatatypeMap[field]">
+        <StackLayout class="input-field" padding="10, 10, 0, 10">
+            <Label
+                   class="inputlabel"
+                   [text]="name | L">
+            </Label>
+            <TextField
+                    *ngIf="type"
+                    returnKeyType="done"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    [(ngModel)]="value"
+                    [keyboardType]="type"
+            ></TextField>
+            <TextField
+                    *ngIf="!type"
+                    returnKeyType="done"
+                    [autocorrect]="false"
+                    autocapitalizationType="none"
+                    [(ngModel)]="value"
+            ></TextField>
         </StackLayout>
+    </StackLayout>
+
+    <StackLayout class="alarm-card" *ngIf="cableSettingsDatatypeMap[field]" height="200">
+        <StackLayout>
+            <Label text="{{'EDIT CABLE SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
+            <StackLayout class="input-field" padding="10, 10, 0, 10">
+                <GridLayout rows="5,*" columns="0,40,*,170,0" paddingBottom="10">
+                    <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                borderTopColor="#d3d3d3"></GridLayout>
+                    <Label col=1 row=1 [text]="icon"
+                           [class]="'alarm-symbol-' + iconfont + ' alarm-gray'"></Label>
+                    <Label col="2" row="1" [text]="name | L"
+                           class="alarm-blue font-weight-bold"
+                           verticalAlignment="center"></Label>
+                    <ListPicker #picker col="3" row="1" [width]="listPickerWidth" [minWidth]="listPickerWidth"
+                                [items]="listPicker"
+                                [selectedIndex]="originalCableSettingIndex"
+                                [(ngModel)]="originalCableSettingIndex"
+                                (selectedIndexChange)="selectedIndexChanged(picker)"></ListPicker>
+                </GridLayout>
+            </StackLayout>
+        </StackLayout>
+    </StackLayout>
+    <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveDeviceSetting()"></Button>
 </StackLayout>

@@ -11,6 +11,41 @@
             <StackLayout paddingBottom="15">
                 <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                 <GridLayout rows="10"></GridLayout>
+                <StackLayout class="alarm-card"
+                             *ngIf="dataService.alarmSettings[device.id]">
+                    <StackLayout>
+                        <Label text="{{'CABLE SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
+                        <StackLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'external_voltage_cable'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray"></Label>
+                                <Label col="2" row="1" text="{{'External battery' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1"
+                                       [text]="device.external_voltage_cable | L"
+                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            </GridLayout>
+                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'multisensor_cable'] : []">
+                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
+                                            borderTopColor="#d3d3d3"></GridLayout>
+                                <Label col=1 row=1 text=""
+                                       class="alarm-symbol-fas alarm-gray"></Label>
+                                <Label col="2" row="1" text="{{'Multisensor' | L}}"
+                                       class="alarm-blue font-weight-bold"
+                                       verticalAlignment="center"></Label>
+                                <Label col="3" row="1"
+                                       [text]="device.multisensor_cable | L"
+                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                            </GridLayout>
+
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
                 <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>

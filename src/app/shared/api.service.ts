@@ -106,7 +106,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    //baseUrl = 'https://02dd1ec92366.ngrok.io/';
+    // baseUrl = 'https://29c05bc52989.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -483,12 +483,14 @@ export class ApiService {
         });
     }
 
-    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string) {
-        console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName, ', harbour_contact:' + deviceContact);
+    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string, externalBatteryCable: string, multisensorCable: string) {
+        console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName + ', harbour_contact:' + deviceContact + ', external_voltage_cable:' + externalBatteryCable);
         this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
                 device_name: deviceName,
                 berth: deviceBerth,
                 harbour_contact: deviceContact,
+                external_voltage_cable: externalBatteryCable,
+                multisensor_cable: multisensorCable,
                 id: deviceId
             }
             , {

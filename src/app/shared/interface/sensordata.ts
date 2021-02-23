@@ -510,20 +510,20 @@ export interface BoatHistory {
     };
 }
 
-export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, majorStep: number, show_history: boolean } } = {
-    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', majorStep: 0, show_history: false},
-    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', majorStep: 5, show_history: true},
-    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', majorStep:   0, show_history: true},
-    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', majorStep: 5, show_history: true},
-    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: 'ChargingActive', name: 'Voltage Intern Battery', majorStep: 1, show_history: true},
-    // ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', majorStep: 1, show_history: false},
-    // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', majorStep: 1, show_history: false},
-    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop', majorStep: 1, show_history: true},
-    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 1', majorStep: 1, show_history: true},
-    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 2', majorStep: 1, show_history: true},
-    // StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Loop A', majorStep: 1, show_history: true},
-    // StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A1', majorStep: 1, show_history: true},
-    // StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A2', majorStep: 1, show_history: true},
+export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, name_by_cable: string[], majorStep: number, show_history: boolean, cable: string[] } } = {
+    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', name_by_cable: [], majorStep: 0, show_history: false, cable: []},
+    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', name_by_cable: ['Voltage Extern Battery', 'Voltage Extern Battery 1'], majorStep: 5, show_history: true, cable: ['SINGLE', 'DOUBLE']},
+    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB']},
+    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', name_by_cable: [], majorStep: 5, show_history: true, cable: []},
+    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
+    // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
+    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 1', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 2', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Loop A', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A1', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A2', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
 };
 
 export const boatGpsMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, majorStep: number, show_history: boolean } } = {

@@ -3,10 +3,11 @@ import { Theme } from "@nativescript/theme";
 import { isAndroid } from 'tns-core-modules/platform';
 import * as firebase from 'nativescript-plugin-firebase';
 import {getString, setString, hasKey, remove} from 'tns-core-modules/application-settings';
-import { SelectedIndexChangedEventData, TabStripItemEventData } from "tns-core-modules/ui/bottom-navigation";
+import { SelectedIndexChangedEventData, TabStripItemEventData, tabStripProperty } from "tns-core-modules/ui/bottom-navigation";
 import { RouterExtensions } from "nativescript-angular/router";
 import {alert} from "tns-core-modules/ui/dialogs";
 import {AnimationCurve} from "tns-core-modules/ui/enums";
+import {Page} from "tns-core-modules/ui/page";
 
 @Component({
     selector: 'app-ns',
@@ -19,7 +20,10 @@ export class AppComponent implements OnInit {
     currentIndex = -1;
     themeMode = "unknown"
 
-    constructor(private routerExtensions: RouterExtensions) {
+    constructor(
+        private routerExtensions: RouterExtensions,
+        private page: Page
+    ) {
         // Use the component constructor to inject providers.
     }
 

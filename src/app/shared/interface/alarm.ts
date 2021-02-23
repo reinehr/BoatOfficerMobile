@@ -22,6 +22,19 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
     ]
 };
 
+export const cableSettingsDatatypeMap: { [dataTypeKey: string]: { [index: number]: {value: string, name: string} } } = {
+    external_voltage_cable: {
+        0: {value: 'NONE', name: localize('none')},
+        1: {value: 'SINGLE', name: localize('one battery')},
+        2: {value: 'DOUBLE', name: localize('two batteries')},
+        3: {value: 'USB', name: localize('usb charger')},
+    },
+    multisensor_cable: {
+        0: {value: 'NONE', name: localize('none')},
+        1: {value: 'WATER', name: localize('water detection')},
+    },
+}
+
 export const alarmSettingsDatatypeMap: { [dataTypeKey: string]: { [ttnValue: string]: {value: number, unit: string, name: string} } } = {
     shock: {
         0: {value: 0, unit: '', name: localize('off')},

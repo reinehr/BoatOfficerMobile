@@ -28,6 +28,8 @@ export interface DeviceAlarmDataFormat {
     'harbour_contact': string;
     'berth': string;
     'url_key': string;
+    'external_voltage_cable': string;
+    'multisensor_cable': string;
     'role': string;
     'lifeguard': boolean;
     'num_candidate': number;

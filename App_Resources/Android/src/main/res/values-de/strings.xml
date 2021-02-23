@@ -96,6 +96,7 @@
   <string name="Save">"Speichern"</string>
   <string name="_Contact_number_Z1MVijQ">"Kontaktnummer"</string>
   <string name="_EDIT_USERS_2dTwgU">"NUTZER BEARBEITEN"</string>
+  <string name="_EDIT_CABLE_SETTINGS_Z1M9nRG">"SENSOREINSTELLUNGEN BEARBEITEN"</string>
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"GERÄTEEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_EDIT_ALARM_SETTINGS_190vuB">"ALARMEINSTELLUNGEN BEARBEITEN"</string>
   <string name="_____EDIT_SETTINGS_____ZePiMy">""</string>
@@ -147,6 +148,13 @@
   <string name="_Serial_Number_8rO9v">"Seriennummer"</string>
   <string name="INFORMATION">"INFORMATIONEN"</string>
   <string name="Picture">"Bild"</string>
+  <string name="WATER">"Wassereinbruchsensor"</string>
+  <string name="USB">"USB-Ladekabel"</string>
+  <string name="DOUBLE">"Kabel für zwei Batt."</string>
+  <string name="SINGLE">"Kabel für eine Batt."</string>
+  <string name="NONE">"kein Kabel angeschl."</string>
+  <string name="Multisensor">"Multisensor"</string>
+  <string name="_External_battery_Z14Cw8h">"Externe Spannungen"</string>
   <string name="_no_contact_number_Z29h9yB">"Keine Kontaktnummer"</string>
   <string name="_Harbour_Contact_ZOpY64">"Hafenkontakt"</string>
   <string name="_no_berth_ZXDVru">"kein Liegeplatz"</string>
@@ -178,6 +186,7 @@
   <string name="_High_Voltage_2_Level_Z2n4eHo">"Maximale Spannung 2"</string>
   <string name="_Low_Voltage_1_Level_Z1gsbol">"Minimale Spannung 1"</string>
   <string name="_High_Voltage_1_Level_1E1QWR">"Maximale Spannung 1"</string>
+  <string name="_CABLE_SETTINGS_Z1fUn3g">"SENSOR EINSTELLUNGEN"</string>
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM EINSTELLUNGEN"</string>
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOOT EINSTELLUNGEN"</string>
   <string name="Back">"Zurück"</string>
@@ -204,8 +213,10 @@
   <string name="_Intern_Temperature_ZF40Gb">"Interne Temperatur"</string>
   <string name="_Charging_active_ZbDBT5">"Akku wird geladen"</string>
   <string name="_Voltage_Intern_Battery_Z1PhXWl">"Spannung interner Akku"</string>
+  <string name="_Voltage_USB_1AaAy1">"Spannung USB"</string>
   <string name="_Voltage_Extern_Battery_2_ttEbs">"Spannung Boot-Batterie 2"</string>
   <string name="_Voltage_Extern_Battery_1_ttEbr">"Spannung Boot-Batterie 1"</string>
+  <string name="_Voltage_Extern_Battery_2a36oe">"Spannung Boot-Batterie"</string>
   <string name="Updated">"Aktualisiert"</string>
   <string name="Time">"Zeit"</string>
   <string name="SENSORS">"SENSOREN"</string>

@@ -32,8 +32,8 @@ export class LogoutComponent implements OnInit {
 
     saveForm() {
         this.isLoading = true;
+        this.authService.logout();
         this.apiService.logout().subscribe(resData => {
-            this.authService.logout();
             const options = {
                 title: localize('Logout successful'),
                 okButtonText: 'OK'

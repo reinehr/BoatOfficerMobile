@@ -111,6 +111,22 @@
     background-color: #d3d3d3;
 }
 
+.sub-title-bar-top {
+    width: 100%;
+    padding: 5px;
+    line-height: 100%;
+    vertical-align: middle;
+    text-align: center;
+    color: #091524;
+    font-size: 16pt;
+    background-color: #d3d3d3;
+}
+
+.sub-title-bar {
+    @extend .sub-title-bar-top;
+    margin-top: 10;
+}
+
 .alarm-card {
     background-color: white;
     padding: 5,10,10,10;

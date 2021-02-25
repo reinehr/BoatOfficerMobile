@@ -7,11 +7,10 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView>
         <StackLayout class="page__content">
-            <Button *ngIf="!hasKey" marginTop="10"
-                    text="{{'Log in' | L}}"
-                    class="alarm-button"
-                    nsRouterLink="../auth"
-                    pageTransition="slideLeft"></Button>
+            <GridLayout class="sub-title-bar-top" columns="10, *, 10" rows="45"
+                        *ngIf="hasKey">
+                <Label col="1" class="" text="{{'Devices' | L}}"></Label>
+            </GridLayout>
             <Button *ngIf="hasKey" marginTop="10"
                     text="{{'Register new device' | L}}"
                     class="alarm-button"
@@ -21,6 +20,29 @@
                     text="{{'Sign on a Boat' | L}}"
                     class="alarm-button"
                     nsRouterLink="../signonaboat"
+                    pageTransition="slideLeft"></Button>
+            <GridLayout class="sub-title-bar-top" columns="10, *, 10" rows="45"
+                        *ngIf="!hasKey">
+                <Label col="1" class="" text="{{'Account' | L}}"></Label>
+            </GridLayout>
+            <GridLayout class="sub-title-bar" columns="10, *, 10" rows="45"
+                        *ngIf="hasKey">
+                <Label col="1" class="" text="{{'Account' | L}}"></Label>
+            </GridLayout>
+            <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
+                <TextView color="black" *ngIf="hasEmail"
+                          [text]="'You are logged in as' | L: email"
+                ></TextView>
+            </StackLayout>
+            <Button *ngIf="!hasKey" marginTop="10"
+                    text="{{'Log in' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../auth"
+                    pageTransition="slideLeft"></Button>
+            <Button *ngIf="hasKey" marginTop="10"
+                    text="{{'Edit personal data' | L}}"
+                    class="alarm-button"
+                    nsRouterLink="../editpersonaldata"
                     pageTransition="slideLeft"></Button>
             <Button *ngIf="hasKey" marginTop="10"
                     text="{{'Buy pro version' | L}}"
@@ -32,21 +54,16 @@
                     class="alarm-button"
                     nsRouterLink="../logout"
                     pageTransition="slideLeft"></Button>
+            <GridLayout class="sub-title-bar" columns="10, *, 10" rows="45">
+                <Label col="1" class="" text="{{'Miscellaneous' | L}}"></Label>
+            </GridLayout>
             <Button marginTop="10"
                     text="{{'Impressum' | L}}"
                     class="alarm-button"
                     nsRouterLink="../impressum"
                     pageTransition="slideLeft"></Button>
-            <StackLayout android:class="alarm-card" ios:class="alarm-card-home" marginTop="10" paddingTop="15" *ngIf="hasEmail">
-                <TextView color="black" *ngIf="hasEmail"
-                        [text]="'You are logged in as' | L: email"
-                ></TextView>
-            </StackLayout>
-            <Button *ngIf="hasKey" marginTop="10"
-                    text="{{'Edit personal data' | L}}"
-                    class="alarm-button"
-                    nsRouterLink="../editpersonaldata"
-                    pageTransition="slideLeft"></Button>
+
+
             <Button marginTop="10"
                     text="{{'Show TTN Mapper' | L}}"
                     class="alarm-button"

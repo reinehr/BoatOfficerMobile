@@ -193,6 +193,9 @@
 
   "### SETTINGS ###": "",
   "SETTINGS": "EINSTELLUNGEN",
+  "Devices": "Geräte",
+  "Account": "Account",
+  "Miscellaneous": "Verschiedenes",
   "Register new device": "Neues Gerät registrieren",
   "Sign on a Boat": "Auf einem Boot anheuern",
   "You are logged in as": "Du bist als %s angemeldet",

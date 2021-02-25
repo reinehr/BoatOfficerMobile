@@ -11,11 +11,13 @@
   <string name="_Terms_of_Use_17jxBW">"Terms of Use"</string>
   <string name="Impressum">"Imprint"</string>
   <string name="IMPRESSUM">"IMPRINT"</string>
-  <string name="_That_s_included_oeFzz">"With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes."</string>
+  <string name="_That_is_included_Z2wFRPY">"With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 12 months in the past.\n2.: You can give other users access to your BoatOfficer as \"Guardians\" (up to 5x) or \"Sailors\" (up to 10x). They will then also see the extended history.\n3.: You can decrease the update interval for position and sensor data to 5 minutes."</string>
   <string name="_What_is_included_ISxuJ">"What\'s included?"</string>
   <string name="_Disclaimer_Recurring_Abo_Zmfdfh">"These subscriptions are automatically renewed after they have expired unless canceled beforehand."</string>
   <string name="_com_boatofficer_boatofficermobile_abo_year_interval_206wvw">"Year"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q">"Month"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_localizedDescription_ZlDEtg">"Extended functionality and data history"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_localizedDescription_1gAOL4">"Extended functionality and data history"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo">"Annual subscription (recurring)"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm">"Monthly subscription (recurring)"</string>
   <string name="PURCHASE">"BOATOFFICER PRO"</string>

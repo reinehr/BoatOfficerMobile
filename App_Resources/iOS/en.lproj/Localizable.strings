@@ -9,11 +9,13 @@
 "_Terms_of_Use_17jxBW" = "Terms of Use";
 "Impressum" = "Imprint";
 "IMPRESSUM" = "IMPRINT";
-"_That_s_included_oeFzz" = "With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 3 months in the past.\n2.: You can decrease the update interval for position and sensor data to 5 minutes.";
+"_That_is_included_Z2wFRPY" = "With the Pro subscription you get the following extensions for all BoatOfficer devices that you have registered:\n1.: You can view all sensor data and position data up to 12 months in the past.\n2.: You can give other users access to your BoatOfficer as \"Guardians\" (up to 5x) or \"Sailors\" (up to 10x). They will then also see the extended history.\n3.: You can decrease the update interval for position and sensor data to 5 minutes.";
 "_What_is_included_ISxuJ" = "What's included?";
 "_Disclaimer_Recurring_Abo_Zmfdfh" = "These subscriptions are automatically renewed after they have expired unless canceled beforehand.";
 "_com_boatofficer_boatofficermobile_abo_year_interval_206wvw" = "Year";
 "_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q" = "Month";
+"_com_boatofficer_boatofficermobile_abo_year_localizedDescription_ZlDEtg" = "Extended functionality and data history";
+"_com_boatofficer_boatofficermobile_abo_month_localizedDescription_1gAOL4" = "Extended functionality and data history";
 "_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo" = "Annual subscription (recurring)";
 "_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm" = "Monthly subscription (recurring)";
 "PURCHASE" = "BOATOFFICER PRO";
@@ -94,6 +96,7 @@
 "Save" = "Save";
 "_Contact_number_Z1MVijQ" = "Contact number";
 "_EDIT_USERS_2dTwgU" = "EDIT USERS";
+"_EDIT_CABLE_SETTINGS_Z1M9nRG" = "EDIT CABLE SETTINGS";
 "_EDIT_DEVICE_SETTINGS_Z1uqdFy" = "EDIT DEVICE SETTINGS";
 "_EDIT_ALARM_SETTINGS_190vuB" = "EDIT ALARM SETTINGS";
 "_____EDIT_SETTINGS_____ZePiMy" = "";
@@ -145,6 +148,13 @@
 "_Serial_Number_8rO9v" = "Serial Number";
 "INFORMATION" = "INFORMATION";
 "Picture" = "Picture";
+"WATER" = "water ingress sensor";
+"USB" = "USB charging cable";
+"DOUBLE" = "two batteries";
+"SINGLE" = "single battery cable";
+"NONE" = "no cable connected";
+"Multisensor" = "Multisensor";
+"_External_battery_Z14Cw8h" = "External voltage";
 "_no_contact_number_Z29h9yB" = "no contact number";
 "_Harbour_Contact_ZOpY64" = "Harbour Contact";
 "_no_berth_ZXDVru" = "no berth";
@@ -176,6 +186,7 @@
 "_High_Voltage_2_Level_Z2n4eHo" = "High Voltage 2 Level";
 "_Low_Voltage_1_Level_Z1gsbol" = "Low Voltage 1 Level";
 "_High_Voltage_1_Level_1E1QWR" = "High Voltage 1 Level";
+"_CABLE_SETTINGS_Z1fUn3g" = "CABLE SETTINGS";
 "_ALARM_SETTINGS_1Fewk2" = "ALARM SETTINGS";
 "_BOAT_SETTINGS_ZCbOd5" = "BOAT SETTINGS";
 "Back" = "Back";
@@ -202,8 +213,10 @@
 "_Intern_Temperature_ZF40Gb" = "Intern Temperature";
 "_Charging_active_ZbDBT5" = "Charging active";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Voltage Intern Battery";
+"_Voltage_USB_1AaAy1" = "Voltage USB";
 "_Voltage_Extern_Battery_2_ttEbs" = "Voltage Boat Battery 2";
 "_Voltage_Extern_Battery_1_ttEbr" = "Voltage Boat Battery 1";
+"_Voltage_Extern_Battery_2a36oe" = "Voltage Boat Battery";
 "Updated" = "Updated";
 "Time" = "Time";
 "SENSORS" = "SENSORS";

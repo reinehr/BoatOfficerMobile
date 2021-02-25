@@ -9,11 +9,13 @@
 "_Terms_of_Use_17jxBW" = "Nutzungsbedingungen";
 "Impressum" = "Impressum";
 "IMPRESSUM" = "IMPRESSUM";
-"_That_s_included_oeFzz" = "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. ";
+"_That_is_included_Z2wFRPY" = "Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 12 Monate in die Vergangenheit einsehen. \n2.: Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. ";
 "_What_is_included_ISxuJ" = "Was bekomme ich dafür?";
 "_Disclaimer_Recurring_Abo_Zmfdfh" = "Diese Abos verlängern sich nach Ablauf automatisch, sofern sie nicht vorher gekündigt werden.";
 "_com_boatofficer_boatofficermobile_abo_year_interval_206wvw" = "Jahr";
 "_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q" = "Monat";
+"_com_boatofficer_boatofficermobile_abo_year_localizedDescription_ZlDEtg" = "Erweiterte Funktionalität und Historie";
+"_com_boatofficer_boatofficermobile_abo_month_localizedDescription_1gAOL4" = "Erweiterte Funktionalität und Historie";
 "_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo" = "Jahresabo (wiederkehrend)";
 "_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm" = "Monatsabo (wiederkehrend)";
 "PURCHASE" = "BOATOFFICER PRO";
@@ -94,6 +96,7 @@
 "Save" = "Speichern";
 "_Contact_number_Z1MVijQ" = "Kontaktnummer";
 "_EDIT_USERS_2dTwgU" = "NUTZER BEARBEITEN";
+"_EDIT_CABLE_SETTINGS_Z1M9nRG" = "SENSOREINSTELLUNGEN BEARBEITEN";
 "_EDIT_DEVICE_SETTINGS_Z1uqdFy" = "GERÄTEEINSTELLUNGEN BEARBEITEN";
 "_EDIT_ALARM_SETTINGS_190vuB" = "ALARMEINSTELLUNGEN BEARBEITEN";
 "_____EDIT_SETTINGS_____ZePiMy" = "";
@@ -145,6 +148,13 @@
 "_Serial_Number_8rO9v" = "Seriennummer";
 "INFORMATION" = "INFORMATIONEN";
 "Picture" = "Bild";
+"WATER" = "Wassereinbruchsensor";
+"USB" = "USB-Ladekabel";
+"DOUBLE" = "Kabel für zwei Batt.";
+"SINGLE" = "Kabel für eine Batt.";
+"NONE" = "kein Kabel angeschl.";
+"Multisensor" = "Multisensor";
+"_External_battery_Z14Cw8h" = "Externe Spannungen";
 "_no_contact_number_Z29h9yB" = "Keine Kontaktnummer";
 "_Harbour_Contact_ZOpY64" = "Hafenkontakt";
 "_no_berth_ZXDVru" = "kein Liegeplatz";
@@ -176,6 +186,7 @@
 "_High_Voltage_2_Level_Z2n4eHo" = "Maximale Spannung 2";
 "_Low_Voltage_1_Level_Z1gsbol" = "Minimale Spannung 1";
 "_High_Voltage_1_Level_1E1QWR" = "Maximale Spannung 1";
+"_CABLE_SETTINGS_Z1fUn3g" = "SENSOR EINSTELLUNGEN";
 "_ALARM_SETTINGS_1Fewk2" = "ALARM EINSTELLUNGEN";
 "_BOAT_SETTINGS_ZCbOd5" = "BOOT EINSTELLUNGEN";
 "Back" = "Zurück";
@@ -202,8 +213,10 @@
 "_Intern_Temperature_ZF40Gb" = "Interne Temperatur";
 "_Charging_active_ZbDBT5" = "Akku wird geladen";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Spannung interner Akku";
+"_Voltage_USB_1AaAy1" = "Spannung USB";
 "_Voltage_Extern_Battery_2_ttEbs" = "Spannung Boot-Batterie 2";
 "_Voltage_Extern_Battery_1_ttEbr" = "Spannung Boot-Batterie 1";
+"_Voltage_Extern_Battery_2a36oe" = "Spannung Boot-Batterie";
 "Updated" = "Aktualisiert";
 "Time" = "Zeit";
 "SENSORS" = "SENSOREN";

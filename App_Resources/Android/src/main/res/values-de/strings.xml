@@ -11,11 +11,13 @@
   <string name="_Terms_of_Use_17jxBW">"Nutzungsbedingungen"</string>
   <string name="Impressum">"Impressum"</string>
   <string name="IMPRESSUM">"IMPRESSUM"</string>
-  <string name="_That_s_included_oeFzz">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 3 Monate in die Vergangenheit einsehen. \n2.: (Das ist in der aktuellen App-Version noch nicht möglich, kommt aber ganz bald.) Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie, wenn Du es ihnen erlaubst.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. "</string>
+  <string name="_That_is_included_Z2wFRPY">"Mit dem Pro-Abo bekommst du für alle BoatOfficer-Geräte, die du registriert hast, folgende Erweiterungen: \n1.: Du kannst alle Sensordaten und Positionsdaten bis 12 Monate in die Vergangenheit einsehen. \n2.: Du kannst anderen Benutzern als \"Wächter\" (bis zu 5x) oder \"Segler\" (bis zu 10x) Zugriff auf deinen BoatOfficer geben. Diese sehen dann auch die erweiterte Historie.\n3.: Du kannst das Update-Intervall für Positions- und Sensordaten auf 5 Minuten verringern. "</string>
   <string name="_What_is_included_ISxuJ">"Was bekomme ich dafür?"</string>
   <string name="_Disclaimer_Recurring_Abo_Zmfdfh">"Diese Abos verlängern sich nach Ablauf automatisch, sofern sie nicht vorher gekündigt werden."</string>
   <string name="_com_boatofficer_boatofficermobile_abo_year_interval_206wvw">"Jahr"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_month_interval_2tWS9q">"Monat"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_year_localizedDescription_ZlDEtg">"Erweiterte Funktionalität und Historie"</string>
+  <string name="_com_boatofficer_boatofficermobile_abo_month_localizedDescription_1gAOL4">"Erweiterte Funktionalität und Historie"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_year_localizedTitle_2admMo">"Jahresabo (wiederkehrend)"</string>
   <string name="_com_boatofficer_boatofficermobile_abo_month_localizedTitle_1XhChm">"Monatsabo (wiederkehrend)"</string>
   <string name="PURCHASE">"BOATOFFICER PRO"</string>

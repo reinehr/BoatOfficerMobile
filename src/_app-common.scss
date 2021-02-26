@@ -143,6 +143,13 @@
     margin-bottom: 0;
 }
 
+.row-item-with-top-border {
+    padding-top: 5;
+    padding-bottom: 5;
+    border-top-color: #d3d3d3;
+    border-top-width: 1;
+}
+
 $buttons_count: 6;
 .interval-button {
     margin-left: calc((5%)/#{$buttons_count});

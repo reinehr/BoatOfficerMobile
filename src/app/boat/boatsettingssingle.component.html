@@ -16,29 +16,25 @@
                     <StackLayout>
                         <Label text="{{'CABLE SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout rows="*" columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'external_voltage_cable'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'External battery' | L}}"
+                                <Label col="1" text="{{'External battery' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.external_voltage_cable | L"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout rows="*" columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'multisensor_cable'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Multisensor' | L}}"
+                                <Label col="1" text="{{'Multisensor' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.multisensor_cable | L"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
@@ -54,19 +50,17 @@
                                 <StackLayout *ngIf="alarmSettingsMap[field]">
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="dataService.alarmSettings[device.id][alarm.key]">
-                                            <GridLayout rows="5,*" columns="5,40,*,80,5" paddingBottom="5"
+                                            <GridLayout columns="40,*,80" class="row-item-with-top-border"
                                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editalarmsettings', device.id, field, index] : []">
-                                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                                            borderTopColor="#d3d3d3"></GridLayout>
-                                                <Label col=1 row=1 [text]="alarm.icon"
+                                                <Label col="0" [text]="alarm.icon"
                                                        [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
-                                                <Label col="2" row="1" [text]="alarm.name | L"
+                                                <Label col="1"  [text]="alarm.name | L"
                                                        class="alarm-blue font-weight-bold"
                                                        verticalAlignment="center"></Label>
-                                                <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"
+                                                <Label col="2"  *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"
                                                        [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"
                                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
-                                                <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"
+                                                <Label col="2"  *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"
                                                        [text]="(alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit | L)"
                                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                                             </GridLayout>
@@ -92,65 +86,57 @@
                     <StackLayout>
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'name'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text="O"
+                                <Label col="0" text="O"
                                        class="alarm-symbol-s alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Boat Name' | L}}"
+                                <Label col="1"  text="{{'Boat Name' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="!device.name"
+                                <Label col="2"  *ngIf="!device.name"
                                        text="{{'no boat name' | L}}"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.name"
+                                <Label col="2"  *ngIf="device.name"
                                        [text]="device.name"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'berth'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0"  text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Berth' | L}}"
+                                <Label col="1"  text="{{'Berth' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="!device.berth"
+                                <Label col="2"  *ngIf="!device.berth"
                                        text="{{'no berth' | L}}"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.berth"
+                                <Label col="2"  *ngIf="device.berth"
                                        [text]="device.berth"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editdevicesettings', idDevice, 'contact'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text="T"
+                                <Label col="0" text="T"
                                        class="alarm-symbol-s alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Harbour Contact' | L}}"
+                                <Label col="1" text="{{'Harbour Contact' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="!device.harbour_contact"
+                                <Label col="2" *ngIf="!device.harbour_contact"
                                        text="{{'no contact number' | L}}"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.harbour_contact"
+                                <Label col="2" *ngIf="device.harbour_contact"
                                        [text]="device.harbour_contact"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,100,*,5" paddingBottom="5"
+                            <GridLayout columns="40,100,*" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' ? ['../../uploadpicture', device.id] : []"
                                         pageTransition="slideLeft" *ngIf="(device.role == 'officer')">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 [text]="'i'"
+                                <Label col="0" [text]="'i'"
                                        [class]="'alarm-symbol-bo alarm-gray'"></Label>
-                                <Label col="2" row="1" [text]="'Picture' | L"
+                                <Label col="1" [text]="'Picture' | L"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Image col="3" row="1" *ngIf="device.boat_image_small && device.boat_image_small != 'null'"
+                                <Image col="2" *ngIf="device.boat_image_small && device.boat_image_small != 'null'"
                                        [src]="'' + device.boat_image_small"
                                        class="boatoffice-boat-image"></Image>
                             </GridLayout>
@@ -164,41 +150,35 @@
                     <StackLayout>
                         <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         *ngIf="(device.role == 'officer' || device.role == 'guard')">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Serial Number' | L}}"
+                                <Label col="1" text="{{'Serial Number' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.serial_number_dec"
+                                <Label col="2" *ngIf="device.serial_number_dec"
                                        [text]="device.serial_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border">
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Firmware Version' | L}}"
+                                <Label col="1" text="{{'Firmware Version' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.firmware_version_str"
+                                <Label col="2" *ngIf="device.firmware_version_str"
                                        [text]="device.firmware_version_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         *ngIf="(device.role == 'officer' || device.role == 'guard')">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Product Number' | L}}"
+                                <Label col="1" text="{{'Product Number' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1" *ngIf="device.product_number_str"
+                                <Label col="2" *ngIf="device.product_number_str"
                                        [text]="device.product_number_str"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
@@ -210,73 +190,61 @@
                     <StackLayout>
                         <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border">
+                                <Label col="0" text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Captain' | L}}"
+                                <Label col="1" text="{{'Captain' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="((device.device_officer.firstname || device.device_officer.name) ? device.device_officer.firstname + ' ' + device.device_officer.name : device.device_officer.email)"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         *ngIf="device.role == 'officer' && 0 != device.num_candidate"
                                         [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'candidate'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0"  text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Requests' | L}}"
+                                <Label col="1"  text="{{'Requests' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.num_candidate"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'guard'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0"  text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Guards' | L}}"
+                                <Label col="1"  text="{{'Guards' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.num_guard"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,150,5" paddingBottom="5"
+                            <GridLayout columns="40,*,150" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'sailor'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0"  text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{'Sailors' | L}}"
+                                <Label col="1"  text="{{'Sailors' | L}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.num_sailor"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-                            <GridLayout rows="5,*" columns="5,40,*,50,5" paddingBottom="5"
+                            <GridLayout columns="40,*,50" class="row-item-with-top-border"
                                         [nsRouterLink]="device.role == 'officer' ? ['../../editusers', idDevice, 'lifeguard'] : []">
-                                <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                            borderTopColor="#d3d3d3"></GridLayout>
-                                <Label col=1 row=1 text=""
+                                <Label col="0"  text=""
                                        class="alarm-symbol-fas alarm-gray"></Label>
-                                <Label col="2" row="1" text="{{('Lifeguards' | L) + (device.lifeguard ? ' (' + ('You are included' | L) + ')' : (''))}}"
+                                <Label col="1"  text="{{('Lifeguards' | L) + (device.lifeguard ? ' (' + ('You are included' | L) + ')' : (''))}}"
                                        class="alarm-blue font-weight-bold"
                                        verticalAlignment="center"></Label>
-                                <Label col="3" row="1"
+                                <Label col="2"
                                        [text]="device.num_lifeguard"
                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                             </GridLayout>
-
-
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>

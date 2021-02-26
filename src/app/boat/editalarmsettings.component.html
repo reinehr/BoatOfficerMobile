@@ -11,12 +11,10 @@
             <StackLayout *ngIf="alarmSettingsMap[field]">
                 <StackLayout *ngFor="let alarm of [alarmSettingsMap[field][idAlarm]]; let index = index">
                     <StackLayout *ngIf="dataService.alarmSettings[idDevice][alarm.key]">
-                        <GridLayout rows="5,*" columns="5,40,*,120,5" paddingBottom="10">
-                            <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                        borderTopColor="#d3d3d3"></GridLayout>
-                            <Label col=1 row=1 [text]="alarm.icon"
+                        <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
+                            <Label col="0" row="0" [text]="alarm.icon"
                                    [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
-                            <Label col="2" row="1" [text]="alarm.name | L"
+                            <Label col="1" row="0" [text]="alarm.name | L"
                                    class="alarm-blue font-weight-bold"
                                    verticalAlignment="center"></Label>
                             <!--                                            <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"-->
@@ -25,7 +23,7 @@
                             <!--                                            <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"-->
                             <!--                                                   [text]="alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name + ' ' + alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit"-->
                             <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
-                            <ListPicker #picker col="3" row="1" [width]="listPickerWidth" [minWidth]="listPickerWidth"
+                            <ListPicker #picker col="0" row="1" colSpan="2" [width]="listPickerWidth" [minWidth]="listPickerWidth"
                                         [items]="listPicker"
                                         [selectedIndex]="originalAlarmSettingIndex"
                                         [(ngModel)]="originalAlarmSettingIndex"
@@ -46,7 +44,7 @@
     </StackLayout>
     <StackLayout>
         <StackLayout>
-            <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveAlarmSetting()"></Button>
+            <Button text="{{'Save' | L}}" class="alarm-button" (tap)="saveAlarmSetting()"></Button>
         </StackLayout>
     </StackLayout>
 </StackLayout>

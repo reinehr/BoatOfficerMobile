@@ -41,7 +41,7 @@ export class EditdevicesettingsComponent implements OnInit {
     originalCableSettingIndex = 0;
     selectedListPickerIndex = 0;
     selectedCableValue = '';
-    listPickerWidth = 150;
+    listPickerWidth = 400;
 
 
     ngOnInit(): void {

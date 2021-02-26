@@ -44,7 +44,7 @@ export class MapdetailsComponent implements OnInit {
 
     latitude = -23.86;
     longitude = 151.20;
-    zoom = 12;
+    zoom = 13;
     minZoom = 0;
     maxZoom = 22;
     bearing = 0;

@@ -87,6 +87,9 @@
   <string name="_You_are_logged_in_as_Z1GEmEn">"You are logged in as %1$s"</string>
   <string name="_Sign_on_a_Boat_ZIAXjF">"Sign on a Boat"</string>
   <string name="_Register_new_device_1xIGNi">"Register new device"</string>
+  <string name="Miscellaneous">"Miscellaneous"</string>
+  <string name="Account">"Account"</string>
+  <string name="Devices">"Devices"</string>
   <string name="SETTINGS">"SETTINGS"</string>
   <string name="_____SETTINGS_____2rJ01w">""</string>
   <string name="_Upload_complete_ZM2kiM">"Upload complete"</string>

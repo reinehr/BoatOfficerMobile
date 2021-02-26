@@ -87,6 +87,9 @@
   <string name="_You_are_logged_in_as_Z1GEmEn">"Du bist als %1$s angemeldet"</string>
   <string name="_Sign_on_a_Boat_ZIAXjF">"Auf einem Boot anheuern"</string>
   <string name="_Register_new_device_1xIGNi">"Neues Gerät registrieren"</string>
+  <string name="Miscellaneous">"Verschiedenes"</string>
+  <string name="Account">"Account"</string>
+  <string name="Devices">"Geräte"</string>
   <string name="SETTINGS">"EINSTELLUNGEN"</string>
   <string name="_____SETTINGS_____2rJ01w">""</string>
   <string name="_Upload_complete_ZM2kiM">"Upload fertig"</string>

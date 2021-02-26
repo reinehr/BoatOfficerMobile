@@ -143,9 +143,15 @@
     margin-bottom: 0;
 }
 
+.weather-row {
+    padding-left: 10;
+    padding-right: 10;
+    vertical-align: middle;
+}
+
 .alarm-card-simple-title {
-    margin-top: 10;
-    margin-bottom: 10;
+    margin-top: 8;
+    margin-bottom: 8;
     padding-left: 10;
     padding-right: 10;
     vertical-align: middle;
@@ -220,10 +226,6 @@ $buttons_count: 6;
     font-size: 16pt;
 }
 
-.map-home {
-    margin: 0,30,0,30;
-}
-
 .boat-name {
     background-color: #091524;
     color: white;
@@ -289,6 +291,11 @@ $buttons_count: 6;
     font-size: 14px;
     text-align: left;
     vertical-align: bottom;
+    margin: 0,20,7,20;
+}
+
+.map-grid .text-overlay-bottom-left {
+    @extend .text-overlay-bottom-left;
     margin: 0,10,7,10;
 }
 

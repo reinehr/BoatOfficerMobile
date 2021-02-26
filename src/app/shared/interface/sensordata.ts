@@ -30,6 +30,8 @@ export interface WebcamData {
     'latitude': number,
     'longitude': number,
     'url': string,
+    'source_name': string,
+    'source_url': string,
     'distance': string,
 }
 

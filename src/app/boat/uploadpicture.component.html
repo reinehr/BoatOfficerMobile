@@ -6,8 +6,8 @@
 
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
 
-    <Button row="0" text="{{'Pick Image' | L}}" (tap)="onSelectSingleTap()" horizontalAlignment="center" class="alarm-button"></Button>
+    <Button row="0" text="{{'Pick Image' | L}}" (tap)="onSelectSingleTap()" horizontalAlignment="center" class="alarm-button" marginTop="10"></Button>
     <Image row="1" [src]="imageSrc" [width]="previewSize" [height]="previewSize" stretch="aspectFit"></Image>
-    <Button row="2" text="{{'Upload Image' || L}}" (tap)="onUploadTap()" horizontalAlignment="center" class="alarm-button alarm-green" *ngIf="imageSrc"></Button>
+    <Button row="2" text="{{'Upload Image' || L}}" (tap)="onUploadTap()" horizontalAlignment="center" class="alarm-button" *ngIf="imageSrc"></Button>
 <!--    <Label [text]="status" class="alarm-card" horizontalAlignment="center"></Label>-->
 </StackLayout>

@@ -143,11 +143,32 @@
     margin-bottom: 0;
 }
 
+.alarm-card-simple-title {
+    margin-top: 10;
+    margin-bottom: 10;
+    padding-left: 10;
+    padding-right: 10;
+    vertical-align: middle;
+}
+
+.alarm-card-4segments-title {
+    margin-top: 10;
+    margin-bottom: 10;
+    padding-left: 10;
+    padding-right: 10;
+    vertical-align: middle;
+}
+
 .row-item-with-top-border {
-    padding-top: 5;
-    padding-bottom: 5;
+    padding: 5, 10, 5, 10;
     border-top-color: #d3d3d3;
     border-top-width: 1;
+    vertical-align: middle;
+}
+
+.row-item-with-top-border .alarm-symbol, .row-item-with-top-border .alarm-symbol-fas, .row-item-with-top-border .alarm-symbol-bo, .row-item-with-top-border .alarm-symbol-fas-small, .row-item-with-top-border .alarm-symbol-weather, .row-item-with-top-border .alarm-symbol-s
+{
+    text-align: left;
 }
 
 $buttons_count: 6;

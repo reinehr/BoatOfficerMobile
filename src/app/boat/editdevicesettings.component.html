@@ -33,16 +33,14 @@
     <StackLayout class="alarm-card" *ngIf="cableSettingsDatatypeMap[field]" height="200">
         <StackLayout>
             <Label text="{{'EDIT CABLE SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
-            <StackLayout class="input-field" padding="10, 10, 0, 10">
-                <GridLayout rows="5,*" columns="0,40,*,170,0" paddingBottom="10">
-                    <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1"
-                                borderTopColor="#d3d3d3"></GridLayout>
-                    <Label col=1 row=1 [text]="icon"
+            <StackLayout class="input-field">
+                <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
+                    <Label col="0" row="0" [text]="icon"
                            [class]="'alarm-symbol-' + iconfont + ' alarm-gray'"></Label>
-                    <Label col="2" row="1" [text]="name | L"
+                    <Label col="1" row="0" [text]="name | L"
                            class="alarm-blue font-weight-bold"
                            verticalAlignment="center"></Label>
-                    <ListPicker #picker col="3" row="1" [width]="listPickerWidth" [minWidth]="listPickerWidth"
+                    <ListPicker #picker col="0" row="1" colSpan="2" [width]="listPickerWidth" [minWidth]="listPickerWidth"
                                 [items]="listPicker"
                                 [selectedIndex]="originalCableSettingIndex"
                                 [(ngModel)]="originalCableSettingIndex"
@@ -51,5 +49,5 @@
             </StackLayout>
         </StackLayout>
     </StackLayout>
-    <Button text="{{'Save' | L}}" class="alarm-button alarm-green" (tap)="saveDeviceSetting()"></Button>
+    <Button text="{{'Save' | L}}" class="alarm-button" (tap)="saveDeviceSetting()"></Button>
 </StackLayout>

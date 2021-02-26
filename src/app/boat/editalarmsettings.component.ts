@@ -39,7 +39,7 @@ export class EditalarmsettingsComponent implements OnInit {
     originalAlarmSettingIndex = 0;
     selectedListPickerIndex = 0;
     selectedAlarmValue = 0;
-    listPickerWidth = 50;
+    listPickerWidth = 400;
     selectedIndexAtOpen = 0;
 
 

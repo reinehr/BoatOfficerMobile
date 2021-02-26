@@ -85,6 +85,9 @@
 "_You_are_logged_in_as_Z1GEmEn" = "Du bist als %1$@ angemeldet";
 "_Sign_on_a_Boat_ZIAXjF" = "Auf einem Boot anheuern";
 "_Register_new_device_1xIGNi" = "Neues Gerät registrieren";
+"Miscellaneous" = "Verschiedenes";
+"Account" = "Account";
+"Devices" = "Geräte";
 "SETTINGS" = "EINSTELLUNGEN";
 "_____SETTINGS_____2rJ01w" = "";
 "_Upload_complete_ZM2kiM" = "Upload fertig";

@@ -16,7 +16,6 @@ import {ImpressumComponent} from "~/app/settings/impressum.component";
 import {PurchaseComponent} from "~/app/settings/purchase.component";
 import {EditpersonaldataComponent} from "~/app/settings/editpersonaldata.component";
 import {TtnmapperviewComponent} from "~/app/settings/ttnmapperview.component";
-import {BoatsettingsComponent} from "~/app/boat/boatsettings.component";
 import {BoatsettingssingleComponent} from "~/app/boat/boatsettingssingle.component";
 import {UploadpictureComponent} from "~/app/boat/uploadpicture.component";
 import {SensordetailsComponent} from "~/app/boat/sensordetails.component";
@@ -38,7 +37,6 @@ const routes: Routes = [
     {path: 'alarm', component: AlarmComponent, outlet: 'alarm'},
 
     {path: 'boat', component: BoatComponent, outlet: 'boat'},
-    {path: 'settings', component: BoatsettingsComponent, outlet: 'boat'},
     {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'boat'},
     {path: 'uploadpicture/:idDevice', component: UploadpictureComponent, outlet: 'boat'},
     {path: 'sensordetails/:idDevice/:field', component: SensordetailsComponent, outlet: 'boat'},

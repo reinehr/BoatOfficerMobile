@@ -30,7 +30,6 @@ import {CommonModule} from "@angular/common";
 import {SensordetailsComponent} from "~/app/boat/sensordetails.component";
 import {GpsdetailsComponent} from "~/app/boat/gpsdetails.component";
 import {MapdetailsComponent} from "~/app/boat/mapdetails.component";
-import {BoatsettingsComponent} from "~/app/boat/boatsettings.component";
 import {BoatsettingssingleComponent} from "~/app/boat/boatsettingssingle.component";
 import {UploadpictureComponent} from "~/app/boat/uploadpicture.component";
 import {EditalarmsettingsComponent} from "~/app/boat/editalarmsettings.component";
@@ -80,7 +79,7 @@ export class MyIntl extends TimeagoIntl {
     declarations: [
         AppComponent,
         AlarmComponent,
-        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent,
+        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent,
         HomeComponent, WebcamComponent,
         SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent, TtnmapperviewComponent
     ],

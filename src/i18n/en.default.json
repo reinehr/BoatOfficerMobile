@@ -193,6 +193,9 @@
 
   "### SETTINGS ###": "",
   "SETTINGS": "SETTINGS",
+  "Devices": "Devices",
+  "Account": "Account",
+  "Miscellaneous": "Miscellaneous",
   "Register new device": "Register new device",
   "Sign on a Boat": "Sign on a Boat",
   "You are logged in as": "You are logged in as %s",

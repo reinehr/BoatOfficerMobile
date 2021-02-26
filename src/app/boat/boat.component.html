@@ -48,7 +48,12 @@
                                 <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">
                                     <GridLayout columns="40, *, 40, auto, 10" rows="50, 5" borderTopWidth="1"
                                                 borderTopColor="#d3d3d3"
-                                                *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 || dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 || dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) && dataService.boatStatus[device.id].sensor_data[sensorField] != null && sensorField != 'time'" [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
+                                                *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 ||
+                                                dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 ||
+                                                dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                                                dataService.boatStatus[device.id].sensor_data[sensorField] != null &&
+                                                    sensorField != 'time'"
+                                                [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
                                         <Label col=0 row=0 [text]="dataService.sensorFieldMap[sensorField].icon"
                                                [class]="'alarm-symbol-' + dataService.sensorFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
                                         <Label col=0 row=0 [text]="''" *ngIf="dataService.sensorFieldMap[sensorField].filter == 'ChargingActive' && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active['ChargingActive']"

@@ -1,16 +1,20 @@
-<ActionBar title="{{ 'ALARM HISTORY' | L }}" class="action-bar bg-darkblue">
+<ActionBar title="{{ 'ALARMS' | L }}" class="action-bar bg-darkblue">
     <!--    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back"></NavigationButton>-->
-    <Label text="{{ 'ALARM HISTORY' | L }}" class="alarm-text"
+    <Label text="{{ 'ALARMS' | L }}" class="alarm-text"
            (tap)="toggleAllBoatDetails($event)"></Label>
 
-    <!--    <ActionItem-->
-    <!--            ios.position="right"-->
-    <!--            android.position="right">-->
-    <!--        <Label (tap)="click_gear()"-->
-    <!--               class="alarm-symbol alarm-blue"-->
-    <!--               text="L">-->
-    <!--        </Label>-->
-    <!--    </ActionItem>-->
+    <ActionItem
+            ios.position="right"
+            android.position="right">
+        <Label *ngIf="true == showOnlyOpen"
+                class="alarm-symbol-fas alarm-white"
+               text="" (tap)="onToggleHistoricAlarms()" pageTransition="slideLeft">
+        </Label>
+        <Label *ngIf="false == showOnlyOpen"
+               class="alarm-symbol-fas alarm-blue"
+               text="" (tap)="onToggleHistoricAlarms()" pageTransition="slideLeft">
+        </Label>
+    </ActionItem>
 </ActionBar>
 
 <GridLayout class="homeBackgroundImage"
@@ -19,19 +23,9 @@
         <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
-                    <GridLayout columns="120, *, 100" rows="30, 30" padding="5" class="bg-darkblue"
-                                (tap)="toggleBoatDetails(device.id)">
-                        <GridLayout col="0" row="0" rowSpan="2" marginRight="12"
-                                    *ngIf="device.boat_image_small && device.boat_image_small != 'null'">
-                            <Image [src]="'' + device.boat_image_small"
-                                   class="boatoffice-boat-image"></Image>
-                        </GridLayout>
-                        <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
-                        <Label col="1" row="1" [text]="device.name" class="alarm-blue t-16" height="30"></Label>
-                        <Label col="2" row="0" text="{{ 'only active' | L }}" class="c-white t-16" height="30"></Label>
-                        <Switch col="2" row="1" [checked]="showOnlyOpen" (checkedChange)="onCheckedChange($event)" height="30"
-                                horizontalAlignment="center"></Switch>
-                    </GridLayout>
+                    <StackLayout (tap)="toggleBoatDetails(device.id)">
+                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm" ]></boat-header>
+                    </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="visible">
                         <StackLayout *ngFor="let alarmType of device.keyTypeActive">
                             <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">

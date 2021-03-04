@@ -74,7 +74,6 @@
     vertical-align: center;
 }
 
-
 .boatoffice-boat-image-container{
     width: 100%;
     display: block;
@@ -87,6 +86,17 @@
     border: 1px solid black;
     padding: 0,30,0,30;
 
+}
+
+.alarm-number-circle {
+    color: white;
+    background-color: #fb8b24;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: center;
+    margin-right: 10;
+    width: 35;
+    height: 35;
 }
 
 .boatoffice-boat-image-home {
@@ -144,24 +154,24 @@
 }
 
 .weather-row {
-    padding-left: 10;
-    padding-right: 10;
+    padding-left: 5;
+    padding-right: 5;
     vertical-align: middle;
 }
 
 .alarm-card-simple-title {
     margin-top: 8;
     margin-bottom: 8;
-    padding-left: 10;
-    padding-right: 10;
+    padding-left: 5;
+    padding-right: 5;
     vertical-align: middle;
 }
 
 .alarm-card-4segments-title {
     margin-top: 10;
     margin-bottom: 10;
-    padding-left: 10;
-    padding-right: 10;
+    padding-left: 5;
+    padding-right: 5;
     vertical-align: middle;
 }
 
@@ -291,7 +301,7 @@ $buttons_count: 6;
     font-size: 14px;
     text-align: left;
     vertical-align: bottom;
-    margin: 0,20,7,20;
+    margin: 0,20,7,15;
 }
 
 .map-grid .text-overlay-bottom-left {
@@ -423,6 +433,10 @@ $buttons_count: 6;
 
 .alarm-gray {
     color: #d3d3d3;
+}
+
+.alarm-white {
+    color: #FFFFFF;
 }
 
 .ci-darkblue {

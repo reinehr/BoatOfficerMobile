@@ -114,6 +114,10 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         this.showOnlyOpen = sw.checked;
     }
 
+    onToggleHistoricAlarms(){
+        this.showOnlyOpen = ! this.showOnlyOpen;
+    }
+
     updateAlarmBadge(){
         console.log("Update Alarm Number Badge");
         LocalNotifications.requestPermission().then(

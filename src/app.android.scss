@@ -2,3 +2,15 @@
 @import "app-common";
 
 // Place any CSS rules you want to apply only on Android here
+
+.alarm-number-circle {
+  color: white;
+  background-color: #fb8b24;
+  border-radius: 50%;
+  text-align: center;
+  //vertical-align: center;
+  padding-top: 8;
+  margin-right: 10;
+  width: 40;
+  height: 40;
+}

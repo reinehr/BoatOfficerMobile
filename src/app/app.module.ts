@@ -36,6 +36,7 @@ import {EditalarmsettingsComponent} from "~/app/boat/editalarmsettings.component
 import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.component";
 import {EditusersComponent} from "~/app/boat/editusers.component";
 import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.component";
+import {AlarmCard4segmentsTitleComponent} from "~/app/shared/ui/alarm-card-4segments-title/alarm-card-4segments-title.component";
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
 // import * as GMSServices from 'nativescript-google-maps-sdk';
@@ -80,7 +81,7 @@ export class MyIntl extends TimeagoIntl {
     declarations: [
         AppComponent,
         AlarmComponent,
-        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditinhibitsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent,
+        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditinhibitsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent, AlarmCard4segmentsTitleComponent,
         HomeComponent, WebcamComponent,
         SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent, TtnmapperviewComponent
     ],

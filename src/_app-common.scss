@@ -74,7 +74,6 @@
     vertical-align: center;
 }
 
-
 .boatoffice-boat-image-container{
     width: 100%;
     display: block;
@@ -87,6 +86,17 @@
     border: 1px solid black;
     padding: 0,30,0,30;
 
+}
+
+.alarm-number-circle {
+    color: white;
+    background-color: #fb8b24;
+    border-radius: 50%;
+    text-align: center;
+    vertical-align: center;
+    margin-right: 10;
+    width: 35;
+    height: 35;
 }
 
 .boatoffice-boat-image-home {
@@ -143,11 +153,38 @@
     margin-bottom: 0;
 }
 
+.weather-row {
+    padding-left: 5;
+    padding-right: 5;
+    vertical-align: middle;
+}
+
+.alarm-card-simple-title {
+    margin-top: 8;
+    margin-bottom: 8;
+    padding-left: 5;
+    padding-right: 5;
+    vertical-align: middle;
+}
+
+.alarm-card-4segments-title {
+    margin-top: 10;
+    margin-bottom: 10;
+    padding-left: 5;
+    padding-right: 5;
+    vertical-align: middle;
+}
+
 .row-item-with-top-border {
-    padding-top: 5;
-    padding-bottom: 5;
+    padding: 5, 10, 5, 10;
     border-top-color: #d3d3d3;
     border-top-width: 1;
+    vertical-align: middle;
+}
+
+.row-item-with-top-border .alarm-symbol, .row-item-with-top-border .alarm-symbol-fas, .row-item-with-top-border .alarm-symbol-bo, .row-item-with-top-border .alarm-symbol-fas-small, .row-item-with-top-border .alarm-symbol-weather, .row-item-with-top-border .alarm-symbol-s
+{
+    text-align: left;
 }
 
 $buttons_count: 6;
@@ -197,10 +234,6 @@ $buttons_count: 6;
     background-color: #091524;
     color: #ffffff;
     font-size: 16pt;
-}
-
-.map-home {
-    margin: 0,30,0,30;
 }
 
 .boat-name {
@@ -268,6 +301,11 @@ $buttons_count: 6;
     font-size: 14px;
     text-align: left;
     vertical-align: bottom;
+    margin: 0,20,7,15;
+}
+
+.map-grid .text-overlay-bottom-left {
+    @extend .text-overlay-bottom-left;
     margin: 0,10,7,10;
 }
 
@@ -395,6 +433,10 @@ $buttons_count: 6;
 
 .alarm-gray {
     color: #d3d3d3;
+}
+
+.alarm-white {
+    color: #FFFFFF;
 }
 
 .ci-darkblue {

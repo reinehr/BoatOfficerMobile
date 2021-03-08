@@ -1,4 +1,4 @@
-<GridLayout columns="120, *, 40" rows="30, 30" padding="5" class="bg-darkblue">
+<GridLayout columns="120, *, auto, 40" rows="30, 30" padding="5" class="bg-darkblue">
   <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="boat_image_small && boat_image_small != 'null'">
     <Image [src]="'' + boat_image_small"
            class="boatoffice-boat-image"></Image>
@@ -6,8 +6,12 @@
   <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
   <Label col="1" row="1" [text]="boatname"
          class="alarm-blue t-16" height="30"></Label>
-  <Label col="2" row="0" rowSpan="2" [text]="''"
+  <Label *ngIf="numberOfActiveAlarms && role != 'officer'" col="2" row="0" rowSpan="2" [text]="numberOfActiveAlarms"
+         class="alarm-number-circle t-16 font-weight-bold"></Label>
+  <Label *ngIf="numberOfActiveAlarms && role == 'officer'" col="3" row="0" rowSpan="2" [text]="numberOfActiveAlarms"
+         class="alarm-number-circle t-16 font-weight-bold"></Label>
+  <Label col="3" row="0" rowSpan="2" [text]="''"
          class="user-role-symbol" *ngIf="role == 'sailor'"></Label>
-  <Label col="2" row="0" rowSpan="2" [text]="''"
+  <Label col="3" row="0" rowSpan="2" [text]="''"
          class="user-role-symbol" *ngIf="role == 'guard'"></Label>
 </GridLayout>

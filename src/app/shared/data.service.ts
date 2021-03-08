@@ -9,7 +9,7 @@ import {
     historyInterval,
     WEATHER_ICONS, windSpeedToBeaufort
 } from '~/app/shared/interface/sensordata';
-import {AlarmSettings} from '~/app/shared/interface/alarm';
+import {AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 
 export interface DataItem {
     id: number;
@@ -166,7 +166,9 @@ export class DataService {
     public deviceData: DeviceAlarmDataFormat[];
     activeAlarmByField: { [idDevice: number]: { [sensorFieldKey: string]: boolean } };
     private alarmSettingsSub: Subscription;
+    private alarmInhibitSettingsSub: Subscription;
     alarmSettings: AlarmSettings;
+    alarmInhibitSettings: AlarmInhibitSettings;
     private boatHistorySub: Subscription;
     public boatHistory: BoatHistory;
     historyIntervalData = historyInterval;
@@ -268,6 +270,28 @@ export class DataService {
                     console.log('loading alarmSettings');
                 } else {
                     console.log('no alarmSettings');
+                }
+            }
+        );
+        this.alarmInhibitSettingsSub = this.apiService.alarmInhibitSettings.subscribe(
+            asdata => {
+                if (asdata) {
+                    let now = Date.now();
+                    this.alarmInhibitSettings = asdata;
+                    for (let idDevice in this.alarmInhibitSettings) {
+                        for (let alarmKey in this.alarmInhibitSettings[idDevice]) {
+                            if (this.alarmInhibitSettings[idDevice][alarmKey].inhibitDatetime) {
+                                let inhibitDatetime = new Date(this.alarmInhibitSettings[idDevice][alarmKey].inhibitDatetime).getTime();
+                                if(inhibitDatetime > now) {
+                                    this.alarmInhibitSettings[idDevice][alarmKey].isInhibitNow = true;
+                                }
+                            }
+                        }
+                    }
+                    this.dataLoaded = true;
+                    console.log('loading alarmInhibitSettings');
+                } else {
+                    console.log('no alarmInhibitSettings');
                 }
             }
         );

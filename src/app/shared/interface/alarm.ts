@@ -4,19 +4,29 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
     ExtBatt1Volt: [
         {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
         {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
+        {key: 'Voltage Drop', name: 'Mute Voltage Drop', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'Ext. Batt 1 Voltage', name: 'Mute Ext. Batt 1 Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
     ],
     ExtBatt2Volt: [
         {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
         {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
+        {key: 'Ext. Batt 2 Voltage', name: 'Mute Ext. Batt 2 Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
     ],
     IntTemperature: [
         {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90, max_pro: 90},
         {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19, max_pro: 19},
+        {key: 'Temperature', name: 'Mute Temperature', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
     ],
     ShockSensor: [
         {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3, max_pro: 3},
+        {key: 'Shock Detected', name: 'Mute Shock Detected', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
     ],
     Device: [
+        {key: 'Button 1 Pushed', name: 'Mute Button 1 Pushed', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'Button 1 Pushed Long', name: 'Mute Button 1 Pushed Long', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'SOS Activated', name: 'Mute SOS Activated', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'Internal Battery Voltage', name: 'Mute Internal Battery Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'Position Jump', name: 'Mute Position Jump', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
         {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
         {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
     ]
@@ -127,13 +137,20 @@ export interface AlarmSettings {
     };
 }
 
+export interface AlarmInhibitSettings {
+    [idDevice: number]: {
+        [alarmKey: string]: { alarmType: string, active, activeChanged, lastSent: string, inhibitDatetime: string, countSentTotal: string, countSentSinceLastActive: string, device_id: number, isInhibitNow?: boolean }
+    };
+}
+
+//todo: Diese Map wird nur noch für 'unit' verwendet. Hier kann man sicher mal aufräumen.
 export const alarmByTypeMap: {[typeKey: string]: {title: string, text: string, priority: string, column_sensor_data: string, unit: string, type: string}} = {
     'Button 1 Pushed': {title: 'Button', text: 'Button Pushed', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed'},
     'Button 1 Pushed Long': {title: 'Button', text: 'Button Pushed Long', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long'},
     'SOS Activated': {title: 'SOS', text: 'SOS Activated', priority: 'High', column_sensor_data: '', unit: '', type: 'SOS Activated'},
     'Internal Battery Voltage': {title: 'Voltage', text: 'Internal Battery Voltage Warning', priority: 'High', column_sensor_data: 'IntBattVolt', unit: ' V', type: 'Internal Battery Voltage'},
     'Shock Detected': {title: 'Shock', text: 'Shock Detected', priority: 'High', column_sensor_data: '', unit: '', type: 'Shock Detected'},
-    Temperature: {title: 'Temperature', text: 'Temperature Warning', priority: 'High', column_sensor_data: 'IntTemperature', unit: '°C', type: 'Temperature'},
+    'Temperature': {title: 'Temperature', text: 'Temperature Warning', priority: 'High', column_sensor_data: 'IntTemperature', unit: '°C', type: 'Temperature'},
     'Position Jump': {title: 'Position', text: 'Position Jump', priority: 'High', column_sensor_data: '', unit: '', type: 'Position Jump'},
     'Voltage Drop': {title: 'Voltage', text: 'Voltage Drop Detected', priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Voltage Drop'},
     'Ext. Batt 1 Voltage': {title: 'Voltage', text: 'Ext. Batt 1 Voltage Warning', priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Ext. Batt 1 Voltage'},

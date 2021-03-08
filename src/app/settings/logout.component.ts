@@ -32,7 +32,6 @@ export class LogoutComponent implements OnInit {
 
     saveForm() {
         this.isLoading = true;
-        this.authService.logout();
         this.apiService.logout().subscribe(resData => {
             const options = {
                 title: localize('Logout successful'),
@@ -40,6 +39,7 @@ export class LogoutComponent implements OnInit {
             };
             this.dataService.deviceData = [];
             this.isLoading = false;
+            this.authService.logout();
             alert(options).then(() => {
                 this.router.navigate([''], { clearHistory: true });
             });

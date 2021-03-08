@@ -20,7 +20,7 @@ import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
-import {AlarmSettings} from '~/app/shared/interface/alarm';
+import {AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 import { localize } from 'nativescript-localize';
 import {device} from 'tns-core-modules/platform';
 
@@ -79,6 +79,10 @@ export class ApiService {
         return this.alarmSettingsData.asObservable();
     }
 
+    get alarmInhibitSettings() {
+        return this.alarmInhibitSettingsData.asObservable();
+    }
+
     private sensorDataHistory =
         new BehaviorSubject<{
             'device_id': number,
@@ -101,6 +105,7 @@ export class ApiService {
     private boatStatusData = new BehaviorSubject<BoatStatus>(null);
     private boatHistoryData = new BehaviorSubject<BoatHistory>(null);
     private alarmSettingsData = new BehaviorSubject<AlarmSettings>(null);
+    private alarmInhibitSettingsData = new BehaviorSubject<AlarmInhibitSettings>(null);
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
@@ -113,6 +118,7 @@ export class ApiService {
     baseDeviceAlarmUrl = `${this.baseUrl}api/device_alarm/`;
     baseDeviceUserUrl = `${this.baseUrl}api/device_user/`;
     baseDeviceAlarmSettingsUrl = `${this.baseUrl}api/device_alarm_settings/`;
+    baseDeviceInhibitAlarmSettingsUrl = `${this.baseUrl}api/device_alarm_inhibit/`;
     token = getString('token', '');
     uuid = device.uuid
     language = device.language
@@ -312,6 +318,30 @@ export class ApiService {
             if (resData) {
                 this.alarmSettingsData.next(resData);
             }
+            this.httpClient.get<AlarmInhibitSettings>(this.baseDeviceInhibitAlarmSettingsUrl + '',
+                {
+                    headers: this.getHeader(),
+                    params: param
+                }
+            ).pipe(tap(resData => {
+                if (resData) {
+                    this.alarmInhibitSettingsData.next(resData);
+                }
+            })).subscribe();
+        }));
+    }
+
+    getDeviceInhibitAlarmSettings() {
+        const param: any = {};
+        return this.httpClient.get<AlarmInhibitSettings>(this.baseDeviceInhibitAlarmSettingsUrl + '',
+            {
+                headers: this.getHeader(),
+                params: param
+            }
+        ).pipe(tap(resData => {
+            if (resData) {
+                this.alarmInhibitSettingsData.next(resData);
+            }
         }));
     }
 
@@ -475,6 +505,22 @@ export class ApiService {
                 type: alarmKey,
                 value_user: alarmValue,
                 deviceId
+            }
+            , {
+                headers: this.getHeader()
+            }).subscribe(() => {
+            this.getDeviceAlarmSettings().subscribe();
+        });
+    }
+
+
+    saveAlarmInhibitSettings(idDevice: number, key: string, selectedDate: Date) {
+        console.log('saveAlarmInhibitSettings (Device:' + idDevice + ', alarmKey:' + key, ', timestamp:' + selectedDate.getTime()/1000);
+
+        this.httpClient.post<any>(this.baseDeviceInhibitAlarmSettingsUrl + 'update_field/', {
+                alarmType: key,
+                inhibitDatetime: selectedDate.getTime()/1000,
+                deviceId: idDevice
             }
             , {
                 headers: this.getHeader()

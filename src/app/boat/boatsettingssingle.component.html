@@ -47,7 +47,7 @@
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
                         <StackLayout *ngFor="let field of sensorFieldKeys">
                             <StackLayout>
-                                <StackLayout *ngIf="alarmSettingsMap[field]">
+                                <StackLayout *ngIf="alarmSettingsMap[field]" class="row-item-with-top-border">
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="dataService.alarmSettings[device.id][alarm.key]">
                                             <GridLayout columns="40,*,80" class="row-item-with-top-border"
@@ -72,6 +72,29 @@
                                                 <Label class="alarm-orange" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
                                                        [text]="('Value changed to' | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].unit | L) + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
                                                        horizontalAlignment="center"></Label>
+                                            </GridLayout>
+
+                                        </StackLayout>
+                                        <StackLayout *ngIf="alarm.datatype == 'datetime' && dataService.alarmInhibitSettings">
+                                            <GridLayout columns="40,*,auto" class="row-item-with-top-border"
+                                                        [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editinhibitsettings', device.id, field, index] : []">
+                                                <Label col="0" [text]="alarm.icon"
+                                                       [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
+                                                <Label col="1"  [text]="(alarm.name | L)"
+                                                       class="alarm-blue font-weight-bold"
+                                                       verticalAlignment="center"></Label>
+                                                <Label col="2"  *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]
+                                                                        && dataService.alarmInhibitSettings[device.id] && dataService.alarmInhibitSettings[device.id][alarm.key]
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].isInhibitNow"
+                                                       [text]="dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime | date : 'dd.MM.yyyy HH:mm'"
+                                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                                                <Label col="2"  *ngIf="!(!alarmSettingsDatatypeMap[alarm.datatype]
+                                                                        && dataService.alarmInhibitSettings[device.id] && dataService.alarmInhibitSettings[device.id][alarm.key]
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].isInhibitNow)"
+                                                       [text]="'not muted' | L"
+                                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                                             </GridLayout>
 
                                         </StackLayout>

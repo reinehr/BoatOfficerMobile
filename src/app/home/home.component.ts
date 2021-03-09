@@ -62,8 +62,8 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     constructor(// private _itemService: DataService,
         private page: Page,
-        private apiService: ApiService,
-        private dataService: DataService,
+        public apiService: ApiService,
+        public dataService: DataService,
         intl: TimeagoIntl,
         private httpClient: HttpClient
     ) {

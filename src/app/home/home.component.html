@@ -175,7 +175,7 @@
                             </GridLayout>
                         </StackLayout>
                         <GridLayout>
-                            <StackLayout class="alarm-card-home" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
+                            <StackLayout class="alarm-card-home" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
                                 <alarm-card-4segments-title [title]="'WEBCAM' | L" [subtitletop]="dataService.boatStatus[device.id].nearest_webcam.location_name"  [subtitlebottom]="dataService.boatStatus[device.id].nearest_webcam.name"></alarm-card-4segments-title>
                                 <GridLayout columns="*" rows="240" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[device.id].nearest_webcam.url" >
                                     <GridLayout id="GridLayout-webcam" [columns]="webcamWidth[device.id] ? webcamWidth[device.id] : '*'" [rows]="webcamHeight[device.id] ? webcamHeight[device.id] : 240">
@@ -192,6 +192,7 @@
                             <StackLayout [visibility]="(webcamScaled[device.id] ? 'collapsed' : 'visible')" class="alarm-card-home" padding="5,10,10,10" marginBottom="10" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].nearest_webcam && dataService.boatStatus[device.id].nearest_webcam.url">
                             </StackLayout>
                         </GridLayout>
+                        <GridLayout height="10"></GridLayout>
                     </StackLayout>
                 </StackLayout>
             </GridLayout>

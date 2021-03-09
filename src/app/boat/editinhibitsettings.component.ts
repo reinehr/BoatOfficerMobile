@@ -17,8 +17,8 @@ export class EditinhibitsettingsComponent implements OnInit {
 
     constructor(
         private router: RouterExtensions,
-        private apiService: ApiService,
-        private dataService: DataService,
+        public apiService: ApiService,
+        public dataService: DataService,
         private route: ActivatedRoute
     ) {
         this.route.params.subscribe(params => {

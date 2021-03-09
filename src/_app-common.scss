@@ -99,6 +99,19 @@
     height: 40;
 }
 
+
+.alarm-number-circle-android {
+    color: white;
+    background-color: #fb8b24;
+    border-radius: 50%;
+    text-align: center;
+    //vertical-align: center;
+    padding-top: 8;
+    margin-right: 10;
+    width: 40;
+    height: 40;
+}
+
 .boatoffice-boat-image-home {
     // height: 100%;
     width: 100%;
@@ -140,7 +153,7 @@
 
 .alarm-card {
     background-color: white;
-    padding: 5,10,10,10;
+    padding: 0,10,10,10;
     margin: 10;
     border-radius: 10;
 }

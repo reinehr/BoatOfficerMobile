@@ -7,9 +7,9 @@
   <Label col="1" row="1" [text]="boatname"
          class="alarm-blue t-16" height="30"></Label>
   <Label *ngIf="numberOfActiveAlarms && role != 'officer'" col="2" row="0" rowSpan="2" [text]="numberOfActiveAlarms"
-         class="alarm-number-circle t-16 font-weight-bold"></Label>
+         ios:class="alarm-number-circle t-16 font-weight-bold" android:class="alarm-number-circle-android t-16 font-weight-bold"></Label>
   <Label *ngIf="numberOfActiveAlarms && role == 'officer'" col="3" row="0" rowSpan="2" [text]="numberOfActiveAlarms"
-         class="alarm-number-circle t-16 font-weight-bold"></Label>
+         ios:class="alarm-number-circle t-16 font-weight-bold" android:class="alarm-number-circle-android t-16 font-weight-bold"></Label>
   <Label col="3" row="0" rowSpan="2" [text]="''"
          class="user-role-symbol" *ngIf="role == 'sailor'"></Label>
   <Label col="3" row="0" rowSpan="2" [text]="''"

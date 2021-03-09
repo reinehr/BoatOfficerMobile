@@ -11,32 +11,36 @@
             <StackLayout *ngIf="alarmSettingsMap[field]">
                 <StackLayout *ngFor="let alarm of [alarmSettingsMap[field][idAlarm]]; let index = index">
                     <StackLayout *ngIf="dataService.alarmSettings[idDevice][alarm.key]">
-                        <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
-                            <Label col="0" row="0" [text]="alarm.icon"
-                                   [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
-                            <Label col="1" row="0" [text]="alarm.name | L"
-                                   class="alarm-blue font-weight-bold"
-                                   verticalAlignment="center"></Label>
-                            <!--                                            <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"-->
-                            <!--                                                   [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"-->
-                            <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
-                            <!--                                            <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"-->
-                            <!--                                                   [text]="alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name + ' ' + alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit"-->
-                            <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
-                            <ListPicker #picker col="0" row="1" colSpan="2" [width]="listPickerWidth" [minWidth]="listPickerWidth"
-                                        [items]="listPicker"
-                                        [selectedIndex]="originalAlarmSettingIndex"
-                                        [(ngModel)]="originalAlarmSettingIndex"
-                                        (selectedIndexChange)="selectedIndexChanged(picker)"></ListPicker>
-                        </GridLayout>
-<!--                        <GridLayout paddingBottom="5"-->
-<!--                                    *ngIf="dataService.alarmSettings[idDevice][alarm.key].value_user != null && dataService.alarmSettings[idDevice][alarm.key].value_user != dataService.alarmSettings[idDevice][alarm.key].value_device"-->
-<!--                                    marginTop="-10">-->
-<!--                            <Label class="alarm-orange"-->
-<!--                                   [text]="'Value changed to ' + dataService.alarmSettings[idDevice][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[idDevice][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"-->
-<!--                                   horizontalAlignment="center"></Label>-->
-<!--                        </GridLayout>-->
+                        <StackLayout *ngFor="let device of dataService.deviceData">
+                            <StackLayout *ngIf="device.id == idDevice">
+                                <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
+                                    <Label col="0" row="0" [text]="alarm.icon"
+                                           [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
+                                    <Label col="1" row="0" [text]="(alarm.name_by_cable.length > 0 ? (alarm.cable.indexOf(device.external_voltage_cable) >= 0 ? alarm.name_by_cable[alarm.cable.indexOf(device.external_voltage_cable)] : alarm.name_by_cable[alarm.cable.indexOf(device.multisensor_cable)]) : alarm.name) | L"
+                                           class="alarm-blue font-weight-bold"
+                                           verticalAlignment="center"></Label>
+                                    <!--                                            <Label col="3" row="1" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"-->
+                                    <!--                                                   [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"-->
+                                    <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
+                                    <!--                                            <Label col="3" row="1" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"-->
+                                    <!--                                                   [text]="alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name + ' ' + alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit"-->
+                                    <!--                                                   class="alarm-blue pull-right font-weight-bold"></Label>-->
+                                    <ListPicker #picker col="0" row="1" colSpan="2" [width]="listPickerWidth" [minWidth]="listPickerWidth"
+                                                [items]="listPicker"
+                                                [selectedIndex]="originalAlarmSettingIndex"
+                                                [(ngModel)]="originalAlarmSettingIndex"
+                                                (selectedIndexChange)="selectedIndexChanged(picker)"></ListPicker>
+                                </GridLayout>
+        <!--                        <GridLayout paddingBottom="5"-->
+        <!--                                    *ngIf="dataService.alarmSettings[idDevice][alarm.key].value_user != null && dataService.alarmSettings[idDevice][alarm.key].value_user != dataService.alarmSettings[idDevice][alarm.key].value_device"-->
+        <!--                                    marginTop="-10">-->
+        <!--                            <Label class="alarm-orange"-->
+        <!--                                   [text]="'Value changed to ' + dataService.alarmSettings[idDevice][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[idDevice][alarm.key].time_changed_user | timeago) + '. Waiting for device to sync'"-->
+        <!--                                   horizontalAlignment="center"></Label>-->
+        <!--                        </GridLayout>-->
 
+                            </StackLayout>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

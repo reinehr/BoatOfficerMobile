@@ -167,10 +167,13 @@
   <string name="_no_boat_name_83Bnd">"Kein Name"</string>
   <string name="_Boat_Name_sj2Tz">"Name des Bootes"</string>
   <string name="_OTHER_SETTINGS_Z2fMNTg">"WEITERE EINSTELLUNGEN"</string>
+  <string name="_Set_the_time_until_which_the_alarm_should_be_inhibited_1HfxvK">"Stelle die Zeit ein, bis zu der der Alarm unterdrückt werden soll"</string>
   <string name="_not_muted_Zd6tw2">"nicht unterdr."</string>
   <string name="_Mute_Ext__Batt_2_Voltage_ftJki">"Warnung \'Ext. Batt. 2 Spannung\' unterdrücken"</string>
   <string name="_Mute_Ext__Batt_1_Voltage_2o1KBk">"Warnung \'Ext. Batt. 1 Spannung\' unterdrücken"</string>
-  <string name="_Mute_Voltage_Drop_Z1tLlbD">"Warnung \'Batterie 1 benutzt\' unterdrücken"</string>
+  <string name="_Mute_Ext__Batt_Voltage_1pFqQo">"Warnung \'Ext. Batt. Spannung\' unterdrücken"</string>
+  <string name="_Mute_Voltage_1_Drop_Z1RNVHi">"Warnung \'Batterie 1 benutzt\' unterdrücken"</string>
+  <string name="_Mute_Voltage_Drop_Z1tLlbD">"Warnung \'Batterie benutzt\' unterdrücken"</string>
   <string name="_Mute_Position_Jump_1y9qie">"Warnung \'Boot in Bewegung\' unterdrücken"</string>
   <string name="_Mute_Temperature_Z15t6uA">"Warnung \'Temperatur\' unterdrücken"</string>
   <string name="_Mute_Shock_Detected_26vaM2">"Warnung \'Erschütterung\' unterdrücken"</string>
@@ -202,6 +205,9 @@
   <string name="_High_Voltage_2_Level_Z2n4eHo">"Maximale Spannung 2"</string>
   <string name="_Low_Voltage_1_Level_Z1gsbol">"Minimale Spannung 1"</string>
   <string name="_High_Voltage_1_Level_1E1QWR">"Maximale Spannung 1"</string>
+  <string name="_Low_Voltage_Level_Z11m95s">"Minimale Spannung"</string>
+  <string name="_High_Voltage_Level_ZsB3eS">"Maximale Spannung"</string>
+  <string name="_INHIBIT_SETTINGS_Zz7vK1">"ALARMUNTERDRÜCKUNG EINSTELLEN"</string>
   <string name="_CABLE_SETTINGS_Z1fUn3g">"SENSOR EINSTELLUNGEN"</string>
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM EINSTELLUNGEN"</string>
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOOT EINSTELLUNGEN"</string>
@@ -278,7 +284,9 @@
   <string name="_Loop_Sensor_A_Closed_U7Qa4">"Loop Sensor A geschlossen"</string>
   <string name="_Ext__Batt_2_Voltage_2lxNOr">"Ext. Batt. 2 Spannung"</string>
   <string name="_Ext__Batt_1_Voltage_ZA6iHs">"Ext. Batt. 1 Spannung"</string>
-  <string name="_Voltage_Drop_Z1sCWAa">"Batterie 1 benutzt"</string>
+  <string name="_Ext__Batt_Voltage_1XH1xr">"Ext. Batt. Spannung"</string>
+  <string name="_Voltage_1_Drop_LHnsL">"Batterie 1 benutzt"</string>
+  <string name="_Voltage_Drop_Z1sCWAa">"Batterie benutzt"</string>
   <string name="_Position_Jump_28ppOX">"Boot in Bewegung"</string>
   <string name="Temperature">"Temperatur"</string>
   <string name="_Shock_Detected_Zj9CPP">"Erschütterung"</string>

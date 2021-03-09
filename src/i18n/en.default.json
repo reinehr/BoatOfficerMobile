@@ -90,6 +90,9 @@
   "BOAT SETTINGS": "BOAT SETTINGS",
   "ALARM SETTINGS": "ALARM SETTINGS",
   "CABLE SETTINGS": "CABLE SETTINGS",
+  "INHIBIT SETTINGS": "INHIBIT SETTINGS",
+  "High Voltage Level": "High Voltage Level",
+  "Low Voltage Level": "Low Voltage Level",
   "High Voltage 1 Level": "High Voltage 1 Level",
   "Low Voltage 1 Level": "Low Voltage 1 Level",
   "High Voltage 2 Level": "High Voltage 2 Level",
@@ -121,10 +124,13 @@
   "Mute Shock Detected": "Mute 'shock detected' warnings",
   "Mute Temperature": "Mute 'temperature' warnings",
   "Mute Position Jump": "Mute 'boat moved' warnings",
-  "Mute Voltage Drop": "Mute 'battery 1 usage' warnings",
+  "Mute Voltage Drop": "Mute 'battery usage' warnings",
+  "Mute Voltage 1 Drop": "Mute 'battery 1 usage' warnings",
+  "Mute Ext. Batt Voltage": "Mute 'ext. batt. voltage' warnings",
   "Mute Ext. Batt 1 Voltage": "Mute 'ext. batt. 1 voltage' warnings",
   "Mute Ext. Batt 2 Voltage": "Mute 'ext. batt. 2 voltage' warnings",
   "not muted": "not muted",
+  "Set the time until which the alarm should be inhibited": "Set the time until which the alarm should be inhibited",
   "OTHER SETTINGS": "OTHER SETTINGS",
   "Boat Name": "Boat Name",
   "no boat name": "no boat name",
@@ -297,5 +303,4 @@
   "Show TTN Mapper": "Show TTN Mapper",
   "About TTN Mapper": "About TTN Mapper",
   "ttnmapper_info_text": "TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.\n(http://ttnmapper.org)"
-
 }

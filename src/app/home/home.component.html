@@ -58,22 +58,24 @@
                         <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0" nsRouterLink="../alarm">
                             <Label [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold c-black alarm-card-simple-title"
                                        horizontalAlignment="left"></Label>
-                            <StackLayout *ngFor="let alarm of device.alarm; let idAlarm = index">
-                                <StackLayout *ngIf="(alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible)) && alarm.index_type_active === 1">
-                                    <GridLayout columns="40, auto, auto" rows="40">
-                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
-                                               *ngIf="alarm.status == 'open'"></Label>
-                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
-                                               *ngIf="alarm.status == 'open_someone_responsible'"></Label>
-                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                                               *ngIf="alarm.status == 'marked_as_ok'"></Label>
-                                        <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
-                                               *ngIf="alarm.status == 'clear_by_device'"></Label>
-                                        <Label col=1 row=0 [text]="(alarm.type | L)" class="alarm-gray t-16 font-weight-bold"
-                                               verticalAlignment="middle"></Label>
-                                        <Label col=2 row=0 [text]="' ' + alarm.value + alarmByTypeMap[alarm.type].unit" class="alarm-gray t-16 font-weight-bold"
-                                               verticalAlignment="middle" *ngIf="alarm.value"></Label>
-                                    </GridLayout>
+                            <StackLayout *ngFor="let alarmType of device.keyTypeActive">
+                                <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">
+                                    <StackLayout *ngIf="(alarm.status=='open' || (alarm.status=='open_someone_responsible' && alarm.i_am_responsible))">
+                                        <GridLayout columns="40, auto, auto" rows="40">
+                                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-orange"
+                                                   *ngIf="alarm.status == 'open'"></Label>
+                                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-blue"
+                                                   *ngIf="alarm.status == 'open_someone_responsible'"></Label>
+                                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                                   *ngIf="alarm.status == 'marked_as_ok'"></Label>
+                                            <Label col=0 row=0 text="C" class="alarm-symbol alarm-gray"
+                                                   *ngIf="alarm.status == 'clear_by_device'"></Label>
+                                            <Label col=1 row=0 [text]="(alarm.name | L)" class="alarm-gray t-16 font-weight-bold"
+                                                   verticalAlignment="middle"></Label>
+                                            <Label col=2 row=0 [text]="' ' + alarm.value + alarm.unit" class="alarm-gray t-16 font-weight-bold"
+                                                   verticalAlignment="middle" *ngIf="alarm.value"></Label>
+                                        </GridLayout>
+                                    </StackLayout>
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>

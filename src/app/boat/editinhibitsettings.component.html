@@ -11,21 +11,24 @@
             <StackLayout *ngIf="alarmSettingsMap[field]">
                 <StackLayout *ngFor="let alarm of [alarmSettingsMap[field][idAlarm]]; let index = index">
                     <StackLayout *ngIf="true">
-                        <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
-                            <Label col="0" row="0" [text]="alarm.icon"
-                                   [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
-                            <Label col="1" row="0" [text]="alarm.name | L"
-                                   class="alarm-blue font-weight-bold"
-                                   verticalAlignment="center"></Label>
-                            <GridLayout col="1" row="1" rows="*,*">
-                                <DatePicker row="0" year="2021" month="1" day="1"
-                                            [minDate]="minDate" [maxDate]="maxDate"
-                                            (dateChange)="onDateChanged($event)"
-                                            verticalAlignment="center"></DatePicker>
-                                <TimePicker id="tPicker" row="1" [time]="minDate" (timeChange)="onTimeChanged($event)"></TimePicker>
-                            </GridLayout>
-                        </GridLayout>
-
+                        <StackLayout *ngFor="let device of dataService.deviceData">
+                            <StackLayout *ngIf="device.id == idDevice">
+                                <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
+                                    <Label col="0" row="0" [text]="alarm.icon"
+                                           [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
+                                    <Label col="1" row="0" [text]="(alarm.name_by_cable.length > 0 ? (alarm.cable.indexOf(device.external_voltage_cable) >= 0 ? alarm.name_by_cable[alarm.cable.indexOf(device.external_voltage_cable)] : alarm.name_by_cable[alarm.cable.indexOf(device.multisensor_cable)]) : alarm.name) | L"
+                                           class="alarm-blue font-weight-bold"
+                                           verticalAlignment="center"></Label>
+                                    <GridLayout col="1" row="1" rows="*,*">
+                                        <DatePicker row="0" year="2021" month="1" day="1"
+                                                    [minDate]="minDate" [maxDate]="maxDate"
+                                                    (dateChange)="onDateChanged($event)"
+                                                    verticalAlignment="center"></DatePicker>
+                                        <TimePicker id="tPicker" row="1" [time]="minDate" (timeChange)="onTimeChanged($event)"></TimePicker>
+                                    </GridLayout>
+                                </GridLayout>
+                            </StackLayout>
+                        </StackLayout>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

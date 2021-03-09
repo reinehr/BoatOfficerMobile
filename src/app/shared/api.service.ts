@@ -109,7 +109,7 @@ export class ApiService {
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
-    baseUrl = 'https://boat-officer-backend.herokuapp.com/';
+    baseUrl = 'https://boat-officer-backend-testing.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
     // baseUrl = 'https://29c05bc52989.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
@@ -237,46 +237,61 @@ export class ApiService {
         ).pipe(tap(resData => {
             if (resData) {
                 for (const idDevice in resData) {
+                    let device = resData[idDevice];
                     if (!indexTypeActive[idDevice]) {
                         indexTypeActive[idDevice] = [];
                         resData[idDevice].sum_active_alarm = 0;
                     }
-                    for (const idAlarm in resData[idDevice].alarm) {
-                        if (!indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type]) {
-                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = 0;
-                        }
-                        if (!resData[idDevice].alarm_summarized) {
-                            resData[idDevice].keyTypeActive = [];
-                            resData[idDevice].alarm_summarized = [];
-                        }
-                        if (!resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type]) {
-                            resData[idDevice].keyTypeActive.push(resData[idDevice].alarm[idAlarm].type);
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type] = {};
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].type = resData[idDevice].alarm[idAlarm].type;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm_newest = resData[idDevice].alarm[idAlarm];
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active = false;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].status = resData[idDevice].alarm[idAlarm].status;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm = [];
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open = 0;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_closed = 0;
-                            //console.log('.')
-                        }
-                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
-                            indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type] + 1;
-                            resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
-                            resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open = resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open + 1;
-                            resData[idDevice].alarm[idAlarm].hidden = true;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm.push(resData[idDevice].alarm[idAlarm]);
-                            if (!resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active) {
-                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].active = true;
-                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm_newest = resData[idDevice].alarm[idAlarm];
-                                resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].status = resData[idDevice].alarm[idAlarm].status;
+                    for (const idAlarm in device.alarm) {
+                        let alarm = device.alarm[idAlarm];
+                        let type = alarm.type;
+                        let cableConnected = (alarmByTypeMap[type].cable.length == 0 ||
+                            alarmByTypeMap[type].cable.indexOf(device.multisensor_cable) >= 0 ||
+                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0);
+                        let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
+
+                        if (cableConnected) {
+                            if (!indexTypeActive[idDevice][type]) {
+                                indexTypeActive[idDevice][type] = 0;
                             }
-                        } else {
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_closed = resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].count_open + 1;
-                            resData[idDevice].alarm[idAlarm].hidden = true;
-                            resData[idDevice].alarm_summarized[resData[idDevice].alarm[idAlarm].type].alarm.push(resData[idDevice].alarm[idAlarm]);
+                            if (!resData[idDevice].alarm_summarized) {
+                                resData[idDevice].keyTypeActive = [];
+                                resData[idDevice].alarm_summarized = [];
+                            }
+                            if (!resData[idDevice].alarm_summarized[type]) {
+                                resData[idDevice].keyTypeActive.push(type);
+                                resData[idDevice].alarm_summarized[type] = {};
+                                resData[idDevice].alarm_summarized[type].type = type;
+                                resData[idDevice].alarm_summarized[type].name = name;
+                                resData[idDevice].alarm_summarized[type].unit = alarmByTypeMap[type].unit;
+                                resData[idDevice].alarm_summarized[type].connected = cableConnected;
+                                resData[idDevice].alarm_summarized[type].alarm_newest = alarm;
+                                resData[idDevice].alarm_summarized[type].value = alarm.value;
+                                resData[idDevice].alarm_summarized[type].active = false;
+                                resData[idDevice].alarm_summarized[type].status = alarm.status;
+                                resData[idDevice].alarm_summarized[type].alarm = [];
+                                resData[idDevice].alarm_summarized[type].count_open = 0;
+                                resData[idDevice].alarm_summarized[type].count_closed = 0;
+                                //console.log('.')
+                            }
+                            if (alarm.status === 'open' || (alarm.status === 'open_someone_responsible' && alarm.i_am_responsible)) {
+                                indexTypeActive[idDevice][type] = indexTypeActive[idDevice][type] + 1;
+                                resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][type];
+                                resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
+                                resData[idDevice].alarm_summarized[type].count_open = resData[idDevice].alarm_summarized[type].count_open + 1;
+                                resData[idDevice].alarm[idAlarm].hidden = true;
+                                resData[idDevice].alarm_summarized[type].alarm.push(resData[idDevice].alarm[idAlarm]);
+                                if (!resData[idDevice].alarm_summarized[type].active) {
+                                    resData[idDevice].alarm_summarized[type].active = true;
+                                    resData[idDevice].alarm_summarized[type].alarm_newest = resData[idDevice].alarm[idAlarm];
+                                    resData[idDevice].alarm_summarized[type].value = resData[idDevice].alarm[idAlarm].value;
+                                    resData[idDevice].alarm_summarized[type].status = resData[idDevice].alarm[idAlarm].status;
+                                }
+                            } else {
+                                resData[idDevice].alarm_summarized[type].count_closed = resData[idDevice].alarm_summarized[type].count_closed + 1;
+                                resData[idDevice].alarm[idAlarm].hidden = true;
+                                resData[idDevice].alarm_summarized[type].alarm.push(resData[idDevice].alarm[idAlarm]);
+                            }
                         }
                     }
                     for (const idAlarm in resData[idDevice].alarm) {

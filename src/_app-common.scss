@@ -101,15 +101,9 @@
 
 
 .alarm-number-circle-android {
-    color: white;
-    background-color: #fb8b24;
-    border-radius: 50%;
-    text-align: center;
+    @extend .alarm-number-circle;
     //vertical-align: center;
-    padding-top: 8;
-    margin-right: 10;
-    width: 40;
-    height: 40;
+    padding-top: 7;
 }
 
 .boatoffice-boat-image-home {

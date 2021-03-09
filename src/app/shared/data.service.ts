@@ -100,6 +100,10 @@ export interface DeviceAlarmDataFormat {
         'count_open'?: number;
         'count_closed'?: number;
         'type'?: string,
+        'name'?: string,
+        'value'?: string,
+        'unit'?: string,
+        'connected'?: boolean,
         'status'?: string,
         'loading'?: boolean,
         'active'?: boolean,

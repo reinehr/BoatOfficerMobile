@@ -167,10 +167,13 @@
   <string name="_no_boat_name_83Bnd">"no boat name"</string>
   <string name="_Boat_Name_sj2Tz">"Boat Name"</string>
   <string name="_OTHER_SETTINGS_Z2fMNTg">"OTHER SETTINGS"</string>
+  <string name="_Set_the_time_until_which_the_alarm_should_be_inhibited_1HfxvK">"Set the time until which the alarm should be inhibited"</string>
   <string name="_not_muted_Zd6tw2">"not muted"</string>
   <string name="_Mute_Ext__Batt_2_Voltage_ftJki">"Mute \'ext. batt. 2 voltage\' warnings"</string>
   <string name="_Mute_Ext__Batt_1_Voltage_2o1KBk">"Mute \'ext. batt. 1 voltage\' warnings"</string>
-  <string name="_Mute_Voltage_Drop_Z1tLlbD">"Mute \'battery 1 usage\' warnings"</string>
+  <string name="_Mute_Ext__Batt_Voltage_1pFqQo">"Mute \'ext. batt. voltage\' warnings"</string>
+  <string name="_Mute_Voltage_1_Drop_Z1RNVHi">"Mute \'battery 1 usage\' warnings"</string>
+  <string name="_Mute_Voltage_Drop_Z1tLlbD">"Mute \'battery usage\' warnings"</string>
   <string name="_Mute_Position_Jump_1y9qie">"Mute \'boat moved\' warnings"</string>
   <string name="_Mute_Temperature_Z15t6uA">"Mute \'temperature\' warnings"</string>
   <string name="_Mute_Shock_Detected_26vaM2">"Mute \'shock detected\' warnings"</string>
@@ -202,6 +205,9 @@
   <string name="_High_Voltage_2_Level_Z2n4eHo">"High Voltage 2 Level"</string>
   <string name="_Low_Voltage_1_Level_Z1gsbol">"Low Voltage 1 Level"</string>
   <string name="_High_Voltage_1_Level_1E1QWR">"High Voltage 1 Level"</string>
+  <string name="_Low_Voltage_Level_Z11m95s">"Low Voltage Level"</string>
+  <string name="_High_Voltage_Level_ZsB3eS">"High Voltage Level"</string>
+  <string name="_INHIBIT_SETTINGS_Zz7vK1">"INHIBIT SETTINGS"</string>
   <string name="_CABLE_SETTINGS_Z1fUn3g">"CABLE SETTINGS"</string>
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM SETTINGS"</string>
   <string name="_BOAT_SETTINGS_ZCbOd5">"BOAT SETTINGS"</string>
@@ -291,4 +297,6 @@
   <string name="app_name">"BoatOfficer"</string>
   <string name="title_activity_kimera">"BoatOfficer"</string>
   <string name="LOCALE">"en"</string>
+  <string name="_Ext__Batt_Voltage_1XH1xr">"Ext. Batt Voltage"</string>
+  <string name="_Voltage_1_Drop_LHnsL">"Voltage 1 Drop"</string>
 </resources>

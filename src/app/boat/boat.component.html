@@ -47,26 +47,26 @@
                                         <Label col=0 row=0 [text]="''" *ngIf="dataService.sensorFieldMap[sensorField].filter == 'ChargingActive' && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active['ChargingActive']"
                                                [class]="'alarm-symbol-fas-small' + (alarmActive ? ' alarm-gray-dark' :  ' alarm-gray-dark')" opacity="1"></Label>
                                         <Label col=1 row=0 [text]="(dataService.sensorFieldMap[sensorField].name_by_cable.length > 0 ? (dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0 ? dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable)] : dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable)]) : dataService.sensorFieldMap[sensorField].name) | L" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
-                                               horizontalAlignment="left"></Label>
+                                               verticalAlignment="middle" horizontalAlignment="left"></Label>
                                         <Label col=2 row=0
                                                [text]="alarmActive ? 'C': ''"
                                                class="alarm-symbol alarm-orange"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='active'"
                                                [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('yes' | L) : ('no' | L)"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               horizontalAlignment="right"></Label>
+                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='closed'"
                                                [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('closed' | L) : ('open' | L)"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               horizontalAlignment="right"></Label>
+                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='3V'"
                                                [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               horizontalAlignment="right"></Label>
+                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='' || dataService.sensorFieldMap[sensorField].filter=='ChargingActive'"
                                                [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               horizontalAlignment="right"></Label>
+                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
 
                                     </GridLayout>
                                 </StackLayout>

@@ -1,34 +1,34 @@
 import {localize} from "nativescript-localize";
 
-export const alarmSettingsMap: { [fieldName: string]: { key: string, name: string, icon: string, iconfont: string, datatype: string, unit: string, filter?: string, min: number, max: number, max_pro: number } [] } = {
+export const alarmSettingsMap: { [fieldName: string]: { key: string, name: string, name_by_cable: string[], icon: string, iconfont: string, datatype: string, unit: string, filter?: string, min: number, max: number, max_pro: number, cable: string[] } [] } = {
     ExtBatt1Volt: [
-        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
-        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
-        {key: 'Voltage Drop', name: 'Mute Voltage Drop', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'Ext. Batt 1 Voltage', name: 'Mute Ext. Batt 1 Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingHighInVolt', name: 'High Voltage 1 Level', name_by_cable: ['High Voltage Level', 'High Voltage 1 Level'], icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60, cable: ['SINGLE', 'DOUBLE']},
+        {key: 'UserCfg_ExtBatt1VoltageAlarmSettingLowInVolt', name: 'Low Voltage 1 Level', name_by_cable: ['Low Voltage Level', 'Low Voltage 1 Level'], icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59, cable: ['SINGLE', 'DOUBLE']},
+        {key: 'Voltage Drop', name: 'Mute Voltage Drop', name_by_cable: ['Mute Voltage Drop', 'Mute Voltage 1 Drop'], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: ['SINGLE', 'DOUBLE']},
+        {key: 'Ext. Batt 1 Voltage', name: 'Mute Ext. Batt 1 Voltage', name_by_cable: ['Mute Ext. Batt Voltage', 'Mute Ext. Batt 1 Voltage'], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: ['SINGLE', 'DOUBLE']},
     ],
     ExtBatt2Volt: [
-        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60},
-        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59},
-        {key: 'Ext. Batt 2 Voltage', name: 'Mute Ext. Batt 2 Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingHighInVolt', name: 'High Voltage 2 Level', name_by_cable: [], icon: 'a', iconfont: 'bo', datatype: 'float', unit: ' V', min: 1, max: 60, max_pro: 60, cable: ['DOUBLE']},
+        {key: 'UserCfg_ExtBatt2VoltageAlarmSettingLowInVolt', name: 'Low Voltage 2 Level', name_by_cable: [], icon: 'f', iconfont: 'bo', datatype: 'float', unit: ' V', min: 0, max: 59, max_pro: 59, cable: ['DOUBLE']},
+        {key: 'Ext. Batt 2 Voltage', name: 'Mute Ext. Batt 2 Voltage', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: ['DOUBLE']},
     ],
     IntTemperature: [
-        {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90, max_pro: 90},
-        {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19, max_pro: 19},
-        {key: 'Temperature', name: 'Mute Temperature', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'UserCfg_IntTemperatureAlarmSettingHighInDegreesC', name: 'Temperature High Level', name_by_cable: [], icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: 20, max: 90, max_pro: 90, cable: []},
+        {key: 'UserCfg_IntTemperatureAlarmSettingLowInDegreesC', name: 'Temperature Low Level', name_by_cable: [], icon: 'n', iconfont: 'bo', datatype: 'float', unit: '°C', min: -30, max: 19, max_pro: 19, cable: []},
+        {key: 'Temperature', name: 'Mute Temperature', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
     ],
     ShockSensor: [
-        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3, max_pro: 3},
-        {key: 'Shock Detected', name: 'Mute Shock Detected', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
+        {key: 'UserCfg_ShockSensorAlarmSettingSensitivityEnum', name: 'Shock Sensor', name_by_cable: [], icon: 'k', iconfont: 'bo', datatype: 'shock', unit: '', filter: '', min: 0, max: 3, max_pro: 3, cable: []},
+        {key: 'Shock Detected', name: 'Mute Shock Detected', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
     ],
     Device: [
-        {key: 'Button 1 Pushed', name: 'Mute Button 1 Pushed', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'Button 1 Pushed Long', name: 'Mute Button 1 Pushed Long', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'SOS Activated', name: 'Mute SOS Activated', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'Internal Battery Voltage', name: 'Mute Internal Battery Voltage', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'Position Jump', name: 'Mute Position Jump', icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0},
-        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
-        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24},
+        {key: 'Button 1 Pushed', name: 'Mute Button 1 Pushed', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
+        {key: 'Button 1 Pushed Long', name: 'Mute Button 1 Pushed Long', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: ['NEVER']},
+        {key: 'SOS Activated', name: 'Mute SOS Activated', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
+        {key: 'Internal Battery Voltage', name: 'Mute Internal Battery Voltage', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
+        {key: 'Position Jump', name: 'Mute Position Jump', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
+        {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: []},
+        {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: []},
     ]
 };
 
@@ -143,22 +143,21 @@ export interface AlarmInhibitSettings {
     };
 }
 
-//todo: Diese Map wird nur noch für 'unit' verwendet. Hier kann man sicher mal aufräumen.
-export const alarmByTypeMap: {[typeKey: string]: {title: string, text: string, priority: string, column_sensor_data: string, unit: string, type: string}} = {
-    'Button 1 Pushed': {title: 'Button', text: 'Button Pushed', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed'},
-    'Button 1 Pushed Long': {title: 'Button', text: 'Button Pushed Long', priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long'},
-    'SOS Activated': {title: 'SOS', text: 'SOS Activated', priority: 'High', column_sensor_data: '', unit: '', type: 'SOS Activated'},
-    'Internal Battery Voltage': {title: 'Voltage', text: 'Internal Battery Voltage Warning', priority: 'High', column_sensor_data: 'IntBattVolt', unit: ' V', type: 'Internal Battery Voltage'},
-    'Shock Detected': {title: 'Shock', text: 'Shock Detected', priority: 'High', column_sensor_data: '', unit: '', type: 'Shock Detected'},
-    'Temperature': {title: 'Temperature', text: 'Temperature Warning', priority: 'High', column_sensor_data: 'IntTemperature', unit: '°C', type: 'Temperature'},
-    'Position Jump': {title: 'Position', text: 'Position Jump', priority: 'High', column_sensor_data: '', unit: '', type: 'Position Jump'},
-    'Voltage Drop': {title: 'Voltage', text: 'Voltage Drop Detected', priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Voltage Drop'},
-    'Ext. Batt 1 Voltage': {title: 'Voltage', text: 'Ext. Batt 1 Voltage Warning', priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Ext. Batt 1 Voltage'},
-    'Ext. Batt 2 Voltage': {title: 'Voltage', text: 'Ext. Batt 2 Voltage Warning', priority: 'High', column_sensor_data: 'ExtBatt2Volt', unit: ' V', type: 'Ext. Batt 2 Voltage'},
-    'Loop Sensor A Closed': {title: 'Loop', text: 'Loop Sensor A Closed', priority: 'High', column_sensor_data: '', unit: '', type: 'Loop Sensor A Closed'},
-    'Loop Sensor A Opened': {title: 'Loop', text: 'Loop Sensor A Opened', priority: 'High', column_sensor_data: '', unit: '', type: 'Loop Sensor A Opened'},
-    'Multi Sensor A 1 Closed': {title: 'Multi', text: 'Multi Sensor A 1 Closed', priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 1 Closed'},
-    'Multi Sensor A 1 Opened': {title: 'Multi', text: 'Multi Sensor A 1 Opened', priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 1 Opened'},
-    'Multi Sensor A 2 Closed': {title: 'Multi', text: 'Multi Sensor A 2 Closed', priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 2 Closed'},
-    'Multi Sensor A 2 Opened': {title: 'Multi', text: 'Multi Sensor A 2 Opened', priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 2 Opened'},
+export const alarmByTypeMap: {[typeKey: string]: {title: string, name: string, name_by_cable: string[], priority: string, column_sensor_data: string, unit: string, type: string, cable: string[]}} = {
+    'Button 1 Pushed': {title: 'Button', name: 'Button 1 Pushed', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed', cable: []},
+    'Button 1 Pushed Long': {title: 'Button', name: 'Button 1 Pushed Long', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long', cable: ['NEVER']},
+    'SOS Activated': {title: 'SOS', name: 'SOS Activated', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'SOS Activated', cable: []},
+    'Internal Battery Voltage': {title: 'Voltage', name: 'Internal Battery Voltage', name_by_cable:[], priority: 'High', column_sensor_data: 'IntBattVolt', unit: ' V', type: 'Internal Battery Voltage', cable: []},
+    'Shock Detected': {title: 'Shock', name: 'Shock Detected', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Shock Detected', cable: []},
+    'Temperature': {title: 'Temperature', name: 'Temperature', name_by_cable:[], priority: 'High', column_sensor_data: 'IntTemperature', unit: '°C', type: 'Temperature', cable: []},
+    'Position Jump': {title: 'Position', name: 'Position Jump', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Position Jump', cable: []},
+    'Voltage Drop': {title: 'Voltage', name: 'Voltage Drop', name_by_cable:['Voltage Drop', 'Voltage 1 Drop'], priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Voltage Drop', cable: ['SINGLE', 'DOUBLE']},
+    'Ext. Batt 1 Voltage': {title: 'Voltage', name: 'Ext. Batt 1 Voltage', name_by_cable:['Ext. Batt Voltage', 'Ext. Batt 1 Voltage'], priority: 'High', column_sensor_data: 'ExtBatt1Volt', unit: ' V', type: 'Ext. Batt 1 Voltage', cable: ['SINGLE', 'DOUBLE']},
+    'Ext. Batt 2 Voltage': {title: 'Voltage', name: 'Ext. Batt 2 Voltage', name_by_cable:[], priority: 'High', column_sensor_data: 'ExtBatt2Volt', unit: ' V', type: 'Ext. Batt 2 Voltage', cable: ['DOUBLE']},
+    'Loop Sensor A Closed': {title: 'Loop', name: 'Loop Sensor A Closed', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Loop Sensor A Closed', cable: []},
+    'Loop Sensor A Opened': {title: 'Loop', name: 'Loop Sensor A Opened', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Loop Sensor A Opened', cable: []},
+    'Multi Sensor A 1 Closed': {title: 'Multi', name: 'Multi Sensor A 1 Closed', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 1 Closed', cable: []},
+    'Multi Sensor A 1 Opened': {title: 'Multi', name: 'Multi Sensor A 1 Opened', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 1 Opened', cable: []},
+    'Multi Sensor A 2 Closed': {title: 'Multi', name: 'Multi Sensor A 2 Closed', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 2 Closed', cable: []},
+    'Multi Sensor A 2 Opened': {title: 'Multi', name: 'Multi Sensor A 2 Opened', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Multi Sensor A 2 Opened', cable: []},
 };

@@ -205,6 +205,9 @@
 "_High_Voltage_1_Level_1E1QWR" = "Maximale Spannung 1";
 "_Low_Voltage_Level_Z11m95s" = "Minimale Spannung";
 "_High_Voltage_Level_ZsB3eS" = "Maximale Spannung";
+"_ALARM_MUTING_jK0sg" = "ALARM STUMMSCHALTUNG";
+"_Mute_alarm_until_ZotEj" = "Alarm stummschalten bis";
+"_EDIT_INHIBIT_SETTINGS_c0TFO" = "ALARMUNTERDRÜCKUNG BEARBEITEN";
 "_INHIBIT_SETTINGS_Zz7vK1" = "ALARMUNTERDRÜCKUNG EINSTELLEN";
 "_CABLE_SETTINGS_Z1fUn3g" = "SENSOR EINSTELLUNGEN";
 "_ALARM_SETTINGS_1Fewk2" = "ALARM EINSTELLUNGEN";
@@ -248,7 +251,7 @@
 "at" = "um";
 "_by_user_on_Z2iKonM" = "durch %1$@ am";
 "_by_Device_on_1F3vHR" = "durch das Gerät am";
-"_Open__Responsibility_clarified__ZHdP9Y" = "Offen (verantwortlichkeit geklärt)";
+"_Open__Responsibility_clarified__ZHdP9Y" = "Offen (Verantwortlichkeit geklärt)";
 "_Marked_as_OK_1RhBc6" = "Als OK markiert";
 "Cleared" = "Gelöst";
 "_Mark_as_solved_Z1fL0Du" = "Als gelöst markieren";

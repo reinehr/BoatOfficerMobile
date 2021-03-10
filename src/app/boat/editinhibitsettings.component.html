@@ -5,21 +5,24 @@
 </ActionBar>
 
 <StackLayout backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png" padding="10,10,10,10">
-    <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[idDevice]" android:height="350" ios:height="200">
+    <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[idDevice]" android:height="400" ios:height="250">
         <StackLayout>
-            <Label text="{{'INHIBIT SETTINGS' | L}}" class="t-16 font-weight-bold"></Label>
+            <Label text="{{'INHIBIT SETTINGS' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
             <StackLayout *ngIf="alarmSettingsMap[field]">
                 <StackLayout *ngFor="let alarm of [alarmSettingsMap[field][idAlarm]]; let index = index">
                     <StackLayout *ngIf="true">
                         <StackLayout *ngFor="let device of dataService.deviceData">
                             <StackLayout *ngIf="device.id == idDevice">
-                                <GridLayout rows="40,*" columns="40,*" class="row-item-with-top-border">
+                                <GridLayout rows="40,40,*" columns="40,*" class="row-item-with-top-border">
                                     <Label col="0" row="0" [text]="alarm.icon"
                                            [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
                                     <Label col="1" row="0" [text]="(alarm.name_by_cable.length > 0 ? (alarm.cable.indexOf(device.external_voltage_cable) >= 0 ? alarm.name_by_cable[alarm.cable.indexOf(device.external_voltage_cable)] : alarm.name_by_cable[alarm.cable.indexOf(device.multisensor_cable)]) : alarm.name) | L"
                                            class="alarm-blue font-weight-bold"
                                            verticalAlignment="center"></Label>
-                                    <GridLayout col="1" row="1" rows="*,*">
+                                    <Label col="1" row="1" [text]="'Mute alarm until' | L"
+                                           class="alarm-blue font-weight-bold"
+                                           verticalAlignment="center"></Label>
+                                    <GridLayout col="1" row="2" rows="*,*">
                                         <DatePicker row="0" [year]="minDate.getFullYear()" [month]="minDate.getMonth() + 1" [day]="minDate.getDate()"
                                                     [minDate]="minDate" [maxDate]="maxDate"
                                                     (dateChange)="onDateChanged($event)"

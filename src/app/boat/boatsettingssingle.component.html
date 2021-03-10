@@ -46,7 +46,6 @@
                         <StackLayout *ngFor="let field of sensorFieldKeys">
                             <StackLayout>
                                 <StackLayout *ngIf="alarmSettingsMap[field]">
-                                    <GridLayout height="2" class="row-item-with-top-border"></GridLayout>
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="(alarm.cable.length == 0 ||
                                                 alarm.cable.indexOf(device.multisensor_cable) >= 0 ||
@@ -76,11 +75,24 @@
                                             </GridLayout>
 
                                         </StackLayout>
+                                    </StackLayout>
+                                </StackLayout>
+                            </StackLayout>
+                        </StackLayout>
+                    </StackLayout>
+                </StackLayout>
+                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
+                    <StackLayout>
+                        <Label text="{{'ALARM MUTING' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
+                        <StackLayout *ngFor="let field of sensorFieldKeys">
+                            <StackLayout>
+                                <StackLayout *ngIf="alarmSettingsMap[field]">
+                                    <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
                                         <StackLayout *ngIf="(alarm.cable.length == 0 ||
                                                 alarm.cable.indexOf(device.multisensor_cable) >= 0 ||
                                                 alarm.cable.indexOf(device.external_voltage_cable) >= 0) &&
                                                 alarm.datatype == 'datetime' && dataService.alarmInhibitSettings">
-                                            <GridLayout columns="35,*,auto" class="row-item-with-top-border"
+                                            <GridLayout columns="35,*,auto,40" class="row-item-with-top-border"
                                                         [nsRouterLink]="device.role == 'officer' || device.role == 'guard' ? ['../../editinhibitsettings', device.id, field, index] : []">
                                                 <Label col="0" [text]="alarm.icon"
                                                        [class]="'alarm-symbol-' + alarm.iconfont + ' alarm-gray'"></Label>
@@ -92,13 +104,19 @@
                                                                         && dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime
                                                                         && dataService.alarmInhibitSettings[device.id][alarm.key].isInhibitNow"
                                                        [text]="dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime | date : 'dd.MM.yyyy HH:mm'"
-                                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
-                                                <Label col="2"  *ngIf="!(!alarmSettingsDatatypeMap[alarm.datatype]
+                                                       class="alarm-gray pull-right font-weight-bold" verticalAlignment="center"></Label>
+                                                <Label col="3"  *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]
+                                                                        && dataService.alarmInhibitSettings[device.id] && dataService.alarmInhibitSettings[device.id][alarm.key]
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime
+                                                                        && dataService.alarmInhibitSettings[device.id][alarm.key].isInhibitNow"
+                                                       [text]="''"
+                                                       class="alarm-gray mute-symbol-fas" verticalAlignment="center"></Label>
+                                                <Label col="3"  *ngIf="!(!alarmSettingsDatatypeMap[alarm.datatype]
                                                                         && dataService.alarmInhibitSettings[device.id] && dataService.alarmInhibitSettings[device.id][alarm.key]
                                                                         && dataService.alarmInhibitSettings[device.id][alarm.key].inhibitDatetime
                                                                         && dataService.alarmInhibitSettings[device.id][alarm.key].isInhibitNow)"
-                                                       [text]="'not muted' | L"
-                                                       class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
+                                                       [text]="''"
+                                                       class="alarm-blue mute-symbol-fas" verticalAlignment="center"></Label>
                                             </GridLayout>
 
                                         </StackLayout>

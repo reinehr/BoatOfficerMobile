@@ -38,7 +38,8 @@ export class EditinhibitsettingsComponent implements OnInit {
 
     selectedDate: Date = new Date();
     minDate: Date = new Date();
-    maxDate: Date = new Date(2099, 12, 31);
+    twoYears = 720 * 60 * 60 * 24 * 1000;
+    maxDate: Date = new Date(this.minDate.getTime() + this.twoYears);
 
     ngOnInit(): void {
         const alarm = alarmSettingsMap[this.field][this.idAlarm];

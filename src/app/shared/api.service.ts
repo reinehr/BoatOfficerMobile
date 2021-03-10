@@ -20,7 +20,7 @@ import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from 'tns-core-modules/ui/dialogs';
-import {AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
+import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 import { localize } from 'nativescript-localize';
 import {device} from 'tns-core-modules/platform';
 
@@ -109,7 +109,7 @@ export class ApiService {
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
-    baseUrl = 'https://boat-officer-backend-testing.herokuapp.com/';
+    baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
     // baseUrl = 'https://29c05bc52989.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;

@@ -29,6 +29,7 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         {key: 'Position Jump', name: 'Position Jump', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
         {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: []},
         {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: []},
+        {key: 'AdminCfg_AllowMapping', name: 'Allow TTN Mapping', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'yes-no', unit: '', filter: '', min: 0, max: 1, max_pro: 1, cable: []},
     ]
 };
 
@@ -46,6 +47,10 @@ export const cableSettingsDatatypeMap: { [dataTypeKey: string]: { [index: number
 }
 
 export const alarmSettingsDatatypeMap: { [dataTypeKey: string]: { [ttnValue: string]: {value: number, unit: string, name: string} } } = {
+    'yes-no': {
+        0: {value: 0, unit: '', name: localize('no')},
+        1: {value: 1, unit: '', name: localize('yes')},
+    },
     shock: {
         0: {value: 0, unit: '', name: localize('off')},
         1: {value: 1, unit: localize('intensity'), name: localize('low')},
@@ -89,6 +94,10 @@ export const alarmSettingsDatatypeMap: { [dataTypeKey: string]: { [ttnValue: str
 };
 
 export const alarmSettingsDatatypeMapOrderedByIndex: { [dataTypeKey: string]: { [ttnValue: string]: {value: number, unit: string, name: string} } } = {
+    'yes-no': {
+        0: {value: 0, unit: '', name: localize('no')},
+        1: {value: 1, unit: '', name: localize('yes')},
+    },
     shock: {
         0: {value: 0, unit: '', name: localize('off')},
         1: {value: 1, unit: localize('intensity'), name: localize('low')},

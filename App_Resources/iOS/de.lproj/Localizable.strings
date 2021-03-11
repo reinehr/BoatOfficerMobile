@@ -195,8 +195,9 @@
 "low" = "niedrige";
 "off" = "aus";
 "intensity" = "Intens.";
-"_Update_Rate_Position_4GuC0" = "Update Rate Position";
-"_Update_Rate_General_1FGak9" = "Update Rate Sensoren";
+"_Allow_TTN_Mapping_mL18P" = "TTN-Mapping erlauben";
+"_Update_Rate_Position_4GuC0" = "Datenintervall Position";
+"_Update_Rate_General_1FGak9" = "Datenintervall Sensoren";
 "_Shock_Sensor_ZL7Y1d" = "Schock-Sensor";
 "_Temperature_Low_Level_1K4wtQ" = "Minimale Temperatur";
 "_Temperature_High_Level_2vC47s" = "Maximale Temperatur";

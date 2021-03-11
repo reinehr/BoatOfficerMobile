@@ -195,6 +195,7 @@
 "low" = "low";
 "off" = "off";
 "intensity" = "intensity";
+"_Allow_TTN_Mapping_mL18P" = "Allow TTN Mapping";
 "_Update_Rate_Position_4GuC0" = "Update Rate Position";
 "_Update_Rate_General_1FGak9" = "Update Rate General";
 "_Shock_Sensor_ZL7Y1d" = "Shock Sensor";
@@ -286,7 +287,9 @@
 "_Loop_Sensor_A_Closed_U7Qa4" = "Loop sensor A closed";
 "_Ext__Batt_2_Voltage_2lxNOr" = "Ext. batt. 2 voltage";
 "_Ext__Batt_1_Voltage_ZA6iHs" = "Ext. batt. 1 voltage";
-"_Voltage_Drop_Z1sCWAa" = "Battery 1 usage";
+"_Ext__Batt_Voltage_1XH1xr" = "Ext. batt. voltage";
+"_Voltage_1_Drop_LHnsL" = "Battery 1 usage";
+"_Voltage_Drop_Z1sCWAa" = "Battery usage";
 "_Position_Jump_28ppOX" = "Boat moved";
 "Temperature" = "Temperature";
 "_Shock_Detected_Zj9CPP" = "Shock detected";
@@ -297,5 +300,3 @@
 "_____HOME_____24WOsh" = "";
 "_app_name_1k3Sbz" = "BoatOfficer";
 "LOCALE" = "en";
-"_Ext__Batt_Voltage_1XH1xr" = "Ext. Batt Voltage";
-"_Voltage_1_Drop_LHnsL" = "Voltage 1 Drop";

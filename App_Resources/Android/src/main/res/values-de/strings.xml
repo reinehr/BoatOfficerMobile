@@ -100,6 +100,7 @@
   <string name="_1D_q1">"1T"</string>
   <string name="Save">"Speichern"</string>
   <string name="_Contact_number_Z1MVijQ">"Kontaktnummer"</string>
+  <string name="EDIT">"BEARBEITEN"</string>
   <string name="_EDIT_USERS_2dTwgU">"NUTZER BEARBEITEN"</string>
   <string name="_EDIT_CABLE_SETTINGS_Z1M9nRG">"SENSOREINSTELLUNGEN BEARBEITEN"</string>
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"GERÄTEEINSTELLUNGEN BEARBEITEN"</string>
@@ -196,8 +197,9 @@
   <string name="low">"niedrige"</string>
   <string name="off">"aus"</string>
   <string name="intensity">"Intens."</string>
-  <string name="_Update_Rate_Position_4GuC0">"Update Rate Position"</string>
-  <string name="_Update_Rate_General_1FGak9">"Update Rate Sensoren"</string>
+  <string name="_Allow_TTN_Mapping_mL18P">"TTN-Mapping erlauben"</string>
+  <string name="_Update_Rate_Position_4GuC0">"Datenintervall Position"</string>
+  <string name="_Update_Rate_General_1FGak9">"Datenintervall Sensoren"</string>
   <string name="_Shock_Sensor_ZL7Y1d">"Schock-Sensor"</string>
   <string name="_Temperature_Low_Level_1K4wtQ">"Minimale Temperatur"</string>
   <string name="_Temperature_High_Level_2vC47s">"Maximale Temperatur"</string>
@@ -207,6 +209,9 @@
   <string name="_High_Voltage_1_Level_1E1QWR">"Maximale Spannung 1"</string>
   <string name="_Low_Voltage_Level_Z11m95s">"Minimale Spannung"</string>
   <string name="_High_Voltage_Level_ZsB3eS">"Maximale Spannung"</string>
+  <string name="_ALARM_MUTING_jK0sg">"ALARM STUMMSCHALTUNG"</string>
+  <string name="_Mute_alarm_until_ZotEj">"Alarm stummschalten bis"</string>
+  <string name="_EDIT_INHIBIT_SETTINGS_c0TFO">"ALARMUNTERDRÜCKUNG BEARBEITEN"</string>
   <string name="_INHIBIT_SETTINGS_Zz7vK1">"ALARMUNTERDRÜCKUNG EINSTELLEN"</string>
   <string name="_CABLE_SETTINGS_Z1fUn3g">"SENSOR EINSTELLUNGEN"</string>
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM EINSTELLUNGEN"</string>
@@ -250,7 +255,7 @@
   <string name="at">"um"</string>
   <string name="_by_user_on_Z2iKonM">"durch %1$s am"</string>
   <string name="_by_Device_on_1F3vHR">"durch das Gerät am"</string>
-  <string name="_Open__Responsibility_clarified__ZHdP9Y">"Offen (verantwortlichkeit geklärt)"</string>
+  <string name="_Open__Responsibility_clarified__ZHdP9Y">"Offen (Verantwortlichkeit geklärt)"</string>
   <string name="_Marked_as_OK_1RhBc6">"Als OK markiert"</string>
   <string name="Cleared">"Gelöst"</string>
   <string name="_Mark_as_solved_Z1fL0Du">"Als gelöst markieren"</string>

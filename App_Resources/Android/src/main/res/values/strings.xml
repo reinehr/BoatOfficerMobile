@@ -100,6 +100,7 @@
   <string name="_1D_q1">"1D"</string>
   <string name="Save">"Save"</string>
   <string name="_Contact_number_Z1MVijQ">"Contact number"</string>
+  <string name="EDIT">"EDIT"</string>
   <string name="_EDIT_USERS_2dTwgU">"EDIT USERS"</string>
   <string name="_EDIT_CABLE_SETTINGS_Z1M9nRG">"EDIT CABLE SETTINGS"</string>
   <string name="_EDIT_DEVICE_SETTINGS_Z1uqdFy">"EDIT DEVICE SETTINGS"</string>
@@ -196,6 +197,7 @@
   <string name="low">"low"</string>
   <string name="off">"off"</string>
   <string name="intensity">"intensity"</string>
+  <string name="_Allow_TTN_Mapping_mL18P">"Allow TTN Mapping"</string>
   <string name="_Update_Rate_Position_4GuC0">"Update Rate Position"</string>
   <string name="_Update_Rate_General_1FGak9">"Update Rate General"</string>
   <string name="_Shock_Sensor_ZL7Y1d">"Shock Sensor"</string>
@@ -207,6 +209,9 @@
   <string name="_High_Voltage_1_Level_1E1QWR">"High Voltage 1 Level"</string>
   <string name="_Low_Voltage_Level_Z11m95s">"Low Voltage Level"</string>
   <string name="_High_Voltage_Level_ZsB3eS">"High Voltage Level"</string>
+  <string name="_ALARM_MUTING_jK0sg">"ALARM MUTING"</string>
+  <string name="_Mute_alarm_until_ZotEj">"Mute alarm until"</string>
+  <string name="_EDIT_INHIBIT_SETTINGS_c0TFO">"EDIT INHIBIT SETTINGS"</string>
   <string name="_INHIBIT_SETTINGS_Zz7vK1">"INHIBIT SETTINGS"</string>
   <string name="_CABLE_SETTINGS_Z1fUn3g">"CABLE SETTINGS"</string>
   <string name="_ALARM_SETTINGS_1Fewk2">"ALARM SETTINGS"</string>
@@ -284,7 +289,9 @@
   <string name="_Loop_Sensor_A_Closed_U7Qa4">"Loop sensor A closed"</string>
   <string name="_Ext__Batt_2_Voltage_2lxNOr">"Ext. batt. 2 voltage"</string>
   <string name="_Ext__Batt_1_Voltage_ZA6iHs">"Ext. batt. 1 voltage"</string>
-  <string name="_Voltage_Drop_Z1sCWAa">"Battery 1 usage"</string>
+  <string name="_Ext__Batt_Voltage_1XH1xr">"Ext. batt. voltage"</string>
+  <string name="_Voltage_1_Drop_LHnsL">"Battery 1 usage"</string>
+  <string name="_Voltage_Drop_Z1sCWAa">"Battery usage"</string>
   <string name="_Position_Jump_28ppOX">"Boat moved"</string>
   <string name="Temperature">"Temperature"</string>
   <string name="_Shock_Detected_Zj9CPP">"Shock detected"</string>
@@ -297,6 +304,4 @@
   <string name="app_name">"BoatOfficer"</string>
   <string name="title_activity_kimera">"BoatOfficer"</string>
   <string name="LOCALE">"en"</string>
-  <string name="_Ext__Batt_Voltage_1XH1xr">"Ext. Batt Voltage"</string>
-  <string name="_Voltage_1_Drop_LHnsL">"Voltage 1 Drop"</string>
 </resources>

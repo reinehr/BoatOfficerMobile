@@ -12,7 +12,7 @@ import {NativeScriptHttpClientModule} from 'nativescript-angular/http-client';
 import {TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter} from 'ngx-timeago';
 
 // GMSServices.MapView
-import * as platform from 'tns-core-modules/platform';
+import * as platform from '@nativescript/core/platform';
 import {BoatComponent} from "~/app/boat/boat.component";
 import {HomeComponent} from "~/app/home/home.component";
 import {SettingsComponent} from "~/app/settings/settings.component";

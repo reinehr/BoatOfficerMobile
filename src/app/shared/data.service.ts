@@ -32,6 +32,7 @@ export interface DeviceAlarmDataFormat {
     'multisensor_cable': string;
     'role': string;
     'lifeguard': boolean;
+    'getPush': boolean;
     'num_candidate': number;
     'num_sailor': number;
     'num_guard': number;
@@ -67,6 +68,7 @@ export interface DeviceAlarmDataFormat {
         'name': string,
         'phone': string,
         'lifeguard': boolean,
+        'getPush': boolean,
     };
     'device_users': {
         'id': number,
@@ -78,6 +80,7 @@ export interface DeviceAlarmDataFormat {
         'name': string,
         'phone': string,
         'lifeguard': boolean,
+        'getPush': boolean,
     }[];
     'alarm': {
         'id': number;

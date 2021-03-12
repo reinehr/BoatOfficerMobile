@@ -3,7 +3,7 @@ import {
     OnInit,
     AfterViewInit
 } from '@angular/core';
-import {Page} from 'tns-core-modules/ui/page/page';
+import {Page} from '@nativescript/core/ui/page/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import {MapView, Marker, Position, Polyline} from 'nativescript-google-maps-sdk';
 import {Subscription} from 'rxjs';
@@ -13,20 +13,20 @@ import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from 'ngx-timeago';
 import {localize} from 'nativescript-localize';
 import {registerElement} from 'nativescript-angular/element-registry';
-import {ScrollEventData, ScrollView} from 'tns-core-modules/ui/scroll-view';
+import {ScrollEventData, ScrollView} from '@nativescript/core/ui/scroll-view';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
-import {isAndroid } from 'tns-core-modules/platform';
-import { AnimationCurve } from 'tns-core-modules/ui/enums';
-import { getViewById } from 'tns-core-modules/ui/core/view';
-import { EventData } from 'tns-core-modules/data/observable';
-import { Image } from 'tns-core-modules/ui/image';
-import { ImageSource } from 'tns-core-modules/image-source';
-import { Color } from 'tns-core-modules/color';
-import {hasKey, getString} from 'tns-core-modules/application-settings';
+import {isAndroid } from '@nativescript/core/platform';
+import { AnimationCurve } from '@nativescript/core/ui/enums';
+import { getViewById } from '@nativescript/core/ui/core/view';
+import { EventData } from '@nativescript/core/data/observable';
+import { Image } from '@nativescript/core/ui/image';
+import { ImageSource } from '@nativescript/core/image-source';
+import { Color } from '@nativescript/core/color';
+import {hasKey, getString} from '@nativescript/core/application-settings';
 
 import {HttpClient} from '@angular/common/http';
-import { layout } from "tns-core-modules/utils/utils";
-import { WebView, LoadEventData } from 'tns-core-modules/ui/web-view';
+import { layout } from "@nativescript/core/utils/utils";
+import { WebView, LoadEventData } from '@nativescript/core/ui/web-view';
 import enumerate = Reflect.enumerate;
 declare let android: any; // or even better - use tns-platform-declarations for intelliSense for the native APis
 

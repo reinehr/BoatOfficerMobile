@@ -121,6 +121,10 @@
   <string name="_Yes__Leave_25v2J7">"Yes, Leave"</string>
   <string name="_Leave_this_boat_ZMQkmx">"Leave this boat"</string>
   <string name="_Do_you_really_want_to_leave_this_boat___s___Z2ezym8">"Do you really want to leave this boat (%1$s)?"</string>
+  <string name="_Yes__deactivate_Zbd08d">"Yes, deactivate"</string>
+  <string name="_Do_you_really_want_to_deactivate_push_notifications_for_this_boat___s___ZjuirB">"You don\'t want to receive push notifications for this boat (%1$s)?"</string>
+  <string name="_Yes__activate_Z7rKqA">"Yes"</string>
+  <string name="_Activate_push_notifications_for_this_boat___s___1weiCz">"You want to receive push notifications for this boat (%1$s)?"</string>
   <string name="_Note__Without_PRO_Upgrade__you_can_only_hire_one_guard__Z1RPRx">"Note: Without PRO Upgrade, you can only hire one guard."</string>
   <string name="_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr">"Now, paste the BoatOfficer ID (%1$s) in an e-mail or messenger to send it to your friends."</string>
   <string name="_BoatOfficer_ID_copied_RHX1P">"BoatOfficer ID copied"</string>
@@ -299,6 +303,8 @@
   <string name="_SOS_Activated_8MuAK">"SOS activated"</string>
   <string name="_Button_1_Pushed_Long_Cz504">"Button pushed long"</string>
   <string name="_Button_1_Pushed_lW2d4">"Button pushed"</string>
+  <string name="___w">" "</string>
+  <string name="__">""</string>
   <string name="_____HOME_____24WOsh">""</string>
   <string name="_app_name_1k3Sbz">"BoatOfficer"</string>
   <string name="app_name">"BoatOfficer"</string>

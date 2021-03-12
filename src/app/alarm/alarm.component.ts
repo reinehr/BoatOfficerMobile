@@ -1,16 +1,16 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
-import {ScrollView, ScrollEventData} from 'tns-core-modules/ui/scroll-view';
+import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import * as TNSPhone from 'nativescript-phone';
-import { EventData } from 'tns-core-modules/data/observable';
-import { Switch } from 'tns-core-modules/ui/switch';
+import { EventData } from '@nativescript/core/data/observable';
+import { Switch } from '@nativescript/core/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
 import { LocalNotifications } from 'nativescript-local-notifications';
-import {StackLayout} from "tns-core-modules/ui/layouts/stack-layout";
-import {Page} from "tns-core-modules/ui/page";
+import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
+import {Page} from "@nativescript/core/ui/page";
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 

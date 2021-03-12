@@ -119,6 +119,10 @@
 "_Yes__Leave_25v2J7" = "Ja, ich gehe";
 "_Leave_this_boat_ZMQkmx" = "Von Bord gehen";
 "_Do_you_really_want_to_leave_this_boat___s___Z2ezym8" = "Möchtest du wirklich dieses Boot (%1$@) verlassen?";
+"_Yes__deactivate_Zbd08d" = "Ja, deaktivieren";
+"_Do_you_really_want_to_deactivate_push_notifications_for_this_boat___s___ZjuirB" = "Du möchtest keine Push-Nachrichten mehr erhalten für dieses Boot (%1$@)?";
+"_Yes__activate_Z7rKqA" = "Ja";
+"_Activate_push_notifications_for_this_boat___s___1weiCz" = "Du möchtest Push-Nachrichten erhalten für dieses Boot (%1$@)?";
 "_Note__Without_PRO_Upgrade__you_can_only_hire_one_guard__Z1RPRx" = "Hinweis: Ohne PRO Upgrade kannst du nur einen Wachmann zum Boot hinzufügen.";
 "_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr" = "Setze nun die BoatOfficer ID (%1$@) in einer E-Mail oder einem Messenger ein, um sie deinen Freunden zu senden.";
 "_BoatOfficer_ID_copied_RHX1P" = "BoatOfficer ID kopiert";
@@ -297,6 +301,8 @@
 "_SOS_Activated_8MuAK" = "SOS aktiviert";
 "_Button_1_Pushed_Long_Cz504" = "Knopf lange gedrückt";
 "_Button_1_Pushed_lW2d4" = "Knopf gedrückt";
+"___w" = " ";
+"__" = "";
 "_____HOME_____24WOsh" = "";
 "_app_name_1k3Sbz" = "BoatOfficer";
 "LOCALE" = "de";

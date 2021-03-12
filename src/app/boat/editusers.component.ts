@@ -6,7 +6,7 @@ import {DataService} from '~/app/shared/data.service';
 import {alarmSettingsDatatypeMap, alarmSettingsMap} from '~/app/shared/interface/alarm';
 import {stringify} from "@angular/compiler/src/util";
 import {localize} from "nativescript-localize";
-import {alert, confirm, action} from "tns-core-modules/ui/dialogs";
+import {alert, confirm, action} from "@nativescript/core/ui/dialogs";
 
 
 @Component({
@@ -46,7 +46,7 @@ export class EditusersComponent implements OnInit {
 
     }
 
-    changeSailorToGuard(userid, username, deviceid, lifeguard) {
+    changeSailorToGuard(userid, username, deviceid, lifeguard, getPush) {
         const options = {
             title: localize("Change role"),
             message: localize("Change role of %s from Sailor to Guard?", username),
@@ -55,12 +55,12 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'guard');
+                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'guard', getPush);
             }
         });
     }
 
-    changeGuardToSailor(userid, username, deviceid, lifeguard) {
+    changeGuardToSailor(userid, username, deviceid, lifeguard, getPush) {
         const options = {
             title: localize("Change role"),
             message: localize("Change role of %s from Guard to Sailor?", username),
@@ -69,12 +69,12 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'sailor');
+                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'sailor', getPush);
             }
         });
     }
 
-    changeUserRole(userid, username, deviceid, lifeguard) {
+    changeUserRole(userid, username, deviceid, lifeguard, getPush) {
         const options = {
             title: localize("Change role of %s?",username),
             message: "",
@@ -88,17 +88,17 @@ export class EditusersComponent implements OnInit {
                 console.log("Set user to new role: " + result);
                 if (result==localize("Sailor")) {
                     newrole = "sailor";
-                    this.apiService.setDeviceUserData(deviceid, userid, false, newrole);
+                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush);
                 }
                 else if (result==localize("Guard")){
                     newrole = "guard";
-                    this.apiService.setDeviceUserData(deviceid, userid, false, newrole);
+                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush);
                 }
             }
         });
     }
 
-    offboardUser(userid, username, deviceid)
+    offboardUser(userid, username, deviceid, getPush)
     {
         const options = {
             title: localize("Send aboard"),
@@ -108,12 +108,12 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, false, 'aboard');
+                this.apiService.setDeviceUserData(deviceid, userid, false, 'aboard', getPush);
             }
         });
     }
 
-    revokeLifeguardStatus(userid, username, deviceid, role)
+    revokeLifeguardStatus(userid, username, deviceid, role, getPush)
     {
         const options = {
             title: localize("Discharge Emergency Contact"),
@@ -123,12 +123,12 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, false, role);
+                this.apiService.setDeviceUserData(deviceid, userid, false, role, getPush);
             }
         });
     }
 
-    grantLifeguardStatus(userid, username, deviceid, role)
+    grantLifeguardStatus(userid, username, deviceid, role, getPush)
     {
         const options = {
             title: localize("Add Emergency Contact"),
@@ -138,7 +138,7 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, true, role);
+                this.apiService.setDeviceUserData(deviceid, userid, true, role, getPush);
             }
         });
     }

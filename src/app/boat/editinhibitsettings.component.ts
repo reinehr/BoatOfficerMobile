@@ -4,9 +4,9 @@ import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from '@angular/router';
 import {DataService} from '~/app/shared/data.service';
 import {alarmSettingsDatatypeMap, alarmSettingsDatatypeMapOrderedByIndex, alarmSettingsMap} from '~/app/shared/interface/alarm';
-import { DatePicker } from "tns-core-modules/ui/date-picker";
-import { TimePicker } from "tns-core-modules/ui/time-picker";
-import {isAndroid, isIOS} from "tns-core-modules/platform";
+import { DatePicker } from "@nativescript/core/ui/date-picker";
+import { TimePicker } from "@nativescript/core/ui/time-picker";
+import {isAndroid, isIOS} from "@nativescript/core/platform";
 
 
 @Component({

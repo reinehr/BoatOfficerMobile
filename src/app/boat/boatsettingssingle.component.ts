@@ -8,10 +8,10 @@ import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from "ngx-timeago";
 import {localize} from "nativescript-localize";
-import {alert, confirm} from "tns-core-modules/ui/dialogs";
+import {alert, confirm} from "@nativescript/core/ui/dialogs";
 import * as Clipboard from "nativescript-clipboard";
 import {ActivatedRoute} from "@angular/router";
-//import * as SocialShare from "nativescript-social-share";
+import * as SocialShare from "@nativescript/social-share";
 
 @Component({
     selector: 'app-boatsettings',
@@ -24,7 +24,6 @@ export class BoatsettingssingleComponent implements OnInit {
     sensorFieldKeys = Object.keys(alarmSettingsMap);
     dialogOpen = false;
     idDevice = 0;
-    device = null;
 
     constructor(
         private apiService: ApiService,
@@ -45,7 +44,6 @@ export class BoatsettingssingleComponent implements OnInit {
         }
         intl.changes.next();
 
-        this.device = dataService.deviceData[this.idDevice];
     }
 
     ngOnInit(): void {
@@ -73,6 +71,27 @@ export class BoatsettingssingleComponent implements OnInit {
         confirm(options).then( result => {
             if(result) {
                 this.apiService.leaveUserDevice(deviceid);
+            }
+        });
+    }
+
+    editGetPush(deviceid, boatname, getPush)
+    {
+        let options = {
+            title: localize("Activate push notifications for this boat (%s)?", boatname),
+            okButtonText: localize("Yes, activate"),
+            cancelButtonText: localize("Cancel"),
+        };
+        if (!getPush) {
+            options = {
+                title: localize("Do you really want to deactivate push notifications for this boat (%s)?", boatname),
+                okButtonText: localize("Yes, deactivate"),
+                cancelButtonText: localize("Cancel"),
+            };
+        }
+        confirm(options).then( result => {
+            if(result) {
+                this.apiService.editGetPush(deviceid, getPush);
             }
         });
     }

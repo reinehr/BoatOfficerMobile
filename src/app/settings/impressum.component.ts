@@ -2,9 +2,9 @@ import {Component, OnInit} from '@angular/core';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from "~/app/shared/data.service";
-import { alert } from "tns-core-modules/ui/dialogs";
+import { alert } from "@nativescript/core/ui/dialogs";
 import {localize} from "nativescript-localize";
-import * as utils from "tns-core-modules/utils/utils";
+import * as utils from "@nativescript/core/utils/utils";
 
 // import {BarcodeScanner} from 'nativescript-barcodescanner';
 

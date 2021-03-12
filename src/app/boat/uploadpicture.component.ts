@@ -4,8 +4,8 @@ import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from "@angular/router";
 import {DataService} from "~/app/shared/data.service";
-import {ImageSource, fromFile, fromResource, fromBase64} from "tns-core-modules/image-source";
-import {Folder, path, knownFolders} from "tns-core-modules/file-system";
+import {ImageSource, fromFile, fromResource, fromBase64} from "@nativescript/core/image-source";
+import {Folder, path, knownFolders} from "@nativescript/core/file-system";
 import { localize } from "nativescript-localize";
 
 

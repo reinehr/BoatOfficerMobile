@@ -20,8 +20,8 @@ module.exports = env => {
     // Add your custom Activities, Services and other Android app components here.
     const appComponents = env.appComponents || [];
     appComponents.push(...[
-        "tns-core-modules/ui/frame",
-        "tns-core-modules/ui/frame/activity",
+        "@nativescript/core/ui/frame",
+        "@nativescript/core/ui/frame/activity",
     ]);
 
     const platform = env && (env.android && "android" || env.ios && "ios" || env.platform);
@@ -65,14 +65,14 @@ module.exports = env => {
     const tsConfigPath = join(__dirname, tsConfigName);
     const hasRootLevelScopedModules = nsWebpack.hasRootLevelScopedModules({ projectDir: projectRoot });
     const hasRootLevelScopedAngular = nsWebpack.hasRootLevelScopedAngular({ projectDir: projectRoot });
-    let coreModulesPackageName = "tns-core-modules";
+    let coreModulesPackageName = "@nativescript/core";
     const alias = env.alias || {};
     alias['~'] = appFullPath;
 
     const compilerOptions = getCompilerOptionsFromTSConfig(tsConfigPath);
     if (hasRootLevelScopedModules) {
         coreModulesPackageName = "@nativescript/core";
-        alias["tns-core-modules"] = coreModulesPackageName;
+        alias["@nativescript/core"] = coreModulesPackageName;
         nsWebpack.processTsPathsForScopedModules({ compilerOptions });
     }
 
@@ -87,9 +87,9 @@ module.exports = env => {
     const entries = env.entries || {};
     entries.bundle = entryPath;
 
-    const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("tns-core-modules") > -1);
+    const areCoreModulesExternal = Array.isArray(env.externals) && env.externals.some(e => e.indexOf("@nativescript/core") > -1);
     if (platform === "ios" && !areCoreModulesExternal) {
-        entries["tns_modules/tns-core-modules/inspector_modules"] = "inspector_modules";
+        entries["tns_modules/@nativescript/core/inspector_modules"] = "inspector_modules";
     };
 
     const ngCompilerTransformers = [];
@@ -162,7 +162,7 @@ module.exports = env => {
         },
         resolve: {
             extensions: [".ts", ".js", ".scss", ".css"],
-            // Resolve {N} system modules from tns-core-modules
+            // Resolve {N} system modules from @nativescript/core
             modules: [
                 resolve(__dirname, `node_modules/${coreModulesPackageName}`),
                 resolve(__dirname, "node_modules"),

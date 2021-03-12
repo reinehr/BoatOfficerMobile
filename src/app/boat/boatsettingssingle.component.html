@@ -8,7 +8,7 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
         <StackLayout *ngIf="dataService.dataLoaded">
-            <StackLayout paddingBottom="15">
+            <StackLayout paddingBottom="15" *ngFor="let device of [dataService.deviceData[this.idDevice]]">
                 <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                 <GridLayout rows="10"></GridLayout>
                 <StackLayout class="alarm-card"
@@ -294,12 +294,18 @@
                     </StackLayout>
                 </StackLayout>
                 <Button
+                        text="{{(device.getPush ? ('Deactivate push notifications' | L) : ('Activate push notifications' | L))}}"
+                        class="wide-button"
+                        *ngIf="device.role != 'officer'"
+                        (tap)="editGetPush(device.id, device.name, !device.getPush)">
+                </Button>
+                <Button marginTop="10"
                         text="{{'Leave this boat' | L}}"
                         class="wide-button"
                         *ngIf="device.role != 'officer'"
                         (tap)="leaveThisBoat(device.id, device.name)">
                 </Button>
-                <Button
+                <Button marginTop="10"
                         text="{{'Invite Crew' | L}}"
                         class="wide-button"
                         *ngIf="device.role == 'officer'"

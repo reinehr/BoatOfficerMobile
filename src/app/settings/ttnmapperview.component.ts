@@ -2,12 +2,12 @@ import {Component, OnInit} from '@angular/core';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from "~/app/shared/data.service";
-import { alert } from "tns-core-modules/ui/dialogs";
+import { alert } from "@nativescript/core/ui/dialogs";
 import {localize} from "nativescript-localize";
 import {ApiService} from "~/app/shared/api.service";
-import {hasKey, remove} from "tns-core-modules/application-settings";
+import {hasKey, remove} from "@nativescript/core/application-settings";
 import * as geolocation from "nativescript-geolocation";
-import { Accuracy } from "tns-core-modules/ui/enums"; // used to describe at what accuracy the location should be get
+import { Accuracy } from "@nativescript/core/ui/enums"; // used to describe at what accuracy the location should be get
 
 
 @Component({

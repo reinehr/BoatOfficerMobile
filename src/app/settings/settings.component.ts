@@ -1,7 +1,7 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
 import {RouterExtensions} from 'nativescript-angular/router';
-import {hasKey, getString} from 'tns-core-modules/application-settings';
+import {hasKey, getString} from '@nativescript/core/application-settings';
 
 @Component({
     selector: 'app-settings',

@@ -4,13 +4,13 @@ import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '~/app/shared/api.service';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {MapView, Marker, Position, Polyline} from 'nativescript-google-maps-sdk';
-import { Color } from 'tns-core-modules/color';
-import {ImageSource} from "tns-core-modules/image-source";
-import {Image} from "tns-core-modules/ui/image";
-import {ScrollEventData, ScrollView} from "tns-core-modules/ui/scroll-view";
-import {Page} from "tns-core-modules/ui/page";
-import {isAndroid } from 'tns-core-modules/platform';
-import {LoadEventData, WebView} from "tns-core-modules/ui/web-view";
+import { Color } from '@nativescript/core/color';
+import {ImageSource} from "@nativescript/core/image-source";
+import {Image} from "@nativescript/core/ui/image";
+import {ScrollEventData, ScrollView} from "@nativescript/core/ui/scroll-view";
+import {Page} from "@nativescript/core/ui/page";
+import {isAndroid } from '@nativescript/core/platform';
+import {LoadEventData, WebView} from "@nativescript/core/ui/web-view";
 
 @Component({
     selector: 'app-webcam',

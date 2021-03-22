@@ -39,6 +39,8 @@
                                                 *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 ||
                                                 dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 ||
                                                 dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                                                (dataService.sensorFieldMap[sensorField].type.length == 0 ||
+                                                dataService.sensorFieldMap[sensorField].type.indexOf(device.type) >= 0) &&
                                                 dataService.boatStatus[device.id].sensor_data[sensorField] != null &&
                                                     sensorField != 'time'"
                                                 [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">

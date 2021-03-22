@@ -5,6 +5,9 @@ export interface Sensordata {
     ExtBatt2Volt: number;
     IntBattVolt: number;
     IntTemperature: number;
+    PressureHektoPascal: number;
+    HumidityPercent: number;
+    BrightnessPercent: number;
     MessageReason: number;
     SensorALoopVolt: number;
     SensorAMulti1Volt: number;
@@ -394,6 +397,9 @@ export interface SensordataTime {
     device: { value: number, time: Date };
     ChargingActive: { value: boolean, time: Date };
     ExtBatt1Volt: { value: number, time: Date };
+    PressureHektoPascal: { value: number, time: Date };
+    HumidityPercent: { value: number, time: Date };
+    BrightnessPercent: { value: number, time: Date };
     ExtBatt2Volt: { value: number, time: Date };
     IntBattVolt: { value: number, time: Date };
     IntTemperature: { value: number, time: Date };
@@ -433,6 +439,9 @@ export interface BoatStatus {
             'ExtBatt2Volt': number,
             'IntBattVolt': number,
             'IntTemperature': number,
+            'PressureHektoPascal': number,
+            'HumidityPercent': number,
+            'BrightnessPercent': number,
             'PosMessageSubstitute': boolean,
             'SensorALoopVolt': number,
             'SensorAMulti1Volt': number,
@@ -448,6 +457,9 @@ export interface BoatStatus {
             'ExtBatt2Volt'?: boolean,
             'IntBattVolt'?: boolean,
             'IntTemperature'?: boolean,
+            'PressureHektoPascal'?: boolean,
+            'HumidityPercent'?: boolean,
+            'BrightnessPercent'?: boolean,
             'PosMessageSubstitute'?: boolean,
             'SensorALoopVolt'?: boolean,
             'SensorAMulti1Volt'?: boolean,
@@ -500,6 +512,9 @@ export interface BoatHistory {
             'ExtBatt2Volt': number,
             'IntBattVolt': number,
             'IntTemperature': number,
+            'PressureHektoPascal': number,
+            'HumidityPercent': number,
+            'BrightnessPercent': number,
             'PosMessageSubstitute': boolean,
             'SensorALoopVolt': number,
             'SensorAMulti1Volt': number,
@@ -512,12 +527,15 @@ export interface BoatHistory {
     };
 }
 
-export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, name_by_cable: string[], majorStep: number, show_history: boolean, cable: string[] } } = {
-    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', name_by_cable: [], majorStep: 0, show_history: false, cable: []},
-    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', name_by_cable: ['Voltage Extern Battery', 'Voltage Extern Battery 1'], majorStep: 5, show_history: true, cable: ['SINGLE', 'DOUBLE']},
-    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB']},
-    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', name_by_cable: [], majorStep: 5, show_history: true, cable: []},
-    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, name_by_cable: string[], majorStep: number, show_history: boolean, cable: string[], type: string[] } } = {
+    time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', name_by_cable: [], majorStep: 0, show_history: false, cable: [], type: []},
+    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', name_by_cable: ['Voltage Extern Battery', 'Voltage Extern Battery 1'], majorStep: 5, show_history: true, cable: ['SINGLE', 'DOUBLE'], type: ['BoatOfficer']},
+    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB'], type: ['BoatOfficer']},
+    IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', name_by_cable: [], majorStep: 5, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
+    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
+    PressureHektoPascal: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: ' hPa', filter: '', name: 'Pressure in hectopascal', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    HumidityPercent: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: '%', filter: '', name: 'Humidity', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    BrightnessPercent: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: "%", filter: '', name: 'Brightness', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
     // ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
     // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
     // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
@@ -541,5 +559,5 @@ export const historyInterval: {id: number, days: number, name: string, step: num
     {id: 2, days: 7.0,  name: '1W', step: 1,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 7)), stop: new Date()}},
     {id: 3, days: 31.0, name: '1M', step: 2,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 31)), stop: new Date()}},
     {id: 4, days: 92.0, name: '3M', step: 5,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 92)), stop: new Date()}},
-    {id: 5, days: 365.0, name: '1J', step: 31,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 365)), stop: new Date()}},
+    {id: 5, days: 365.0, name: '1Y', step: 31,  stepUnit: 'Day',  sensorData: {sliceStart: 0, sliceStop: 0}, positionData: {sliceStart: 0, sliceStop: 0}, dateInterval: {start: new Date(new Date().getTime() - (1000 * 60 * 60 * 24 * 365)), stop: new Date()}},
 ];

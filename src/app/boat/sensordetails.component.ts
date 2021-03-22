@@ -47,7 +47,7 @@ export class SensordetailsComponent implements OnInit {
 
     ngOnInit(): void {
         console.log("Called alarm field: "+this.field);
-        if (alarmSettingsMap[this.field])
+        if (alarmSettingsMap[this.field] && this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id] && this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key] && this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key].value_device)
         {
             this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key].value_device});
             this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': this.dataService.alarmSettings[this.dataService.deviceData[this.idDevice].id][alarmSettingsMap[this.field][0].key].value_device});

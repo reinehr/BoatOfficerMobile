@@ -94,6 +94,7 @@
 "_Upload_Image_1uNJcH" = "Bild hochladen";
 "_Pick_Image_Z1H1rLN" = "Bild wählen";
 "_PICK_BOAT_IMAGE_2oVDWq" = "BILD WÄHLEN";
+"_1Y_qm" = "1J";
 "_3D_r2" = "3T";
 "_1D_q1" = "1T";
 "Save" = "Speichern";
@@ -239,6 +240,9 @@
 "_GPS_Reception_Z1yTsh" = "GPS Empfang";
 "POSITION" = "POSITION";
 "_____MAP______Z2fjHjq" = "";
+"Brightness" = "Helligkeit";
+"Humidity" = "Relative Luftfeuchtigkeit";
+"_Pressure_in_hectopascal_Z2fMuRX" = "Luftdruck";
 "_Intern_Temperature_ZF40Gb" = "Interne Temperatur";
 "_Charging_active_ZbDBT5" = "Akku wird geladen";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Spannung interner Akku";

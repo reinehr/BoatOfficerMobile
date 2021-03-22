@@ -15,19 +15,19 @@ import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
 import {tap} from 'rxjs/operators';
 import {logger} from 'codelyzer/util/logger';
-import {getString, hasKey} from 'tns-core-modules/application-settings';
+import {getString, hasKey} from '@nativescript/core/application-settings';
 import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
-import {alert} from 'tns-core-modules/ui/dialogs';
+import {alert} from '@nativescript/core/ui/dialogs';
 import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 import { localize } from 'nativescript-localize';
-import {device} from 'tns-core-modules/platform';
+import {device} from '@nativescript/core/platform';
 
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
-import {Folder, path, knownFolders} from 'tns-core-modules/file-system';
+import {Folder, path, knownFolders} from '@nativescript/core';
 // const fs = require('file-system');
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
@@ -393,12 +393,13 @@ export class ApiService {
         }
     }
 
-    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {
+    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string, getPush: boolean) {
         this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
                 device_id: idDevice,
                 user_id: idUser,
                 role: role,
-                lifeguard: lifeguard
+                lifeguard: lifeguard,
+                getPush: getPush
             }
             , {
                 headers: this.getHeader()
@@ -419,7 +420,20 @@ export class ApiService {
         });
     }
 
-    getIntTemperatureHistory(device: number, days: number) {
+    editGetPush(idDevice: number, getPush: boolean) {
+        console.log('Leave Device ' + idDevice);
+        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'edit_get_push/', {
+                device_id: idDevice,
+                getPush: getPush
+            }
+            , {
+                headers: this.getHeader()
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
+    getIntTemperatureHistoryDepricated(device: number, days: number) {
         return this.httpClient.post<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
         (this.baseSensorUrl + 'get_sensor_history_by_field/', {
                 field: 'IntTemperature',
@@ -437,7 +451,7 @@ export class ApiService {
         }));
     }
 
-    getSensorHistoryByField(sensorField: string, device: number, days: number) {
+    getSensorHistoryByFieldDepricated(sensorField: string, device: number, days: number) {
 
         console.log(`Token1: ${this.token}`);
         console.log(`PushToken1: ${getString('push_token', '')}`);
@@ -459,11 +473,11 @@ export class ApiService {
         }));
     }
 
-    getSensorHistory(sensorField: string, device: number, days: number) {
+    getSensorHistoryDepricated(sensorField: string, device: number, days: number) {
 
         console.log(`Token1: ${this.token}`);
         console.log(`PushToken1: ${getString('push_token', '')}`);
-        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_data/'}`);
+        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_data_depricated/'}`);
         return this.httpClient.post<{
             'device_id': number,
             'device_name': string,
@@ -474,7 +488,7 @@ export class ApiService {
                 [others: string]: { 'data': number, 'time': string }
             }
         }[]>
-        (this.baseSensorUrl + 'get_sensor_data/', {
+        (this.baseSensorUrl + 'get_sensor_data_depricated/', {
                 field: sensorField,
                 device,
                 days,

@@ -96,6 +96,7 @@
   <string name="_Upload_Image_1uNJcH">"Bild hochladen"</string>
   <string name="_Pick_Image_Z1H1rLN">"Bild wählen"</string>
   <string name="_PICK_BOAT_IMAGE_2oVDWq">"BILD WÄHLEN"</string>
+  <string name="_1Y_qm">"1J"</string>
   <string name="_3D_r2">"3T"</string>
   <string name="_1D_q1">"1T"</string>
   <string name="Save">"Speichern"</string>
@@ -241,6 +242,9 @@
   <string name="_GPS_Reception_Z1yTsh">"GPS Empfang"</string>
   <string name="POSITION">"POSITION"</string>
   <string name="_____MAP______Z2fjHjq">""</string>
+  <string name="Brightness">"Helligkeit"</string>
+  <string name="Humidity">"Relative Luftfeuchtigkeit"</string>
+  <string name="_Pressure_in_hectopascal_Z2fMuRX">"Luftdruck"</string>
   <string name="_Intern_Temperature_ZF40Gb">"Interne Temperatur"</string>
   <string name="_Charging_active_ZbDBT5">"Akku wird geladen"</string>
   <string name="_Voltage_Intern_Battery_Z1PhXWl">"Spannung interner Akku"</string>

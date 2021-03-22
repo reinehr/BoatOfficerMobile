@@ -94,6 +94,7 @@
 "_Upload_Image_1uNJcH" = "Upload Image";
 "_Pick_Image_Z1H1rLN" = "Pick Image";
 "_PICK_BOAT_IMAGE_2oVDWq" = "PICK BOAT IMAGE";
+"_1Y_qm" = "1Y";
 "_3D_r2" = "3D";
 "_1D_q1" = "1D";
 "Save" = "Save";
@@ -239,6 +240,9 @@
 "_GPS_Reception_Z1yTsh" = "GPS Reception";
 "POSITION" = "POSITION";
 "_____MAP______Z2fjHjq" = "";
+"Brightness" = "Brightness";
+"Humidity" = "Relative humidity";
+"_Pressure_in_hectopascal_Z2fMuRX" = "Atmospheric pressure";
 "_Intern_Temperature_ZF40Gb" = "Intern Temperature";
 "_Charging_active_ZbDBT5" = "Charging active";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Voltage Intern Battery";

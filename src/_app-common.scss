@@ -393,6 +393,18 @@ $buttons_count: 6;
     vertical-align: center;
 }
 
+.alarm-symbol-wi {
+    font-family: 'Weather Icons', 'weathericons', 'weathericons-regular-webfont';
+    // background-color: #091524;
+    // color: orange;
+    font-weight: 400;
+    font-size: 24px;
+    text-align: center;
+    width: 50pt;
+    vertical-align: center;
+    padding-right: 15;
+}
+
 .alarm-symbol-fas {
     font-family: "Font Awesome 5 Free", "fa-solid-900";
     font-weight: 400;

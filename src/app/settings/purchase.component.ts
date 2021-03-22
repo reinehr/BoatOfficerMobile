@@ -1,9 +1,9 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from '~/app/shared/data.service';
 import {ApiService} from "~/app/shared/api.service";
-import {Page} from '@nativescript/core/ui/page/page';
+import {Page} from '@nativescript/core/ui/page';
 import { alert } from '@nativescript/core/ui/dialogs';
 import {localize} from 'nativescript-localize';
 import * as applicationSettings from '@nativescript/core/application-settings';

@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {ApiService} from '~/app/shared/api.service';
@@ -62,6 +62,11 @@ export class BoatsettingssingleComponent implements OnInit {
     }
 
     leaveThisBoat(deviceid, boatname)
+    {
+        SocialShare.shareText("BoatOfficer ID copied to clipboard.");
+    }
+
+    leaveThisBoatOrig(deviceid, boatname)
     {
         const options = {
             title: localize("Do you really want to leave this boat (%s)?", boatname),

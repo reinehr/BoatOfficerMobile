@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes } from '@angular/router';
-import { NSEmptyOutletComponent } from 'nativescript-angular';
-import { NativeScriptRouterModule } from 'nativescript-angular/router';
+import { NSEmptyOutletComponent } from '@nativescript/angular';
+import { NativeScriptRouterModule } from '@nativescript/angular';
 import {AlarmComponent} from "~/app/alarm/alarm.component";
 import {AppComponent} from "~/app/app.component";
 import {HomeComponent} from "~/app/home/home.component";

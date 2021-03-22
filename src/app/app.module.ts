@@ -1,14 +1,14 @@
-import {NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
+import {Injectable, NgModule, NO_ERRORS_SCHEMA} from '@angular/core';
 import { NativeScriptLocalizeModule } from "nativescript-localize/angular";
-import {NativeScriptModule} from 'nativescript-angular/nativescript.module';
-import {NativeScriptFormsModule} from 'nativescript-angular/forms';
+import {NativeScriptModule} from '@nativescript/angular';
+import {NativeScriptFormsModule} from '@nativescript/angular';
 import {ReactiveFormsModule} from '@angular/forms';
 
 import {AppRoutingModule} from './app-routing.module';
 import {AppComponent} from './app.component';
 import { AlarmComponent } from "./alarm/alarm.component";
 
-import {NativeScriptHttpClientModule} from 'nativescript-angular/http-client';
+import {NativeScriptHttpClientModule} from '@nativescript/angular';
 import {TimeagoModule, TimeagoIntl, TimeagoFormatter, TimeagoCustomFormatter} from 'ngx-timeago';
 
 // GMSServices.MapView
@@ -47,7 +47,7 @@ if (platform.isIOS) {
 // import { CookieService } from 'ngx-cookie-service';
 declare var GMSServices: any;
 /*
-import firebase = require('nativescript-plugin-firebase');
+import firebase = require('@nativescript/firebase');
 
 firebase
     .init()
@@ -55,6 +55,7 @@ firebase
     .catch(error => console.error(`Error: ${error}`));
 */
 
+@Injectable()
 export class MyIntl extends TimeagoIntl {
 // do extra stuff here...
 }
@@ -94,3 +95,18 @@ export class MyIntl extends TimeagoIntl {
 })
 export class AppModule {
 }
+
+// Work around incompatibility with getUIView() function in AccessibilityHelper.ios.js
+// in nativescript-accessibility-ext module which *always* uses `.ios`, triggering a crash.
+Object.defineProperty(
+    require("nativescript-google-maps-sdk").MapView.prototype,
+    "ios",
+    {
+        get() {
+            return this.nativeView;
+            // throw new Error('Now use instance.nativeView instead of instance.ios');
+        },
+        enumerable: true,
+        configurable: true,
+    }
+);

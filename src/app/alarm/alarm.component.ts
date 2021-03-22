@@ -1,5 +1,5 @@
 import {AfterViewInit, Component, OnInit} from '@angular/core';
-import {registerElement} from 'nativescript-angular/element-registry';
+import {registerElement} from '@nativescript/angular';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
@@ -8,7 +8,7 @@ import * as TNSPhone from 'nativescript-phone';
 import { EventData } from '@nativescript/core/data/observable';
 import { Switch } from '@nativescript/core/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
-import { LocalNotifications } from 'nativescript-local-notifications';
+import { LocalNotifications } from '@nativescript/local-notifications';
 import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
 import {Page} from "@nativescript/core/ui/page";
 

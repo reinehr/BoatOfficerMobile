@@ -1,12 +1,12 @@
 import {Component, ElementRef, OnInit, ViewChild} from '@angular/core';
 import {ApiService} from '../shared/api.service';
 import {AuthService} from '~/app/shared/auth.service';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {DataService} from '~/app/shared/data.service';
 import {alert} from '@nativescript/core/ui/dialogs';
 import {localize} from 'nativescript-localize';
-import { registerElement } from "nativescript-angular";
-registerElement("PreviousNextView", () => require("nativescript-iqkeyboardmanager").PreviousNextView);
+import { registerElement } from "@nativescript/angular";
+registerElement("PreviousNextView", () => require("@nativescript/iqkeyboardmanager").PreviousNextView);
 
 
 @Component({

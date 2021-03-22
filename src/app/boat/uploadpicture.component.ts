@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import * as imagepicker from 'nativescript-imagepicker';
 import {ApiService} from '~/app/shared/api.service';
 import {ActivatedRoute} from "@angular/router";

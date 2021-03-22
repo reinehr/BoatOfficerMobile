@@ -1,6 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {Router} from '@angular/router';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {EventData} from '@nativescript/core/data/observable';
 import {Switch} from '@nativescript/core/ui/switch';
 import {ListPicker} from '@nativescript/core/ui/list-picker';

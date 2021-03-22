@@ -3,7 +3,7 @@ import {
     OnInit,
     AfterViewInit
 } from '@angular/core';
-import {Page} from '@nativescript/core/ui/page/page';
+import {Page} from '@nativescript/core/ui/page';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
 import {MapView, Marker, Position, Polyline} from 'nativescript-google-maps-sdk';
 import {Subscription} from 'rxjs';
@@ -12,12 +12,14 @@ import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from 'ngx-timeago';
 import {localize} from 'nativescript-localize';
-import {registerElement} from 'nativescript-angular/element-registry';
+import {registerElement} from '@nativescript/angular';
 import {ScrollEventData, ScrollView} from '@nativescript/core/ui/scroll-view';
+import {PullToRefresh} from "@nstudio/nativescript-pulltorefresh";
+import {ScrollViewBase} from "@nativescript/core/ui/scroll-view/scroll-view-common";
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
 import {isAndroid } from '@nativescript/core/platform';
 import { AnimationCurve } from '@nativescript/core/ui/enums';
-import { getViewById } from '@nativescript/core/ui/core/view';
+import { getViewById } from '@nativescript/core/ui';
 import { EventData } from '@nativescript/core/data/observable';
 import { Image } from '@nativescript/core/ui/image';
 import { ImageSource } from '@nativescript/core/image-source';
@@ -239,40 +241,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                 html.clientWidth, html.scrollWidth, html.offsetWidth);`;
             if (webView.ios) {
                 //webView.ios.scrollView.scrollEnabled = false;
-                webView.ios.evaluateJavaScriptCompletionHandler(jsStr,
-                    (
-                        result,
-                        error
-                    ) => {
-                        if (error) {
-                            console.log("error...");
-                        } else if (result) {
-                            //webView.parent.effectiveHeight = result;
-                            let id = webView.id;
-                            //console.log(webView.parent.effectiveHeight);
-                            //console.log(webView.height);
-                            if (!this.webcamWidth[id]) {
-                                this.webcamWidth[id] = 295;
-                                this.webcamHeight[id] = 240;
-                                this.webcamScale[id] = 1;
-                                this.webcamScaled[id] = false;
-                                //console.log('result widht: ' + result)
-                                this.webcamScale[id] = webView.getActualSize().width / result;
-                                let height = webView.getActualSize().height / this.webcamScale[id];
-                                //console.log('new height: ' + height)
-                                this.webcamHeight[id] = height;
-                                this.webcamWidth[id] = result;
-                                webView.reload();
-                            } else if (!this.webcamScaled[id]) {
-                                webView.scaleX = this.webcamScale[id];
-                                webView.scaleY = this.webcamScale[id];
-                                webView.translateY = -(this.webcamHeight[id] / 2 - this.webcamHeight[id] * this.webcamScale[id] / 2);
-                                webView.translateX = -(this.webcamWidth[id] / 2 - this.webcamWidth[id] * this.webcamScale[id] / 2);
-                                this.webcamScaled[id] = true;
-                                // this.changeDetectorRef.detectChanges();
-                            }
-                        }
-                    });
+
             } else if (webView.android) {
                 this.webcamScaled[webView.id] = true;
                 // Works only on Android 19 and above

@@ -1,6 +1,6 @@
 import {Component, ElementRef, OnInit, ViewChild, Inject} from '@angular/core';
 import {ApiService} from '../shared/api.service';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {localize} from "nativescript-localize";
 
 // import {BarcodeScanner} from 'nativescript-barcodescanner';

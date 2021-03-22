@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {ActivatedRoute} from '@angular/router';
 import {ApiService} from '~/app/shared/api.service';
 import {DataService, DeviceAlarmDataFormat} from '~/app/shared/data.service';
@@ -72,40 +72,6 @@ export class WebcamComponent implements OnInit {
                 html.clientWidth, html.scrollWidth, html.offsetWidth);`;
         if (webView.ios) {
             //webView.ios.scrollView.scrollEnabled = false;
-            webView.ios.evaluateJavaScriptCompletionHandler(jsStr,
-                (
-                    result,
-                    error
-                ) => {
-                    if (error) {
-                        console.log("error...");
-                    } else if (result) {
-                        //webView.parent.effectiveHeight = result;
-                        let id = webView.id;
-                        //console.log(webView.parent.effectiveHeight);
-                        //console.log(webView.height);
-                        if (!this.webcamWidth[order]) {
-                            this.webcamWidth[order] = 295;
-                            this.webcamHeight[order] = 240;
-                            this.webcamScale[order] = 1;
-                            this.webcamScaled[order] = false;
-                            //console.log('result widht: ' + result)
-                            this.webcamScale[order] = webView.getActualSize().width / result;
-                            let height = webView.getActualSize().height / this.webcamScale[order];
-                            //console.log('new height: ' + height)
-                            this.webcamHeight[order] = height;
-                            this.webcamWidth[order] = result;
-                            webView.reload();
-                        } else if (!this.webcamScaled[order]) {
-                            webView.scaleX = this.webcamScale[order];
-                            webView.scaleY = this.webcamScale[order];
-                            webView.translateY = -(this.webcamHeight[order] / 2 - this.webcamHeight[order] * this.webcamScale[order] / 2);
-                            webView.translateX = -(this.webcamWidth[order] / 2 - this.webcamWidth[order] * this.webcamScale[order] / 2);
-                            this.webcamScaled[order] = true;
-                            // this.changeDetectorRef.detectChanges();
-                        }
-                    }
-                });
         } else if (webView.android) {
             this.webcamScaled[order] = true;
         }

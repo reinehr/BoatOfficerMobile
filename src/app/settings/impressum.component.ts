@@ -1,5 +1,5 @@
 import {Component, OnInit} from '@angular/core';
-import {RouterExtensions} from 'nativescript-angular/router';
+import {RouterExtensions} from '@nativescript/angular';
 import {AuthService} from '~/app/shared/auth.service';
 import {DataService} from "~/app/shared/data.service";
 import { alert } from "@nativescript/core/ui/dialogs";

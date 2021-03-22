@@ -1,6 +1,6 @@
 import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import {DataService, DeviceAlarmDataFormat, SensorDataHistory} from '~/app/shared/data.service';
-import {registerElement} from 'nativescript-angular/element-registry';
+import {registerElement} from '@nativescript/angular';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
 import {Subscription} from 'rxjs';

@@ -7,8 +7,8 @@ import {alert} from '@nativescript/core/ui/dialogs';
 // import {User} from '~/app/auth/user.model';
 import {getString, setString, hasKey, remove} from '@nativescript/core/application-settings';
 import {localize} from 'nativescript-localize';
-import {firebase} from 'nativescript-plugin-firebase/firebase-common';
-require('nativescript-plugin-firebase/firebase-common');
+import {firebase} from '@nativescript/firebase/firebase-common';
+require('@nativescript/firebase/firebase-common');
 const FIREBASE_API_KEY = 'AIzaSyAJ-aGPt9y4MPIdBpdCEBGhRTlzZp695M0';
 
 interface AuthResponseData {

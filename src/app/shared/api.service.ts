@@ -15,19 +15,19 @@ import {DeviceAlarmDataFormat} from '~/app/shared/data.service';
 import {catchError, switchMap} from 'rxjs/internal/operators';
 import {tap} from 'rxjs/operators';
 import {logger} from 'codelyzer/util/logger';
-import {getString, hasKey} from 'tns-core-modules/application-settings';
+import {getString, hasKey} from '@nativescript/core/application-settings';
 import {AlarmComponent} from '~/app/alarm/alarm.component';
 import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
-// import {getCurrentPushToken} from 'nativescript-plugin-firebase';
-import {alert} from 'tns-core-modules/ui/dialogs';
+// import {getCurrentPushToken} from '@nativescript/firebase';
+import {alert} from '@nativescript/core/ui/dialogs';
 import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 import { localize } from 'nativescript-localize';
-import {device} from 'tns-core-modules/platform';
+import {device} from '@nativescript/core/platform';
 
 
 const bghttpModule = require('nativescript-background-http');
 const session = bghttpModule.session('image-upload');
-import {Folder, path, knownFolders} from 'tns-core-modules/file-system';
+import {Folder, path, knownFolders} from '@nativescript/core/file-system';
 // const fs = require('file-system');
 
 const FIREBASE_API_KEY = 'AIzaSyDqeKk0czvXBxuHu0Gqdyye34pSQNJK7Oo';
@@ -111,7 +111,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    // baseUrl = 'https://29c05bc52989.ngrok.io/';
+    //baseUrl = 'https://27a391aeb9e0.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -393,12 +393,13 @@ export class ApiService {
         }
     }
 
-    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string) {
+    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string, getPush: boolean) {
         this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
                 device_id: idDevice,
                 user_id: idUser,
                 role: role,
-                lifeguard: lifeguard
+                lifeguard: lifeguard,
+                getPush: getPush
             }
             , {
                 headers: this.getHeader()
@@ -411,6 +412,19 @@ export class ApiService {
         console.log('Leave Device ' + idDevice);
         let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'leave_device/', {
                 device_id: idDevice
+            }
+            , {
+                headers: this.getHeader()
+            }).subscribe(() => {
+            this.getDeviceData().subscribe();
+        });
+    }
+
+    editGetPush(idDevice: number, getPush: boolean) {
+        console.log('Leave Device ' + idDevice);
+        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'edit_get_push/', {
+                device_id: idDevice,
+                getPush: getPush
             }
             , {
                 headers: this.getHeader()

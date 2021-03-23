@@ -22,8 +22,8 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         {key: 'Shock Detected', name: 'Shock Detected', name_by_cable: [], icon: 'k', iconfont: 'bo', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
     ],
     Device: [
-        {key: 'Button 1 Pushed', name: 'Button 1 Pushed', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
-        {key: 'Button 1 Pushed Long', name: 'Button 1 Pushed Long', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: ['NEVER']},
+        {key: 'Button 1 Pushed', name: 'Button 1 Pushed', name_by_cable: [], icon: '', iconfont: 'far', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
+        {key: 'Button 1 Pushed Long', name: 'Button 1 Pushed Long', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
         {key: 'SOS Activated', name: 'SOS Activated', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
         {key: 'Internal Battery Voltage', name: 'Internal Battery Voltage', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
         {key: 'Position Jump', name: 'Position Jump', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: []},
@@ -155,7 +155,7 @@ export interface AlarmInhibitSettings {
 
 export const alarmByTypeMap: {[typeKey: string]: {title: string, name: string, name_by_cable: string[], priority: string, column_sensor_data: string, unit: string, type: string, cable: string[]}} = {
     'Button 1 Pushed': {title: 'Button', name: 'Button 1 Pushed', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed', cable: []},
-    'Button 1 Pushed Long': {title: 'Button', name: 'Button 1 Pushed Long', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long', cable: ['NEVER']},
+    'Button 1 Pushed Long': {title: 'Button', name: 'Button 1 Pushed Long', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Button Pushed Long', cable: []},
     'SOS Activated': {title: 'SOS', name: 'SOS Activated', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'SOS Activated', cable: []},
     'Internal Battery Voltage': {title: 'Voltage', name: 'Internal Battery Voltage', name_by_cable:[], priority: 'High', column_sensor_data: 'IntBattVolt', unit: ' V', type: 'Internal Battery Voltage', cable: []},
     'Shock Detected': {title: 'Shock', name: 'Shock Detected', name_by_cable:[], priority: 'High', column_sensor_data: '', unit: '', type: 'Shock Detected', cable: []},

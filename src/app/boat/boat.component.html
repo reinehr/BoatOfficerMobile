@@ -62,11 +62,11 @@
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='3V'"
-                                               [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + dataService.sensorFieldMap[sensorField].unit"
+                                               [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + ' ' + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='' || dataService.sensorFieldMap[sensorField].filter=='ChargingActive'"
-                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + dataService.sensorFieldMap[sensorField].unit"
+                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + ' ' + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
 
@@ -130,11 +130,11 @@
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter=='3V'"
-                                               [text]="(dataService.boatStatus[device.id].position_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].position_data[sensorField]) + dataService.gpsFieldMap[sensorField].unit"
+                                               [text]="(dataService.boatStatus[device.id].position_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].position_data[sensorField]) + ' ' + dataService.gpsFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter==''"
-                                               [text]="dataService.boatStatus[device.id].position_data[sensorField] + dataService.gpsFieldMap[sensorField].unit"
+                                               [text]="dataService.boatStatus[device.id].position_data[sensorField] + ' ' + dataService.gpsFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
 

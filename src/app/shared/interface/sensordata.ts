@@ -529,18 +529,18 @@ export interface BoatHistory {
 
 export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, name_by_cable: string[], majorStep: number, show_history: boolean, cable: string[], type: string[] } } = {
     time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', name_by_cable: [], majorStep: 0, show_history: false, cable: [], type: []},
-    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '3V', name: 'Voltage Extern Battery 1', name_by_cable: ['Voltage Extern Battery', 'Voltage Extern Battery 1'], majorStep: 5, show_history: true, cable: ['SINGLE', 'DOUBLE'], type: ['BoatOfficer']},
-    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB'], type: ['BoatOfficer']},
+    ExtBatt1Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: '3V', name: 'Voltage Extern Battery 1', name_by_cable: ['Voltage Extern Battery', 'Voltage Extern Battery 1'], majorStep: 5, show_history: true, cable: ['SINGLE', 'DOUBLE'], type: ['BoatOfficer']},
+    ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB'], type: ['BoatOfficer']},
     IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', name_by_cable: [], majorStep: 5, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
-    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: ' V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
-    PressureHektoPascal: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: ' hPa', filter: '', name: 'Pressure in hectopascal', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: 'V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
+    PressureHektoPascal: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: 'hPa', filter: '', name: 'Pressure in hectopascal', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
     HumidityPercent: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: '%', filter: '', name: 'Humidity', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
     BrightnessPercent: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: "%", filter: '', name: 'Brightness', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
     // ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
     // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
-    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Loop', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
-    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 1', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
-    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: ' V', filter: '', name: 'Voltage Multi A 2', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Loop', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // SensorAMulti1Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Multi A 1', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
+    // SensorAMulti2Volt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Multi A 2', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
     // StatusLoopA: {icon: '', iconfont: 'fas', alarm: ['Loop Sensor A Closed', 'Loop Sensor A Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Loop A', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
     // StatusMultiA1: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 1 Closed', 'Multi Sensor A 1 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A1', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
     // StatusMultiA2: {icon: '', iconfont: 'fas', alarm: ['Multi Sensor A 2 Closed', 'Multi Sensor A 2 Opened'], datatype: 'bool', unit: '', filter: 'closed', name: 'Status Multi A2', name_by_cable: [], majorStep: 1, show_history: true, cable: []},
@@ -548,8 +548,8 @@ export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: str
 
 export const boatGpsMap: { [fieldName: string]: { icon: string, iconfont: string, alarm: string[], datatype: string, unit: string, filter: string, name: string, majorStep: number, show_history: boolean } } = {
     time: {icon: 'o', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'ago', name: 'Time', majorStep: 0, show_history: false},
-    speed: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: ' km/h', filter: '', name: 'Speed', majorStep: 10, show_history: true},
-    haccuracy: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: ' m', filter: '', name: 'Position Accuracy', majorStep: 10, show_history: true},
+    speed: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: 'km/h', filter: '', name: 'Speed', majorStep: 10, show_history: true},
+    haccuracy: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: 'm', filter: '', name: 'Position Accuracy', majorStep: 10, show_history: true},
     heading: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: '°', filter: '', name: 'Direction', majorStep: 45, show_history: false},
 };
 

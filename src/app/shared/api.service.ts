@@ -111,7 +111,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    // baseUrl = 'https://29c05bc52989.ngrok.io/';
+    // baseUrl = 'https://5cad825f29a0.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;

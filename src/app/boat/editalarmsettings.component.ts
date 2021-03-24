@@ -52,7 +52,7 @@ export class EditalarmsettingsComponent implements OnInit {
                     this.originalAlarmSettingIndex = this.listPicker.length;
                     this.selectedListPickerIndex = this.originalAlarmSettingIndex;
                 }
-                const listPickerString = stringify(i) + alarm.unit;
+                const listPickerString = stringify(i) + ' ' + alarm.unit;
                 this.listPicker.push(listPickerString);
                 if (listPickerString.length * 15 > this.listPickerWidth) {
                     this.listPickerWidth = listPickerString.length * 15;

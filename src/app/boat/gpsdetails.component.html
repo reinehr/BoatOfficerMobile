@@ -249,14 +249,14 @@
                         <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
                             <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col="2" row="1" rowSpan="2" text="Maximum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.value + ' ' + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
                             <Label col="3" row="2" [text]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].max.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
                         </GridLayout>
                         <GridLayout rows="5,*,*", columns="10,30,*,*,10" paddingBottom="10">
                             <GridLayout col="1" row="0" colSpan="3" borderTopWidth="1" borderTopColor="#d3d3d3"></GridLayout>
                             <Label col=1 row=1 rowSpan="2" text="" class="alarm-symbol-fas alarm-gray"></Label>
                             <Label col="2" row="1" rowSpan="2" text="Minimum" class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
-                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
+                            <Label col="3" row="1" [text]="dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.value + ' ' + dataService.gpsFieldMap[field].unit + ' '" class="alarm-blue pull-right font-weight-bold"></Label>
                             <Label col="3" row="2" [text]="(dataService.minMaxGps[dataService.deviceData[idDevice].id][selectedIntervalId][field].min.time | date : 'dd.MM.yyyy HH:mm')" class="c-grey-dark pull-right"></Label>
                         </GridLayout>
                     </StackLayout>

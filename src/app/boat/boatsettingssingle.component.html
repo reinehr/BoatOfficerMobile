@@ -58,7 +58,7 @@
                                                 <Label col="1"  [text]="(alarm.name_by_cable.length > 0 ? (alarm.cable.indexOf(device.external_voltage_cable) >= 0 ? alarm.name_by_cable[alarm.cable.indexOf(device.external_voltage_cable)] : alarm.name_by_cable[alarm.cable.indexOf(device.multisensor_cable)]) : alarm.name) | L"
                                                        class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
                                                 <Label col="2"  *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"
-                                                       [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"
+                                                       [text]="dataService.alarmSettings[device.id][alarm.key].value_device + ' ' + alarm.unit"
                                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                                                 <Label col="2"  *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"
                                                        [text]="(alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit | L)"
@@ -67,7 +67,7 @@
                                             <GridLayout paddingBottom="5"
                                                         *ngIf="dataService.alarmSettings[device.id][alarm.key].value_user != null && dataService.alarmSettings[device.id][alarm.key].value_user != dataService.alarmSettings[device.id][alarm.key].value_device">
                                                 <Label class="alarm-orange" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
-                                                       [text]="('Value changed to' | L) + ' ' + dataService.alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
+                                                       [text]="('Value changed to' | L) + ' ' + dataService.alarmSettings[device.id][alarm.key].value_user + ' ' + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
                                                        horizontalAlignment="center"></Label>
                                                 <Label class="alarm-orange" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
                                                        [text]="('Value changed to' | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].unit | L) + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"

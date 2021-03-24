@@ -44,7 +44,6 @@ export const cableSettingsDatatypeMap: { [dataTypeKey: string]: { [index: number
     multisensor_cable: {
         0: {value: 'NONE', name: localize('none')},
         1: {value: 'WATER', name: localize('water detection')},
-        2: {value: 'WEATHER', name: localize('weather')},
     },
 }
 

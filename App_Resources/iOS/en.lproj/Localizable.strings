@@ -116,6 +116,7 @@
 "upgrade_to_pro_for_feature" = "This is a Pro Feature. Please upgrade your app to Pro, to make use of this feature.";
 "please_test_sos_before_usage" = "Please test this feature before first usage. It is an additional help, it is no guaranteed means for the saving of boat and lifes.";
 "users_listed_here_sos" = "Users listed above will receive a SOS push notification, when you activate the SOS function by a long button push on the device (red light starts continuous blinking until deactivation by another long button push).";
+"note_about_requests" = "Users listed above are requesting to sign on your boat. Edit their role to guard or sailor so they can see your boat's data. You can revoke these roles any time or you can deny the request right away.\n\nThis feature is limited to one other crew member without the Pro subscription.";
 "Cancel" = "Cancel";
 "_Yes__Leave_25v2J7" = "Yes, Leave";
 "_Leave_this_boat_ZMQkmx" = "Leave this boat";

@@ -116,6 +116,7 @@
 "upgrade_to_pro_for_feature" = "Dies ist eine Pro Funktion. Bitte upgrade deine App zu Pro, um diese Funktion zu nutzen.";
 "please_test_sos_before_usage" = "Bitte teste diese Funktion vor der ersten Nutzung. Es ist eine Unterstützung, kein garantiertes Hilfsmittel um Boot und Leben zu retten.";
 "users_listed_here_sos" = "Oben aufgelistete Nutzer werden eine SOS Push-Nachricht bekommen, wenn du die SOS Funktion durch einen langen Knopfdruck am Gerät aktivierst (die rote LED blinkt dann bis zur Deaktivierung durch einen erneuten langen Tastendruck).";
+"note_about_requests" = "Oben aufgelistete Nutzer möchten auf deinem Boot anheuern. Bearbeite ihre Rolle zu Wachmann oder Matrose, sodass sie die Daten deines Bootes sehen können. Du kannst diese Rollen jederzeit widerrufen oder jetzt direkt die Anfrage ablehnen.\n\nDiese Funktion ist ohne Pro Abo auf ein weiteres Crew-Mitglied beschränkt.";
 "Cancel" = "Abbrechen";
 "_Yes__Leave_25v2J7" = "Ja, ich gehe";
 "_Leave_this_boat_ZMQkmx" = "Von Bord gehen";

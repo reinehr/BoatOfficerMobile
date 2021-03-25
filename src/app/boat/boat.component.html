@@ -23,12 +23,16 @@
                         <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
-                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *, 10" rows="45">
+                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *,40, 10" rows="45">
                             <Label col="1" class="alarm-symbol"
                                    text="M" pageTransition="slideLeft"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>
                             <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+                            <Label col="4" [text]="''" *ngIf="device.role == 'officer' && 0 != device.num_candidate"
+                                   [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []"
+                                   class="user-role-symbol-orange"></Label>
+
                         </GridLayout>
                         <StackLayout class="alarm-card"
                                      *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">

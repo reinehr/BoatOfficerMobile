@@ -3,7 +3,7 @@
     <Image [src]="'' + boat_image_small"
            class="boatoffice-boat-image"></Image>
   </GridLayout>
-  <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
+  <Label col="1" row="0" [text]="deviceType | L" class="c-white t-16 font-weight-bold" height="30"></Label>
   <Label col="1" row="1" [text]="boatname"
          class="alarm-blue t-16" height="30"></Label>
   <Label *ngIf="numberOfActiveAlarms && role != 'officer'" col="2" row="0" rowSpan="2" [text]="numberOfActiveAlarms"

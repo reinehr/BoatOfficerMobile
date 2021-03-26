@@ -24,7 +24,7 @@
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
-                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm" ]></boat-header>
+                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm"] [deviceType]="device.type"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="visible">
                         <StackLayout *ngFor="let alarmType of device.keyTypeActive">

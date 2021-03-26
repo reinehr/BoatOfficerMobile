@@ -99,7 +99,7 @@ export class BoatsettingssingleComponent implements OnInit {
     invitePersonsOnBoard(deviceIndex) {
         let boatofficer_id = "";
         //SocialShare.shareText("BoatOfficer ID copied to clipboard.", "Was willst du tun?");
-        boatofficer_id = this.dataService.deviceData[deviceIndex].serial_number_hex.substring(2).toUpperCase()+"-"+this.dataService.deviceData[deviceIndex].url_key.toUpperCase();
+        boatofficer_id = '';//this.dataService.deviceData[deviceIndex].serial_number_hex.substring(2).toUpperCase()+"-"+this.dataService.deviceData[deviceIndex].url_key.toUpperCase();
         Clipboard.setText(boatofficer_id);
         let messagetext = localize('Now, paste the BoatOfficer ID (%s) in an e-mail or messenger to send it to your friends.', boatofficer_id);
         if (!this.dataService.deviceData[deviceIndex].is_pro)

@@ -111,7 +111,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    // baseUrl = 'https://5cad825f29a0.ngrok.io/';
+    //baseUrl = 'https://112ef4491f57.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -245,12 +245,15 @@ export class ApiService {
                     for (const idAlarm in device.alarm) {
                         let alarm = device.alarm[idAlarm];
                         let type = alarm.type;
-                        let cableConnected = (alarmByTypeMap[type].cable.length == 0 ||
+                        console.log(alarm.type)
+                        let cableConnected = alarmByTypeMap[type] && (alarmByTypeMap[type].cable.length == 0 ||
                             alarmByTypeMap[type].cable.indexOf(device.multisensor_cable) >= 0 ||
-                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0);
-                        let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
+                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                            (alarmByTypeMap[type].dev_type.length == 0 ||
+                                alarmByTypeMap[type].dev_type.indexOf(device.type) >= 0);
 
                         if (cableConnected) {
+                            let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
                             if (!indexTypeActive[idDevice][type]) {
                                 indexTypeActive[idDevice][type] = 0;
                             }

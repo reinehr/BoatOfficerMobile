@@ -118,6 +118,7 @@
   <string name="upgrade_to_pro_for_feature">"Dies ist eine Pro Funktion. Bitte upgrade deine App zu Pro, um diese Funktion zu nutzen."</string>
   <string name="please_test_sos_before_usage">"Bitte teste diese Funktion vor der ersten Nutzung. Es ist eine Unterstützung, kein garantiertes Hilfsmittel um Boot und Leben zu retten."</string>
   <string name="users_listed_here_sos">"Oben aufgelistete Nutzer werden eine SOS Push-Nachricht bekommen, wenn du die SOS Funktion durch einen langen Knopfdruck am Gerät aktivierst (die rote LED blinkt dann bis zur Deaktivierung durch einen erneuten langen Tastendruck)."</string>
+  <string name="note_about_requests">"Oben aufgelistete Nutzer möchten auf deinem Boot anheuern. Bearbeite ihre Rolle zu Wachmann oder Matrose, sodass sie die Daten deines Bootes sehen können. Du kannst diese Rollen jederzeit widerrufen oder jetzt direkt die Anfrage ablehnen.\n\nDiese Funktion ist ohne Pro Abo auf ein weiteres Crew-Mitglied beschränkt."</string>
   <string name="Cancel">"Abbrechen"</string>
   <string name="_Yes__Leave_25v2J7">"Ja, ich gehe"</string>
   <string name="_Leave_this_boat_ZMQkmx">"Von Bord gehen"</string>
@@ -130,6 +131,8 @@
   <string name="_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr">"Setze nun die BoatOfficer ID (%1$s) in einer E-Mail oder einem Messenger ein, um sie deinen Freunden zu senden."</string>
   <string name="_BoatOfficer_ID_copied_RHX1P">"BoatOfficer ID kopiert"</string>
   <string name="_Invite_Crew_7xG4K">"Besatzung anheuern"</string>
+  <string name="_Activate_push_notifications_Z1mO15W">"Pushnachrichten aktivieren"</string>
+  <string name="_Deactivate_push_notifications_ZBYkQp">"Pushnachrichten deaktivieren"</string>
   <string name="_Discharge__s_as_emergency_contact__1FXbHp">"%1$s als Notfall Kontakt entlassen? Kontakt bleibt weiterhin Wachmann oder Matrose."</string>
   <string name="_Discharge_Emergency_Contact_1XG0Lm">"Notfall Kontakt beenden"</string>
   <string name="_List__s_as_emergency_contact__ZAwUpz">"%1$s als Notfall Kontakt hinzufügen?"</string>
@@ -242,6 +245,7 @@
   <string name="_GPS_Reception_Z1yTsh">"GPS Empfang"</string>
   <string name="POSITION">"POSITION"</string>
   <string name="_____MAP______Z2fjHjq">""</string>
+  <string name="_Reed_Sensor_Closed_ZRAXY4">"Magnetsensor"</string>
   <string name="Brightness">"Helligkeit"</string>
   <string name="Humidity">"Relative Luftfeuchtigkeit"</string>
   <string name="_Pressure_in_hectopascal_Z2fMuRX">"Luftdruck"</string>
@@ -269,6 +273,9 @@
   <string name="_Mark_as_solved_Z1fL0Du">"Als gelöst markieren"</string>
   <string name="_Call_Harbour_Z2adssO">"Hafen anrufen"</string>
   <string name="_only_active_2jJRcz">"nur aktive"</string>
+  <string name="_to_mslr_Z1pJbGC">"Wettersensor"</string>
+  <string name="_Weather_sensor_Z1OARJh">"Wettersensor"</string>
+  <string name="BoatOfficer">"Boot"</string>
   <string name="Boat">"Boot"</string>
   <string name="ALARMS">"ALARME"</string>
   <string name="_ALARM_HISTORY_ZHagc2">"ALARM HISTORIE"</string>
@@ -289,6 +296,7 @@
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARMSTATUS"</string>
   <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts)."</string>
   <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"."</string>
+  <string name="_Unknown_Alarm_1bfTB8">"unbekannter Alarm"</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi Sensor A 2 geöffnet"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi Sensor A 2 geschlossen"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi Sensor A 1 geöffnet"</string>

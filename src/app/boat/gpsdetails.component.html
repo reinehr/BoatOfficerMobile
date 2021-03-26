@@ -14,7 +14,7 @@
                         <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
                                class="boatoffice-boat-image"></Image>
                     </GridLayout>
-                    <Label col="1" row="0" [text]="'Boat' | L" class="c-white t-16 font-weight-bold" height="30"></Label>
+                    <Label col="1" row="0" [text]="dataService.deviceData[idDevice].type | L" class="c-white t-16 font-weight-bold" height="30"></Label>
                     <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
                            class="alarm-blue t-16" height="30"></Label>
                 </GridLayout>

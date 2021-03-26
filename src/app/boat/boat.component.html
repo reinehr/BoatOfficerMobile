@@ -20,7 +20,7 @@
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
-                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
+                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
                         <GridLayout class="boat-control-bar" columns="10, 40, 130, *,40, 10" rows="45">

@@ -9,7 +9,7 @@
     <PullToRefresh (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" *ngIf="initialized" iosOverflowSafeArea="false">
             <StackLayout>
-                <boat-header [boatname]="dataService.deviceData[idDevice].name" [boat_image_small]="dataService.deviceData[idDevice].boat_image_small" [role]="dataService.deviceData[idDevice].role"></boat-header>
+                <boat-header [boatname]="dataService.deviceData[idDevice].name" [boat_image_small]="dataService.deviceData[idDevice].boat_image_small" [role]="dataService.deviceData[idDevice].role" [deviceType]="dataService.deviceData[idDevice].type"></boat-header>
                 <StackLayout orientation="horizontal" height="60" marginTop="15">
                     <GridLayout
                             class="{{'interval-button' + (interval.id == selectedIntervalId ? '-selected' : '')}}" verticalAlignment="top" horizontalAlignment="center"

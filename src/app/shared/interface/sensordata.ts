@@ -15,6 +15,7 @@ export interface Sensordata {
     StatusLoopA: boolean;
     StatusMultiA1: boolean;
     StatusMultiA2: boolean;
+    ReedSensorClosed: boolean;
     altitude: number;
     hdop: number;
     isMultiGnssUsed: boolean;
@@ -410,6 +411,7 @@ export interface SensordataTime {
     StatusLoopA: { value: boolean, time: Date };
     StatusMultiA1: { value: boolean, time: Date };
     StatusMultiA2: { value: boolean, time: Date };
+    ReedSensorClosed: { value: boolean, time: Date };
     altitude: { value: number, time: Date };
     hdop: { value: number, time: Date };
     isMultiGnssUsed: { value: boolean, time: Date };
@@ -448,7 +450,8 @@ export interface BoatStatus {
             'SensorAMulti2Volt': number,
             'StatusLoopA': boolean,
             'StatusMultiA1': boolean,
-            'StatusMultiA2': boolean
+            'StatusMultiA2': boolean,
+            'ReedSensorClosed': boolean
         },
         'alarm_active'?: {
             'time'?: boolean,
@@ -466,7 +469,8 @@ export interface BoatStatus {
             'SensorAMulti2Volt'?: boolean,
             'StatusLoopA'?: boolean,
             'StatusMultiA1'?: boolean,
-            'StatusMultiA2'?: boolean
+            'StatusMultiA2'?: boolean,
+            'ReedSensorClosed'?: boolean
         },
         'weather'?: WeatherData,
         'weather_forecast'?: WeatherForecastData,
@@ -521,7 +525,8 @@ export interface BoatHistory {
             'SensorAMulti2Volt': number,
             'StatusLoopA': boolean,
             'StatusMultiA1': boolean,
-            'StatusMultiA2': boolean
+            'StatusMultiA2': boolean,
+            'ReedSensorClosed': boolean
         }[],
         'sensor_data_length'?: number,
     };
@@ -533,9 +538,10 @@ export const boatStatusMap: { [fieldName: string]: { icon: string, iconfont: str
     ExtBatt2Volt: {icon: 'K', iconfont: 'bo', alarm: ['Ext. Voltage'], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Extern Battery 2', name_by_cable: ['Voltage Extern Battery 2', 'Voltage USB'], majorStep:   0, show_history: true, cable: ['DOUBLE', 'USB'], type: ['BoatOfficer']},
     IntTemperature: {icon: 'n', iconfont: 'bo', alarm: ['Temperature'], datatype: 'float', unit: '°C', filter: '', name: 'Intern Temperature', name_by_cable: [], majorStep: 5, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
     IntBattVolt: {icon: '', iconfont: 'fas', alarm: ['Internal Battery Voltage'], datatype: 'float', unit: 'V', filter: 'ChargingActive', name: 'Voltage Intern Battery', name_by_cable: [], majorStep: 1, show_history: true, cable: [], type: ['BoatOfficer', 'to-mslr']},
-    PressureHektoPascal: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: 'hPa', filter: '', name: 'Pressure in hectopascal', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
-    HumidityPercent: {icon: '', iconfont: 'wi', alarm: [], datatype: 'float', unit: '%', filter: '', name: 'Humidity', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
-    BrightnessPercent: {icon: '', iconfont: 'fas', alarm: [], datatype: 'float', unit: "%", filter: '', name: 'Brightness', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    PressureHektoPascal: {icon: '', iconfont: 'wi', alarm: ['Pressure'], datatype: 'float', unit: 'hPa', filter: '', name: 'Pressure in hectopascal', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    HumidityPercent: {icon: '', iconfont: 'wi', alarm: ['Humidity'], datatype: 'float', unit: '%', filter: '', name: 'Humidity', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    BrightnessPercent: {icon: '', iconfont: 'fas', alarm: ['Brightness'], datatype: 'float', unit: "%", filter: '', name: 'Brightness', name_by_cable: [], majorStep: 10, show_history: true, cable: [], type: ['to-mslr']},
+    ReedSensorClosed: {icon: '', iconfont: 'fas', alarm: [], datatype: 'bool', unit: "", filter: 'closed', name: 'Reed Sensor Closed', name_by_cable: [], majorStep: 1, show_history: true, cable: [], type: ['to-mslr']},
     // ChargingActive: {icon: 'U', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'active', name: 'Charging active', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
     // PosMessageSubstitute: {icon: '', iconfont: 'bo', alarm: [], datatype: 'bool', unit: '', filter: 'hide', name: 'Position Message Subst.', name_by_cable: [], majorStep: 1, show_history: false, cable: []},
     // SensorALoopVolt: {icon: 'k', iconfont: 'bo', alarm: [], datatype: 'float', unit: 'V', filter: '', name: 'Voltage Loop', name_by_cable: [], majorStep: 1, show_history: true, cable: []},

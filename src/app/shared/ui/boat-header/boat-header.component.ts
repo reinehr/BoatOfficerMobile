@@ -14,6 +14,7 @@ export class BoatHeaderComponent {
     @Input() boat_image_small: string;
     @Input() role: string;
     @Input() numberOfActiveAlarms: number;
+    @Input() deviceType: string;
 
     constructor() {
     }

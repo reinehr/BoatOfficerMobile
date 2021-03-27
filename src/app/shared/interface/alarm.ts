@@ -21,8 +21,8 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         {key: 'Temperature', name: 'Temperature', name_by_cable: [], icon: 'n', iconfont: 'bo', datatype: 'datetime', unit: '', filter: '', min: 0, max: 0, max_pro: 0, cable: [], type: ['BoatOfficer']},
     ],
     PressureHektoPascal: [
-        {key: 'UserConfig_PressureHighLimit_InHektoPascal', name: 'Pressure High Level', name_by_cable: [], icon: '', iconfont: 'wi', datatype: 'float', unit: 'hPa', min: 700, max: 1100, max_pro: 1100, cable: [], type: ['to-mslr']},
-        {key: 'UserConfig_PressureLowLimit_InHektoPascal', name: 'Pressure Low Level', name_by_cable: [], icon: '', iconfont: 'wi', datatype: 'float', unit: 'hPa', min: 700, max: 1100, max_pro: 1100, cable: [], type: ['to-mslr']},
+        {key: 'UserConfig_PressureHighLimit_InHektoPascal', name: 'Pressure High Level', name_by_cable: [], icon: '', iconfont: 'wi', datatype: 'float', unit: 'hPa', min: 200, max: 1100, max_pro: 1100, cable: [], type: ['to-mslr']},
+        {key: 'UserConfig_PressureLowLimit_InHektoPascal', name: 'Pressure Low Level', name_by_cable: [], icon: '', iconfont: 'wi', datatype: 'float', unit: 'hPa', min: 200, max: 1100, max_pro: 1100, cable: [], type: ['to-mslr']},
         {key: 'UserConfig_PressureDropAlarmActive', name: 'Pressure Drop Limit', name_by_cable: [], icon: '', iconfont: 'wi', datatype: 'float', unit: 'hPa', min: 5, max: 200, max_pro: 200, cable: [], type: ['to-mslr']},
     ],
     BrightnessPercent: [

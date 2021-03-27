@@ -245,7 +245,6 @@ export class ApiService {
                     for (const idAlarm in device.alarm) {
                         let alarm = device.alarm[idAlarm];
                         let type = alarm.type;
-                        console.log(alarm.type)
                         let cableConnected = alarmByTypeMap[type] && (alarmByTypeMap[type].cable.length == 0 ||
                             alarmByTypeMap[type].cable.indexOf(device.multisensor_cable) >= 0 ||
                             alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0) &&

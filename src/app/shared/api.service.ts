@@ -111,7 +111,7 @@ export class ApiService {
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
     baseUrl = 'https://boat-officer-backend.herokuapp.com/';
     baseUrlWeather = 'https://api.openweathermap.org/data/2.5/';
-    //baseUrl = 'https://27a391aeb9e0.ngrok.io/';
+    //baseUrl = 'https://112ef4491f57.ngrok.io/';
     baseSensorUrl = `${this.baseUrl}api/sensor_data/`;
     baseDeviceUrl = `${this.baseUrl}api/device/`;
     baseUserUrl = `${this.baseUrl}api/users/`;
@@ -245,12 +245,14 @@ export class ApiService {
                     for (const idAlarm in device.alarm) {
                         let alarm = device.alarm[idAlarm];
                         let type = alarm.type;
-                        let cableConnected = (alarmByTypeMap[type].cable.length == 0 ||
+                        let cableConnected = alarmByTypeMap[type] && (alarmByTypeMap[type].cable.length == 0 ||
                             alarmByTypeMap[type].cable.indexOf(device.multisensor_cable) >= 0 ||
-                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0);
-                        let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
+                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                            (alarmByTypeMap[type].dev_type.length == 0 ||
+                                alarmByTypeMap[type].dev_type.indexOf(device.type) >= 0);
 
                         if (cableConnected) {
+                            let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
                             if (!indexTypeActive[idDevice][type]) {
                                 indexTypeActive[idDevice][type] = 0;
                             }
@@ -433,7 +435,7 @@ export class ApiService {
         });
     }
 
-    getIntTemperatureHistory(device: number, days: number) {
+    getIntTemperatureHistoryDepricated(device: number, days: number) {
         return this.httpClient.post<{ 'min': number, 'max': number, 'milliseconds': number, 'day': number, 'date': string }[]>
         (this.baseSensorUrl + 'get_sensor_history_by_field/', {
                 field: 'IntTemperature',
@@ -451,7 +453,7 @@ export class ApiService {
         }));
     }
 
-    getSensorHistoryByField(sensorField: string, device: number, days: number) {
+    getSensorHistoryByFieldDepricated(sensorField: string, device: number, days: number) {
 
         console.log(`Token1: ${this.token}`);
         console.log(`PushToken1: ${getString('push_token', '')}`);
@@ -473,11 +475,11 @@ export class ApiService {
         }));
     }
 
-    getSensorHistory(sensorField: string, device: number, days: number) {
+    getSensorHistoryDepricated(sensorField: string, device: number, days: number) {
 
         console.log(`Token1: ${this.token}`);
         console.log(`PushToken1: ${getString('push_token', '')}`);
-        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_data/'}`);
+        console.log(`Url: ${this.baseSensorUrl + 'get_sensor_data_depricated/'}`);
         return this.httpClient.post<{
             'device_id': number,
             'device_name': string,
@@ -488,7 +490,7 @@ export class ApiService {
                 [others: string]: { 'data': number, 'time': string }
             }
         }[]>
-        (this.baseSensorUrl + 'get_sensor_data/', {
+        (this.baseSensorUrl + 'get_sensor_data_depricated/', {
                 field: sensorField,
                 device,
                 days,

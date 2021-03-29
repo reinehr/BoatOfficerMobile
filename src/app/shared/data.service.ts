@@ -10,6 +10,7 @@ import {
     WEATHER_ICONS, windSpeedToBeaufort
 } from '~/app/shared/interface/sensordata';
 import {AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
+import {isNull} from "@angular/compiler/src/output/output_ast";
 
 export interface DataItem {
     id: number;
@@ -28,6 +29,7 @@ export interface DeviceAlarmDataFormat {
     'harbour_contact': string;
     'berth': string;
     'url_key': string;
+    'type': string;
     'external_voltage_cable': string;
     'multisensor_cable': string;
     'role': string;
@@ -409,7 +411,7 @@ export class DataService {
                                                 }
                                             };
                                         }
-                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] < this.minMax[idDevice][idInterval][field].min.value) {
+                                        if ((this.boatHistory[idDevice].sensor_data[idEvent][field] || this.boatHistory[idDevice].sensor_data[idEvent][field] === 0) && this.boatHistory[idDevice].sensor_data[idEvent][field] < this.minMax[idDevice][idInterval][field].min.value) {
                                             this.minMax[idDevice][idInterval][field].min = {
                                                 time: this.boatHistory[idDevice].sensor_data[idEvent].time,
                                                 value: this.boatHistory[idDevice].sensor_data[idEvent][field]
@@ -460,7 +462,7 @@ export class DataService {
                                                 }
                                             };
                                         }
-                                        if (this.boatHistory[idDevice].position_data[idEvent][field] < this.minMaxGps[idDevice][idInterval][field].min.value) {
+                                        if ((this.boatHistory[idDevice].position_data[idEvent][field] || this.boatHistory[idDevice].position_data[idEvent][field] === 0) && this.boatHistory[idDevice].position_data[idEvent][field] < this.minMaxGps[idDevice][idInterval][field].min.value) {
                                             this.minMaxGps[idDevice][idInterval][field].min = {
                                                 time: this.boatHistory[idDevice].position_data[idEvent].time,
                                                 value: this.boatHistory[idDevice].position_data[idEvent][field]

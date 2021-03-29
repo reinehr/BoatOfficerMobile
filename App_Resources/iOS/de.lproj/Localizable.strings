@@ -94,6 +94,7 @@
 "_Upload_Image_1uNJcH" = "Bild hochladen";
 "_Pick_Image_Z1H1rLN" = "Bild wählen";
 "_PICK_BOAT_IMAGE_2oVDWq" = "BILD WÄHLEN";
+"_1Y_qm" = "1J";
 "_3D_r2" = "3T";
 "_1D_q1" = "1T";
 "Save" = "Speichern";
@@ -115,6 +116,7 @@
 "upgrade_to_pro_for_feature" = "Dies ist eine Pro Funktion. Bitte upgrade deine App zu Pro, um diese Funktion zu nutzen.";
 "please_test_sos_before_usage" = "Bitte teste diese Funktion vor der ersten Nutzung. Es ist eine Unterstützung, kein garantiertes Hilfsmittel um Boot und Leben zu retten.";
 "users_listed_here_sos" = "Oben aufgelistete Nutzer werden eine SOS Push-Nachricht bekommen, wenn du die SOS Funktion durch einen langen Knopfdruck am Gerät aktivierst (die rote LED blinkt dann bis zur Deaktivierung durch einen erneuten langen Tastendruck).";
+"note_about_requests" = "Oben aufgelistete Nutzer möchten auf deinem Boot anheuern. Bearbeite ihre Rolle zu Wachmann oder Matrose, sodass sie die Daten deines Bootes sehen können. Du kannst diese Rollen jederzeit widerrufen oder jetzt direkt die Anfrage ablehnen.\n\nDiese Funktion ist ohne Pro Abo auf ein weiteres Crew-Mitglied beschränkt.";
 "Cancel" = "Abbrechen";
 "_Yes__Leave_25v2J7" = "Ja, ich gehe";
 "_Leave_this_boat_ZMQkmx" = "Von Bord gehen";
@@ -127,6 +129,8 @@
 "_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr" = "Setze nun die BoatOfficer ID (%1$@) in einer E-Mail oder einem Messenger ein, um sie deinen Freunden zu senden.";
 "_BoatOfficer_ID_copied_RHX1P" = "BoatOfficer ID kopiert";
 "_Invite_Crew_7xG4K" = "Besatzung anheuern";
+"_Activate_push_notifications_Z1mO15W" = "Pushnachrichten aktivieren";
+"_Deactivate_push_notifications_ZBYkQp" = "Pushnachrichten deaktivieren";
 "_Discharge__s_as_emergency_contact__1FXbHp" = "%1$@ als Notfall Kontakt entlassen? Kontakt bleibt weiterhin Wachmann oder Matrose.";
 "_Discharge_Emergency_Contact_1XG0Lm" = "Notfall Kontakt beenden";
 "_List__s_as_emergency_contact__ZAwUpz" = "%1$@ als Notfall Kontakt hinzufügen?";
@@ -239,6 +243,10 @@
 "_GPS_Reception_Z1yTsh" = "GPS Empfang";
 "POSITION" = "POSITION";
 "_____MAP______Z2fjHjq" = "";
+"_Reed_Sensor_Closed_ZRAXY4" = "Magnetsensor";
+"Brightness" = "Helligkeit";
+"Humidity" = "Relative Luftfeuchtigkeit";
+"_Pressure_in_hectopascal_Z2fMuRX" = "Luftdruck";
 "_Intern_Temperature_ZF40Gb" = "Interne Temperatur";
 "_Charging_active_ZbDBT5" = "Akku wird geladen";
 "_Voltage_Intern_Battery_Z1PhXWl" = "Spannung interner Akku";
@@ -263,6 +271,9 @@
 "_Mark_as_solved_Z1fL0Du" = "Als gelöst markieren";
 "_Call_Harbour_Z2adssO" = "Hafen anrufen";
 "_only_active_2jJRcz" = "nur aktive";
+"_to_mslr_Z1pJbGC" = "Wettersensor";
+"_Weather_sensor_Z1OARJh" = "Wettersensor";
+"BoatOfficer" = "Boot";
 "Boat" = "Boot";
 "ALARMS" = "ALARME";
 "_ALARM_HISTORY_ZHagc2" = "ALARM HISTORIE";
@@ -283,6 +294,7 @@
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARMSTATUS";
 "no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts).";
 "no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\".";
+"_Unknown_Alarm_1bfTB8" = "unbekannter Alarm";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 geöffnet";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 geschlossen";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 geöffnet";

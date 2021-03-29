@@ -20,15 +20,19 @@
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
-                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
+                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
-                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *, 10" rows="45">
+                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *,40, 10" rows="45">
                             <Label col="1" class="alarm-symbol"
                                    text="M" pageTransition="slideLeft"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>
                             <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
                                    [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+                            <Label col="4" [text]="''" *ngIf="device.role == 'officer' && 0 != device.num_candidate"
+                                   [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []"
+                                   class="user-role-symbol-orange"></Label>
+
                         </GridLayout>
                         <StackLayout class="alarm-card"
                                      *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
@@ -39,6 +43,8 @@
                                                 *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 ||
                                                 dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 ||
                                                 dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                                                (dataService.sensorFieldMap[sensorField].type.length == 0 ||
+                                                dataService.sensorFieldMap[sensorField].type.indexOf(device.type) >= 0) &&
                                                 dataService.boatStatus[device.id].sensor_data[sensorField] != null &&
                                                     sensorField != 'time'"
                                                 [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
@@ -60,11 +66,11 @@
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='3V'"
-                                               [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + dataService.sensorFieldMap[sensorField].unit"
+                                               [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + ' ' + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='' || dataService.sensorFieldMap[sensorField].filter=='ChargingActive'"
-                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + dataService.sensorFieldMap[sensorField].unit"
+                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + ' ' + dataService.sensorFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
 
@@ -128,11 +134,11 @@
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter=='3V'"
-                                               [text]="(dataService.boatStatus[device.id].position_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].position_data[sensorField]) + dataService.gpsFieldMap[sensorField].unit"
+                                               [text]="(dataService.boatStatus[device.id].position_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].position_data[sensorField]) + ' ' + dataService.gpsFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
                                         <Label col=3 row=0 *ngIf="dataService.gpsFieldMap[sensorField].filter==''"
-                                               [text]="dataService.boatStatus[device.id].position_data[sensorField] + dataService.gpsFieldMap[sensorField].unit"
+                                               [text]="dataService.boatStatus[device.id].position_data[sensorField] + ' ' + dataService.gpsFieldMap[sensorField].unit"
                                                [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
                                                verticalAlignment="middle" horizontalAlignment="right"></Label>
 

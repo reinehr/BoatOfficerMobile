@@ -39,7 +39,7 @@
   <string name="_Registration_successful_1qR5S6">"Registration successful"</string>
   <string name="_You_are_now_logged_in_1b7ehS">"You are now logged in"</string>
   <string name="_Login_successful_1U3M0J">"Login successful"</string>
-  <string name="_Application_is_send__Z2aYkRr">"Application is send."</string>
+  <string name="_Application_is_send__Z2aYkRr">"Application sent."</string>
   <string name="USER_IS_ALREADY_CANDIDATE">"You are already applicant for this boat."</string>
   <string name="USER_IS_ALREADY_SAILOR">"You are already sailor on this boat."</string>
   <string name="USER_IS_ALREADY_GUARD">"You are already guard on this boat."</string>
@@ -96,6 +96,7 @@
   <string name="_Upload_Image_1uNJcH">"Upload Image"</string>
   <string name="_Pick_Image_Z1H1rLN">"Pick Image"</string>
   <string name="_PICK_BOAT_IMAGE_2oVDWq">"PICK BOAT IMAGE"</string>
+  <string name="_1Y_qm">"1Y"</string>
   <string name="_3D_r2">"3D"</string>
   <string name="_1D_q1">"1D"</string>
   <string name="Save">"Save"</string>
@@ -117,6 +118,7 @@
   <string name="upgrade_to_pro_for_feature">"This is a Pro Feature. Please upgrade your app to Pro, to make use of this feature."</string>
   <string name="please_test_sos_before_usage">"Please test this feature before first usage. It is an additional help, it is no guaranteed means for the saving of boat and lifes."</string>
   <string name="users_listed_here_sos">"Users listed above will receive a SOS push notification, when you activate the SOS function by a long button push on the device (red light starts continuous blinking until deactivation by another long button push)."</string>
+  <string name="note_about_requests">"Users listed above are requesting to sign on your boat. Edit their role to guard or sailor so they can see your boat\'s data. You can revoke these roles any time or you can deny the request right away.\n\nThis feature is limited to one other crew member without the Pro subscription."</string>
   <string name="Cancel">"Cancel"</string>
   <string name="_Yes__Leave_25v2J7">"Yes, Leave"</string>
   <string name="_Leave_this_boat_ZMQkmx">"Leave this boat"</string>
@@ -129,6 +131,8 @@
   <string name="_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr">"Now, paste the BoatOfficer ID (%1$s) in an e-mail or messenger to send it to your friends."</string>
   <string name="_BoatOfficer_ID_copied_RHX1P">"BoatOfficer ID copied"</string>
   <string name="_Invite_Crew_7xG4K">"Invite Crew"</string>
+  <string name="_Activate_push_notifications_Z1mO15W">"Activate push notifications"</string>
+  <string name="_Deactivate_push_notifications_ZBYkQp">"Deactivate push notifications"</string>
   <string name="_Discharge__s_as_emergency_contact__1FXbHp">"Discharge %1$s as emergency contact? Contact remains guard or sailor."</string>
   <string name="_Discharge_Emergency_Contact_1XG0Lm">"Discharge Emergency Contact"</string>
   <string name="_List__s_as_emergency_contact__ZAwUpz">"List %1$s as emergency contact?"</string>
@@ -241,6 +245,10 @@
   <string name="_GPS_Reception_Z1yTsh">"GPS Reception"</string>
   <string name="POSITION">"POSITION"</string>
   <string name="_____MAP______Z2fjHjq">""</string>
+  <string name="_Reed_Sensor_Closed_ZRAXY4">"Magnet sensor"</string>
+  <string name="Brightness">"Brightness"</string>
+  <string name="Humidity">"Relative humidity"</string>
+  <string name="_Pressure_in_hectopascal_Z2fMuRX">"Atmospheric pressure"</string>
   <string name="_Intern_Temperature_ZF40Gb">"Intern Temperature"</string>
   <string name="_Charging_active_ZbDBT5">"Charging active"</string>
   <string name="_Voltage_Intern_Battery_Z1PhXWl">"Voltage Intern Battery"</string>
@@ -265,6 +273,9 @@
   <string name="_Mark_as_solved_Z1fL0Du">"Mark as solved"</string>
   <string name="_Call_Harbour_Z2adssO">"Call Harbour"</string>
   <string name="_only_active_2jJRcz">"only active"</string>
+  <string name="_to_mslr_Z1pJbGC">"Weather sensor"</string>
+  <string name="_Weather_sensor_Z1OARJh">"Weather sensor"</string>
+  <string name="BoatOfficer">"Boat"</string>
   <string name="Boat">"Boat"</string>
   <string name="ALARMS">"ALARMS"</string>
   <string name="_ALARM_HISTORY_ZHagc2">"ALARM HISTORY"</string>
@@ -285,6 +296,7 @@
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARM STATUS"</string>
   <string name="no_boat">"You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right)."</string>
   <string name="no_key">"You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\"."</string>
+  <string name="_Unknown_Alarm_1bfTB8">"Unknown alarm"</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi sensor A 2 opened"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi sensor A 2 closed"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi sensor A 1 opened"</string>

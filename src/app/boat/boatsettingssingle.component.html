@@ -9,10 +9,10 @@
     <ScrollView orientation="vertical">
         <StackLayout *ngIf="dataService.dataLoaded">
             <StackLayout paddingBottom="15" *ngFor="let device of [dataService.deviceData[this.idDevice]]">
-                <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role"></boat-header>
+                <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                 <GridLayout rows="10"></GridLayout>
                 <StackLayout class="alarm-card"
-                             *ngIf="dataService.alarmSettings[device.id]">
+                             *ngIf="device.type == 'BoatOfficer'">
                     <StackLayout>
                         <Label text="{{'CABLE SETTINGS' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout>
@@ -40,14 +40,17 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card"
+                             *ngIf="dataService.alarmSettings[device.id]">
                     <StackLayout>
                         <Label text="{{'ALARM SETTINGS' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout *ngFor="let field of sensorFieldKeys">
                             <StackLayout>
                                 <StackLayout *ngIf="alarmSettingsMap[field]">
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
-                                        <StackLayout *ngIf="(alarm.cable.length == 0 ||
+                                        <StackLayout *ngIf="(alarm.type.length == 0 ||
+                                                alarm.type.indexOf(device.type) >= 0) &&
+                                                (alarm.cable.length == 0 ||
                                                 alarm.cable.indexOf(device.multisensor_cable) >= 0 ||
                                                 alarm.cable.indexOf(device.external_voltage_cable) >= 0) &&
                                                 dataService.alarmSettings[device.id][alarm.key]">
@@ -58,7 +61,7 @@
                                                 <Label col="1"  [text]="(alarm.name_by_cable.length > 0 ? (alarm.cable.indexOf(device.external_voltage_cable) >= 0 ? alarm.name_by_cable[alarm.cable.indexOf(device.external_voltage_cable)] : alarm.name_by_cable[alarm.cable.indexOf(device.multisensor_cable)]) : alarm.name) | L"
                                                        class="alarm-blue font-weight-bold" verticalAlignment="center"></Label>
                                                 <Label col="2"  *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]"
-                                                       [text]="dataService.alarmSettings[device.id][alarm.key].value_device + alarm.unit"
+                                                       [text]="dataService.alarmSettings[device.id][alarm.key].value_device + ' ' + alarm.unit"
                                                        class="alarm-blue pull-right font-weight-bold" verticalAlignment="center"></Label>
                                                 <Label col="2"  *ngIf="alarmSettingsDatatypeMap[alarm.datatype]"
                                                        [text]="(alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_device].unit | L)"
@@ -67,7 +70,7 @@
                                             <GridLayout paddingBottom="5"
                                                         *ngIf="dataService.alarmSettings[device.id][alarm.key].value_user != null && dataService.alarmSettings[device.id][alarm.key].value_user != dataService.alarmSettings[device.id][alarm.key].value_device">
                                                 <Label class="alarm-orange" *ngIf="!alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
-                                                       [text]="('Value changed to' | L) + ' ' + dataService.alarmSettings[device.id][alarm.key].value_user + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
+                                                       [text]="('Value changed to' | L) + ' ' + dataService.alarmSettings[device.id][alarm.key].value_user + ' ' + alarm.unit + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
                                                        horizontalAlignment="center"></Label>
                                                 <Label class="alarm-orange" *ngIf="alarmSettingsDatatypeMap[alarm.datatype]" textWrap="true"
                                                        [text]="('Value changed to' | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].name | L) + ' ' + (alarmSettingsDatatypeMap[alarm.datatype][dataService.alarmSettings[device.id][alarm.key].value_user].unit | L) + ' ' + (dataService.alarmSettings[device.id][alarm.key].time_changed_user | timeago) + '. ' + ('Waiting for device to sync' | L)"
@@ -81,14 +84,16 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card" *ngIf="dataService.alarmInhibitSettings[device.id] && device.type == 'BoatOfficer'">
                     <StackLayout>
                         <Label text="{{'ALARM MUTING' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout *ngFor="let field of sensorFieldKeys">
                             <StackLayout>
                                 <StackLayout *ngIf="alarmSettingsMap[field]">
                                     <StackLayout *ngFor="let alarm of alarmSettingsMap[field]; let index = index">
-                                        <StackLayout *ngIf="(alarm.cable.length == 0 ||
+                                        <StackLayout *ngIf="(alarm.type.length == 0 ||
+                                                alarm.type.indexOf(device.type) >= 0) &&
+                                                (alarm.cable.length == 0 ||
                                                 alarm.cable.indexOf(device.multisensor_cable) >= 0 ||
                                                 alarm.cable.indexOf(device.external_voltage_cable) >= 0) &&
                                                 alarm.datatype == 'datetime' && dataService.alarmInhibitSettings">
@@ -126,8 +131,7 @@
                         </StackLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout class="alarm-card"
-                             *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card">
                     <StackLayout>
                         <Label text="{{'OTHER SETTINGS' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout>
@@ -190,8 +194,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card"
-                             *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card">
                     <StackLayout>
                         <Label text="{{'INFORMATION' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout>
@@ -231,7 +234,7 @@
                     </StackLayout>
                 </StackLayout>
 
-                <StackLayout class="alarm-card" *ngIf="dataService.alarmSettings[device.id]">
+                <StackLayout class="alarm-card">
                     <StackLayout>
                         <Label text="{{'USERS' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
                         <StackLayout>

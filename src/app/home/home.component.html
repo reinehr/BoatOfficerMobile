@@ -72,7 +72,7 @@
                                                    *ngIf="alarm.status == 'clear_by_device'"></Label>
                                             <Label col=1 row=0 [text]="(alarm.name | L)" class="alarm-gray t-16 font-weight-bold"
                                                    verticalAlignment="middle"></Label>
-                                            <Label col=2 row=0 [text]="' ' + alarm.value + alarm.unit" class="alarm-gray t-16 font-weight-bold"
+                                            <Label col=2 row=0 [text]="' ' + alarm.value + ' ' + alarm.unit" class="alarm-gray t-16 font-weight-bold"
                                                    verticalAlignment="middle" *ngIf="alarm.value"></Label>
                                         </GridLayout>
                                     </StackLayout>

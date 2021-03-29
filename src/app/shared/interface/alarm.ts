@@ -49,7 +49,7 @@ export const alarmSettingsMap: { [fieldName: string]: { key: string, name: strin
         {key: 'UserConfig_UpdateRate_InEnum', name: 'Update Rate', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: [], type: ['to-mslr']},
         {key: 'UserCfg_UpdateRateGeneralEnum', name: 'Update Rate General', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: [], type: ['BoatOfficer']},
         {key: 'UserCfg_UpdateRatePositionEnum', name: 'Update Rate Position', name_by_cable: [], icon: 'o', iconfont: 'bo', datatype: 'updaterate', unit: '', filter: '', min: 0, max: 16, max_pro: 24, cable: [], type: ['BoatOfficer']},
-        {key: 'AdminCfg_AllowMapping', name: 'Allow TTN Mapping', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'yes-no', unit: '', filter: '', min: 0, max: 1, max_pro: 1, cable: [], type: ['BoatOfficer']},
+        // {key: 'AdminCfg_AllowMapping', name: 'Allow TTN Mapping', name_by_cable: [], icon: '', iconfont: 'fas', datatype: 'yes-no', unit: '', filter: '', min: 0, max: 1, max_pro: 1, cable: [], type: ['BoatOfficer']},
     ]
 };
 

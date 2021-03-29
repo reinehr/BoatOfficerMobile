@@ -207,6 +207,16 @@
 "_Update_Rate_Position_4GuC0" = "Update Rate Position";
 "_Update_Rate_General_1FGak9" = "Update Rate General";
 "_Shock_Sensor_ZL7Y1d" = "Shock Sensor";
+"_Humidity_Change_Limit_Z27ncDJ" = "Humidity Change Limit";
+"_Humidity_Low_Level_1VzsE2" = "Humidity Low Level";
+"_Humidity_High_Level_Z1N3akO" = "Humidity High Level";
+"_Brightness_Change_Limit_Z5eRLX" = "Brightness Change Limit";
+"_Brightness_Low_Level_Z1N7CFb" = "Brightness Low Level";
+"_Brightness_High_Level_Z14n3LV" = "Brightness High Level";
+"_Pressure_Change_Limit_2mt0sV" = "Pressure Change Limit";
+"_Pressure_Low_Level_Z1cvIsT" = "Pressure Low Level";
+"_Pressure_High_Level_2gLxYT" = "Pressure High Level";
+"_Temperature_Change_Limit_2iNFRA" = "Temperature Change Limit";
 "_Temperature_Low_Level_1K4wtQ" = "Temperature Low Level";
 "_Temperature_High_Level_2vC47s" = "Temperature High Level";
 "_Low_Voltage_2_Level_Zdm9fF" = "Low Voltage 2 Level";
@@ -246,6 +256,7 @@
 "_Reed_Sensor_Closed_ZRAXY4" = "Magnet sensor";
 "Brightness" = "Brightness";
 "Humidity" = "Relative humidity";
+"Pressure" = "Atmospheric pressure";
 "_Pressure_in_hectopascal_Z2fMuRX" = "Atmospheric pressure";
 "_Intern_Temperature_ZF40Gb" = "Intern Temperature";
 "_Charging_active_ZbDBT5" = "Charging active";
@@ -295,6 +306,8 @@
 "no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right).";
 "no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\".";
 "_Unknown_Alarm_1bfTB8" = "Unknown alarm";
+"_Contact_Closed_1NJWJq" = "Magnet sensor closed";
+"_Contact_Opened_2dNsqL" = "Magnet sensor opened";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi sensor A 2 opened";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi sensor A 2 closed";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi sensor A 1 opened";

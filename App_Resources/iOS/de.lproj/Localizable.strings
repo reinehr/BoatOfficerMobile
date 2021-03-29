@@ -207,6 +207,16 @@
 "_Update_Rate_Position_4GuC0" = "Datenintervall Position";
 "_Update_Rate_General_1FGak9" = "Datenintervall Sensoren";
 "_Shock_Sensor_ZL7Y1d" = "Schock-Sensor";
+"_Humidity_Change_Limit_Z27ncDJ" = "Luftfeuchtigkeitsänderung";
+"_Humidity_Low_Level_1VzsE2" = "Minimale Luftfeuchtigkeit";
+"_Humidity_High_Level_Z1N3akO" = "Maximale Luftfeuchtigkeit";
+"_Brightness_Change_Limit_Z5eRLX" = "Helligkeitsänderung";
+"_Brightness_Low_Level_Z1N7CFb" = "Minimale Helligkeit";
+"_Brightness_High_Level_Z14n3LV" = "Maximale Helligkeit";
+"_Pressure_Change_Limit_2mt0sV" = "Luftdruckänderung";
+"_Pressure_Low_Level_Z1cvIsT" = "Minimaler Luftdruck";
+"_Pressure_High_Level_2gLxYT" = "Maximaler Luftdruck";
+"_Temperature_Change_Limit_2iNFRA" = "Temperaturänderung";
 "_Temperature_Low_Level_1K4wtQ" = "Minimale Temperatur";
 "_Temperature_High_Level_2vC47s" = "Maximale Temperatur";
 "_Low_Voltage_2_Level_Zdm9fF" = "Minimale Spannung 2";
@@ -246,6 +256,7 @@
 "_Reed_Sensor_Closed_ZRAXY4" = "Magnetsensor";
 "Brightness" = "Helligkeit";
 "Humidity" = "Relative Luftfeuchtigkeit";
+"Pressure" = "Luftdruck";
 "_Pressure_in_hectopascal_Z2fMuRX" = "Luftdruck";
 "_Intern_Temperature_ZF40Gb" = "Interne Temperatur";
 "_Charging_active_ZbDBT5" = "Akku wird geladen";
@@ -295,6 +306,8 @@
 "no_boat" = "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts).";
 "no_key" = "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\".";
 "_Unknown_Alarm_1bfTB8" = "unbekannter Alarm";
+"_Contact_Closed_1NJWJq" = "Magnetsensor geschlossen";
+"_Contact_Opened_2dNsqL" = "Magnetsensor geöffnet";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi Sensor A 2 geöffnet";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi Sensor A 2 geschlossen";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi Sensor A 1 geöffnet";

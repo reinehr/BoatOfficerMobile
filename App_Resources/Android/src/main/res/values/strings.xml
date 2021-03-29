@@ -209,6 +209,16 @@
   <string name="_Update_Rate_Position_4GuC0">"Update Rate Position"</string>
   <string name="_Update_Rate_General_1FGak9">"Update Rate General"</string>
   <string name="_Shock_Sensor_ZL7Y1d">"Shock Sensor"</string>
+  <string name="_Humidity_Change_Limit_Z27ncDJ">"Humidity Change Limit"</string>
+  <string name="_Humidity_Low_Level_1VzsE2">"Humidity Low Level"</string>
+  <string name="_Humidity_High_Level_Z1N3akO">"Humidity High Level"</string>
+  <string name="_Brightness_Change_Limit_Z5eRLX">"Brightness Change Limit"</string>
+  <string name="_Brightness_Low_Level_Z1N7CFb">"Brightness Low Level"</string>
+  <string name="_Brightness_High_Level_Z14n3LV">"Brightness High Level"</string>
+  <string name="_Pressure_Change_Limit_2mt0sV">"Pressure Change Limit"</string>
+  <string name="_Pressure_Low_Level_Z1cvIsT">"Pressure Low Level"</string>
+  <string name="_Pressure_High_Level_2gLxYT">"Pressure High Level"</string>
+  <string name="_Temperature_Change_Limit_2iNFRA">"Temperature Change Limit"</string>
   <string name="_Temperature_Low_Level_1K4wtQ">"Temperature Low Level"</string>
   <string name="_Temperature_High_Level_2vC47s">"Temperature High Level"</string>
   <string name="_Low_Voltage_2_Level_Zdm9fF">"Low Voltage 2 Level"</string>
@@ -248,6 +258,7 @@
   <string name="_Reed_Sensor_Closed_ZRAXY4">"Magnet sensor"</string>
   <string name="Brightness">"Brightness"</string>
   <string name="Humidity">"Relative humidity"</string>
+  <string name="Pressure">"Atmospheric pressure"</string>
   <string name="_Pressure_in_hectopascal_Z2fMuRX">"Atmospheric pressure"</string>
   <string name="_Intern_Temperature_ZF40Gb">"Intern Temperature"</string>
   <string name="_Charging_active_ZbDBT5">"Charging active"</string>
@@ -297,6 +308,8 @@
   <string name="no_boat">"You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right)."</string>
   <string name="no_key">"You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\"."</string>
   <string name="_Unknown_Alarm_1bfTB8">"Unknown alarm"</string>
+  <string name="_Contact_Closed_1NJWJq">"Magnet sensor closed"</string>
+  <string name="_Contact_Opened_2dNsqL">"Magnet sensor opened"</string>
   <string name="_Multi_Sensor_A_2_Opened_Z1AUWdv">"Multi sensor A 2 opened"</string>
   <string name="_Multi_Sensor_A_2_Closed_Z20YrTQ">"Multi sensor A 2 closed"</string>
   <string name="_Multi_Sensor_A_1_Opened_1pnX6c">"Multi sensor A 1 opened"</string>

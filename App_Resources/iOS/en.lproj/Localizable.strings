@@ -37,7 +37,7 @@
 "_Registration_successful_1qR5S6" = "Registration successful";
 "_You_are_now_logged_in_1b7ehS" = "You are now logged in";
 "_Login_successful_1U3M0J" = "Login successful";
-"_Application_is_send__Z2aYkRr" = "Application is send.";
+"_Application_is_send__Z2aYkRr" = "Application sent.";
 "USER_IS_ALREADY_CANDIDATE" = "You are already applicant for this boat.";
 "USER_IS_ALREADY_SAILOR" = "You are already sailor on this boat.";
 "USER_IS_ALREADY_GUARD" = "You are already guard on this boat.";
@@ -129,6 +129,8 @@
 "_Now__paste_the_BoatOfficer_ID___s__in_an_e_mail_or_messenger_to_send_it_to_your_friends__Z2rE3Lr" = "Now, paste the BoatOfficer ID (%1$@) in an e-mail or messenger to send it to your friends.";
 "_BoatOfficer_ID_copied_RHX1P" = "BoatOfficer ID copied";
 "_Invite_Crew_7xG4K" = "Invite Crew";
+"_Activate_push_notifications_Z1mO15W" = "Activate push notifications";
+"_Deactivate_push_notifications_ZBYkQp" = "Deactivate push notifications";
 "_Discharge__s_as_emergency_contact__1FXbHp" = "Discharge %1$@ as emergency contact? Contact remains guard or sailor.";
 "_Discharge_Emergency_Contact_1XG0Lm" = "Discharge Emergency Contact";
 "_List__s_as_emergency_contact__ZAwUpz" = "List %1$@ as emergency contact?";
@@ -241,6 +243,7 @@
 "_GPS_Reception_Z1yTsh" = "GPS Reception";
 "POSITION" = "POSITION";
 "_____MAP______Z2fjHjq" = "";
+"_Reed_Sensor_Closed_ZRAXY4" = "Magnet sensor";
 "Brightness" = "Brightness";
 "Humidity" = "Relative humidity";
 "_Pressure_in_hectopascal_Z2fMuRX" = "Atmospheric pressure";
@@ -268,6 +271,9 @@
 "_Mark_as_solved_Z1fL0Du" = "Mark as solved";
 "_Call_Harbour_Z2adssO" = "Call Harbour";
 "_only_active_2jJRcz" = "only active";
+"_to_mslr_Z1pJbGC" = "Weather sensor";
+"_Weather_sensor_Z1OARJh" = "Weather sensor";
+"BoatOfficer" = "Boat";
 "Boat" = "Boat";
 "ALARMS" = "ALARMS";
 "_ALARM_HISTORY_ZHagc2" = "ALARM HISTORY";
@@ -288,6 +294,7 @@
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARM STATUS";
 "no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right).";
 "no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\".";
+"_Unknown_Alarm_1bfTB8" = "Unknown alarm";
 "_Multi_Sensor_A_2_Opened_Z1AUWdv" = "Multi sensor A 2 opened";
 "_Multi_Sensor_A_2_Closed_Z20YrTQ" = "Multi sensor A 2 closed";
 "_Multi_Sensor_A_1_Opened_1pnX6c" = "Multi sensor A 1 opened";

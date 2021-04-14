@@ -378,8 +378,24 @@ export class ApiService {
 
     setAlarmData(idAlarms: number[], markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
         let numSuccess = 0
-        for (let idAlarm of idAlarms) {
-            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
+        // for (let idAlarm of idAlarms) {
+        //     this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
+        //             id: idAlarm,
+        //             marked_as_ok: markedAsOk,
+        //             marked_as_responsible: markedAsResponsible
+        //         }
+        //         , {
+        //             headers: this.getHeader()
+        //         }).subscribe(() => {
+        //         numSuccess = numSuccess+1;
+        //         if(numSuccess==idAlarms.length) {
+        //             this.getDeviceData().subscribe();
+        //         }
+        //     });
+        // }
+        if (idAlarms.length > 1) {
+            let idAlarm = idAlarms[0]
+            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_all_by_user/', {
                     id: idAlarm,
                     marked_as_ok: markedAsOk,
                     marked_as_responsible: markedAsResponsible
@@ -387,10 +403,7 @@ export class ApiService {
                 , {
                     headers: this.getHeader()
                 }).subscribe(() => {
-                    numSuccess = numSuccess+1;
-                    if(numSuccess==idAlarms.length) {
-                        this.getDeviceData().subscribe();
-                    }
+                    this.getDeviceData().subscribe();
             });
         }
     }

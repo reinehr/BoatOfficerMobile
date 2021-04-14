@@ -39,42 +39,52 @@
                             <alarm-card-4segments-title [title]="'SENSORS' | L" [updatedatetime]="dataService.boatStatus[device.id].sensor_data.time"  [warning]="''"></alarm-card-4segments-title>
                             <GridLayout *ngFor="let sensorField of dataService.sensorFieldKeys">
                                 <StackLayout *ngFor="let alarmActive of [dataService.boatStatus[device.id] && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active[sensorField]]">
-                                    <GridLayout columns="40, *, 40, auto" rows="50" class="row-item-with-top-border"
-                                                *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 ||
-                                                dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 ||
-                                                dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) &&
-                                                (dataService.sensorFieldMap[sensorField].type.length == 0 ||
-                                                dataService.sensorFieldMap[sensorField].type.indexOf(device.type) >= 0) &&
-                                                dataService.boatStatus[device.id].sensor_data[sensorField] != null &&
-                                                    sensorField != 'time'"
-                                                [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
-                                        <Label col=0 row=0 [text]="dataService.sensorFieldMap[sensorField].icon"
-                                               [class]="'alarm-symbol-' + dataService.sensorFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
-                                        <Label col=0 row=0 [text]="''" *ngIf="dataService.sensorFieldMap[sensorField].filter == 'ChargingActive' && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active['ChargingActive']"
-                                               [class]="'alarm-symbol-fas-small' + (alarmActive ? ' alarm-gray-dark' :  ' alarm-gray-dark')" opacity="1"></Label>
-                                        <Label col=1 row=0 [text]="(dataService.sensorFieldMap[sensorField].name_by_cable.length > 0 ? (dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0 ? dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable)] : dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable)]) : dataService.sensorFieldMap[sensorField].name) | L" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
-                                               verticalAlignment="middle" horizontalAlignment="left"></Label>
-                                        <Label col=2 row=0
-                                               [text]="alarmActive ? 'C': ''"
-                                               class="alarm-symbol alarm-orange"></Label>
-                                        <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='active'"
-                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('yes' | L) : ('no' | L)"
-                                               [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
-                                        <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='closed'"
-                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('closed' | L) : ('open' | L)"
-                                               [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
-                                        <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='3V'"
-                                               [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + ' ' + dataService.sensorFieldMap[sensorField].unit"
-                                               [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
-                                        <Label col=3 row=0 *ngIf="dataService.sensorFieldMap[sensorField].filter=='' || dataService.sensorFieldMap[sensorField].filter=='ChargingActive'"
-                                               [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + ' ' + dataService.sensorFieldMap[sensorField].unit"
-                                               [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
-                                               verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                    <StackLayout *ngFor="let filter of [(dataService.sensorFieldMap[sensorField].filter_by_cable.length > 0 ? (dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0 ? dataService.sensorFieldMap[sensorField].filter_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable)] : dataService.sensorFieldMap[sensorField].filter_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable)]) : dataService.sensorFieldMap[sensorField].filter)]">
+                                        <GridLayout columns="40, *, 40, auto" rows="50" class="row-item-with-top-border"
+                                                    *ngIf="(dataService.sensorFieldMap[sensorField].cable.length == 0 ||
+                                                    dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable) >= 0 ||
+                                                    dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0) &&
+                                                    (dataService.sensorFieldMap[sensorField].type.length == 0 ||
+                                                    dataService.sensorFieldMap[sensorField].type.indexOf(device.type) >= 0) &&
+                                                    dataService.boatStatus[device.id].sensor_data[sensorField] != null &&
+                                                        sensorField != 'time'"
+                                                    [nsRouterLink]="(dataService.sensorFieldMap[sensorField].show_history ? ['../sensordetails', idDevice, sensorField] : [])">
+                                            <Label col=0 row=0 [text]="(dataService.sensorFieldMap[sensorField].icon_by_cable.length > 0 ? (dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0 ? dataService.sensorFieldMap[sensorField].icon_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable)] : dataService.sensorFieldMap[sensorField].icon_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable)]) : dataService.sensorFieldMap[sensorField].icon) | L"
+                                                   [class]="'alarm-symbol-' + dataService.sensorFieldMap[sensorField].iconfont + (alarmActive ? ' alarm-orange' :  ' alarm-gray')"></Label>
+                                            <Label col=0 row=0 [text]="''" *ngIf="filter == 'ChargingActive' && dataService.boatStatus[device.id].alarm_active && dataService.boatStatus[device.id].alarm_active['ChargingActive']"
+                                                   [class]="'alarm-symbol-fas-small' + (alarmActive ? ' alarm-gray-dark' :  ' alarm-gray-dark')" opacity="1"></Label>
+                                            <Label col=1 row=0 [text]="(dataService.sensorFieldMap[sensorField].name_by_cable.length > 0 ? (dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable) >= 0 ? dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.external_voltage_cable)] : dataService.sensorFieldMap[sensorField].name_by_cable[dataService.sensorFieldMap[sensorField].cable.indexOf(device.multisensor_cable)]) : dataService.sensorFieldMap[sensorField].name) | L" [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : ' alarm-blue')"
+                                                   verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                            <Label col=2 row=0
+                                                   [text]="alarmActive ? 'C': ''"
+                                                   class="alarm-symbol alarm-orange"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='active'"
+                                                   [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('yes' | L) : ('no' | L)"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='closed'"
+                                                   [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('closed' | L) : ('open' | L)"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='connected'"
+                                                   [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('connected' | L) : ('not connected' | L)"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='wet'"
+                                                   [text]="dataService.boatStatus[device.id].sensor_data[sensorField] == true ? ('wet' | L) : ('dry' | L)"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='3V'"
+                                                   [text]="(dataService.boatStatus[device.id].sensor_data[sensorField] < 3.0 ? 0 : dataService.boatStatus[device.id].sensor_data[sensorField]) + ' ' + dataService.sensorFieldMap[sensorField].unit"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
+                                            <Label col=3 row=0 *ngIf="filter=='' || filter=='ChargingActive'"
+                                                   [text]="dataService.boatStatus[device.id].sensor_data[sensorField] + ' ' + dataService.sensorFieldMap[sensorField].unit"
+                                                   [class]="'t-16 font-weight-bold' + (alarmActive ? ' alarm-orange' : '')"
+                                                   verticalAlignment="middle" horizontalAlignment="right"></Label>
 
-                                    </GridLayout>
+                                        </GridLayout>
+                                    </StackLayout>
                                 </StackLayout>
                             </GridLayout>
                         </StackLayout>

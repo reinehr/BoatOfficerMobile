@@ -164,6 +164,7 @@
 "USB" = "USB-Ladekabel";
 "DOUBLE" = "Kabel für zwei Batt.";
 "SINGLE" = "Kabel für eine Batt.";
+"MULTI_NONE" = "kein Kabel angeschl.";
 "NONE" = "kein Kabel angeschl.";
 "Multisensor" = "Multisensor";
 "_External_battery_Z14Cw8h" = "Externe Spannungen";

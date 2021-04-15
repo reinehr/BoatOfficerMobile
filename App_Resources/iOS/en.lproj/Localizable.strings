@@ -164,6 +164,7 @@
 "USB" = "USB charging cable";
 "DOUBLE" = "two batteries";
 "SINGLE" = "single battery cable";
+"MULTI_NONE" = "no cable connected";
 "NONE" = "no cable connected";
 "Multisensor" = "Multisensor";
 "_External_battery_Z14Cw8h" = "External voltage";

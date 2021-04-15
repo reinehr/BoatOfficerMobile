@@ -166,6 +166,7 @@
   <string name="USB">"USB charging cable"</string>
   <string name="DOUBLE">"two batteries"</string>
   <string name="SINGLE">"single battery cable"</string>
+  <string name="MULTI_NONE">"no cable connected"</string>
   <string name="NONE">"no cable connected"</string>
   <string name="Multisensor">"Multisensor"</string>
   <string name="_External_battery_Z14Cw8h">"External voltage"</string>

@@ -186,6 +186,7 @@
   "External battery": "Externe Spannungen",
   "Multisensor": "Multisensor",
   "NONE": "kein Kabel angeschl.",
+  "MULTI_NONE": "kein Kabel angeschl.",
   "SINGLE": "Kabel für eine Batt.",
   "DOUBLE": "Kabel für zwei Batt.",
   "USB": "USB-Ladekabel",

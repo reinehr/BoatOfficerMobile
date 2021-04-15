@@ -186,6 +186,7 @@
   "External battery": "External voltage",
   "Multisensor": "Multisensor",
   "NONE": "no cable connected",
+  "MULTI_NONE": "no cable connected",
   "SINGLE": "single battery cable",
   "DOUBLE": "two batteries",
   "USB": "USB charging cable",

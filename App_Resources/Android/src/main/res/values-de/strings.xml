@@ -166,6 +166,7 @@
   <string name="USB">"USB-Ladekabel"</string>
   <string name="DOUBLE">"Kabel für zwei Batt."</string>
   <string name="SINGLE">"Kabel für eine Batt."</string>
+  <string name="MULTI_NONE">"kein Kabel angeschl."</string>
   <string name="NONE">"kein Kabel angeschl."</string>
   <string name="Multisensor">"Multisensor"</string>
   <string name="_External_battery_Z14Cw8h">"Externe Spannungen"</string>

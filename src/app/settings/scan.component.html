@@ -8,6 +8,13 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
         <StackLayout class="form">
+
+            <Button marginTop="10"
+                    text="{{'Scan serial number from QR code' | L}}"
+                    class="alarm-button"
+                    (tap)="scanBarcode()">
+            </Button>
+
             <StackLayout class="input-field" padding="10, 10, 0, 10">
                 <Label
                         class="inputlabel"

@@ -2,8 +2,9 @@ import {Component, ElementRef, OnInit, ViewChild, Inject} from '@angular/core';
 import {ApiService} from '../shared/api.service';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {localize} from "nativescript-localize";
+import {Md5} from "ts-md5/dist/md5"
 
-// import {BarcodeScanner} from 'nativescript-barcodescanner';
+import {BarcodeScanner} from 'nativescript-barcodescanner';
 
 @Component({
     selector: 'app-scan',
@@ -27,9 +28,38 @@ export class ScanComponent implements OnInit {
     ngOnInit() {
     }
 
-    // scanBarcode() {
-    //     new BarcodeScanner().scan({});
-    // }
+    scanBarcode() {
+        new BarcodeScanner().scan({
+            formats: "QR_CODE, EAN_13",
+            closeCallback: () => {
+                console.log("Scanner closed")
+            }, // invoked when the scanner was closed (success or abort)
+            openSettingsIfPermissionWasPreviouslyDenied: true, // On iOS you can send the user to the settings app if access was previously denied
+        }).then((result) => {
+                // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
+                let productNumberScan = '';
+                let webKeyScan = '';
+                let serialNumberScan = '';
+                [productNumberScan, serialNumberScan, webKeyScan] = result.text.replace(/.*\/d\//g, "").split('-');
+                let md5 = Md5.hashStr(serialNumberScan).toString().substr(0,3);
+                serialNumberScan = ("00000000000000000000000000000000" + (parseInt(serialNumberScan, 16)).toString(2)).substr(-32);
+                const year = ("0000" + (parseInt(serialNumberScan.substr(0,7), 2).toString(10))).substr(-2);
+                const week = ("0000" + (parseInt(serialNumberScan.substr(7,6), 2).toString(10))).substr(-2);
+                const producer = ("0000" + (parseInt(serialNumberScan.substr(13,6), 2).toString(10))).substr(-2);
+                const productNumber = ("0000" + (parseInt(serialNumberScan.substr(19,13), 2).toString(10))).substr(-4);
+                this.serialNumber = year + '-' + week + '-' + producer + '-' + productNumber + '-' + md5;
+
+                alert({
+                    title: "Scan result",
+                    message: "Format: " + result.format + ",\nValue: " + result.text,
+                    okButtonText: "OK"
+                });
+            }, (errorMessage) => {
+                console.log("No scan. " + errorMessage);
+            }
+        );
+    }
+
     saveForm() {
         console.log('registering Device ... ', this.serialNumber);
         const serialNumberString = this.serialNumber.replace(/\D/g, "");

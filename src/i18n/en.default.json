@@ -193,6 +193,7 @@
   "WATER": "water ingress sensor",
   "Picture": "Picture",
   "INFORMATION": "INFORMATION",
+  "Scan serial number from QR code": "Scan serial number from QR code",
   "Serial Number": "Serial Number",
   "Firmware Version": "Firmware Version",
   "Product Number": "Product Number",

@@ -23,7 +23,7 @@
 "_More_information_ZrQ5m5" = "More information";
 "MANUAL" = "MANUAL";
 "_____MANUALS_____QpVav" = "";
-"ttnmapper_info_text" = "TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.<br>(http://ttnmapper.org)";
+"ttnmapper_info_text" = "TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.\n(http://ttnmapper.org)";
 "_About_TTN_Mapper_1BcfjW" = "About TTN Mapper";
 "_Show_TTN_Mapper_vBTfI" = "Show TTN Mapper";
 "_Save_Data_2vImsS" = "Save Data";

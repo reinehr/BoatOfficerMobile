@@ -39,6 +39,7 @@ import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.compo
 import {AlarmCard4segmentsTitleComponent} from "~/app/shared/ui/alarm-card-4segments-title/alarm-card-4segments-title.component";
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
+import {ManualComponent} from "~/app/manuals/manual.component";
 // import * as GMSServices from 'nativescript-google-maps-sdk';
 if (platform.isIOS) {
 //     GMSServices.
@@ -83,7 +84,7 @@ export class MyIntl extends TimeagoIntl {
         AlarmComponent,
         BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditinhibitsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent, AlarmCard4segmentsTitleComponent,
         HomeComponent, WebcamComponent,
-        SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent, TtnmapperviewComponent
+        SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent, TtnmapperviewComponent, ManualComponent
     ],
     schemas: [
         NO_ERRORS_SCHEMA

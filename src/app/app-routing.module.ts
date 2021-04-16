@@ -26,6 +26,7 @@ import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.compone
 import {EditusersComponent} from "~/app/boat/editusers.component";
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
+import {ManualComponent} from "~/app/manuals/manual.component";
 
 const routes: Routes = [
     {path: '', redirectTo: '/(home:home//alarm:alarm//boat:boat//settings:settings)', pathMatch: 'full'},
@@ -58,6 +59,7 @@ const routes: Routes = [
     { path: 'purchase', component: PurchaseComponent, outlet: 'settings' },
     { path: 'editpersonaldata', component: EditpersonaldataComponent, outlet: 'settings' },
     { path: 'ttnmapperview', component: TtnmapperviewComponent, outlet: 'settings'},
+    { path: 'manuals/boatofficerblue', component: ManualComponent, outlet: 'settings'},
 ];
 
 @NgModule({

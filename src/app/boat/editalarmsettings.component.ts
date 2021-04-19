@@ -47,15 +47,32 @@ export class EditalarmsettingsComponent implements OnInit {
         const alarm = alarmSettingsMap[this.field][this.idAlarm];
         const isPro = this.dataService.boatStatus[this.idDevice].purchases.is_pro;
         if (!alarmSettingsDatatypeMap[alarm.datatype]) {
-            for (let i = alarm.min; i <= (isPro ? alarm.max_pro : alarm.max); i++) {
-                if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === i) {
-                    this.originalAlarmSettingIndex = this.listPicker.length;
-                    this.selectedListPickerIndex = this.originalAlarmSettingIndex;
+            if (!alarm.alarm_edit_decimals)
+            {
+                for (let i = alarm.min; i <= (isPro ? alarm.max_pro : alarm.max); i++) {
+                    if (parseInt(this.dataService.alarmSettings[this.idDevice][alarm.key].value_device, 10) === i) {
+                        this.originalAlarmSettingIndex = this.listPicker.length;
+                        this.selectedListPickerIndex = this.originalAlarmSettingIndex;
+                    }
+                    const listPickerString = stringify(i) + ' ' + alarm.unit;
+                    this.listPicker.push(listPickerString);
+                    if (listPickerString.length * 15 > this.listPickerWidth) {
+                        this.listPickerWidth = listPickerString.length * 15;
+                    }
                 }
-                const listPickerString = stringify(i) + ' ' + alarm.unit;
-                this.listPicker.push(listPickerString);
-                if (listPickerString.length * 15 > this.listPickerWidth) {
-                    this.listPickerWidth = listPickerString.length * 15;
+            }
+            else
+            {
+                for (let i = (alarm.min * 10); i <= 10 * (isPro ? alarm.max_pro : alarm.max); i++) {
+                    if (Math.round((parseFloat((this.dataService.alarmSettings[this.idDevice][alarm.key].value_device)) * 10)) === i) {
+                        this.originalAlarmSettingIndex = this.listPicker.length;
+                        this.selectedListPickerIndex = this.originalAlarmSettingIndex;
+                    }
+                    const listPickerString = stringify((i/10)) + ' ' + alarm.unit;
+                    this.listPicker.push(listPickerString);
+                    if (listPickerString.length * 15 > this.listPickerWidth) {
+                        this.listPickerWidth = listPickerString.length * 15;
+                    }
                 }
             }
         } else {
@@ -90,7 +107,13 @@ export class EditalarmsettingsComponent implements OnInit {
         {
             this.selectedListPickerIndex = picker.selectedIndex;
             if (!alarmSettingsDatatypeMap[alarm.datatype]) {
-                this.selectedAlarmValue = picker.selectedIndex + alarm.min;
+                if (!alarm.alarm_edit_decimals) {
+                    this.selectedAlarmValue = picker.selectedIndex + alarm.min;
+                }
+                else
+                {
+                    this.selectedAlarmValue = (picker.selectedIndex/10) + alarm.min;
+                }
             } else {
                 this.selectedAlarmValue = alarmSettingsDatatypeMapOrderedByIndex[alarm.datatype][picker.selectedIndex].value;
             }

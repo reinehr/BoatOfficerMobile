@@ -16,7 +16,7 @@ import {Image} from '@nativescript/core/ui/image';
 import { WebView } from '@nativescript/core/ui/web-view';
 import {Page} from '@nativescript/core/ui/page';
 import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
-
+import { isAndroid } from '@nativescript/core/platform';
 
 @Component({
     selector: 'app-manual',
@@ -30,6 +30,7 @@ export class ManualComponent implements OnInit, AfterViewInit {
     scrollLayout: ScrollView = null;
     scrollBase = null;
     allchaptersvisible = false;
+    is_android = isAndroid
 
     chapters = [{'no': '1', 'title': localize('manual_bob_chapter_title_introduction'), 'content':localize('manual_bob_chapter_content_introduction'), 'weblink': 'https://www.boatofficer.com/support', 'weblinktitle':'www.boatofficer.com/support'},
         {'no': '2', 'title': localize('manual_bob_chapter_title_scope'), 'content':localize('manual_bob_chapter_content_scope')},

@@ -26,11 +26,11 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.3.6</string>
+    <string>1.3.7</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>10049</string>
+    <string>10050</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UILaunchStoryboardName</key>
@@ -64,6 +64,8 @@
     <string>Light</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <string>No</string>
+    <key>NSCameraUsageDescription</key>
+    <string>enter your camera permission request text here</string>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>

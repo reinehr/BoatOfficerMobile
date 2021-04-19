@@ -19,7 +19,7 @@
                     </StackLayout>
                     <StackLayout class="manual-chapter-content" [id]="'chapter-content-' + chapter.no" visibility="collapse">
 
-                        <WebView *ngIf="chapter.content && chapter.content != ''" [src]="'\<font face=&quot;arial&quot;\>'+chapter.content+'\</font\>'" height="300" [id]="'chapter-webview-' + chapter.no" (loadFinished)="onLoadFinishedChapterWebview(chapter.no)"></WebView>
+                        <WebView *ngIf="chapter.content && chapter.content != ''" [src]="'\<font face=&quot;arial&quot;\>'+chapter.content+'\</font\>'" [height]="(is_android ? 'auto' : '300')" [id]="'chapter-webview-' + chapter.no" (loadFinished)="onLoadFinishedChapterWebview(chapter.no)"></WebView>
                         <Label *ngIf="chapter.weblink && chapter.weblink != ''" class="font-weight-bold" text="{{'More information' | L}}:"></Label>
                         <Label *ngIf="chapter.weblink && chapter.weblink != ''" class="manual-text-link" [text]="chapter.weblinktitle" (tap)="openChapterUrl(chapter.no)"></Label>
                         <Image *ngIf="chapter.image && chapter.image != ''" [src]="'~/assets/manual/en/'+chapter.image" class="manual-image"></Image>

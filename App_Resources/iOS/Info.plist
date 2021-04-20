@@ -30,7 +30,7 @@
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>10050</string>
+    <string>10053</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UILaunchStoryboardName</key>
@@ -65,7 +65,12 @@
     <key>ITSAppUsesNonExemptEncryption</key>
     <string>No</string>
     <key>NSCameraUsageDescription</key>
-    <string>enter your camera permission request text here</string>
+    <string>Open camera for scanning a QR code</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+    <string>tel</string>
+    <string>telprompt</string>
+    </array>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>

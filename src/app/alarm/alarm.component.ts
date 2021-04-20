@@ -4,13 +4,14 @@ import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
 import {Subject, Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
-import * as TNSPhone from 'nativescript-phone';
+//import * as TNSPhone from 'nativescript-phone';
 import { EventData } from '@nativescript/core/data/observable';
 import { Switch } from '@nativescript/core/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
 import { LocalNotifications } from 'nativescript-local-notifications';
 import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
 import {Page} from "@nativescript/core/ui/page";
+import {Utils} from "@nativescript/core";
 
 registerElement('PullToRefresh', () => require('@nstudio/nativescript-pulltorefresh').PullToRefresh);
 
@@ -106,7 +107,9 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     }
 
     onCallTap(idDevice: number) {
-        TNSPhone.dial(this.dataService.deviceData[idDevice].harbour_contact, true);
+        console.log('Call Harbour')
+        Utils.openUrl('tel://' + this.dataService.deviceData[idDevice].harbour_contact)
+        //TNSPhone.dial(this.dataService.deviceData[idDevice].harbour_contact, true);
     }
 
     onCheckedChange(args: EventData) {

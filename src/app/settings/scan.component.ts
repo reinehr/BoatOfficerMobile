@@ -3,6 +3,7 @@ import {ApiService} from '../shared/api.service';
 import {RouterExtensions} from 'nativescript-angular/router';
 import {localize} from "nativescript-localize";
 import {Md5} from "ts-md5/dist/md5"
+import { isAndroid } from '@nativescript/core/platform';
 
 import {BarcodeScanner} from 'nativescript-barcodescanner';
 
@@ -49,11 +50,6 @@ export class ScanComponent implements OnInit {
                 const productNumber = ("0000" + (parseInt(serialNumberScan.substr(19,13), 2).toString(10))).substr(-4);
                 this.serialNumber = year + '-' + week + '-' + producer + '-' + productNumber + '-' + md5;
 
-                alert({
-                    title: "Scan result",
-                    message: "Format: " + result.format + ",\nValue: " + result.text,
-                    okButtonText: "OK"
-                });
             }, (errorMessage) => {
                 console.log("No scan. " + errorMessage);
             }

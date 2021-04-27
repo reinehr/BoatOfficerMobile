@@ -102,14 +102,14 @@ export class ManualComponent implements OnInit, AfterViewInit {
 
     toggleAllChapterDetails(args) {
         console.log("Chapter Status tapped");
-        // for (const idDevice in this.dataService.deviceData)
-        // {
-        //     const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
-        //     boatDetailsView.visibility = this.allboatsvisible ? "collapse" : "visible";
-        //     boatDetailsView.opacity = 1;
-        // }
-        // this.allboatsvisible = !this.allboatsvisible;
-        // this.scrollLayout.scrollToVerticalOffset(0, true);
+        for (let chapter of this.chapters)
+        {
+            const chapterContentView = <StackLayout> this.page.getViewById("chapter-content-"+chapter.no);
+            chapterContentView.visibility = this.allchaptersvisible ? "collapse" : "visible";
+            chapterContentView.opacity = 1;
+        }
+        this.allchaptersvisible = !this.allchaptersvisible;
+        this.scrollLayout.scrollToVerticalOffset(0, true);
     }
 
     openChapterUrl(chapterNo) {

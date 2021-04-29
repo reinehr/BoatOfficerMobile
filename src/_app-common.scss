@@ -637,3 +637,23 @@ TextView {
     font-size: 16;
     margin: 0,0,0,15;
 }
+
+.manual-chapter-header {
+    padding-left: 15;
+    padding-right: 15;
+    height: 40;
+    vertical-align: middle;
+    background: linear-gradient(rgba(255,255,255,0) 0%, rgba(255,255,255,1) 90%);
+}
+
+.manual-chapter-content {
+    font-family: "Open Sans";
+    padding: 10, 15, 10, 15;
+    vertical-align: top;
+    background-color: white;
+}
+
+.manual-text-link {
+    font-weight: bold;
+    color: #356eb4;
+}

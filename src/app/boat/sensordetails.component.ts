@@ -57,10 +57,17 @@ export class SensordetailsComponent implements OnInit {
 
         if (this.field == 'IntBattVolt')
         {
-            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 4.2});
-            this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 4.2});
-            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.1});
-            this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.1});
+            if (this.dataService.deviceData[this.idDevice].type == 'to-mslr') {
+                this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.1});
+                this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.1});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 2.7});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 2.7});
+            } else {
+                this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 4.2});
+                this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 4.2});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.1});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.1});
+            }
         }
     }
 

@@ -26,11 +26,11 @@
     <key>CFBundlePackageType</key>
     <string>APPL</string>
     <key>CFBundleShortVersionString</key>
-    <string>1.3.6</string>
+    <string>1.3.8</string>
     <key>CFBundleSignature</key>
     <string>????</string>
     <key>CFBundleVersion</key>
-    <string>10049</string>
+    <string>10055</string>
     <key>LSRequiresIPhoneOS</key>
     <true/>
     <key>UILaunchStoryboardName</key>
@@ -64,6 +64,13 @@
     <string>Light</string>
     <key>ITSAppUsesNonExemptEncryption</key>
     <string>No</string>
+    <key>NSCameraUsageDescription</key>
+    <string>Open camera for scanning a QR code</string>
+    <key>LSApplicationQueriesSchemes</key>
+    <array>
+    <string>tel</string>
+    <string>telprompt</string>
+    </array>
     <key>CFBundleURLTypes</key>
     <array>
       <dict>

@@ -226,7 +226,7 @@ export class ApiService {
         // let params = new HttpParams();
         // params = params.append('limit', '5');
         // params = params.append('only_active', 'true');
-        const param: any = {limit: 99, only_active: 'false'};
+        const param: any = {};
         const indexTypeActive = [];
         this.keyTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
@@ -377,9 +377,9 @@ export class ApiService {
     }
 
     setAlarmData(idAlarms: number[], markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
-        let numSuccess = 0
-        for (let idAlarm of idAlarms) {
-            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_by_user/', {
+        if (idAlarms.length >= 1) {
+            let idAlarm = idAlarms[0]
+            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_all_by_user/', {
                     id: idAlarm,
                     marked_as_ok: markedAsOk,
                     marked_as_responsible: markedAsResponsible
@@ -387,10 +387,7 @@ export class ApiService {
                 , {
                     headers: this.getHeader()
                 }).subscribe(() => {
-                    numSuccess = numSuccess+1;
-                    if(numSuccess==idAlarms.length) {
-                        this.getDeviceData().subscribe();
-                    }
+                    this.getDeviceData().subscribe();
             });
         }
     }

@@ -1,0 +1,29 @@
+<ActionBar title="{{'MANUAL' | L}}" class="action-bar bg-darkblue">
+    <NavigationButton text="{{'Back' | L}}" android.systemIcon="ic_menu_back"></NavigationButton>
+    <Label text="{{'MANUAL' | L}}" class="alarm-text"
+        (tap)="toggleAllChapterDetails($event)"></Label>
+
+</ActionBar>
+
+
+<GridLayout id="level_2" class="homeBackgroundImage"
+            backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
+        <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
+            <StackLayout id="level_5">
+                <StackLayout [id]="'chapter-container-' + chapter.no" *ngFor="let chapter of chapters;">
+                    <StackLayout (tap)="toggleChapterDetails(chapter.no)">
+                        <GridLayout columns="30, *" class="t-16 font-weight-bold manual-chapter-header">
+                            <Label col="0" [text]="chapter.no"></Label>
+                            <Label col="1" [text]="chapter.title"></Label>
+                        </GridLayout>
+                    </StackLayout>
+                    <StackLayout class="manual-chapter-content" [id]="'chapter-content-' + chapter.no" visibility="collapse">
+                        <WebView *ngIf="chapter.content && chapter.content != ''" [src]="'\<font face=&quot;arial&quot;\>'+chapter.content+'\</font\>'" height="300" [id]="'chapter-webview-' + chapter.no" (loadFinished)="onLoadFinishedChapterWebview(chapter.no)"></WebView>
+                        <Label *ngIf="chapter.weblink && chapter.weblink != ''" class="font-weight-bold" text="{{'More information' | L}}:"></Label>
+                        <Label *ngIf="chapter.weblink && chapter.weblink != ''" class="manual-text-link" [text]="chapter.weblinktitle" (tap)="openChapterUrl(chapter.no)"></Label>
+                        <Image *ngIf="chapter.image && chapter.image != ''" [src]="'~/assets/manual/en/'+chapter.image" class="manual-image"></Image>
+                    </StackLayout>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+</GridLayout>

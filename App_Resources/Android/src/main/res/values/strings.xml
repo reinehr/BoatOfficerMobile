@@ -1,5 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+  <string name="manual_bob_chapter_content_maintenance">"The BoatOfficer Blue is a low-maintenance product and is designed for long use, even outdoors. &lt;br>&lt;br>Nevertheless, follow these tips to enjoy your BoatOfficer Blue for a long time:&lt;br>&lt;br>Charge the internal battery of the BoatOfficer Blue before the voltage is very low (falls below 3.3 V). &lt;br>The BoatOfficer Blue automatically protects the battery at low voltages by deactivating the GPS and extending the transmission time intervals.&lt;br>If, after inserting the battery cable (and pushing the button to wake it up), charging is not possible, it is already too late, the battery voltage dropped too far and the internal battery must not be recharged for safety reasons. This is an integrated self-protection. Please contact BoatOfficer Service for assistance.&lt;br>&lt;br>Keep the BoatOfficer as dry as possible. &lt;br>&lt;br>The housing of the BoatOfficer Blue tolerates splash water and short submersion. However, avoid this if possible, so that no moisture can get into the housing permanently."</string>
+  <string name="manual_bob_chapter_title_maintenance">"Care of the BoatOfficer Blue"</string>
+  <string name="manual_bob_chapter_content_lorawan">"LoRaWAN is a radio protocol with extremely low energy requirements and a very long range. In order to achieve such low energy consumption, unlike many other mobile devices, the BoatOfficer Blue does not continually communicate with the network.&lt;br>&lt;br>Communication is driven purely by the device, i.e. it is not possible to contact the device at any particular time (e.g. to change settings). The only times that the device is listening to the network for commands is just after it has send a message to the network. Therefore, if you change the settings of the device in the app, they will not be sent immediately, but, it is necessary to wait for the BoatOfficer Blue to sent a message to create the opportunity to transmit the changes to the device settings. This is indicated in the app when making a change of settings.&lt;br>&lt;br>The coverage of the LoRaWAN network of TheThingsNetwork can be checked on ttnmapper.org or by pressing the button on the BoatOfficer Blue (see chapter \"LED indicators\")."</string>
+  <string name="manual_bob_chapter_title_lorawan">"General Information about LoRaWAN and TheThingsNetwork"</string>
+  <string name="manual_bob_chapter_content_leds">"The BoatOfficer Blue LEDs are off most of the time to save energy. &lt;br>The LEDs only light up in two cases: After a button press by the user in the order explained below or when charging via USB.&lt;br>&lt;br>&lt;table style=\"border: 1px solid black; border-collapse: collapse; vertical-align:top\">&lt;tr style=\"background-color: #bbbbbb;\">&lt;td style=\"border: 1px solid black;\" colspan=\"2\">LED signals after button press&lt;/td>&lt;/tr>&lt;tr style=\"background-color: #bbbbbb; vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">1. Immediate feedback&lt;/td>&lt;td style=\"border: 1px solid black;\">immediately after key press&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Red LED lights up briefly&lt;/td>&lt;td style=\"border: 1px solid black;\">BoatOfficer is busy (searching for GPS reception, checking LoRaWAN connection or similar). The button press was registered and will be processed afterwards.&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">All three LEDs are on&lt;/td>&lt;td style=\"border: 1px solid black;\">LED test, all LEDs should be on. Steps 2 (optional), 3 and 4 will follow. &lt;/td>&lt;/tr>&lt;tr style=\"background-color: #bbbb; vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">2. Search&lt;/td>&lt;td style=\"border: 1px solid black;\">Optional&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Blue LED lights up twice briefly (repeating)&lt;/td>&lt;td style=\"border: 1px solid black;\">It is searching for a LoRaWAN connection&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top; background-color: #bbbbbb;\">&lt;td style=\"border: 1px solid black;\" colspan=\"2\">3. Communication quality&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Green and blue LEDs light together for 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">A LoRaWAN connection has been found (Good signal quality)&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Green LED lights, blue flashes (2-4 times) within 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">A LoRaWAN connection was found (the more often blue flashes, the worse the connection)&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Red and blue LED light up together for 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">No LoRaWAN connection was found, resp. the response from the network was not received on the BoatOfficer.&lt;/td>&lt;/tr>&lt;tr style=\"background-color: #bbbb; vertical-align: top;\">&lt;td style=\"border: 1px solid black;\" colspan=\"2\">4. Charge level internal battery&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Green LED lights up 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">Battery fully charged&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Blue LED lights up 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">Battery with medium charge&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Red LED lights up 1 s&lt;/td>&lt;td style=\"border: 1px solid black;\">Battery with low charge: Charge BoatOfficer Blue with USB charging cable or sensor cable for battery as soon as possible. &lt;/td>&lt;/tr>&lt;/table>&lt;br>&lt;table style=\"border-collapse: collapse;\">&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black; background-color: #bbbbbb;\" colspan=\"2\">LED signals when charging via USB adapter&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top; background-color: #bbbbbb;\">&lt;td style=\"border: 1px solid black;\">Signal&lt;/td>&lt;td style=\"border: 1px solid black;\">Meaning&lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Green flashes 3 s on, 3 s off&lt;/td>&lt;td style=\"border: 1px solid black;\">Internal battery is charging. &lt;/td>&lt;/tr>&lt;tr style=\"vertical-align: top;\">&lt;td style=\"border: 1px solid black;\">Green lights longer than 10 s with short pauses&lt;/td>&lt;td style=\"border: 1px solid black;\">Internal battery is fully charged, USB charging cable can be removed.&lt;/td>&lt;/tr>&lt;/table>"</string>
+  <string name="manual_bob_chapter_title_leds">"LEDs"</string>
+  <string name="manual_bob_chapter_content_installation_app">"Obviously you have already downloaded the app. Very nice. :)&lt;br>&lt;br>To connect your new BoatOfficer with your app you have to do two things:&lt;br>1. register (create an account) and&lt;br>2. in this account register BoatOfficer using the serial number and the registration key."</string>
+  <string name="manual_bob_chapter_title_installation_app">"App: Register your BoatOfficer Blue"</string>
+  <string name="manual_bob_chapter_content_installation_batterycables">"The battery cables have fork terminals with an 8 mm opening, suitable for most pole terminals. &lt;br>Note that for the sensor cable for 2 batteries, sensor cable 1 (marked \"Battery 1\") should be connected to the engine starter battery to reliably detect engine activity. The second cable can be connected to the domestic battery. A common ground connection is assumed, so only one cable needs to be connected for the negative terminal."</string>
+  <string name="manual_bob_chapter_title_installation_batterycables">"Installation: Mounting of Sensor Cables for Battery"</string>
+  <string name="manual_bob_chapter_content_installation_position">"BoatOfficer relies on radio communication. Radio waves can be shielded or at least strongly attenuated by metal or water. &lt;br>&lt;br>For good GPS reception BoatOfficer Blue should not be mounted below larger metal objects. The LoRaWAN signal radiates horizontally from the BoatOfficer Blue device. Metal objects or a deep installation in the boat (close to the water level) reduce the LoRaWAN signal strength, quality, and range. For this reason, for beste performance, please install the BoatOfficer Blue in a vertical position (i.e. with the logo facing out and the cables at the bottom) raised above the waterline, if possible."</string>
+  <string name="manual_bob_chapter_title_installation_position">"Installation: Position within the Boat"</string>
+  <string name="manual_bob_chapter_content_installation_mounting">"The BoatOfficer Blue has two standard options for mounting:&lt;br>&lt;br>There is very robust, outdoor-suitable adhesive tape on the back. After removing the protective film, the BoatOfficer Blue can be attached to many surfaces.&lt;br>&lt;br>Alternatively, behind the small flaps on the front are holes that can be used for mounting with screws, for example."</string>
+  <string name="manual_bob_chapter_title_installation_mounting">"Installation: Mounting within the Boat"</string>
+  <string name="manual_bob_chapter_title_illustration">"BoatOfficer Blue Image"</string>
+  <string name="manual_bob_chapter_content_warnings">"BoatOfficer is a tool to increase the safety of your boat. Alarms and information from BoatOfficer to your smartphone may occasionally not be delivered for various reasons (no LoRaWAN reception, network provider interference or similar). Do not rely exclusively on BoatOfficer in critical situations.&lt;br>&lt;br>In the spirit of good seamanship always use several tools to ensure the safety of your boat and the people aboard. &lt;br>&lt;br>&lt;br>Maximum operating temperatures: -20 to 60 °C ambient temperature.&lt;br>Charging of internal battery is only possible between 0 to 45°C. Mind this before winter storage of your boat.&lt;br>&lt;br>Do not fully immerse the device.&lt;br>&lt;br>Do not open housing.&lt;br>&lt;br>Only connect approved BoatOfficer accessory cables. &lt;br>&lt;br>Maximum voltage (battery sensor cable): 60 V (DC).&lt;br>&lt;br>Please retain the paper card with serial number and registration key (see your package) for future reference."</string>
+  <string name="manual_bob_chapter_title_warnings">"WARNINGS"</string>
+  <string name="manual_bob_chapter_content_scope">"- BoatOfficer Blue&lt;br>- Charge Cable USB (200-001-xxx)&lt;br>- Optional: Sensor Cable for 1 Battery (201-001-xxx)&lt;br>- Optional: Sensor Cable for 2 Batteries (201-002-xxx)"</string>
+  <string name="manual_bob_chapter_title_scope">"Scope of this Manual"</string>
+  <string name="manual_bob_chapter_content_introduction">"…as a new user of BoatOfficer!&lt;br>&lt;br>We are proud of our product and are looking forward to BoatOfficer increasing your boating pleasure, alleviating your worries and helping you to reduce costs and damages. It is a new product and we are interested to hear about your experiences and any feature requests for BoatOfficer Blue.&lt;br>&lt;br>Don\'t be afraid to get in touch with us - we would love to hear your feedback:&lt;br>&lt;br>info@boatofficer.com&lt;br>&lt;br>Your BoatOfficer Team wishes you a safe journey and of course a relaxing time ashore.&lt;br>&lt;br>In case of questions or problems please contact us via our support page.&lt;br>&lt;br>Hint: If you scan the QR-Code on your device and click the e-mail button on the webpage appearing, you create a draft e-mail already including your device’s serial number for our reference."</string>
+  <string name="manual_bob_chapter_title_introduction">"Welcome"</string>
+  <string name="_____BOATOFFICERBLUE_____Z1Hn0mh">""</string>
+  <string name="_More_information_ZrQ5m5">"More information"</string>
+  <string name="MANUAL">"MANUAL"</string>
+  <string name="_____MANUALS_____QpVav">""</string>
   <string name="ttnmapper_info_text">"TTN Mapper is a third party service displaying you roughly where to expect LoRaWAN coverage by the TheThingsNetwork (TTN), the network BoatOfficer is using.\n(http://ttnmapper.org)"</string>
   <string name="_About_TTN_Mapper_1BcfjW">"About TTN Mapper"</string>
   <string name="_Show_TTN_Mapper_vBTfI">"Show TTN Mapper"</string>
@@ -88,6 +113,7 @@
   <string name="_Sign_on_a_Boat_ZIAXjF">"Sign on a Boat"</string>
   <string name="_Register_new_device_1xIGNi">"Register new device"</string>
   <string name="Miscellaneous">"Miscellaneous"</string>
+  <string name="Manuals">"Manuals"</string>
   <string name="Account">"Account"</string>
   <string name="Devices">"Devices"</string>
   <string name="SETTINGS">"SETTINGS"</string>
@@ -160,12 +186,14 @@
   <string name="_Product_Number_Z2v9NIX">"Product Number"</string>
   <string name="_Firmware_Version_21dJ4u">"Firmware Version"</string>
   <string name="_Serial_Number_8rO9v">"Serial Number"</string>
+  <string name="_Scan_serial_number_from_QR_code_Z1IAQp6">"Scan serial number from QR code"</string>
   <string name="INFORMATION">"INFORMATION"</string>
   <string name="Picture">"Picture"</string>
   <string name="WATER">"water ingress sensor"</string>
   <string name="USB">"USB charging cable"</string>
   <string name="DOUBLE">"two batteries"</string>
   <string name="SINGLE">"single battery cable"</string>
+  <string name="MULTI_NONE">"no cable connected"</string>
   <string name="NONE">"no cable connected"</string>
   <string name="Multisensor">"Multisensor"</string>
   <string name="_External_battery_Z14Cw8h">"External voltage"</string>
@@ -239,6 +267,10 @@
   <string name="bad_gps_reception_explained">"Poor GPS reception: GPS sensor is (has been) covered too much. Please avoid covering, especially with metal. A shorter position interval may also improve the GPS reception."</string>
   <string name="_Please_buy_Pro_ZkCpFH">"This view is only available if the captain of this ship bought the Pro-Version of this app (In-App Purchase)n."</string>
   <string name="MAP">"MAP"</string>
+  <string name="_not_connected_Z1zbWvw">"not connected"</string>
+  <string name="connected">"connected"</string>
+  <string name="dry">"dry"</string>
+  <string name="wet">"wet"</string>
   <string name="closed">"closed"</string>
   <string name="open">"open"</string>
   <string name="No">"No"</string>
@@ -255,6 +287,18 @@
   <string name="_GPS_Reception_Z1yTsh">"GPS Reception"</string>
   <string name="POSITION">"POSITION"</string>
   <string name="_____MAP______Z2fjHjq">""</string>
+  <string name="_Water_Sensor_2_Dry_huUVs">"Water sensor 2 dry"</string>
+  <string name="_Water_Sensor_2_Wet_hv0J6">"Water sensor 2 wet"</string>
+  <string name="_Water_Sensor_1_Dry_hqQJL">"Water sensor 1 dry"</string>
+  <string name="_Water_Sensor_1_Wet_hqVxp">"Water sensor 1 wet"</string>
+  <string name="_Water_Sensor_2_Z3wysq">"Water sensor 2"</string>
+  <string name="_Water_Sensor_1_Z3wysr">"Water sensor 1"</string>
+  <string name="_Multi_Sensor_Disconnected_Z1YqXtv">"Multi sensor disconnected"</string>
+  <string name="_Multi_Sensor_Connected_Dzu9N">"Multi sensor connected"</string>
+  <string name="_Water_Sensor_Disconnected_ZblkcQ">"Water sensor disconnected"</string>
+  <string name="_Water_Sensor_Connected_2w3GSH">"Water sensor connected"</string>
+  <string name="_Multi_Sensor_22aEEz">"Multi sensor"</string>
+  <string name="_Water_Sensor_Z1Gi2A6">"Water sensor"</string>
   <string name="_Reed_Sensor_Closed_ZRAXY4">"Magnet sensor"</string>
   <string name="Brightness">"Brightness"</string>
   <string name="Humidity">"Relative humidity"</string>

@@ -355,6 +355,14 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
+
+                <StackLayout orientation="vertical" padding="10" class="alarm-card t-18"
+                *ngIf="dataService.sensorFieldMap[field].note && dataService.sensorFieldMap[field].note != ''">
+                    <Label text="{{'Note' | L}}" class="t-16 font-weight-bold alarm-card-simple-title"></Label>
+                    <TextView fontSize="14"  class="sensor-detail-note" [text]="dataService.sensorFieldMap[field].note"></TextView>
+                </StackLayout>
+
+
             </StackLayout>
         </ScrollView>
     </PullToRefresh>

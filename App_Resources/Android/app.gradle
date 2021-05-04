@@ -25,6 +25,8 @@ android {
   }
 }
 
+dependencies { compile 'com.google.android.gms:play-services-maps:16.1.0' }
+
 def settingsGradlePath
 
 if(project.hasProperty("appResourcesPath")){

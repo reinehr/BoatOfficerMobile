@@ -13,8 +13,8 @@
     "crashlytics": false,
     "storage": false,
     "functions": false,
-    "facebook_auth": true,
-    "google_auth": true,
+    "facebook_auth": false,
+    "google_auth": false,
     "admob": false,
     "dynamic_links": false,
     "ml_kit": false

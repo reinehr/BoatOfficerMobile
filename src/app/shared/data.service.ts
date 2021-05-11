@@ -519,7 +519,6 @@ export class DataService {
             }, error => {
                 console.log('AlarmSettings not loading');
             });
-            this.isLoading = false;
         }, error => {
             console.log(error);
             this.isLoading = false;

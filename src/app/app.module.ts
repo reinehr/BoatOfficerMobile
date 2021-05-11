@@ -40,6 +40,7 @@ import {AlarmCard4segmentsTitleComponent} from "~/app/shared/ui/alarm-card-4segm
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
 import {ManualComponent} from "~/app/manuals/manual.component";
+import {NativeScriptMaterialActivityIndicatorModule} from "nativescript-material-activityindicator/angular";
 // import * as GMSServices from 'nativescript-google-maps-sdk';
 if (platform.isIOS) {
 //     GMSServices.
@@ -68,6 +69,7 @@ export class MyIntl extends TimeagoIntl {
         NativeScriptModule,
         NativeScriptLocalizeModule,
         NativeScriptFormsModule,
+        NativeScriptMaterialActivityIndicatorModule,
         ReactiveFormsModule,
         AppRoutingModule,
         NativeScriptHttpClientModule,

@@ -8,8 +8,6 @@
             <GridLayout id="level_4" columns="*" rows="40, 100, 5, *" class="page__content">
                 <Label col=0 row=0 text="" height="40"></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
-                <ActivityIndicator [busy]="isLoading">
-                </ActivityIndicator>
                 <Label col=0 row=2 text="" height="0"></Label>
                 <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!hasKey">
                     <StackLayout class="alarm-card-home">
@@ -200,4 +198,9 @@
             </GridLayout>
         </ScrollView>
     </PullToRefresh>
+    <MDActivityIndicator [busy]="false">
+    </MDActivityIndicator>
+    <GridLayout class="blob" *ngIf="dataService.isLoading">
+        <Image col=0 row=1 src="~/assets/icon.png"></Image>
+    </GridLayout>
 </GridLayout>

@@ -139,4 +139,9 @@
             </ActivityIndicator>
         </StackLayout>
     </ScrollView>
+    <MDActivityIndicator [busy]="false">
+    </MDActivityIndicator>
+    <GridLayout class="blob" *ngIf="dataService.isLoading">
+        <Image col=0 row=1 src="~/assets/icon.png"></Image>
+    </GridLayout>
 </GridLayout>

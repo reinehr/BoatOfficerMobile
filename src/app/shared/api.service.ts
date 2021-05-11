@@ -194,18 +194,6 @@ export class ApiService {
         );
     }
 
-    getLatestSensorData() {
-        return this.httpClient.post<SensordataTime>(this.baseSensorUrl + 'get_latest_depricated/', {device: 1},
-            {
-                headers: this.getHeader()
-            }
-        ).pipe(tap(resData => {
-            if (resData) {
-                this.sensorLatestData.next(resData);
-            }
-        }));
-    }
-
     getUserData() {
         return this.httpClient.get<UserData>(this.baseUserUrl + 'get_userdata/',
             {

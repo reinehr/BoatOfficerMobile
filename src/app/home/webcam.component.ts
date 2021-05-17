@@ -64,7 +64,7 @@ export class WebcamComponent implements OnInit {
 
     onLoadFinished(args: LoadEventData, order: number) {
         const webView = args.object as WebView;
-        console.log('WEBVIEW Webcam onLoadFinished')
+        //console.log('WEBVIEW Webcam onLoadFinished')
 
         let jsStr = `var body = document.body;
                 var html = document.documentElement;

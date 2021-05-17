@@ -531,6 +531,12 @@ export interface BoatHistory {
             'ReedSensorClosed': boolean
         }[],
         'sensor_data_length'?: number,
+        'sensor_data_minmax': {
+            [sensor_field: string]: {'Min': {[interval: string]: number}, 'Max': {[interval: string]: number}, 'MinDate': {[interval: string]: string}, 'MaxDate': {[interval: string]: string}}
+        }
+        'position_data_minmax': {
+            [sensor_field: string]: {'Min': {[interval: string]: number}, 'Max': {[interval: string]: number}, 'MinDate': {[interval: string]: string}, 'MaxDate': {[interval: string]: string}}
+        }
     };
 }
 

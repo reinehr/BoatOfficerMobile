@@ -112,7 +112,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
                                     this.mapView.addMarker(markerWebcam);
                                     this.mapView.mapAnimationsEnabled = true;
                                 } else {
-                                    console.log('Setting no camera marker ...');
+                                    //console.log('Setting no camera marker ...');
                                 }
                                 this.mapView.addMarker(marker);
                                 this.mapView.mapAnimationsEnabled = true;
@@ -144,7 +144,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     // Map events
     onMapReady(event, idDevice: number) {
-        console.log('Map Ready');
+        //console.log('Map Ready');
 
         this.mapView = event.object;
 
@@ -152,7 +152,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         // const icon = new Image();
         // icon.imageSource = imageSource;
 
-        console.log('Setting a marker...');
+        //console.log('Setting a marker...');
 
         const marker = new Marker();
         marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
@@ -180,7 +180,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
             this.mapView.addMarker(markerWebcam);
             this.mapView.mapAnimationsEnabled = true;
         } else {
-            console.log('ready Setting no camera marker ...');
+            //console.log('ready Setting no camera marker ...');
         }
         this.mapView.addMarker(marker);
         this.mapView.mapAnimationsEnabled = true;
@@ -228,7 +228,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
 
     onLoadFinishedWebView(args: LoadEventData) {
         const webView = args.object as WebView;
-        console.log('WEBVIEW Webcams onLoadFinished')
+        //console.log('WEBVIEW Webcams onLoadFinished')
 
         if (!args.error) {
             //console.log(`Url: ${args.url}`);

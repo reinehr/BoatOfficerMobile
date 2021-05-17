@@ -31,6 +31,7 @@ export class GpsdetailsComponent implements OnInit {
     public field = '---';
     public idDevice = 0;
     selectedIntervalId = 2;
+    intervalKeys = {0: '1d', 1: '3d', 2: '7d', 3: '31d', 4: '91d', 5: '365d', 6: 'all'}
     majorStepY = 5;
     minorStepY = 1;
     maxY = 20;

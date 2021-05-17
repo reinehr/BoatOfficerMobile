@@ -181,8 +181,6 @@ export class DataService {
     private boatHistorySub: Subscription;
     public boatHistory: BoatHistory;
     historyIntervalData = historyInterval;
-    minMax: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
-    minMaxGps: { [idDevice: number]: { [idInterval: number]: { [field: string]: { min: { time: string, value: number }, max: { time: string, value: number } } } } } = {};
     public isLoading = false;
     dataLoaded = false;
 
@@ -223,14 +221,6 @@ export class DataService {
                                     // }
                                 }
                                 if (this.boatStatus[idDevice].position_data.latitude) {
-                                    // const weather = this.apiService.getWeatherData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
-                                    // weather.subscribe(wdata => {
-                                    //     wdata.weather[0].icon = String.fromCharCode(WEATHER_ICONS.owmneutral[wdata.weather[0].id]);
-                                    //     const beaufort = windSpeedToBeaufort(wdata.wind.speed);
-                                    //     wdata.wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
-                                    //     wdata.wind.direction_icon = String.fromCharCode(0xf0b1);
-                                    //     this.boatStatus[idDevice].weather = wdata;
-                                    // });
                                     const weatherForecast = this.apiService.getWeatherForecastData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
                                     weatherForecast.subscribe(wdata => {
                                         const dateSunset = new Date(wdata.city.sunset * 1000);
@@ -344,30 +334,6 @@ export class DataService {
                 if (bhdata) {
                     this.boatHistory = bhdata;
                     for (const idDevice of Object.keys(this.boatHistory)) {
-                        if (!this.minMax[idDevice]) {
-                            this.minMax[idDevice] = {};
-                            for (const idInterval in this.historyIntervalData) {
-                                this.minMax[idDevice][idInterval] = {};
-                                for (const field of this.sensorFieldKeys) {
-                                    if (this.sensorFieldMap[field].datatype === 'float') {
-                                        this.minMax[idDevice][idInterval][field] = {};
-                                        // this.minMax[idDevice][interval.id][field] = {min: {}, max: {}};
-                                    }
-                                }
-                            }
-                        }
-                        if (!this.minMaxGps[idDevice]) {
-                            this.minMaxGps[idDevice] = {};
-                            for (const idInterval in this.historyIntervalData) {
-                                this.minMaxGps[idDevice][idInterval] = {};
-                                for (const field of this.gpsFieldKeys) {
-                                    if (this.gpsFieldMap[field].datatype === 'float') {
-                                        this.minMaxGps[idDevice][idInterval][field] = {};
-                                        // this.minMaxGps[idDevice][interval.id][field] = {min: {}, max: {}};
-                                    }
-                                }
-                            }
-                        }
                         if (!this.boatHistory[idDevice].sensor_data) {
                             this.boatHistory[idDevice].sensor_data = [];
                         }
@@ -388,42 +354,6 @@ export class DataService {
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
-                                } else {
-                                    for (const field of this.sensorFieldKeys) {
-                                        if (!this.minMax[idDevice]) {
-                                            this.minMax[idDevice] = {};
-                                        }
-                                        if (!this.minMax[idDevice][idInterval]) {
-                                            this.minMax[idDevice][idInterval] = {};
-                                        }
-                                        if (!this.minMax[idDevice][idInterval][field]) {
-                                            this.minMax[idDevice][idInterval][field] = {};
-                                        }
-                                        if (!this.minMax[idDevice][idInterval][field].min) {
-                                            this.minMax[idDevice][idInterval][field] = {
-                                                min: {
-                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
-                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
-                                                },
-                                                max: {
-                                                    time: this.boatHistory[idDevice].sensor_data[idEvent].time,
-                                                    value: this.boatHistory[idDevice].sensor_data[idEvent][field]
-                                                }
-                                            };
-                                        }
-                                        if ((this.boatHistory[idDevice].sensor_data[idEvent][field] || this.boatHistory[idDevice].sensor_data[idEvent][field] === 0) && this.boatHistory[idDevice].sensor_data[idEvent][field] < this.minMax[idDevice][idInterval][field].min.value) {
-                                            this.minMax[idDevice][idInterval][field].min = {
-                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
-                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
-                                            };
-                                        }
-                                        if (this.boatHistory[idDevice].sensor_data[idEvent][field] > this.minMax[idDevice][idInterval][field].max.value) {
-                                            this.minMax[idDevice][idInterval][field].max = {
-                                                time: this.boatHistory[idDevice].sensor_data[idEvent].time,
-                                                value: this.boatHistory[idDevice].sensor_data[idEvent][field]
-                                            };
-                                        }
-                                    }
                                 }
                                 this.historyIntervalData[idInterval].sensorData.sliceStop = +idEvent;
                             }
@@ -439,42 +369,6 @@ export class DataService {
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].positionData.sliceStart = +idEvent;
-                                } else {
-                                    for (const field of this.gpsFieldKeys) {
-                                        if (!this.minMaxGps[idDevice]) {
-                                            this.minMaxGps[idDevice] = {};
-                                        }
-                                        if (!this.minMaxGps[idDevice][idInterval]) {
-                                            this.minMaxGps[idDevice][idInterval] = {};
-                                        }
-                                        if (!this.minMaxGps[idDevice][idInterval][field]) {
-                                            this.minMaxGps[idDevice][idInterval][field] = {};
-                                        }
-                                        if (!this.minMaxGps[idDevice][idInterval][field].min) {
-                                            this.minMaxGps[idDevice][idInterval][field] = {
-                                                min: {
-                                                    time: this.boatHistory[idDevice].position_data[idEvent].time,
-                                                    value: this.boatHistory[idDevice].position_data[idEvent][field]
-                                                },
-                                                max: {
-                                                    time: this.boatHistory[idDevice].position_data[idEvent].time,
-                                                    value: this.boatHistory[idDevice].position_data[idEvent][field]
-                                                }
-                                            };
-                                        }
-                                        if ((this.boatHistory[idDevice].position_data[idEvent][field] || this.boatHistory[idDevice].position_data[idEvent][field] === 0) && this.boatHistory[idDevice].position_data[idEvent][field] < this.minMaxGps[idDevice][idInterval][field].min.value) {
-                                            this.minMaxGps[idDevice][idInterval][field].min = {
-                                                time: this.boatHistory[idDevice].position_data[idEvent].time,
-                                                value: this.boatHistory[idDevice].position_data[idEvent][field]
-                                            };
-                                        }
-                                        if (this.boatHistory[idDevice].position_data[idEvent][field] > this.minMaxGps[idDevice][idInterval][field].max.value) {
-                                            this.minMaxGps[idDevice][idInterval][field].max = {
-                                                time: this.boatHistory[idDevice].position_data[idEvent].time,
-                                                value: this.boatHistory[idDevice].position_data[idEvent][field]
-                                            };
-                                        }
-                                    }
                                 }
                                 this.historyIntervalData[idInterval].positionData.sliceStop = +idEvent;
                             }

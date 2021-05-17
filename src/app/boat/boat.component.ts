@@ -103,12 +103,12 @@ export class BoatComponent implements OnInit, AfterViewInit {
 
     // Map events
     onMapReady(event, idDevice: number) {
-        console.log('Map Ready');
+        //console.log('Map Ready');
 
         this.mapView = event.object;
 
 
-        console.log('Setting a marker...');
+        //console.log('Setting a marker...');
 
         const marker = new Marker();
         marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);

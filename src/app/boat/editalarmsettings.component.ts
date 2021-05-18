@@ -94,10 +94,14 @@ export class EditalarmsettingsComponent implements OnInit {
     }
 
     saveAlarmSetting() {
+        this.dataService.isLoading = true
         console.log('Save index:' + this.selectedListPickerIndex + ' value: ' + this.selectedAlarmValue);
-        this.apiService.saveAlarmSettings(this.idDevice, alarmSettingsMap[this.field][this.idAlarm].key, this.selectedAlarmValue);
-        // this.dataService.refreshBoatStatus();
-        this.goBack();
+        this.apiService.saveAlarmSettings(this.idDevice, alarmSettingsMap[this.field][this.idAlarm].key, this.selectedAlarmValue).subscribe(
+            () => {
+                this.dataService.refreshBoatStatus()
+                this.goBack();
+            }
+        );
     }
 
     selectedIndexChanged(picker) {

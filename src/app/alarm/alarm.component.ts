@@ -63,7 +63,11 @@ export class AlarmComponent implements OnInit, AfterViewInit {
 
     onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, null);
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, null).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onAlarmTypeResponsibleTap(idDevice: number, alarmType: string) {
@@ -73,12 +77,21 @@ export class AlarmComponent implements OnInit, AfterViewInit {
                 idAlarm.push(alarm.id);
             }
         }
-        this.apiService.setAlarmData(idAlarm, true, null);
+        this.apiService.setAlarmData(idAlarm, true, null).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onAlarmNotResponsibleTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], false, null);
+        this.dataService.isLoading = true
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], false, null).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onAlarmTypeNotResponsibleTap(idDevice: number, alarmType: string) {
@@ -88,12 +101,20 @@ export class AlarmComponent implements OnInit, AfterViewInit {
                 idAlarm.push(alarm.id);
             }
         }
-        this.apiService.setAlarmData(idAlarm, false, null);
+        this.apiService.setAlarmData(idAlarm, false, null).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onAlarmOkTap(idDevice: number, idAlarm: number) {
         this.dataService.deviceData[idDevice].alarm[idAlarm].loading = true;
-        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, true);
+        this.apiService.setAlarmData([this.dataService.deviceData[idDevice].alarm[idAlarm].id], true, true).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onAlarmTypeOkTap(idDevice: number, alarmType: string) {
@@ -103,7 +124,11 @@ export class AlarmComponent implements OnInit, AfterViewInit {
                 idAlarm.push(alarm.id);
             }
         }
-        this.apiService.setAlarmData(idAlarm, true, true);
+        this.apiService.setAlarmData(idAlarm, true, true).subscribe(
+            () => {
+                this.dataService.getDeviceAlarm()
+            }
+        );
     }
 
     onCallTap(idDevice: number) {

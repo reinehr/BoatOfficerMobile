@@ -7,7 +7,7 @@
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <ScrollView orientation="vertical">
-        <StackLayout *ngIf="dataService.dataLoaded">
+        <StackLayout *ngIf="!dataService.isLoading">
             <StackLayout paddingBottom="15" *ngFor="let device of [dataService.deviceData[this.idDevice]]">
                 <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                 <GridLayout rows="10"></GridLayout>

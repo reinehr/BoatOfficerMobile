@@ -113,9 +113,12 @@ export class EditdevicesettingsComponent implements OnInit {
             this.dataService.deviceData[this.idDevice].harbour_contact,
             this.dataService.deviceData[this.idDevice].external_voltage_cable,
             this.dataService.deviceData[this.idDevice].multisensor_cable
-            );
-        this.dataService.refreshBoatStatus();
-        this.goBack();
+            ).subscribe(
+            () => {
+                this.dataService.refreshBoatStatus()
+                this.goBack();
+            }
+        );
     }
 
 

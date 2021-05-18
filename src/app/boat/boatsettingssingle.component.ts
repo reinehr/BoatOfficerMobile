@@ -70,7 +70,11 @@ export class BoatsettingssingleComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.leaveUserDevice(deviceid);
+                this.apiService.leaveUserDevice(deviceid).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }
@@ -91,7 +95,11 @@ export class BoatsettingssingleComponent implements OnInit {
         }
         confirm(options).then( result => {
             if(result) {
-                this.apiService.editGetPush(deviceid, getPush);
+                this.apiService.editGetPush(deviceid, getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }

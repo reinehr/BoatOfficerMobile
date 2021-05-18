@@ -80,34 +80,19 @@ export class AuthComponent implements OnInit {
             } else if (this.password === this.passwordRepeat) {
                 if (!(this.firstname === '') && !(this.lastname === '')) {
                     this.authService.signUp(this.email, this.password).subscribe(resData => {
-                        this.apiService.getDeviceData().subscribe(resp1 => {
-                            console.log('refreshBoatStatus - getDeviceData');
-                            this.apiService.getBoatStatus().subscribe(resp2 => {
-                                this.apiService.editUserData(this.firstname, this.lastname, this.phone).subscribe();
-                                console.log('refreshBoatStatus - getBoatStatus');
-                                this.isLoading = false;
-                            }, error => {
-                                console.log(error);
-                                this.isLoading = false;
-                            });
-                            this.apiService.getDeviceAlarmSettings().subscribe(response => {
-                                console.log('refreshBoatStatus - getDeviceAlarmSettings');
-                            }, error => {
-                                console.log('AlarmSettings not loading');
-                            });
-                            this.isLoading = false;
-                        }, error => {
-                            console.log(error);
-                            this.isLoading = false;
-                        });
-                        const options = {
-                            title: localize('Registration successful'),
-                            message: localize('You are now logged in'),
-                            okButtonText: 'OK'
-                        };
-                        alert(options).then(() => {
-                            this.router.navigate([''], {clearHistory: true});
-                        });
+                        this.dataService.refreshBoatStatus()
+                        this.apiService.editUserData(this.firstname, this.lastname, this.phone).subscribe(
+                            () => {
+                                const options = {
+                                    title: localize('Registration successful'),
+                                    message: localize('You are now logged in'),
+                                    okButtonText: 'OK'
+                                };
+                                alert(options).then(() => {
+                                    this.router.navigate([''], {clearHistory: true});
+                                });
+                            }
+                        );
 
                         this.isLoading = false;
                     }, error => {

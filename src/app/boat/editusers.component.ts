@@ -55,7 +55,11 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'guard', getPush);
+                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'guard', getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }
@@ -69,7 +73,11 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'sailor', getPush);
+                this.apiService.setDeviceUserData(deviceid, userid, lifeguard, 'sailor', getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }
@@ -88,11 +96,19 @@ export class EditusersComponent implements OnInit {
                 console.log("Set user to new role: " + result);
                 if (result==localize("Sailor")) {
                     newrole = "sailor";
-                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush);
+                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush).subscribe(
+                        () => {
+                            this.dataService.refreshBoatStatus()
+                        }
+                    );
                 }
                 else if (result==localize("Guard")){
                     newrole = "guard";
-                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush);
+                    this.apiService.setDeviceUserData(deviceid, userid, lifeguard, newrole, getPush).subscribe(
+                        () => {
+                            this.dataService.refreshBoatStatus()
+                        }
+                    );
                 }
             }
         });
@@ -108,7 +124,11 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, false, 'aboard', getPush);
+                this.apiService.setDeviceUserData(deviceid, userid, false, 'aboard', getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }
@@ -123,7 +143,11 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, false, role, getPush);
+                this.apiService.setDeviceUserData(deviceid, userid, false, role, getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }
@@ -138,7 +162,11 @@ export class EditusersComponent implements OnInit {
         };
         confirm(options).then( result => {
             if(result) {
-                this.apiService.setDeviceUserData(deviceid, userid, true, role, getPush);
+                this.apiService.setDeviceUserData(deviceid, userid, true, role, getPush).subscribe(
+                    () => {
+                        this.dataService.refreshBoatStatus()
+                    }
+                );
             }
         });
     }

@@ -17,7 +17,7 @@ import {tap} from 'rxjs/operators';
 import {logger} from 'codelyzer/util/logger';
 import {getString, hasKey} from '@nativescript/core/application-settings';
 import {AlarmComponent} from '~/app/alarm/alarm.component';
-import {BehaviorSubject, observable, Subject, throwError} from 'rxjs';
+import {BehaviorSubject, Observable, observable, Subject, throwError} from 'rxjs';
 // import {getCurrentPushToken} from 'nativescript-plugin-firebase';
 import {alert} from '@nativescript/core/ui/dialogs';
 import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
@@ -47,42 +47,6 @@ export class ApiService {
     ) {
     }
 
-    get currentSensorDataHistoryData() {
-        return this.sensorDataHistory.asObservable();
-    }
-
-    get currentSensorHistoryData() {
-        return this.sensorHistory.asObservable();
-    }
-
-    get currentTemperatureHistoryData() {
-        return this.temperatureHistory.asObservable();
-    }
-
-    get currentSensorLatestData() {
-        return this.sensorLatestData.asObservable();
-    }
-
-    get deviceData() {
-        return this.device.asObservable();
-    }
-
-    get boatStatus() {
-        return this.boatStatusData.asObservable();
-    }
-
-    get boatHistory() {
-        return this.boatHistoryData.asObservable();
-    }
-
-    get alarmSettings() {
-        return this.alarmSettingsData.asObservable();
-    }
-
-    get alarmInhibitSettings() {
-        return this.alarmInhibitSettingsData.asObservable();
-    }
-
     private sensorDataHistory =
         new BehaviorSubject<{
             'device_id': number,
@@ -101,11 +65,7 @@ export class ApiService {
     private sensorLatestData = new BehaviorSubject<SensordataTime>(null);
     // private weatherData = new BehaviorSubject<WeatherData>(null);
     // private weatherForecastData = new BehaviorSubject<WeatherForecastData>(null);
-    private device = new BehaviorSubject<DeviceAlarmDataFormat[]>(null);
-    private boatStatusData = new BehaviorSubject<BoatStatus>(null);
-    private boatHistoryData = new BehaviorSubject<BoatHistory>(null);
-    private alarmSettingsData = new BehaviorSubject<AlarmSettings>(null);
-    private alarmInhibitSettingsData = new BehaviorSubject<AlarmInhibitSettings>(null);
+    private loadedAlarmData = new BehaviorSubject<boolean>(false);
 
     // baseUrl = 'http://127.0.0.1:8000/';
     signInUrl = `https://identitytoolkit.googleapis.com/v1/accounts:signInWithCustomToken?key=${FIREBASE_API_KEY}`;
@@ -210,93 +170,17 @@ export class ApiService {
         );
     }
 
-    getDeviceData() {
-        // let params = new HttpParams();
-        // params = params.append('limit', '5');
-        // params = params.append('only_active', 'true');
+    getDeviceAlarmObservable(): Observable<DeviceAlarmDataFormat[]> {
         const param: any = {};
-        const indexTypeActive = [];
-        this.keyTypeActive = [];
         return this.httpClient.get<DeviceAlarmDataFormat[]>(this.baseDeviceUrl + 'get_alarm/',
             {
                 headers: this.getHeader(),
                 params: param
             }
-        ).pipe(tap(resData => {
-            if (resData) {
-                for (const idDevice in resData) {
-                    let device = resData[idDevice];
-                    if (!indexTypeActive[idDevice]) {
-                        indexTypeActive[idDevice] = [];
-                        resData[idDevice].sum_active_alarm = 0;
-                    }
-                    for (const idAlarm in device.alarm) {
-                        let alarm = device.alarm[idAlarm];
-                        let type = alarm.type;
-                        let cableConnected = alarmByTypeMap[type] && (alarmByTypeMap[type].cable.length == 0 ||
-                            alarmByTypeMap[type].cable.indexOf(device.multisensor_cable) >= 0 ||
-                            alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0) &&
-                            (alarmByTypeMap[type].dev_type.length == 0 ||
-                                alarmByTypeMap[type].dev_type.indexOf(device.type) >= 0);
-
-                        if (cableConnected) {
-                            let name = (alarmByTypeMap[type].name_by_cable.length > 0 ? (alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable) >= 0 ? alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.external_voltage_cable)] : alarmByTypeMap[type].name_by_cable[alarmByTypeMap[type].cable.indexOf(device.multisensor_cable)]) : alarmByTypeMap[type].name)
-                            if (!indexTypeActive[idDevice][type]) {
-                                indexTypeActive[idDevice][type] = 0;
-                            }
-                            if (!resData[idDevice].alarm_summarized) {
-                                resData[idDevice].keyTypeActive = [];
-                                resData[idDevice].alarm_summarized = [];
-                            }
-                            if (!resData[idDevice].alarm_summarized[type]) {
-                                resData[idDevice].keyTypeActive.push(type);
-                                resData[idDevice].alarm_summarized[type] = {};
-                                resData[idDevice].alarm_summarized[type].type = type;
-                                resData[idDevice].alarm_summarized[type].name = name;
-                                resData[idDevice].alarm_summarized[type].unit = alarmByTypeMap[type].unit;
-                                resData[idDevice].alarm_summarized[type].connected = cableConnected;
-                                resData[idDevice].alarm_summarized[type].alarm_newest = alarm;
-                                resData[idDevice].alarm_summarized[type].value = alarm.value;
-                                resData[idDevice].alarm_summarized[type].active = false;
-                                resData[idDevice].alarm_summarized[type].status = alarm.status;
-                                resData[idDevice].alarm_summarized[type].alarm = [];
-                                resData[idDevice].alarm_summarized[type].count_open = 0;
-                                resData[idDevice].alarm_summarized[type].count_closed = 0;
-                                //console.log('.')
-                            }
-                            if (alarm.status === 'open' || (alarm.status === 'open_someone_responsible' && alarm.i_am_responsible)) {
-                                indexTypeActive[idDevice][type] = indexTypeActive[idDevice][type] + 1;
-                                resData[idDevice].alarm[idAlarm].index_type_active = indexTypeActive[idDevice][type];
-                                resData[idDevice].sum_active_alarm = resData[idDevice].sum_active_alarm + 1;
-                                resData[idDevice].alarm_summarized[type].count_open = resData[idDevice].alarm_summarized[type].count_open + 1;
-                                resData[idDevice].alarm[idAlarm].hidden = true;
-                                resData[idDevice].alarm_summarized[type].alarm.push(resData[idDevice].alarm[idAlarm]);
-                                if (!resData[idDevice].alarm_summarized[type].active) {
-                                    resData[idDevice].alarm_summarized[type].active = true;
-                                    resData[idDevice].alarm_summarized[type].alarm_newest = resData[idDevice].alarm[idAlarm];
-                                    resData[idDevice].alarm_summarized[type].value = resData[idDevice].alarm[idAlarm].value;
-                                    resData[idDevice].alarm_summarized[type].status = resData[idDevice].alarm[idAlarm].status;
-                                }
-                            } else {
-                                resData[idDevice].alarm_summarized[type].count_closed = resData[idDevice].alarm_summarized[type].count_closed + 1;
-                                resData[idDevice].alarm[idAlarm].hidden = true;
-                                resData[idDevice].alarm_summarized[type].alarm.push(resData[idDevice].alarm[idAlarm]);
-                            }
-                        }
-                    }
-                    for (const idAlarm in resData[idDevice].alarm) {
-                        if (resData[idDevice].alarm[idAlarm].status === 'open' || (resData[idDevice].alarm[idAlarm].status === 'open_someone_responsible' && resData[idDevice].alarm[idAlarm].i_am_responsible)) {
-                            resData[idDevice].alarm[idAlarm].sum_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
-                        }
-                    }
-                }
-                this.device.next(resData);
-            }
-        }));
+        )
     }
 
-    getBoatStatus() {
-        console.log('push_token: ' + getString('push_token', ''));
+    getSensorDataLatestObservable(): Observable<BoatStatus> {
         const param: any = {
             push_token: getString('push_token', '')
         };
@@ -305,83 +189,56 @@ export class ApiService {
                 headers: this.getHeader(),
                 params: param
             }
-        ).pipe(tap(resData => {
-            if (resData) {
-                this.boatStatusData.next(resData);
-            }
-        }));
+        );
     }
 
-    getDeviceAlarmSettings() {
+    getAlarmSettingsObservable(): Observable<AlarmSettings> {
         const param: any = {};
         return this.httpClient.get<AlarmSettings>(this.baseDeviceAlarmSettingsUrl + '',
             {
                 headers: this.getHeader(),
                 params: param
             }
-        ).pipe(tap(resData => {
-            if (resData) {
-                this.alarmSettingsData.next(resData);
-            }
-            this.httpClient.get<AlarmInhibitSettings>(this.baseDeviceInhibitAlarmSettingsUrl + '',
-                {
-                    headers: this.getHeader(),
-                    params: param
-                }
-            ).pipe(tap(resData => {
-                if (resData) {
-                    this.alarmInhibitSettingsData.next(resData);
-                }
-            })).subscribe();
-        }));
+        );
     }
 
-    getDeviceInhibitAlarmSettings() {
+
+    getAlarmInhibitSettingsObservable(): Observable<AlarmInhibitSettings> {
         const param: any = {};
         return this.httpClient.get<AlarmInhibitSettings>(this.baseDeviceInhibitAlarmSettingsUrl + '',
             {
                 headers: this.getHeader(),
                 params: param
             }
-        ).pipe(tap(resData => {
-            if (resData) {
-                this.alarmInhibitSettingsData.next(resData);
-            }
-        }));
+        );
     }
 
-    getBoatHistory(days: number) {
-        const param: any = {days};
+    getSensorDataHistoryObservable(): Observable<BoatHistory> {
+        const param: any = {days: 365};
         return this.httpClient.get<BoatHistory>(this.baseSensorUrl + 'get_history/',
             {
                 headers: this.getHeader(),
                 params: param
             }
-        ).pipe(tap(resData => {
-            if (resData) {
-                this.boatHistoryData.next(resData);
-            }
-        }));
+        );
     }
 
-    setAlarmData(idAlarms: number[], markedAsResponsible: boolean = null, markedAsOk: boolean = null) {
+    setAlarmData(idAlarms: number[], markedAsResponsible: boolean = null, markedAsOk: boolean = null): Observable<any> {
         if (idAlarms.length >= 1) {
             let idAlarm = idAlarms[0]
-            this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_all_by_user/', {
+            return this.httpClient.post<any>(this.baseDeviceAlarmUrl + 'ack_all_by_user/', {
                     id: idAlarm,
                     marked_as_ok: markedAsOk,
                     marked_as_responsible: markedAsResponsible
                 }
                 , {
                     headers: this.getHeader()
-                }).subscribe(() => {
-                    this.getDeviceData().subscribe();
-            });
+                });
         }
     }
 
-    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string, getPush: boolean) {
-        this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
+    setDeviceUserData(idDevice: number, idUser: number, lifeguard: boolean, role: string, getPush: boolean): Observable<any> {
+        return this.httpClient.post<any>(this.baseDeviceUserUrl + 'update_user/', {
                 device_id: idDevice,
                 user_id: idUser,
                 role: role,
@@ -390,34 +247,28 @@ export class ApiService {
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+            });
     }
 
-    leaveUserDevice(idDevice: number) {
+    leaveUserDevice(idDevice: number): Observable<any> {
         console.log('Leave Device ' + idDevice);
-        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'leave_device/', {
+        return this.httpClient.post<any>(this.baseDeviceUserUrl + 'leave_device/', {
                 device_id: idDevice
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+            });
     }
 
-    editGetPush(idDevice: number, getPush: boolean) {
+    editGetPush(idDevice: number, getPush: boolean): Observable<any> {
         console.log('Leave Device ' + idDevice);
-        let response = this.httpClient.post<any>(this.baseDeviceUserUrl + 'edit_get_push/', {
+        return this.httpClient.post<any>(this.baseDeviceUserUrl + 'edit_get_push/', {
                 device_id: idDevice,
                 getPush: getPush
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+            });
     }
 
 
@@ -445,39 +296,35 @@ export class ApiService {
         );
     }
 
-    saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number) {
+    saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number): Observable<any> {
         console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue);
-        this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
+        return this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
                 type: alarmKey,
                 value_user: alarmValue,
                 deviceId
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceAlarmSettings().subscribe();
-        });
+            });
     }
 
 
-    saveAlarmInhibitSettings(idDevice: number, key: string, selectedDate: Date) {
+    saveAlarmInhibitSettings(idDevice: number, key: string, selectedDate: Date): Observable<any> {
         console.log('saveAlarmInhibitSettings (Device:' + idDevice + ', alarmKey:' + key, ', timestamp:' + selectedDate.getTime()/1000);
 
-        this.httpClient.post<any>(this.baseDeviceInhibitAlarmSettingsUrl + 'update_field/', {
+        return this.httpClient.post<any>(this.baseDeviceInhibitAlarmSettingsUrl + 'update_field/', {
                 alarmType: key,
                 inhibitDatetime: selectedDate.getTime()/1000,
                 deviceId: idDevice
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceAlarmSettings().subscribe();
-        });
+            });
     }
 
-    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string, externalBatteryCable: string, multisensorCable: string) {
+    saveDeviceSettings(deviceId: number, deviceName: string, deviceBerth: string, deviceContact: string, externalBatteryCable: string, multisensorCable: string): Observable<any> {
         console.log('saveDeviceSettings (Device:' + deviceId + ', device_name:' + deviceName + ', harbour_contact:' + deviceContact + ', external_voltage_cable:' + externalBatteryCable);
-        this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
+        return this.httpClient.post<any>(this.baseDeviceUrl + 'update_device/', {
                 device_name: deviceName,
                 berth: deviceBerth,
                 harbour_contact: deviceContact,
@@ -487,15 +334,13 @@ export class ApiService {
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+            });
     }
 
-    savePurchase(identifier: string, transactionDate: Date, period: number, recurring: boolean) {
+    savePurchase(identifier: string, transactionDate: Date, period: number, recurring: boolean): Observable<any> {
         console.log('savePurchase ' + identifier);
         let dateEnd = (transactionDate.getTime() + (period * 24 * 60 * 60 * 1000));
-        this.httpClient.post<any>(this.baseUserUrl + 'save_purchase/', {
+        return this.httpClient.post<any>(this.baseUserUrl + 'save_purchase/', {
                 is_pro: true,
                 date_pro: transactionDate.getTime(),
                 date_pro_end: dateEnd,
@@ -504,9 +349,7 @@ export class ApiService {
             }
             , {
                 headers: this.getHeader()
-            }).subscribe(() => {
-            this.getDeviceData().subscribe();
-        });
+            });
     }
 
     saveBoatImage(imageAssets: any, imageSrc: any, deviceId: number) {
@@ -569,7 +412,7 @@ export class ApiService {
                 );*/
     }
 
-    editUserData(firstname: string, lastname :string, phone) {
+    editUserData(firstname: string, lastname :string, phone): Observable<any> {
 
         return this.httpClient.post<any>(this.baseUserUrl + 'update_user/', {
                 firstname: firstname,

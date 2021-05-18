@@ -9,7 +9,7 @@
                 <Label col=0 row=0 text="" height="40"></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
                 <Label col=0 row=2 text="" height="0"></Label>
-                <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!hasKey">
+                <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!dataService.loggedIn">
                     <StackLayout class="alarm-card-home">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_key' | L" class="t-16 c-black" textWrap="true"
@@ -17,7 +17,7 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="hasKey && (dataService && dataService.deviceData && dataService.deviceData.length == 0 && isLoading == false)">
+                <StackLayout id="level_5_no_boat" col=0 row=3 *ngIf="dataService.loggedIn && (dataService.noBoat && dataService.isLoading == false)">
                     <StackLayout class="alarm-card-home">
                         <GridLayout columns="*" rows="auto" padding = "5">
                             <Label col=0 row=0 [text]="'no_boat' | L" class="t-16 c-black" textWrap="true"

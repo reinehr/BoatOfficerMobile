@@ -60,34 +60,12 @@ export class BoatComponent implements OnInit, AfterViewInit {
             intl.strings = englishStrings;
         }
         intl.changes.next();
-        this.dataService.apiService.boatStatus.subscribe( ddata => {
-            if (ddata) {
-                setTimeout( () => {
-                    for (const idDevice in this.dataService.deviceData) {
-                        const level6 = this.page.getViewById('level_2').getViewById('level_3')
-                            .getViewById('level_4')
-                            .getViewById('level_5')
-                            .getViewById('level_6_' + this.dataService.deviceData[idDevice].id);
-                        const level7 = level6.getViewById('level_7_' + this.dataService.deviceData[idDevice].id);
-                        if (level7) {
-                            const level8 = level7.getViewById('level_8_' + this.dataService.deviceData[idDevice].id);
-                            this.mapView = level8.getViewById<MapView>('mapview_' + this.dataService.deviceData[idDevice].id);
-                            const marker = new Marker();
-                            marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
-                            marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
-                            marker.snippet = 'BoatOfficer';
-                            marker.userData = {index: 1};
-                            marker.zIndex = 10;
-                            this.mapView.removeAllMarkers();
-                            this.mapView.addMarker(marker);
-                            this.mapView.mapAnimationsEnabled = true;
-                        }
-                    }
-                    this.applyDefaultBoatDetailsVisibility();
-                }, 2000);
+        dataService.loadedAlarmData.subscribe(loaded => {
+            if(loaded && loaded.valueOf()) {
+                this.applyDefaultBoatDetailsVisibility();
+                console.log('applyDefaultBoatDetailsVisibility');
             }
-        }
-        );
+        })
         // const pageView = this.page.getViewById<MapView>('mapview_0');
         // console.log('AFTER INIT longitude: ' + pageView.minZoom);
     }
@@ -208,7 +186,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     }
 
     applyDefaultBoatDetailsVisibility(){
-        if (3 > this.dataService.deviceData.length)
+        if (this.dataService && this.dataService.deviceData && 3 > this.dataService.deviceData.length)
         {
             for (const idDevice in this.dataService.deviceData)
             {

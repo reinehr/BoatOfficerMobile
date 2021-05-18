@@ -40,6 +40,7 @@ export class LogoutComponent implements OnInit {
             this.dataService.deviceData = [];
             this.isLoading = false;
             this.authService.logout();
+            this.dataService.loggedIn = false
             alert(options).then(() => {
                 this.router.navigate([''], { clearHistory: true });
             });

@@ -105,7 +105,11 @@ export class PurchaseComponent implements OnInit {
                         break;
                 }
                 let transactionDate = originalTransaction.transactionDate
-                apiService.savePurchase(originalTransaction.productIdentifier, transactionDate, period, recurring);
+                apiService.savePurchase(originalTransaction.productIdentifier, transactionDate, period, recurring).subscribe(
+                    () => {
+
+                    }
+                );
             }
         });
 

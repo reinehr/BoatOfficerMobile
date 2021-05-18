@@ -68,9 +68,13 @@ export class EditinhibitsettingsComponent implements OnInit {
     }
 
     saveAlarmSetting() {
-        this.apiService.saveAlarmInhibitSettings(this.idDevice, alarmSettingsMap[this.field][this.idAlarm].key, this.selectedDate);
-        // this.dataService.refreshBoatStatus();
-        this.goBack();
+        this.dataService.isLoading = true
+        this.apiService.saveAlarmInhibitSettings(this.idDevice, alarmSettingsMap[this.field][this.idAlarm].key, this.selectedDate).subscribe(
+            () => {
+                this.dataService.refreshBoatStatus();
+                this.goBack();
+            }
+        );
     }
 
 }

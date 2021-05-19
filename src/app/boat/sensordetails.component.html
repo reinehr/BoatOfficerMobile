@@ -8,7 +8,7 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh (refresh)="refreshList($event)">
         <ScrollView orientation="vertical" *ngIf="initialized" iosOverflowSafeArea="false">
-            <StackLayout>
+            <StackLayout *ngIf="!dataService.isLoading">
                 <boat-header [boatname]="dataService.deviceData[idDevice].name" [boat_image_small]="dataService.deviceData[idDevice].boat_image_small" [role]="dataService.deviceData[idDevice].role" [deviceType]="dataService.deviceData[idDevice].type"></boat-header>
                 <StackLayout orientation="horizontal" height="60" marginTop="15">
                     <GridLayout
@@ -21,286 +21,23 @@
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>
                 <StackLayout orientation="vertical" padding="10" class="alarm-card" [visibility]="selectedIntervalId <= 2 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
-                    <RadCartesianChart style="height: 250" id="{{field}}_0" [visibility]="(selectedIntervalId == 0 ? 'visible' : 'collapsed')">
+                    <RadCartesianChart style="height: 250" id="{{field}}_0">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
                                     [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[0]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[0]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[0]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[0]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[0]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[0]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[0]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[0]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
+                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[selectedIntervalId]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[selectedIntervalId]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
+                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[selectedIntervalId]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[selectedIntervalId]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
+                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[selectedIntervalId]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[selectedIntervalId]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[0].stepUnit == 'Hour' ? ' HH:00' : '')}}"
+                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[selectedIntervalId].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
-                                    [majorStepUnit]="dataService.historyIntervalData[0].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[0].step"
-                                    [minimum]="dataService.historyIntervalData[0].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[0].dateInterval.stop">
-                        </DateTimeContinuousAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                    verticalLinesVisible="true"
-                                    horizontalStripLinesVisible="true"
-                                    verticalStripLinesVisible="true"
-                                    verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                    horizontalStrokeWidth="2" verticalstrokeWidth="2"
-                                    horizontalStripLineColor="#eeeef9, #ffffff">
-                        </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
-                                    categoryProperty="date"
-                                    strokeColor="#356eb4"
-                                    seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineHigh"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineLow"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
-                        <Palette tkCartesianPalette seriesName="alarmLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="red"></PaletteEntry>
-                        </Palette>
-                    </RadCartesianChart>
-                    <RadCartesianChart style="height: 250" id="{{field}}_1" [visibility]="(selectedIntervalId == 1 ? 'visible' : 'collapsed')">
-                        <LinearAxis tkCartesianVerticalAxis
-                                    labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[1]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[1]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[1]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[1]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[1]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[1]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[1]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[1]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
-                        </LinearAxis>
-                        <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[1].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                    labelFitMode="Rotate"
-                                    labelLayoutMode="outer"
-                                    [majorStepUnit]="dataService.historyIntervalData[1].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[1].step"
-                                    [minimum]="dataService.historyIntervalData[1].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[1].dateInterval.stop">
-                        </DateTimeContinuousAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                    verticalLinesVisible="true"
-                                    horizontalStripLinesVisible="true"
-                                    verticalStripLinesVisible="true"
-                                    verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                    horizontalStrokeWidth="2" verticalstrokeWidth="2"
-                                    horizontalStripLineColor="#eeeef9, #ffffff">
-                        </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
-                                    categoryProperty="date"
-                                    strokeColor="#356eb4"
-                                    seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineHigh"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineLow"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
-                        <Palette tkCartesianPalette seriesName="alarmLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="red"></PaletteEntry>
-                        </Palette>
-                    </RadCartesianChart>
-                    <RadCartesianChart style="height: 250" id="{{field}}_2" [visibility]="(selectedIntervalId == 2 ? 'visible' : 'collapsed')">
-                        <LinearAxis tkCartesianVerticalAxis
-                                    labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[2]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[2]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[2]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[2]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[2]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[2]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[2]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[2]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
-                        </LinearAxis>
-                        <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[2].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                    labelFitMode="Rotate"
-                                    labelLayoutMode="outer"
-                                    [majorStepUnit]="dataService.historyIntervalData[2].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[2].step"
-                                    [minimum]="dataService.historyIntervalData[2].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[2].dateInterval.stop">
-                        </DateTimeContinuousAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                    verticalLinesVisible="true"
-                                    horizontalStripLinesVisible="true"
-                                    verticalStripLinesVisible="true"
-                                    verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                    horizontalStrokeWidth="2" verticalstrokeWidth="2"
-                                    horizontalStripLineColor="#eeeef9, #ffffff">
-                        </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
-                                    categoryProperty="date"
-                                    strokeColor="#356eb4"
-                                    seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineHigh"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineLow"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
-                        <Palette tkCartesianPalette seriesName="alarmLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="red"></PaletteEntry>
-                        </Palette>
-                    </RadCartesianChart>
-                    <RadCartesianChart style="height: 250" id="{{field}}_3" [visibility]="(selectedIntervalId == 3 ? 'visible' : 'collapsed')">
-                        <LinearAxis tkCartesianVerticalAxis
-                                    labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[3]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[3]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[3]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[3]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[3]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[3]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[3]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[3]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
-                        </LinearAxis>
-                        <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[3].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                    labelFitMode="Rotate"
-                                    labelLayoutMode="outer"
-                                    [majorStepUnit]="dataService.historyIntervalData[3].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[3].step"
-                                    [minimum]="dataService.historyIntervalData[3].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[3].dateInterval.stop">
-                        </DateTimeContinuousAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                    verticalLinesVisible="true"
-                                    horizontalStripLinesVisible="true"
-                                    verticalStripLinesVisible="true"
-                                    verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                    horizontalStrokeWidth="2" verticalstrokeWidth="2"
-                                    horizontalStripLineColor="#eeeef9, #ffffff">
-                        </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
-                                    categoryProperty="date"
-                                    strokeColor="#356eb4"
-                                    seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineHigh"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineLow"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
-                        <Palette tkCartesianPalette seriesName="alarmLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="red"></PaletteEntry>
-                        </Palette>
-                    </RadCartesianChart>
-                    <RadCartesianChart style="height: 250" id="{{field}}_4" [visibility]="(selectedIntervalId == 4 ? 'visible' : 'collapsed')">
-                        <LinearAxis tkCartesianVerticalAxis
-                                    labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[4]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[4]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[4]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[4]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[4]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[4]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[4]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[4]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
-                        </LinearAxis>
-                        <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[4].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                    labelFitMode="Rotate"
-                                    [majorStepUnit]="dataService.historyIntervalData[4].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[4].step"
-                                    [minimum]="dataService.historyIntervalData[4].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[4].dateInterval.stop">
-                        </DateTimeContinuousAxis>
-                        <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
-                                    verticalLinesVisible="true"
-                                    horizontalStripLinesVisible="true"
-                                    verticalStripLinesVisible="true"
-                                    verticalStrokeColor="#cccccc" horizontalStrokeColor="#cccccc"
-                                    horizontalStrokeWidth="2" verticalstrokeWidth="2"
-                                    horizontalStripLineColor="#eeeef9, #ffffff">
-                        </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
-                                    [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
-                                    categoryProperty="date"
-                                    strokeColor="#356eb4"
-                                    seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineHigh"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <LineSeries tkCartesianSeries
-                                    [items]="alarmLineLow"
-                                    categoryProperty="date"
-                                    strokeColor="red"
-                                    seriesName="alarmLine"
-                                    valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
-                        <Palette tkCartesianPalette seriesName="alarmLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="red"></PaletteEntry>
-                        </Palette>
-                    </RadCartesianChart>
-                    <RadCartesianChart style="height: 250" id="{{field}}_5" [visibility]="(selectedIntervalId == 5 ? 'visible' : 'collapsed')">
-                        <LinearAxis tkCartesianVerticalAxis
-                                    labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + (dataService.sensorFieldMap[field].unit == '%' ? '%%' : dataService.sensorFieldMap[field].unit) + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[5]] && dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[5]]) ? (dataService.sensorFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[5]] - dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[5]]) / dataService.sensorFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.sensorFieldMap[field].majorStep)"
-                                    [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[5]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Min[intervalKeys[5]] / dataService.sensorFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[5]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data_minmax[field].Max[intervalKeys[5]] + 1) / dataService.sensorFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.sensorFieldMap[field].majorStep : dataService.sensorFieldMap[field].majorStep)">
-                        </LinearAxis>
-                        <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
-                                    labelMargin="5"
-                                    dateFormat="{{'dd.MM' + (dataService.historyIntervalData[5].stepUnit == 'Hour' ? ' HH:00' : '')}}"
-                                    labelFitMode="Rotate"
-                                    [majorStepUnit]="dataService.historyIntervalData[5].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[5].step"
-                                    [minimum]="dataService.historyIntervalData[5].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[5].dateInterval.stop">
+                                    [majorStepUnit]="dataService.historyIntervalData[selectedIntervalId].stepUnit"
+                                    [majorStep]="dataService.historyIntervalData[selectedIntervalId].step"
+                                    [minimum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.start"
+                                    [maximum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.stop">
                         </DateTimeContinuousAxis>
                         <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
                                     verticalLinesVisible="true"

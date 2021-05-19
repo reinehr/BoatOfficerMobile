@@ -1,17 +1,14 @@
-import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
-import {DataService, DeviceAlarmDataFormat, SensorDataHistory} from '~/app/shared/data.service';
+import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {DataService} from '~/app/shared/data.service';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
 import {Subscription} from 'rxjs';
 import {MapView, Marker, Position} from 'nativescript-google-maps-sdk';
-import {BoatHistory, BoatStatus, boatStatusMap, historyInterval} from '~/app/shared/interface/sensordata';
 import {strings as englishStrings} from 'ngx-timeago/language-strings/en';
 import {strings as germanStrings} from 'ngx-timeago/language-strings/de';
 import {TimeagoIntl} from 'ngx-timeago';
 import {localize} from 'nativescript-localize';
-import {ImageSource} from '@nativescript/core/image-source';
-import {Image} from '@nativescript/core/ui/image';
 import {Page} from '@nativescript/core/ui/page';
 import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
 
@@ -224,7 +221,4 @@ export class BoatComponent implements OnInit, AfterViewInit {
 
     }
 
-    click_gear() {
-
-    }
 }

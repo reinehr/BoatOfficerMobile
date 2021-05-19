@@ -26,7 +26,7 @@
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
                         <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm"] [deviceType]="device.type"></boat-header>
                     </StackLayout>
-                    <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="visible">
+                    <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
                         <StackLayout *ngFor="let alarmType of device.keyTypeActive">
                             <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">
                                 <StackLayout class="alarm-card"
@@ -190,7 +190,7 @@
     </PullToRefresh>
     <MDActivityIndicator [busy]="false">
     </MDActivityIndicator>
-    <GridLayout class="blob" *ngIf="dataService.isLoading">
+    <GridLayout class="blob" *ngIf="dataService.isLoadingAlarm">
         <Image col=0 row=1 src="~/assets/icon.png"></Image>
     </GridLayout>
 </GridLayout>

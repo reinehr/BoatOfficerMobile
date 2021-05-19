@@ -2,9 +2,7 @@ import {AfterViewInit, Component, OnInit} from '@angular/core';
 import {registerElement} from 'nativescript-angular/element-registry';
 import {ApiService} from '~/app/shared/api.service';
 import {ScrollView, ScrollEventData} from '@nativescript/core/ui/scroll-view';
-import {Subject, Subscription} from 'rxjs';
 import {DataService, DeviceAlarmDataFormat} from '../shared/data.service';
-//import * as TNSPhone from 'nativescript-phone';
 import { EventData } from '@nativescript/core/data/observable';
 import { Switch } from '@nativescript/core/ui/switch';
 import { alarmByTypeMap } from '~/app/shared/interface/alarm';
@@ -36,6 +34,12 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         private dataService: DataService,
     ) {
 
+        dataService.loadedAlarmData.subscribe(loaded => {
+            if(loaded && loaded.valueOf()) {
+                this.applyDefaultBoatDetailsVisibility();
+                console.log('applyDefaultBoatDetailsVisibility');
+            }
+        })
     }
 
     onScroll(args: ScrollEventData) {
@@ -51,14 +55,12 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
         this.scrollBase = this.page.getViewById("level_5") as StackLayout;
-        //this.applyDefaultBoatDetailsVisibility(); // TODO needs "Data available" or loading finished trigger
     }
 
     refreshList(args) {
         const pullRefresh = args.object;
         this.dataService.refreshBoatStatus();
         pullRefresh.refreshing = false;
-        //this.updateAlarmBadge();
     }
 
     onAlarmResponsibleTap(idDevice: number, idAlarm: number) {
@@ -233,10 +235,8 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     }
 
     applyDefaultBoatDetailsVisibility(){
-        console.log("Number of boats: "+this.dataService.deviceData.length);
-        if (3 > this.dataService.deviceData.length)
+        if (this.dataService && this.dataService.deviceData && 3 > this.dataService.deviceData.length)
         {
-            console.log("less than 3 boats")
             for (const idDevice in this.dataService.deviceData)
             {
                 const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);

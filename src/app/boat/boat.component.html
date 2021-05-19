@@ -163,7 +163,7 @@
     </PullToRefresh>
     <MDActivityIndicator [busy]="false">
     </MDActivityIndicator>
-    <GridLayout class="blob" *ngIf="dataService.isLoading">
+    <GridLayout class="blob" *ngIf="dataService.isLoadingLatestSensorData">
         <Image col=0 row=1 src="~/assets/icon.png"></Image>
     </GridLayout>
 </GridLayout>

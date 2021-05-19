@@ -77,6 +77,9 @@
                     pageTransition="slideLeft"></Button>
         </StackLayout>
     </ScrollView>
-    <MDActivityIndicator [busy]="dataService.isLoading">
+    <MDActivityIndicator [busy]="false">
     </MDActivityIndicator>
+    <GridLayout class="blob" *ngIf="dataService.isLoadingAlarm">
+        <Image col=0 row=1 src="~/assets/icon.png"></Image>
+    </GridLayout>
 </GridLayout>

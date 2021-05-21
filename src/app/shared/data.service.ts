@@ -11,6 +11,8 @@ import {
 } from '~/app/shared/interface/sensordata';
 import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/interface/alarm';
 import {hasKey} from '@nativescript/core/application-settings';
+import {alert} from '@nativescript/core/ui/dialogs';
+import {localize} from "nativescript-localize";
 
 export interface DataItem {
     id: number;
@@ -196,11 +198,22 @@ export class DataService {
         public apiService: ApiService
     ) {
         console.log('data.service.construct')
-        this.refreshBoatStatus();
+        if(!this.isLoading) {
+            this.refreshBoatStatus();
+        }
     }
 
     getDeviceAlarm(): void {
-
+        setTimeout(() => {
+            if (this.isLoading) {
+                alert({
+                    okButtonText: 'OK',
+                    title: localize('No data received'),
+                    message: localize('Please try again later')}).then(()=>{
+                        this.isLoading = false
+                })
+            }
+        }, 29000)
         this.loadedAlarmData.next(false);
         this.loadedLatestSensorData.next(false);
         this.loadedHistoryData.next(false);
@@ -210,9 +223,9 @@ export class DataService {
         this.isLoadingSensorDataHistory = true;
         const indexTypeActive = [];
         this.apiService.getDeviceAlarmObservable().subscribe(resData => {
-            console.log('... in getDeviceAlarm ' + resData.length)
-
+            console.log('... in getDeviceAlarm')
             if (resData) {
+                let start = Date.now()
                 this.noBoat = true;
                 for (const idDevice in resData) {
                     this.noBoat = false
@@ -286,20 +299,23 @@ export class DataService {
 
                 //this.deviceData = ddata;
                 this.activeAlarmByField = {};
+                let activeAlarm = {};
                 for (const device of resData) {
-                    this.activeAlarmByField[device.id] = {};
+                    activeAlarm[device.id] = {};
                     for (const mapKey of this.sensorFieldKeys) {
                         for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
-                            this.activeAlarmByField[device.id][alarmType] = false;
+                            activeAlarm[device.id][alarmType] = false;
                         }
                     }
                     for (const alarm of device.alarm) {
                         if (alarm.status === 'open' || alarm.status === 'open_someone_responsible') {
-                            this.activeAlarmByField[device.id][alarm.type] = true;
+                            activeAlarm[device.id][alarm.type] = true;
                         }
                     }
                 }
-                console.log('... finished getDeviceAlarm');
+                this.activeAlarmByField = activeAlarm;
+                let time = (Date.now()-start)
+                console.log('... finished getDeviceAlarm in ' + time + 'ms');
                 this.getSensorDataLatest();
                 this.getAlarmSettings();
                 this.getAlarmInhibitSettings();
@@ -320,34 +336,34 @@ export class DataService {
         this.apiService.getSensorDataLatestObservable().subscribe(bsdata => {
             console.log('... in getSensorDataLatest')
             if (bsdata) {
+                let start = Date.now();
                 try {
-                    this.boatStatus = bsdata;
                     for (const idDevice of Object.keys(this.activeAlarmByField)) {
-                        if (this.boatStatus && this.boatStatus[idDevice]) {
+                        if (bsdata[idDevice]) {
                             let timestamp = + new Date();
                             for (let i of [1,2,3,4,5]) {
                                 try {
                                     if (i == 1) {
-                                        this.boatStatus[idDevice].nearest_webcam.url = (this.boatStatus[idDevice].nearest_webcam.url + (this.boatStatus[idDevice].nearest_webcam.url.indexOf('?') > -1 ? '&' : '?') + timestamp)
+                                        bsdata[idDevice].nearest_webcam.url = (bsdata[idDevice].nearest_webcam.url + (bsdata[idDevice].nearest_webcam.url.indexOf('?') > -1 ? '&' : '?') + timestamp)
                                     }
-                                    this.boatStatus[idDevice]['nearest_webcam'+i].url = (this.boatStatus[idDevice]['nearest_webcam'+i].url + (this.boatStatus[idDevice]['nearest_webcam'+i].url.indexOf('?')>-1 ? '&' : '?') + timestamp)
+                                    bsdata[idDevice]['nearest_webcam'+i].url = (bsdata[idDevice]['nearest_webcam'+i].url + (bsdata[idDevice]['nearest_webcam'+i].url.indexOf('?')>-1 ? '&' : '?') + timestamp)
                                 } catch (e) {
-                                    console.log('Error: no Webcam URL for device ' + idDevice + ' webcam ' + i + ' ' + e);
+                                    //console.log('Error: no Webcam URL for device ' + idDevice + ' webcam ' + i + ' ' + e);
                                 }
                             }
-                            this.boatStatus[idDevice].alarm_active = {};
+                            bsdata[idDevice].alarm_active = {};
                             for (const mapKey of this.sensorFieldKeys) {
-                                // if (mapKey in this.boatStatus[idDevice].alarm_active) {
-                                this.boatStatus[idDevice].alarm_active[mapKey] = false;
+                                // if (mapKey in bsdata[idDevice].alarm_active) {
+                                bsdata[idDevice].alarm_active[mapKey] = false;
                                 for (const alarmType of this.sensorFieldMap[mapKey].alarm) {
                                     if (this.activeAlarmByField[idDevice][alarmType]) {
-                                        this.boatStatus[idDevice].alarm_active[mapKey] = true;
+                                        bsdata[idDevice].alarm_active[mapKey] = true;
                                     }
                                 }
                                 // }
                             }
-                            if (this.boatStatus[idDevice].position_data.latitude) {
-                                const weatherForecast = this.apiService.getWeatherForecastData(this.boatStatus[idDevice].position_data.latitude, this.boatStatus[idDevice].position_data.longitude);
+                            if (bsdata[idDevice].position_data.latitude) {
+                                const weatherForecast = this.apiService.getWeatherForecastData(bsdata[idDevice].position_data.latitude, bsdata[idDevice].position_data.longitude);
                                 weatherForecast.subscribe(wdata => {
                                     const dateSunset = new Date(wdata.city.sunset * 1000);
                                     const timeSunset = (dateSunset.getHours() * 60 + dateSunset.getMinutes()) * 60 + dateSunset.getSeconds();
@@ -370,15 +386,17 @@ export class DataService {
                                         wdata.list[listKey].wind.beaufort_icon = String.fromCharCode(WEATHER_ICONS.beaufort[beaufort]);
                                         wdata.list[listKey].wind.direction_icon = String.fromCharCode(0xf0b1);
                                         wdata.list[listKey].wind.beaufort = beaufort;
-                                        this.boatStatus[idDevice].weather_forecast = wdata;
+                                        bsdata[idDevice].weather_forecast = wdata;
                                     }
                                 });
                             }
                         }
                     }
 
+                    this.boatStatus = bsdata;
+                    let time = (Date.now()-start)
                     this.loadedLatestSensorData.next(true);
-                    console.log('... finished getSensorDataLatest');
+                    console.log('... finished getSensorDataLatest in ' + time + 'ms');
                 } catch (e) {
                     console.log('Error: no boatStatus: ' + e);
                 }
@@ -423,7 +441,8 @@ export class DataService {
                             }
                         }
                     }
-                    console.log('... finished getAlarmInhibitSettings');
+                    let time = (Date.now()-now)
+                    console.log('... finished getAlarmInhibitSettings in ' + time + 'ms');
                 } else {
                     console.log('no alarmSettings');
                 }
@@ -440,21 +459,21 @@ export class DataService {
         this.apiService.getSensorDataHistoryObservable().subscribe(
             bhdata => {
                 if (bhdata) {
-                    this.boatHistory = bhdata;
-                    for (const idDevice of Object.keys(this.boatHistory)) {
-                        if (!this.boatHistory[idDevice].sensor_data) {
-                            this.boatHistory[idDevice].sensor_data = [];
+                    let start = Date.now();
+                    for (const idDevice of Object.keys(bhdata)) {
+                        if (!bhdata[idDevice].sensor_data) {
+                            bhdata[idDevice].sensor_data = [];
                         }
-                        if (!this.boatHistory[idDevice].position_data) {
-                            this.boatHistory[idDevice].position_data = [];
+                        if (!bhdata[idDevice].position_data) {
+                            bhdata[idDevice].position_data = [];
                         }
-                        this.boatHistory[idDevice].sensor_data_length = this.boatHistory[idDevice].sensor_data.length;
-                        this.boatHistory[idDevice].position_data_length = this.boatHistory[idDevice].position_data.length;
+                        bhdata[idDevice].sensor_data_length = bhdata[idDevice].sensor_data.length;
+                        bhdata[idDevice].position_data_length = bhdata[idDevice].position_data.length;
 
-                        for (const idEvent in this.boatHistory[idDevice].sensor_data) {
-                            const eventTime = new Date(this.boatHistory[idDevice].sensor_data[idEvent].time);
-                            this.boatHistory[idDevice].sensor_data[idEvent].date = eventTime;
-                            this.boatHistory[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
+                        for (const idEvent in bhdata[idDevice].sensor_data) {
+                            const eventTime = new Date(bhdata[idDevice].sensor_data[idEvent].time);
+                            bhdata[idDevice].sensor_data[idEvent].date = eventTime;
+                            bhdata[idDevice].sensor_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].sensorData.sliceStart = +idEvent;
@@ -462,10 +481,10 @@ export class DataService {
                                 this.historyIntervalData[idInterval].sensorData.sliceStop = +idEvent;
                             }
                         }
-                        for (const idEvent in this.boatHistory[idDevice].position_data) {
-                            const eventTime = new Date(this.boatHistory[idDevice].position_data[idEvent].time);
-                            this.boatHistory[idDevice].position_data[idEvent].date = eventTime;
-                            this.boatHistory[idDevice].position_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
+                        for (const idEvent in bhdata[idDevice].position_data) {
+                            const eventTime = new Date(bhdata[idDevice].position_data[idEvent].time);
+                            bhdata[idDevice].position_data[idEvent].date = eventTime;
+                            bhdata[idDevice].position_data[idEvent].timestring = `${('0' + eventTime.getDate()).slice(-2)}/${('0' + (eventTime.getMonth() + 1)).slice(-2)}/${eventTime.getFullYear()} ${('0' + eventTime.getHours()).slice(-2)}:${('0' + eventTime.getMinutes()).slice(-2)}:00`;
                             for (const idInterval in this.historyIntervalData) {
                                 if (this.historyIntervalData[idInterval].dateInterval.start.getTime() > (eventTime.getTime())) {
                                     this.historyIntervalData[idInterval].positionData.sliceStart = +idEvent;
@@ -474,7 +493,10 @@ export class DataService {
                             }
                         }
                     }
-                    console.log('... finished getSensorDataHistory');
+
+                    this.boatHistory = bhdata;
+                    let time = (Date.now()-start)
+                    console.log('... finished getSensorDataHistory in ' + time + 'ms');
                     this.loadedHistoryData.next(true);
                 } else {
                     console.log('no boatHistory');
@@ -489,7 +511,7 @@ export class DataService {
 
 
     refreshSensorDataHistory(): void {
-        if(hasKey('token')) {
+        if(hasKey('token') && !this.isLoading) {
             this.isLoading = true;
             this.loggedIn = true;
             this.getSensorDataHistory();
@@ -499,7 +521,7 @@ export class DataService {
     }
 
     refreshBoatStatus(): void {
-        if(hasKey('token')) {
+        if(hasKey('token') && !this.isLoading) {
             this.isLoading = true;
             this.loggedIn = true;
             this.getDeviceAlarm();

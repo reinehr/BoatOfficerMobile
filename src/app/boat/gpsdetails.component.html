@@ -29,23 +29,23 @@
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>
                 <StackLayout orientation="vertical" padding="10" class="alarm-card" [visibility]="selectedIntervalId <= 2 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
-                    <RadCartesianChart style="height: 250" id="{{field}}_0">
+                    <RadCartesianChart style="height: 350; padding-bottom: 45" id="{{field}}_0">
                         <LinearAxis tkCartesianVerticalAxis
                                     labelLayoutMode="outer"
-                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
-                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] && dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] - dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)"
                                     [minimum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]] ? (((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]] / dataService.gpsFieldMap[field].majorStep) - 0.49) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : 0)"
-                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] + 1) / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)">
+                                    [maximum]="(dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] ? ((((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] + 1) / dataService.gpsFieldMap[field].majorStep) + 0.5) | number:'2.0-0') * dataService.gpsFieldMap[field].majorStep : dataService.gpsFieldMap[field].majorStep)"
+                                    [labelFormat]="'%.0f ' + dataService.gpsFieldMap[field].unit + ' '"
+                                    [majorStep]="((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] && dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) ? (dataService.gpsFieldMap[field].majorStep * ((((dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Max[intervalKeys[selectedIntervalId]] - dataService.boatHistory[dataService.deviceData[idDevice].id].position_data_minmax[field].Min[intervalKeys[selectedIntervalId]]) / dataService.gpsFieldMap[field].majorStep / 10) + 0.5) | number:'2.0-0')) : dataService.gpsFieldMap[field].majorStep)">
                         </LinearAxis>
                         <DateTimeContinuousAxis tkCartesianHorizontalAxis allowZoom="true" allowPan="true" horizontalLocation="Left"
                                     labelMargin="20"
                                     dateFormat="{{'dd.MM' + (dataService.historyIntervalData[selectedIntervalId].stepUnit == 'Hour' ? ' HH:00' : '')}}"
                                     labelFitMode="Rotate"
                                     labelLayoutMode="outer"
-                                    [majorStepUnit]="dataService.historyIntervalData[selectedIntervalId].stepUnit"
-                                    [majorStep]="dataService.historyIntervalData[selectedIntervalId].step"
                                     [minimum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.start"
-                                    [maximum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.stop">
+                                    [maximum]="dataService.historyIntervalData[selectedIntervalId].dateInterval.stop"
+                                    [majorStepUnit]="dataService.historyIntervalData[selectedIntervalId].stepUnit"
+                                    [majorStep]="dataService.historyIntervalData[selectedIntervalId].step">
                         </DateTimeContinuousAxis>
                         <RadCartesianChartGrid tkCartesianGrid horizontalLinesVisible="true"
                                     verticalLinesVisible="true"

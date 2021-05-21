@@ -20,7 +20,7 @@ export class SensordetailsComponent implements OnInit {
         // private dataService: DataService,
         private routerExtensions: RouterExtensions,
         private route: ActivatedRoute,
-        private dataService: DataService
+        public dataService: DataService
     ) {
         this.route.params.subscribe(params => {
             this.field = params.field;

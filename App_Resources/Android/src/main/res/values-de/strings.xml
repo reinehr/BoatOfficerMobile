@@ -351,6 +351,8 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WETTER VOR ORT"</string>
   <string name="_no_active_alarms_Z1jDuSA">"keine aktiven Alarme"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARMSTATUS"</string>
+  <string name="_Please_try_again_later_2eTdDm">"Bitte versuche es später noch einmal"</string>
+  <string name="_No_data_received_1VgnVe">"Empfang fehlgeschlagen"</string>
   <string name="no_boat">"Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts)."</string>
   <string name="no_key">"Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\"."</string>
   <string name="_Unknown_Alarm_1bfTB8">"unbekannter Alarm"</string>

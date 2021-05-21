@@ -351,6 +351,8 @@
   <string name="_WEATHER_ON_SITE_Z2in1fF">"WEATHER ON SITE"</string>
   <string name="_no_active_alarms_Z1jDuSA">"no active alarms"</string>
   <string name="_ACTIVE_ALARMS_ZcNsSF">"ALARM STATUS"</string>
+  <string name="_Please_try_again_later_2eTdDm">"Please try again later"</string>
+  <string name="_No_data_received_1VgnVe">"No data received"</string>
   <string name="no_boat">"You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right)."</string>
   <string name="no_key">"You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\"."</string>
   <string name="_Unknown_Alarm_1bfTB8">"Unknown alarm"</string>

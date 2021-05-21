@@ -349,6 +349,8 @@
 "_WEATHER_ON_SITE_Z2in1fF" = "WEATHER ON SITE";
 "_no_active_alarms_Z1jDuSA" = "no active alarms";
 "_ACTIVE_ALARMS_ZcNsSF" = "ALARM STATUS";
+"_Please_try_again_later_2eTdDm" = "Please try again later";
+"_No_data_received_1VgnVe" = "No data received";
 "no_boat" = "You have not registered any BoatOfficer yet.\nPlease register your BoatOfficer or sign on a boat, to see its data.\nTo do this, go to the settings (menu at the bottom right).";
 "no_key" = "You are not logged in.\nPlease log in, to see BoatOfficer Data.\nTo do this, go to the settings and tap on \"Log in\".";
 "_Unknown_Alarm_1bfTB8" = "Unknown alarm";

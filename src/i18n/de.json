@@ -28,6 +28,8 @@
   "Unknown Alarm": "unbekannter Alarm",
   "no_key": "Du bist nicht angemeldet.\nMelde dich an, um BoatOfficer Daten zu sehen.\nGehe dazu in die Einstellungen und tippe auf \"Anmelden\".",
   "no_boat": "Du hast noch keinen BoatOfficer registriert.\nRegistriere deinen BoatOfficer oder heuere auf einem anderen Boot an, um dessen Daten zu sehen.\nGehe dazu in die Einstellungen (Menü unten rechts).",
+  "No data received": "Empfang fehlgeschlagen",
+  "Please try again later": "Bitte versuche es später noch einmal",
   "ACTIVE ALARMS": "ALARMSTATUS",
   "no active alarms": "keine aktiven Alarme",
   "WEATHER ON SITE": "WETTER VOR ORT",

@@ -57,7 +57,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
             intl.strings = englishStrings;
         }
         intl.changes.next();
-        dataService.loadedAlarmData.subscribe(loaded => {
+        dataService.loadedLatestSensorData.subscribe(loaded => {
             if(loaded && loaded.valueOf()) {
                 this.applyDefaultBoatDetailsVisibility();
                 console.log('applyDefaultBoatDetailsVisibility');

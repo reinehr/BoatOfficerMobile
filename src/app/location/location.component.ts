@@ -263,16 +263,14 @@ export class LocationComponent implements OnInit, AfterViewInit {
                                 this.webcamHeight[id] = 240;
                                 this.webcamScale[id] = 1;
                                 this.webcamScaled[id] = false;
-                                console.log('result width: ' + result)
-                                //this.webcamScale[id] = webView.getActualSize().width / result;
-                                //let height = webView.getActualSize().height / this.webcamScale[id];
+                                // console.log('result width: ' + result)
                                 this.webcamScale[id] = (this.scrollLayout.getActualSize().width - 40) / result;
                                 let height = 240 / this.webcamScale[id];
-                                console.log('scroll width ' + this.scrollLayout.getActualSize().width);
-                                console.log('actual width: ' + webView.getActualSize().width);
-                                console.log('actual height: ' + webView.getActualSize().height);
-                                console.log('webcam scale: ' + this.webcamScale[id]);
-                                console.log('new height: ' + height);
+                                // console.log('scroll width ' + this.scrollLayout.getActualSize().width);
+                                // console.log('actual width: ' + webView.getActualSize().width);
+                                // console.log('actual height: ' + webView.getActualSize().height);
+                                // console.log('webcam scale: ' + this.webcamScale[id]);
+                                // console.log('new height: ' + height);
                                 this.webcamHeight[id] = height;
                                 this.webcamWidth[id] = result;
                                 webView.reload();

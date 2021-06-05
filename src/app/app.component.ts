@@ -93,8 +93,15 @@ export class AppComponent implements OnInit {
         }
     }
 
-    onSettingsMenuTap(args){
+    onLocationMenuTap(args){
         if (3 == this.currentIndex)
+        {
+            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+        }
+    }
+
+    onSettingsMenuTap(args){
+        if (4 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
         }

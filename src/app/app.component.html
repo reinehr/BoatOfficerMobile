@@ -13,6 +13,9 @@
         <TabStripItem iconSource="font://&#x4f;" class="navigation__item icon-boatofficer" (tap)="onBoatMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
+        <TabStripItem iconSource="font://&#x4f;" class="navigation__item icon-boatofficer" (tap)="onLocationMenuTap($event)">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+        </TabStripItem>
         <TabStripItem iconSource="font://&#x4d;" class="navigation__item icon-boatofficer" (tap)="onSettingsMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
         </TabStripItem>
@@ -28,6 +31,10 @@
 
     <TabContentItem>
         <page-router-outlet name="boat"></page-router-outlet>
+    </TabContentItem>
+
+    <TabContentItem>
+        <page-router-outlet name="location"></page-router-outlet>
     </TabContentItem>
 
     <TabContentItem>

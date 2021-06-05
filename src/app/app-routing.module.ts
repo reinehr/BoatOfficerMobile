@@ -27,9 +27,10 @@ import {EditusersComponent} from "~/app/boat/editusers.component";
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
 import {ManualComponent} from "~/app/manuals/manual.component";
+import {LocationComponent} from "~/app/location/location.component";
 
 const routes: Routes = [
-    {path: '', redirectTo: '/(home:home//alarm:alarm//boat:boat//settings:settings)', pathMatch: 'full'},
+    {path: '', redirectTo: '/(home:home//alarm:alarm//boat:boat//location:location//settings:settings)', pathMatch: 'full'},
 
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'alarm', component: AlarmComponent, outlet: 'home'},
@@ -48,6 +49,9 @@ const routes: Routes = [
     {path: 'editinhibitsettings/:idDevice/:field/:idAlarm', component: EditinhibitsettingsComponent, outlet: 'boat'},
     {path: 'editdevicesettings/:idDevice/:field', component: EditdevicesettingsComponent, outlet: 'boat'},
     {path: 'editusers/:idDevice/:roleOrRequests', component: EditusersComponent, outlet: 'boat'},
+
+    {path: 'location', component: LocationComponent, outlet: 'location'},
+    {path: 'mapdetails/:idDevice', component: MapdetailsComponent, outlet: 'location'},
 
     {path: 'settings', component: SettingsComponent, outlet: 'settings'},
     { path: 'auth', component: AuthComponent, outlet: 'settings' },

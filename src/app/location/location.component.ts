@@ -45,6 +45,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
     webcamWidth = {}; //295;
     webcamScale = {}; //1.0;
     webcamScaled = {}; //false;
+    thingIsVisible = {};
 
     webViewSrc = this.page;
     private sensordataSub: Subscription;
@@ -74,6 +75,12 @@ export class LocationComponent implements OnInit, AfterViewInit {
         intl.changes.next();
         dataService.loadedLatestSensorData.subscribe(loaded => {
             if(loaded && loaded.valueOf()) {
+                console.log('fill list');
+                for (const idDevice in this.dataService.deviceData) {
+                    this.thingIsVisible[this.dataService.deviceData[idDevice].id] = false;
+                    console.log(this.dataService.deviceData[idDevice].id);
+                }
+
                 this.applyDefaultBoatDetailsVisibility();
                 console.log('applyDefaultBoatDetailsVisibility');
             }
@@ -164,6 +171,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
             }).then( () => {
                     this.scrollLayout.scrollToVerticalOffset(scrollTarget.getLocationRelativeTo(this.scrollBase).y, true);
                 });
+            this.thingIsVisible[deviceId] = true;
             // not exactly true, but collapse of all is desired at tap on Title Bar
             this.allboatsvisible = true;
         }
@@ -174,6 +182,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
                 duration: 100
             }).then(() => {
                 boatDetailsView.visibility='collapse';
+                this.thingIsVisible[deviceId] = false;
             }, (err) => {});
         }
         //boatDetailsView.visibility = boatDetailsView.isCollapsed ? "visible" : "collapse";
@@ -186,6 +195,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
             const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
             boatDetailsView.visibility = this.allboatsvisible ? "collapse" : "visible";
             boatDetailsView.opacity = 1;
+            this.thingIsVisible[this.dataService.deviceData[idDevice].id] = this.allboatsvisible ? false : true;
         }
         this.allboatsvisible = !this.allboatsvisible;
         this.scrollLayout.scrollToVerticalOffset(0, true);
@@ -199,6 +209,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
                 const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
                 boatDetailsView.visibility = "visible";
                 boatDetailsView.opacity = 1;
+                this.thingIsVisible[this.dataService.deviceData[idDevice].id] = true;
             }
             this.allboatsvisible = true;
         }
@@ -221,6 +232,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
                         const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
                         boatDetailsView.visibility = "visible";
                         boatDetailsView.opacity = 1;
+                        this.thingIsVisible[this.dataService.deviceData[idDevice].id] = true;
                     }
                 }
                 // not exactly true, but collapse of all is desired at tap on Title Bar
@@ -235,7 +247,7 @@ export class LocationComponent implements OnInit, AfterViewInit {
 
     onLoadFinishedWebView(args: LoadEventData) {
         const webView = args.object as WebView;
-        //console.log('WEBVIEW Webcams onLoadFinished')
+        console.log('WEBVIEW Webcams onLoadFinished')
 
         if (!args.error) {
             //console.log(`Url: ${args.url}`);
@@ -256,21 +268,17 @@ export class LocationComponent implements OnInit, AfterViewInit {
                         } else if (result) {
                             //webView.parent.effectiveHeight = result;
                             let id = webView.id;
-                            console.log('effective height: ' + webView.parent.effectiveHeight);
-                            console.log('webview height: ' + webView.height);
+                            //console.log('effective height: ' + webView.parent.effectiveHeight);
+                            //console.log('webview height: ' + webView.height);
                             if (!this.webcamWidth[id]) {
                                 this.webcamWidth[id] = 295;
                                 this.webcamHeight[id] = 240;
                                 this.webcamScale[id] = 1;
                                 this.webcamScaled[id] = false;
-                                // console.log('result width: ' + result)
-                                this.webcamScale[id] = (this.scrollLayout.getActualSize().width - 40) / result;
-                                let height = 240 / this.webcamScale[id];
-                                // console.log('scroll width ' + this.scrollLayout.getActualSize().width);
-                                // console.log('actual width: ' + webView.getActualSize().width);
-                                // console.log('actual height: ' + webView.getActualSize().height);
-                                // console.log('webcam scale: ' + this.webcamScale[id]);
-                                // console.log('new height: ' + height);
+                                console.log('home result width: ' + result)
+                                this.webcamScale[id] = webView.getActualSize().width / result;
+                                let height = webView.getActualSize().height / this.webcamScale[id];
+                                console.log('home new height: ' + height)
                                 this.webcamHeight[id] = height;
                                 this.webcamWidth[id] = result;
                                 webView.reload();

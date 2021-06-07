@@ -72,7 +72,8 @@ export class AppComponent implements OnInit {
         this.currentIndex = args.newIndex;
     }
 
-    onHomeMenuTap(args){
+
+    onBoatMenuTap(args){
         if (0 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
@@ -86,22 +87,15 @@ export class AppComponent implements OnInit {
         }
     }
 
-    onBoatMenuTap(args){
+    onLocationMenuTap(args){
         if (2 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
         }
     }
 
-    onLocationMenuTap(args){
-        if (3 == this.currentIndex)
-        {
-            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
-        }
-    }
-
     onSettingsMenuTap(args){
-        if (4 == this.currentIndex)
+        if (3 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
         }

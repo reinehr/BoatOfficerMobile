@@ -30,7 +30,7 @@ import {ManualComponent} from "~/app/manuals/manual.component";
 import {LocationComponent} from "~/app/location/location.component";
 
 const routes: Routes = [
-    {path: '', redirectTo: '/(home:home//alarm:alarm//boat:boat//location:location//settings:settings)', pathMatch: 'full'},
+    {path: '', redirectTo: '/(boat:boat//alarm:alarm//location:location//settings:settings)', pathMatch: 'full'},
 
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'alarm', component: AlarmComponent, outlet: 'home'},

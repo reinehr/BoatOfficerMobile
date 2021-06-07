@@ -47,12 +47,12 @@
                                     horizontalStrokeWidth="2" verticalstrokeWidth="2"
                                     horizontalStripLineColor="#eeeef9, #ffffff">
                         </RadCartesianChartGrid>
-                        <LineSeries tkCartesianSeries
+                        <SplineSeries tkCartesianSeries
                                     [items]="dataService.boatHistory[dataService.deviceData[idDevice].id].sensor_data"
                                     categoryProperty="date"
                                     strokeColor="#356eb4"
                                     seriesName="dataLine"
-                                    [valueProperty]="field"></LineSeries>
+                                    [valueProperty]="field"></SplineSeries>
                         <LineSeries tkCartesianSeries
                                     [items]="alarmLineHigh"
                                     categoryProperty="date"
@@ -65,10 +65,7 @@
                                     strokeColor="red"
                                     seriesName="alarmLine"
                                     valueProperty="alarmValue"></LineSeries>
-                        <Palette tkCartesianPalette seriesName="dataLine">
-                            <PaletteEntry tkCartesianPaletteEntry
-                                          strokeColor="#356eb4"></PaletteEntry>
-                        </Palette>
+
                         <Palette tkCartesianPalette seriesName="alarmLine">
                             <PaletteEntry tkCartesianPaletteEntry
                                           strokeColor="red"></PaletteEntry>

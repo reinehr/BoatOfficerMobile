@@ -52,6 +52,7 @@ const routes: Routes = [
 
     {path: 'location', component: LocationComponent, outlet: 'location'},
     {path: 'mapdetails/:idDevice', component: MapdetailsComponent, outlet: 'location'},
+    {path: 'webcam/:idDevice', component: WebcamComponent, outlet: 'location'},
 
     {path: 'settings', component: SettingsComponent, outlet: 'settings'},
     { path: 'auth', component: AuthComponent, outlet: 'settings' },

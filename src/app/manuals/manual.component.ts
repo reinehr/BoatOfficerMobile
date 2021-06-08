@@ -41,8 +41,11 @@ export class ManualComponent implements OnInit, AfterViewInit {
         {'no': '7', 'title': localize('manual_bob_chapter_title_installation_batterycables'), 'content':localize('manual_bob_chapter_content_installation_batterycables'), 'image': 'montage_kabel.png'},
         {'no': '8', 'title': localize('manual_bob_chapter_title_installation_app'), 'content':localize('manual_bob_chapter_content_installation_app')},
         {'no': '9', 'title': localize('manual_bob_chapter_title_leds'), 'content':localize('manual_bob_chapter_content_leds')},
-        {'no': '10', 'title': localize('manual_bob_chapter_title_lorawan'), 'content':localize('manual_bob_chapter_content_lorawan'), 'weblink': 'https://ttnmapper.org', 'weblinktitle':'ttnmapper.org'},
-        {'no': '11', 'title': localize('manual_bob_chapter_title_maintenance'), 'content':localize('manual_bob_chapter_content_maintenance')}
+        {'no': '10', 'title': localize('manual_bob_chapter_title_alarms'), 'content':localize('manual_bob_chapter_content_alarms')},
+        {'no': '11', 'title': localize('manual_bob_chapter_title_lorawan'), 'content':localize('manual_bob_chapter_content_lorawan'), 'weblink': 'https://ttnmapper.org', 'weblinktitle':'ttnmapper.org'},
+        {'no': '12', 'title': localize('manual_bob_chapter_title_intbatt'), 'content':localize('manual_bob_chapter_content_intbatt')},
+        {'no': '13', 'title': localize('manual_bob_chapter_title_watersensor'), 'content':localize('manual_bob_chapter_content_watersensor')},
+        {'no': '14', 'title': localize('manual_bob_chapter_title_maintenance'), 'content':localize('manual_bob_chapter_content_maintenance')}
     ]
 
 

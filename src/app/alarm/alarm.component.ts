@@ -24,18 +24,26 @@ export class AlarmComponent implements OnInit, AfterViewInit {
     showOnlyOpen = true;
     alarmByTypeMap = alarmByTypeMap;
 
+    thingIsVisible = {};
+
     scrollLayout: ScrollView = null;
     scrollBase = null;
     allboatsvisible = true;
+
 
     constructor(
         private page: Page,
         private apiService: ApiService,
         private dataService: DataService,
     ) {
-
-        dataService.loadedAlarmData.subscribe(loaded => {
+        dataService.loadedLatestSensorData.subscribe(loaded => {
             if(loaded && loaded.valueOf()) {
+                console.log('fill list');
+                for (const idDevice in this.dataService.deviceData) {
+                    this.thingIsVisible[this.dataService.deviceData[idDevice].id] = false;
+                    console.log(this.dataService.deviceData[idDevice].id);
+                }
+
                 this.applyDefaultBoatDetailsVisibility();
                 console.log('applyDefaultBoatDetailsVisibility');
             }

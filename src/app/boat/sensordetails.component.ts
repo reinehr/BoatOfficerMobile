@@ -66,8 +66,8 @@ export class SensordetailsComponent implements OnInit {
             } else {
                 this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 4.2});
                 this.alarmLineHigh.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 4.2});
-                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.1});
-                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.1});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[5].dateInterval.start, 'alarmValue': 3.3});
+                this.alarmLineLow.push({'date':this.dataService.historyIntervalData[0].dateInterval.stop, 'alarmValue': 3.3});
             }
         }
     }

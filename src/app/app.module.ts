@@ -36,6 +36,7 @@ import {EditalarmsettingsComponent} from "~/app/boat/editalarmsettings.component
 import {EditdevicesettingsComponent} from "~/app/boat/editdevicesettings.component";
 import {EditusersComponent} from "~/app/boat/editusers.component";
 import {BoatHeaderComponent} from "~/app/shared/ui/boat-header/boat-header.component";
+import {BoatSettingsBarComponent} from "~/app/shared/ui/boat-settings-bar/boat-settings-bar.component";
 import {AlarmCard4segmentsTitleComponent} from "~/app/shared/ui/alarm-card-4segments-title/alarm-card-4segments-title.component";
 import {WebcamComponent} from "~/app/home/webcam.component";
 import {EditinhibitsettingsComponent} from "~/app/boat/editinhibitsettings.component";
@@ -85,7 +86,7 @@ export class MyIntl extends TimeagoIntl {
     declarations: [
         AppComponent,
         AlarmComponent,
-        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditinhibitsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent, AlarmCard4segmentsTitleComponent,
+        BoatComponent, SensordetailsComponent, GpsdetailsComponent, MapdetailsComponent, BoatsettingssingleComponent, UploadpictureComponent, EditalarmsettingsComponent, EditinhibitsettingsComponent, EditdevicesettingsComponent, EditusersComponent, BoatHeaderComponent, BoatSettingsBarComponent, AlarmCard4segmentsTitleComponent,
         HomeComponent, WebcamComponent,
         LocationComponent,
         SettingsComponent, AuthComponent, ScanComponent, SignonaboatComponent, LogoutComponent, AlertsettingsComponent, ImpressumComponent, PurchaseComponent, EditpersonaldataComponent, TtnmapperviewComponent, ManualComponent

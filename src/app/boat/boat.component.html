@@ -17,23 +17,21 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh id="level_3" (refresh)="refreshList($event)">
         <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
+            <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!dataService.loggedIn">
+                <StackLayout class="alarm-card-home">
+                    <GridLayout columns="*" rows="auto" padding = "5">
+                        <Label col=0 row=0 [text]="'no_key' | L" class="t-16 c-black" textWrap="true"
+                               verticalAlignment="middle" horizontalAlignment="left"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
                         <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
-                        <GridLayout class="boat-control-bar" columns="10, 40, 130, *,40, 10" rows="45">
-                            <Label col="1" class="alarm-symbol"
-                                   text="M" pageTransition="slideLeft"
-                                   [nsRouterLink]="['../settingssingle', idDevice]"></Label>
-                            <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
-                                   [nsRouterLink]="['../settingssingle', idDevice]"></Label>
-                            <Label col="4" [text]="''" *ngIf="device.role == 'officer' && 0 != device.num_candidate"
-                                   [nsRouterLink]="device.role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []"
-                                   class="user-role-symbol-orange"></Label>
-
-                        </GridLayout>
+                        <boat-settings-bar [role]="device.role" [deviceType]="device.type" [idDevice]="idDevice" [numCandidates]="device.num_candidate"></boat-settings-bar>
                         <StackLayout class="alarm-card"
                                      *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">
                             <alarm-card-4segments-title [title]="'SENSORS' | L" [updatedatetime]="dataService.boatStatus[device.id].sensor_data.time"  [warning]="''"></alarm-card-4segments-title>
@@ -94,23 +92,24 @@
                                                         *ngIf="device.bad_gps_signal == false"></alarm-card-4segments-title>
                             <alarm-card-4segments-title [title]="'POSITION' | L" [updatedatetime]="dataService.boatStatus[device.id].position_data.time"  [warning]="('GPS Reception' | L)"
                                                         *ngIf="device.bad_gps_signal == true"></alarm-card-4segments-title>
-                            <GridLayout columns="*, 40" rows="*, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
-                                <MapView col="0" row="0" rowSpan="2" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
+                            <GridLayout columns="*, 40" rows="20, *, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                                <MapView col="0" row="0" rowSpan="3" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                          [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                          [tilt]="tilt" padding="5, 5, 5, 5" [mapAnimationsEnabled]="false"
                                          (mapReady)="onMapReady($event, idDevice)"
                                          (markerSelect)="onMarkerEvent($event)"
                                          (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
-                                <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-red"  *ngIf="device.mode == 'SOS' || device.mode == 'Unacknowledged Movement'"></Label>
-                                <Label col="0" row="1" colSpan="2" class="shadow-overlay-bottom-alarm-blue" *ngIf="device.mode != 'SOS' && device.mode != 'Unacknowledged Movement' && device.mode != ''"></Label>
-                                <Label col="0" row="1" class="text-overlay-bottom-left" [text]="(device.mode + ' active') | L" *ngIf="device.mode != ''"></Label>
-                                <Label col="1" row="1" [text]="''"
+                                <Label col="0" row="0" colSpan="2" padding="5" class="t-12 font-weight-bold" textWrap="true" [text]="'LAT: ' + dataService.boatStatus[device.id].position_data.latitude + '   LONG: ' + dataService.boatStatus[device.id].position_data.longitude" verticalAlignment="middle" horizontalAlignment="left"></Label>
+                                <Label col="0" row="2" colSpan="2" class="shadow-overlay-bottom-alarm-red"  *ngIf="device.mode == 'SOS' || device.mode == 'Unacknowledged Movement'"></Label>
+                                <Label col="0" row="2" colSpan="2" class="shadow-overlay-bottom-alarm-blue" *ngIf="device.mode != 'SOS' && device.mode != 'Unacknowledged Movement' && device.mode != ''"></Label>
+                                <Label col="0" row="2" class="text-overlay-bottom-left" [text]="(device.mode + ' active') | L" *ngIf="device.mode != ''"></Label>
+                                <Label col="1" row="2" [text]="''"
                                        class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'SOS'"></Label>
-                                <Label col="1" row="1" [text]="''"
+                                <Label col="1" row="2" [text]="''"
                                        class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'Race Mode'"></Label>
-                                <Label col="1" row="1" [text]="''"
+                                <Label col="1" row="2" [text]="''"
                                        class="fa-symbol-overlay-bottom-right"  *ngIf="device.mode == 'Mapping'"></Label>
-                                <GridLayout col="0" row="0" rowSpan="2" colSpan="2" [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
+                                <GridLayout col="0" row="0" rowSpan="3" colSpan="2" [nsRouterLink]="['../mapdetails', idDevice]"></GridLayout>
                             </GridLayout>
                             <GridLayout>
                                 <StackLayout>

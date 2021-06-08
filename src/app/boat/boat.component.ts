@@ -11,6 +11,7 @@ import {TimeagoIntl} from 'ngx-timeago';
 import {localize} from 'nativescript-localize';
 import {Page} from '@nativescript/core/ui/page';
 import {StackLayout} from "@nativescript/core/ui/layouts/stack-layout";
+import {RouterExtensions} from "nativescript-angular/router";
 
 
 // Important - must register MapView plugin in order to use in Angular templates
@@ -38,6 +39,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
     scrollLayout: ScrollView = null;
     scrollBase = null;
     allboatsvisible = false;
+    thingIsVisible = {};
 
     lastCamera: string;
     private sensorHistoryLoaded: boolean;
@@ -46,6 +48,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         private page: Page,
         private apiService: ApiService,
         private dataService: DataService,
+        private router: RouterExtensions,
         intl: TimeagoIntl
         // private routerExtensions: RouterExtensions
     ) {
@@ -59,6 +62,12 @@ export class BoatComponent implements OnInit, AfterViewInit {
         intl.changes.next();
         dataService.loadedLatestSensorData.subscribe(loaded => {
             if(loaded && loaded.valueOf()) {
+                console.log('fill list');
+                for (const idDevice in this.dataService.deviceData) {
+                    this.thingIsVisible[this.dataService.deviceData[idDevice].id] = false;
+                    console.log(this.dataService.deviceData[idDevice].id);
+                }
+
                 this.applyDefaultBoatDetailsVisibility();
                 console.log('applyDefaultBoatDetailsVisibility');
             }
@@ -73,6 +82,16 @@ export class BoatComponent implements OnInit, AfterViewInit {
     ngAfterViewInit(): void {
         this.scrollLayout = this.page.getViewById("level_4") as ScrollView;
         this.scrollBase = this.page.getViewById("level_5") as StackLayout;
+
+        if (!this.dataService.loggedIn)
+        {
+            console.log("not logged in - route to settings");
+            this.router.navigate([{ outlets: { settings: ['settings']}}]);
+        }
+        else
+        {
+            console.log("logged in");
+        }
     }
 
 
@@ -86,7 +105,9 @@ export class BoatComponent implements OnInit, AfterViewInit {
         //console.log('Setting a marker...');
 
         const marker = new Marker();
-        marker.position = Position.positionFromLatLng(this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude, this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude);
+        this.latitude = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude
+        this.longitude = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude
+        marker.position = Position.positionFromLatLng(this.latitude, this.longitude );
         marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
         marker.userData = {index: 1};

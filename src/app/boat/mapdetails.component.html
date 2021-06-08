@@ -17,8 +17,9 @@
                         <Label [text]="interval.name | L" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
+                <Label *ngIf="selectedIntervalId == 0" paddingleft="10" class="t-12 font-weight-bold" textWrap="true" [text]="'LAT: ' + latitude + '   LONG: ' + longitude" verticalAlignment="middle" horizontalAlignment="left"></Label>
                 <StackLayout orientation="horizontal"
-                             *ngIf="dataService.deviceData[idDevice].bad_gps_signal == true">
+                             *ngIf="(selectedIntervalId == 0) && (dataService.deviceData[idDevice].bad_gps_signal == true)">
                     <GridLayout verticalAlignment="top" horizontalAlignment="center" padding="10">
                         <Label class="" textWrap="true" [text]="'bad_gps_reception_explained' | L" verticalAlignment="middle" horizontalAlignment="center"></Label>
                     </GridLayout>
@@ -28,7 +29,7 @@
                 </StackLayout>
                 <StackLayout [id]="'level_7_' + dataService.deviceData[idDevice].id" orientation="vertical"  backgroundColor="white" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <GridLayout [id]="'level_8_' + dataService.deviceData[idDevice].id" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.latitude != 0">
-                        <MapView [id]="'mapview_' + dataService.deviceData[idDevice].id" #mapView [latitude]="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.latitude" [longitude]="dataService.boatStatus[dataService.deviceData[idDevice].id].position_data.longitude"
+                        <MapView [id]="'mapview_' + dataService.deviceData[idDevice].id" #mapView [latitude]="latitude" [longitude]="longitude"
                                  [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                  [tilt]="tilt" i-padding="50,50,50,50" [padding]="padding" [mapAnimationsEnabled]="false"
                                  (mapReady)="onMapReady($event, idDevice)"

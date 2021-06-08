@@ -38,6 +38,8 @@ const routes: Routes = [
     { path: 'webcam/:idDevice', component: WebcamComponent, outlet: 'home'},
 
     {path: 'alarm', component: AlarmComponent, outlet: 'alarm'},
+    {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'alarm'},
+    {path: 'editusers/:idDevice/:roleOrRequests', component: EditusersComponent, outlet: 'alarm'},
 
     {path: 'boat', component: BoatComponent, outlet: 'boat'},
     {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'boat'},

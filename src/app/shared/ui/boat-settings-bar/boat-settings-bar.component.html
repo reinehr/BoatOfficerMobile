@@ -1,0 +1,10 @@
+<GridLayout class="boat-settings-bar" columns="10, 40, 130, *,40, 10" rows="45">
+  <Label col="1" class="alarm-symbol"
+         text="M" pageTransition="slideLeft"
+         [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+  <Label col="2" text="{{'Settings' | L}}" class="t-16" verticalAlignment="middle"
+         [nsRouterLink]="['../settingssingle', idDevice]"></Label>
+  <Label col="4" [text]="''" *ngIf="role == 'officer' && 0 != numCandidates"
+         [nsRouterLink]="role == 'officer' ? ['../editusers', idDevice, 'candidate'] : []"
+         class="user-role-symbol-orange"></Label>
+</GridLayout>

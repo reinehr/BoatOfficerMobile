@@ -21,12 +21,21 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
     <PullToRefresh (refresh)="refreshList($event)">
         <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
+            <StackLayout id="level_5_no_key" col=0 row=3 *ngIf="!dataService.loggedIn">
+                <StackLayout class="alarm-card-home">
+                    <GridLayout columns="*" rows="auto" padding = "5">
+                        <Label col=0 row=0 [text]="'no_key' | L" class="t-16 c-black" textWrap="true"
+                               verticalAlignment="middle" horizontalAlignment="left"></Label>
+                    </GridLayout>
+                </StackLayout>
+            </StackLayout>
             <StackLayout id="level_5">
                 <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                     <StackLayout (tap)="toggleBoatDetails(device.id)">
-                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm"] [deviceType]="device.type"></boat-header>
+                        <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm" [deviceType]="device.type"></boat-header>
                     </StackLayout>
                     <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
+                        <boat-settings-bar [role]="device.role" [deviceType]="device.type" [idDevice]="idDevice" [numCandidates]="device.num_candidate"></boat-settings-bar>
                         <StackLayout *ngFor="let alarmType of device.keyTypeActive">
                             <StackLayout *ngFor="let alarm of [device.alarm_summarized[alarmType]]">
                                 <StackLayout class="alarm-card"

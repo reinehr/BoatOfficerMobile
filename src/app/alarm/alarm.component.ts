@@ -129,6 +129,7 @@ export class AlarmComponent implements OnInit, AfterViewInit {
 
     onAlarmTypeOkTap(idDevice: number, alarmType: string) {
         let idAlarm = [];
+        this.dataService.deviceData[idDevice].alarm_summarized[alarmType].loading = true;
         for (let alarm of this.dataService.deviceData[idDevice].alarm_summarized[alarmType].alarm) {
             if(alarm.status == 'open' || (alarm.status == 'open_someone_responsible' && alarm.i_am_responsible)) {
                 idAlarm.push(alarm.id);

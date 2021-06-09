@@ -9,16 +9,8 @@
     <StackLayout [id]="'level_4_' + dataService.deviceData[idDevice].id">
         <StackLayout [id]="'level_5_' + dataService.deviceData[idDevice].id" orientation="vertical" *ngIf="initialized">
             <StackLayout [id]="'level_6_' + dataService.deviceData[idDevice].id">
-                <GridLayout columns="120, *" rows="30, 30" padding="5" marginBottom="10" class="bg-darkblue">
-                    <GridLayout col="0" row="0" rowSpan="2" marginRight="12" *ngIf="dataService.deviceData[idDevice].boat_image_small && dataService.deviceData[idDevice].boat_image_small != 'null'">
-                        <Image [src]="'' + dataService.deviceData[idDevice].boat_image_small"
-                               class="boatoffice-boat-image"></Image>
-                    </GridLayout>
-                    <Label col="1" row="0" [text]="dataService.deviceData[idDevice].type | L" class="c-white t-16 font-weight-bold" height="30"></Label>
-                    <Label col="1" row="1" [text]="dataService.deviceData[idDevice].name"
-                           class="alarm-blue t-16" height="30"></Label>
-                </GridLayout>
-                <StackLayout orientation="horizontal" height="60">
+                <boat-header [boatname]="dataService.deviceData[idDevice].name" [boat_image_small]="dataService.deviceData[idDevice].boat_image_small" [role]="dataService.deviceData[idDevice].role" [deviceType]="dataService.deviceData[idDevice].type"></boat-header>
+                <StackLayout orientation="horizontal" height="60" marginTop="15">
                     <GridLayout
                             class="{{'interval-button' + (interval == selectedIntervalId ? '-selected-3' : '-3')}}" verticalAlignment="top" horizontalAlignment="center"
                             (tap)="setSelectedInterval(interval)" *ngFor="let interval of [0,1,2]">

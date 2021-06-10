@@ -35,24 +35,26 @@
                                            [text]="''" *ngIf="device.role == 'sailor'"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'guard'"></Label>
-                                    <GridLayout columns="15, 20, auto, 20, auto, 20, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'BoatOfficer'">
+                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'BoatOfficer'">
                                         <Label col="1" *ngIf="device.external_voltage_cable != 'NONE'" class="text-overlay-bottom-left-sensors icon-boatofficer" [text]="'K'"></Label>
-                                        <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
-                                        <Label col="2" *ngIf="device.external_voltage_cable == 'USB'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
+                                        <Label col="1" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors fas" [text]="''"></Label>
+                                        <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
+                                        <Label col="2" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntBattVolt + ' V  '"></Label>
+                                        <Label col="2" *ngIf="device.external_voltage_cable == 'USB'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
                                         <Label col="3" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'K'"></Label>
-                                        <Label col="4" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
+                                        <Label col="4" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
                                         <Label col="3" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
-                                        <Label col="4" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
+                                        <Label col="4" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                         <Label col="5" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
-                                        <Label col="6" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
+                                        <Label col="6" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                     </GridLayout>
-                                    <GridLayout columns="15, 20, auto, 20, auto, 20, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'to-mslr'">
+                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'to-mslr'">
                                         <Label col="1" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
-                                        <Label col="2" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
+                                        <Label col="2" class="text-overlay-bottom-left-sensors " [text]="'  '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                         <Label col="3" class="text-overlay-bottom-left-sensors  icon-weather" [text]="''"></Label>
-                                        <Label col="4" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.PressureHektoPascal + ' hPa  '"></Label>
+                                        <Label col="4" class="text-overlay-bottom-left-sensors " [text]="'  '+dataService.boatStatus[device.id].sensor_data.PressureHektoPascal + ' hPa  '"></Label>
                                         <Label col="5" class="text-overlay-bottom-left-sensors  icon-weather" [text]="''"></Label>
-                                        <Label col="6" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.HumidityPercent + ' %  '"></Label>
+                                        <Label col="6" class="text-overlay-bottom-left-sensors " [text]="'  '+dataService.boatStatus[device.id].sensor_data.HumidityPercent + ' %  '"></Label>
                                     </GridLayout>
                                 </GridLayout>
                             </GridLayout>
@@ -63,16 +65,18 @@
                                     <Image row="0" rowSpan="3" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                                     <Label row="1" rowspan="2" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>
                                     <Label row="1" class="text-overlay-bottom-left" [text]="device.name"></Label>
-                                    <GridLayout *ngIf="device.type == boat" columns="15, 20, auto, 20, auto, 20, auto, *, 40" row="2">
+                                    <GridLayout *ngIf="device.type == 'BoatOfficer'" columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="2">
                                         <Label col="1" *ngIf="device.external_voltage_cable != 'NONE'" class="text-overlay-bottom-left-sensors icon-boatofficer" [text]="'K'"></Label>
-                                        <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
-                                        <Label col="2" *ngIf="device.external_voltage_cable == 'USB'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
+                                        <Label col="1" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors fas" [text]="''"></Label>
+                                        <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
+                                        <Label col="2" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntBattVolt + ' V  '"></Label>
+                                        <Label col="2" *ngIf="device.external_voltage_cable == 'USB'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
                                         <Label col="3" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'K'"></Label>
-                                        <Label col="4" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
+                                        <Label col="4" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt2Volt + ' V  '"></Label>
                                         <Label col="3" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
-                                        <Label col="4" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
+                                        <Label col="4" *ngIf="device.external_voltage_cable != 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                         <Label col="5" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
-                                        <Label col="6" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
+                                        <Label col="6" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                         <Label col="8" [text]="''"
                                                class="fa-symbol-overlay-bottom-right"  *ngIf="device.role == 'sailor'"></Label>
                                         <Label col="8" [text]="''"

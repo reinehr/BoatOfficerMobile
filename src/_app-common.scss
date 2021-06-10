@@ -25,6 +25,7 @@
     font-family: "BoatOfficer Icons", "boatofficer";
     font-weight: 400;
     // font-size: 28pt;
+    padding-bottom:2;
 }
 
 .weather-font {
@@ -262,7 +263,7 @@ $buttons_count: 6;
     color: white;
     font-weight: 800;
     border-radius: 10;
-    height: 40;
+    height: 80;
     padding: 5;
 }
 
@@ -291,7 +292,7 @@ $buttons_count: 6;
 }
 
 .shadow-overlay-bottom-blue {
-    background: linear-gradient(rgba(9,21,36,0) 0%, rgba(9,21,36,1) 70%);
+    background: linear-gradient(rgba(9,21,36,0) 0%, rgba(9,21,36,0.6) 30%, rgba(9,21,36,1) 90%);
 }
 
 .shadow-overlay-bottom-alarm-blue {
@@ -313,6 +314,15 @@ $buttons_count: 6;
     text-align: left;
     vertical-align: bottom;
     margin: 0,20,7,15;
+}
+
+.text-overlay-bottom-left-sensors {
+    color: white;
+    font-weight: 800;
+    font-size: 14px;
+    text-align: left;
+    vertical-align: bottom;
+    margin: 0, 0, 7, 0;
 }
 
 .map-grid .text-overlay-bottom-left {
@@ -407,6 +417,13 @@ $buttons_count: 6;
     width: 50pt;
     vertical-align: center;
     padding-right: 15;
+}
+
+.icon-weather {
+    font-family: 'Weather Icons', 'weathericons', 'weathericons-regular-webfont';
+    // background-color: #091524;
+    // color: orange;
+    font-weight: 400;
 }
 
 .alarm-symbol-fas {

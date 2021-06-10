@@ -19,7 +19,7 @@
 
 <GridLayout class="homeBackgroundImage"
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_gray.png">
-    <PullToRefresh (refresh)="refreshList($event)" indicatorFillColor="#fff000" indicatorColor="#3489db">
+    <PullToRefresh (refresh)="refreshList($event)">
         <ScrollView id="level_4" orientation="vertical" iosOverflowSafeArea="false">
             <GridLayout>
                 <StackLayout id="level_5_no_key" *ngIf="!dataService.loggedIn">

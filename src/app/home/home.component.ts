@@ -18,9 +18,15 @@ import {isAndroid } from '@nativescript/core/platform';
 import { Image } from '@nativescript/core/ui/image';
 import { ImageSource } from '@nativescript/core/image-source';
 import {hasKey, getString} from '@nativescript/core/application-settings';
+import {BottomNavigation} from "@nativescript/core/ui/bottom-navigation";
+import {Frame} from "@nativescript/core/ui/frame";
+import { TabView} from "@nativescript/core/nativescript-core";
 
 import {HttpClient} from '@angular/common/http';
 import { WebView, LoadEventData } from '@nativescript/core/ui/web-view';
+import {RouterExtensions} from "nativescript-angular/router";
+import {AppComponent} from "~/app/app.component";
+import {getRootView} from "@nativescript/core/application";
 declare let android: any; // or even better - use tns-platform-declarations for intelliSense for the native APis
 
 registerElement('MapView', () => MapView);
@@ -58,6 +64,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
         public apiService: ApiService,
         public dataService: DataService,
         intl: TimeagoIntl,
+        private router: RouterExtensions,
         private httpClient: HttpClient
     ) {
         this.isLoading = true;
@@ -263,6 +270,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
             console.log(`EventName: ${args.eventName}`);
             console.log(`Error: ${args.error}`);
         }
+    }
+
+    onBoatImageTap(idDevice: number) {
+        console.log("boat image tapped");
+        const topmostFrame: Frame = Frame.topmost();
+
+        console.log("Topmost frame:    "+topmostFrame);
+        console.log("Topmost frame page:    "+topmostFrame.currentPage);
+
+        //this.router.navigate(['webcam', idDevice]);
+        //this.router.navigate([{ outlets: { home: ["webcam", idDevice] } }]);
+        //let bottomNav = <BottomNavigation> this.page.getViewById("bottomNav");
+      //  let tabnav:TabView = <TabView>topmostFrame.currentPage.getViewById("bottomNav");
+       // tabnav.selectedIndex = 1;
     }
 
     onWeatherTap(idDevice: number) {

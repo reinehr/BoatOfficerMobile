@@ -30,12 +30,13 @@ import {ManualComponent} from "~/app/manuals/manual.component";
 import {LocationComponent} from "~/app/location/location.component";
 
 const routes: Routes = [
-    {path: '', redirectTo: '/(boat:boat//alarm:alarm//location:location//settings:settings)', pathMatch: 'full'},
+    {path: '', redirectTo: '/(home:home//boat:boat//location:location//alarm:alarm//settings:settings)', pathMatch: 'full'},
 
     {path: 'home', component: HomeComponent, outlet: 'home'},
     {path: 'alarm', component: AlarmComponent, outlet: 'home'},
-    { path: 'mapdetails/:idDevice', component: MapdetailsComponent, outlet: 'home'},
-    { path: 'webcam/:idDevice', component: WebcamComponent, outlet: 'home'},
+    {path: 'mapdetails/:idDevice', component: MapdetailsComponent, outlet: 'home'},
+    {path: 'webcam/:idDevice', component: WebcamComponent, outlet: 'home'},
+    {path: 'boat', component: BoatComponent, outlet: 'home'},
 
     {path: 'alarm', component: AlarmComponent, outlet: 'alarm'},
     {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'alarm'},

@@ -5,7 +5,7 @@
             backgroundImage="~/assets/AppDesignSources_FreigestellteBilder_bg_harbour_w_bluesky.png">
     <PullToRefresh id="level_2" (refresh)="refreshList($event)">
         <ScrollView id="level_3" orientation="vertical" iosOverflowSafeArea="false">
-            <GridLayout id="level_4" columns="*" rows="20, 80, 10, *" class="page__content">
+            <GridLayout id="level_4" columns="*" rows="40, 80, 10, *" class="page__content">
                 <Label col=0 row=0 text=""></Label>
                 <Image col=0 row=1 src="~/assets/BOATOFFICER_Logo.png" class="boatofficer-logo"></Image>
                 <Label col=0 row=2 text=""></Label>
@@ -35,7 +35,7 @@
                                            [text]="''" *ngIf="device.role == 'sailor'"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'guard'"></Label>
-                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'BoatOfficer'">
+                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'BoatOfficer' && dataService.boatStatus && dataService.boatStatus[device.id]">
                                         <Label col="1" *ngIf="device.external_voltage_cable != 'NONE'" class="text-overlay-bottom-left-sensors icon-boatofficer" [text]="'K'"></Label>
                                         <Label col="1" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors fas" [text]="''"></Label>
                                         <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
@@ -48,7 +48,7 @@
                                         <Label col="5" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
                                         <Label col="6" *ngIf="device.external_voltage_cable == 'DOUBLE'" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                     </GridLayout>
-                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'to-mslr'">
+                                    <GridLayout columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="1" colspan="2" *ngIf="device.type == 'to-mslr' && dataService.boatStatus && dataService.boatStatus[device.id]">
                                         <Label col="1" class="text-overlay-bottom-left-sensors  icon-boatofficer" [text]="'n'"></Label>
                                         <Label col="2" class="text-overlay-bottom-left-sensors " [text]="'  '+dataService.boatStatus[device.id].sensor_data.IntTemperature + ' °C  '"></Label>
                                         <Label col="3" class="text-overlay-bottom-left-sensors  icon-weather" [text]="''"></Label>
@@ -65,7 +65,7 @@
                                     <Image row="0" rowSpan="3" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                                     <Label row="1" rowspan="2" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>
                                     <Label row="1" class="text-overlay-bottom-left" [text]="device.name"></Label>
-                                    <GridLayout *ngIf="device.type == 'BoatOfficer'" columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="2">
+                                    <GridLayout *ngIf="device.type == 'BoatOfficer' && dataService.boatStatus && dataService.boatStatus[device.id]" columns="15, auto, auto, auto, auto, auto, auto, *, 40" row="2">
                                         <Label col="1" *ngIf="device.external_voltage_cable != 'NONE'" class="text-overlay-bottom-left-sensors icon-boatofficer" [text]="'K'"></Label>
                                         <Label col="1" *ngIf="device.external_voltage_cable == 'NONE'" class="text-overlay-bottom-left-sensors fas" [text]="''"></Label>
                                         <Label col="2" *ngIf="(device.external_voltage_cable == 'SINGLE') || (device.external_voltage_cable == 'DOUBLE')" class="text-overlay-bottom-left-sensors " [text]="' '+dataService.boatStatus[device.id].sensor_data.ExtBatt1Volt + ' V  '"></Label>
@@ -123,7 +123,7 @@
                                                         *ngIf="device.bad_gps_signal == false"></alarm-card-4segments-title>
                             <alarm-card-4segments-title [title]="'POSITION' | L" [updatedatetime]="dataService.boatStatus[device.id].position_data.time"  [warning]="('GPS Reception' | L)"
                                                         *ngIf="device.bad_gps_signal == true"></alarm-card-4segments-title>
-                            <GridLayout columns="*, 40" rows="20, *, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus[device.id].position_data.latitude != 0">
+                            <GridLayout columns="*, 40" rows="20, *, 40" [id]="'level_8_' + device.id" *ngIf="dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].position_data.latitude != 0">
                                 <MapView col="0" row="0" rowSpan="3" colSpan="2" [id]="'mapview_' + device.id" height="200" #mapView [latitude]="dataService.boatStatus[device.id].position_data.latitude" [longitude]="dataService.boatStatus[device.id].position_data.longitude"
                                          [zoom]="zoom" [minZoom]="minZoom" [maxZoom]="maxZoom" [bearing]="bearing"
                                          [tilt]="tilt" padding="5, 5, 5, 5" [mapAnimationsEnabled]="false"

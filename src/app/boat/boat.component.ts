@@ -164,7 +164,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         console.log("Boat Tapped No: "+deviceId);
         const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
 
-        if (boatDetailsView.isCollapsed)
+        if (boatDetailsView && boatDetailsView.isCollapsed)
         {
             const scrollTarget = this.page.getViewById("level_6_"+deviceId) as StackLayout;
 

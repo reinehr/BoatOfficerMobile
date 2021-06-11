@@ -193,6 +193,7 @@ export class DataService {
     public loadedAlarmData = new BehaviorSubject<boolean>(false);
     public loadedHistoryData = new BehaviorSubject<boolean>(false);
     public loadedLatestSensorData = new BehaviorSubject<boolean>(false);
+    public sumActiveAlarms = 0;
 
     constructor(
         public apiService: ApiService
@@ -227,6 +228,7 @@ export class DataService {
             if (resData) {
                 let start = Date.now()
                 this.noBoat = true;
+                this.sumActiveAlarms = 0;
                 for (const idDevice in resData) {
                     this.noBoat = false
                     let device = resData[idDevice];
@@ -293,6 +295,7 @@ export class DataService {
                             resData[idDevice].alarm[idAlarm].sum_type_active = indexTypeActive[idDevice][resData[idDevice].alarm[idAlarm].type];
                         }
                     }
+                    this.sumActiveAlarms = this.sumActiveAlarms + resData[idDevice].sum_active_alarm;
                 }
                 this.deviceData = resData;
 

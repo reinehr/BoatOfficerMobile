@@ -44,6 +44,7 @@ export class MapdetailsComponent implements OnInit {
 
     latitude = -23.86;
     longitude = 151.20;
+    speed = 0;
     zoom = 13;
     minZoom = 0;
     maxZoom = 22;
@@ -72,7 +73,8 @@ export class MapdetailsComponent implements OnInit {
 
         const marker = new Marker();
         this.latitude = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.latitude;
-        this.longitude = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude
+        this.longitude = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.longitude;
+        this.speed = this.dataService.boatStatus[this.dataService.deviceData[idDevice].id].position_data.speed;
         marker.position = Position.positionFromLatLng(this.latitude, this.longitude);
         marker.title = this.dataService.deviceData[idDevice].name + (this.dataService.deviceData[idDevice].berth ? ' (Berth ' + this.dataService.deviceData[idDevice].berth + ')' : '');
         marker.snippet = 'BoatOfficer';
@@ -161,6 +163,15 @@ export class MapdetailsComponent implements OnInit {
 
     onCoordinateTapped(args) {
         // console.log('Coordinate Tapped, Lat: ' + args.position.latitude + ', Lon: ' + args.position.longitude, args);
+    }
+
+    globeTapped(){
+        console.log("Maptype: "+this.mapView.gMap.mapType);
+        this.mapView.gMap.mapType += 1;
+        if (4 < this.mapView.gMap.mapType)
+        {
+            this.mapView.gMap.mapType = 1;
+        }
     }
 
     onMarkerEvent(args) {

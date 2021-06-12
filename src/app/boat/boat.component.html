@@ -108,7 +108,6 @@
                                              (mapReady)="onMapReady($event, idDevice)"
                                              (markerSelect)="onMarkerEvent($event)"
                                              (markerInfoWindowTapped)="onMarkerEvent($event)"></MapView>
-                                    <Label col="0" row="0" colSpan="2" padding="5" class="t-12 font-weight-bold" textWrap="true" [text]="'LAT: ' + dataService.boatStatus[device.id].position_data.latitude + '   LONG: ' + dataService.boatStatus[device.id].position_data.longitude" verticalAlignment="middle" horizontalAlignment="left"></Label>
                                     <Label col="0" row="2" colSpan="2" class="shadow-overlay-bottom-alarm-red"  *ngIf="device.mode == 'SOS' || device.mode == 'Unacknowledged Movement'"></Label>
                                     <Label col="0" row="2" colSpan="2" class="shadow-overlay-bottom-alarm-blue" *ngIf="device.mode != 'SOS' && device.mode != 'Unacknowledged Movement' && device.mode != ''"></Label>
                                     <Label col="0" row="2" class="text-overlay-bottom-left" [text]="(device.mode + ' active') | L" *ngIf="device.mode != ''"></Label>

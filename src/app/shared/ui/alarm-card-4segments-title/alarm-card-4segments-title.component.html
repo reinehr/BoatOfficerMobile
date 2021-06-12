@@ -1,4 +1,4 @@
-<GridLayout class="alarm-card-4segments-title" columns="19, *, auto" rows="25, 20">
+<GridLayout *ngIf="!thirdrow" class="alarm-card-4segments-title" columns="19, *, auto" rows="25, 20">
   <Label col="0" row="0" colSpan="2" [text]="title" class="t-16 font-weight-bold"
          verticalAlignment="middle" horizontalAlignment="left"></Label>
   <Label col="2" row="0" [text]="('Updated' | L) + ' ' + (updatedatetime | timeago)"
@@ -24,4 +24,35 @@
          class="t-12 font-weight-normal"
          horizontalAlignment="right"
          *ngIf="subtitlebottom"></Label>
+</GridLayout>
+<GridLayout *ngIf="thirdrow" class="alarm-card-4segments-title" columns="19, *, auto" rows="25, 20, 20">
+  <Label col="0" row="0" colSpan="2" [text]="title" class="t-16 font-weight-bold"
+         verticalAlignment="middle" horizontalAlignment="left"></Label>
+  <Label col="2" row="0" [text]="('Updated' | L) + ' ' + (updatedatetime | timeago)"
+         class="t-12 font-weight-bold"
+         horizontalAlignment="right"
+         *ngIf="updatedatetime"></Label>
+  <Label col="2" row="0" [text]="subtitletop"
+         class="t-12 font-weight-bold"
+         horizontalAlignment="right"
+         *ngIf="subtitletop"></Label>
+  <Label col="0" row="1" [text]="''"
+         class="bad-gps-symbol alarm-orange"
+         *ngIf="warning"></Label>
+  <Label col="1" row="1" [text]="warning"
+         class="t-12 font-weight-normal alarm-orange"
+         horizontalAlignment="left"
+         *ngIf="warning"></Label>
+  <Label col="2" row="1" [text]="'(' + (updatedatetime | date:'dd.MM.yyyy HH:mm z') + ')'"
+         class="t-12 font-weight-normal"
+         horizontalAlignment="right"
+         *ngIf="updatedatetime"></Label>
+  <Label col="2" row="1" [text]="subtitlebottom"
+         class="t-12 font-weight-normal"
+         horizontalAlignment="right"
+         *ngIf="subtitlebottom"></Label>
+  <Label col="2" row="2" [text]="thirdrow"
+         class="t-12 font-weight-normal"
+         horizontalAlignment="right"
+         *ngIf="thirdrow"></Label>
 </GridLayout>

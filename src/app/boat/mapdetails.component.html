@@ -17,7 +17,10 @@
                         <Label [text]="interval.name | L" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
-                <Label *ngIf="selectedIntervalId == 0" padding="0 10 10 10" class="t-12 font-weight-bold" textWrap="true" [text]="'LAT: ' + latitude + '   LONG: ' + longitude" verticalAlignment="middle" horizontalAlignment="left"></Label>
+                <GridLayout rows="40", columns="*, 60">
+                    <Label col="0" margin="5" padding="5" class="t-12 font-weight-bold" verticalAlignment="center" textWrap="true" [text]="'LAT: ' + latitude + '°   LONG: ' + longitude + '°   ' + speed + ' km/h'" horizontalAlignment="left"></Label>
+                    <Label col="2" width="40" margin="5" padding="5" (tap)="globeTapped()" class="alarm-blue t-18 fas" verticalAlignment="center" textAlignment="center" [text]="''"></Label>
+                </GridLayout>
                 <StackLayout orientation="horizontal"
                              *ngIf="(selectedIntervalId == 0) && (dataService.deviceData[idDevice].bad_gps_signal == true)">
                     <GridLayout verticalAlignment="top" horizontalAlignment="center" padding="0 10 10 10">

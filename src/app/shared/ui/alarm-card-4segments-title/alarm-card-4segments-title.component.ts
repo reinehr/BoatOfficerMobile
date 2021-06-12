@@ -14,7 +14,7 @@ export class AlarmCard4segmentsTitleComponent {
     @Input() subtitlebottom: string;
     @Input() updatedatetime: string;
     @Input() warning: string;
-
+    @Input() thirdrow: string;
     constructor() {
     }
 

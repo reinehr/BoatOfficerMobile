@@ -11,6 +11,7 @@ import {ScrollEventData, ScrollView} from "@nativescript/core/ui/scroll-view";
 import {Page} from "@nativescript/core/ui/page";
 import {isAndroid } from '@nativescript/core/platform';
 import {LoadEventData, WebView} from "@nativescript/core/ui/web-view";
+import * as utils from "@nativescript/core/utils/utils";
 
 @Component({
     selector: 'app-webcam',
@@ -59,6 +60,16 @@ export class WebcamComponent implements OnInit {
     ngOnInit(): void {}
 
     onLoadStarted(args: LoadEventData) {
+    }
+
+    reportWebcam(webcamUrl, webcamName, webcamLocationName){
+        console.log("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20URL:%20"+webcamUrl+"%0A%0AReason%20for%20reporting:%20");
+        utils.openUrl("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20URL:%20"+webcamUrl+"%0A%0AReason%20for%20reporting:%20");
+    }
+
+    suggestNewWebcam(){
+        console.log("mailto:support@boatofficer.com?subject=Suggest%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0ASuggested%20webcam%20URL:%20%0A%0ALocation:%20");
+        utils.openUrl("mailto:support@boatofficer.com?subject=Suggest%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0ASuggested%20webcam%20URL:%20%0A%0ALocation:%20");
     }
 
 

@@ -1,23 +1,24 @@
 <BottomNavigation #bt selectedIndex="0" id="bottomNav" (selectedIndexChanged)="onSelectedIndexChanged($event)">
-    <TabStrip id="tabstrip">
+    <TabStrip id="tabstrip" iosIconRenderingMode="alwaysOriginal">
         <!--
             Note TabStripItem will only accept single Label and/or single Image elements that it
             will "adopt"; any other layout elements you try to specify will be ignored
         -->
         <TabStripItem id="tabItemHome" iconSource="font://&#xf015;" class="navigation__item fas" (tap)="onHomeMenuTap($event)">
-            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
         <TabStripItem id="tabItemBoat" iconSource="font://&#x4f;" class="navigation__item icon-boatofficer" (tap)="onBoatMenuTap($event)">
-            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
         <TabStripItem id="tabItemLocation" iconSource="font://&#xf5a0;" class="navigation__item fas" (tap)="onLocationMenuTap($event)">
-            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
-        <TabStripItem id="tabItemAlarm" id="tabItemAlarm" iconSource="font://&#x43;" class="navigation__item icon-boatofficer t-36" (tap)="onAlarmsMenuTap($event)">
-            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+        <TabStripItem id="tabItemAlarm" class="navigation__item icon-boatofficer" (tap)="onAlarmsMenuTap($event)">
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
+            <Image [src]="(dataService.sumActiveAlarms == 0 ? (currentIndex == 3 ? '~/assets/alert_active.png' :  '~/assets/alert_inactive.png') : (currentIndex == 3 ? '~/assets/alert_active_badge.png' :  '~/assets/alert_inactive_badge.png'))"></Image>
         </TabStripItem>
         <TabStripItem id="tabItemSettings" iconSource="font://&#x4d;" class="navigation__item icon-boatofficer" (tap)="onSettingsMenuTap($event)">
-            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="5"></Label>
+            <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
     </TabStrip>
 

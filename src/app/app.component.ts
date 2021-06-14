@@ -1,13 +1,14 @@
-import {Component, OnInit, ViewChild} from '@angular/core';
+import {AfterViewInit, Component, OnInit, ViewChild} from '@angular/core';
 import { Theme } from "@nativescript/theme";
 import { isAndroid } from '@nativescript/core/platform';
 import * as firebase from 'nativescript-plugin-firebase';
+import {EventData, Page} from "@nativescript/core/ui/page";
 import {getString, setString, hasKey, remove} from '@nativescript/core/application-settings';
-import { SelectedIndexChangedEventData, TabStripItemEventData, tabStripProperty } from "@nativescript/core/ui/bottom-navigation";
+import { SelectedIndexChangedEventData, TabStripItem, TabStripItemEventData, tabStripProperty } from "@nativescript/core/ui/bottom-navigation";
 import { RouterExtensions } from "nativescript-angular/router";
 import {alert} from "@nativescript/core/ui/dialogs";
 import {AnimationCurve} from "@nativescript/core/ui/enums";
-import {Page} from "@nativescript/core/ui/page";
+import {DataService} from "~/app/shared/data.service";
 
 @Component({
     selector: 'app-ns',
@@ -18,10 +19,11 @@ import {Page} from "@nativescript/core/ui/page";
 export class AppComponent implements OnInit {
 
     currentIndex = -1;
-    themeMode = "unknown"
+    themeMode = "unknown";
 
     constructor(
         private routerExtensions: RouterExtensions,
+        public dataService: DataService,
         private page: Page
     ) {
         // Use the component constructor to inject providers.

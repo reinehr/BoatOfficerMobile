@@ -368,6 +368,17 @@ $buttons_count: 6;
     height: 44pt;
 }
 
+.light-button {
+    margin-left: 10;
+    margin-right: 10;
+    height: 40;
+    border-radius: 20;
+    border-width: 2;
+    border-color: #091524;
+    color: #356eb4;
+    font-size: 16pt;
+}
+
 .action-bar {
     background-color: #091524;
     color: white;

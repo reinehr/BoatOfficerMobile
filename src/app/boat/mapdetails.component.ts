@@ -166,11 +166,23 @@ export class MapdetailsComponent implements OnInit {
     }
 
     globeTapped(){
-        console.log("Maptype: "+this.mapView.gMap.mapType);
-        this.mapView.gMap.mapType += 1;
-        if (4 < this.mapView.gMap.mapType)
+        let mapType = 0;
+        if(isAndroid){
+            mapType =  this.mapView.gMap.getMapType();
+        }else{
+            mapType =  this.mapView.gMap.mapType;
+        }
+
+        mapType++;
+        if (4 < mapType)
         {
-            this.mapView.gMap.mapType = 1;
+            mapType = 1;
+        }
+
+        if(isAndroid){
+            this.mapView.gMap.setMapType(mapType);
+        }else{
+            this.mapView.gMap.mapType = mapType;
         }
     }
 

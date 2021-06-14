@@ -60,7 +60,7 @@
                             </GridLayout>
                         </StackLayout>
                         <StackLayout *ngIf="device.boat_image_medium && device.boat_image_medium != 'null'">
-                            <GridLayout (tab)="onBoatImageTap(device.id)">
+                            <GridLayout (tap)="onBoatImageTap(device.id)">
                                 <GridLayout columns="*" rows="*, 30,30" class="boatoffice-boat-image-container">
                                     <Image row="0" rowSpan="3" colSpan="2" class="boatoffice-boat-image-home" [src]="'' + device.boat_image_medium"></Image>
                                     <Label row="1" rowspan="2" colSpan="2" class="shadow-overlay-bottom-blue bottom-border-radius"></Label>

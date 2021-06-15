@@ -33,10 +33,9 @@ const routes: Routes = [
     {path: '', redirectTo: '/(homeoutlet:home//boatoutlet:boat//locationoutlet:location//alarmoutlet:alarm//settingsoutlet:settings)', pathMatch: 'full'},
 
     {path: 'home', component: HomeComponent, outlet: 'homeoutlet'},
-    {path: 'alarm', component: AlarmComponent, outlet: 'homeoutlet'},
     {path: 'mapdetails/:idDevice', component: MapdetailsComponent, outlet: 'homeoutlet'},
     {path: 'webcam/:idDevice', component: WebcamComponent, outlet: 'homeoutlet'},
-    {path: 'boat', component: BoatComponent, outlet: 'homeoutlet'},
+
 
     {path: 'alarm', component: AlarmComponent, outlet: 'alarmoutlet'},
     {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'alarmoutlet'},

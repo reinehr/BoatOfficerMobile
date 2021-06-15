@@ -28,7 +28,7 @@
                 <StackLayout id="level_5" col=0 row=3 *ngIf="dataService">
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index" marginTop="30">
                         <StackLayout class="only-boat-name" *ngIf="!device.boat_image_medium || device.boat_image_medium == 'null'">
-                            <GridLayout>
+                            <GridLayout (tap)="onBoatImageTap(device.id)">
                                 <GridLayout rows="35, 35" columns="*, 40" class="bg-darkblue">
                                     <Label col="0" row="0" class="boat-name-in-button" [text]="device.name"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
@@ -85,7 +85,17 @@
                                 </GridLayout>
                             </GridLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0" nsRouterLink="../alarm">
+                        <!--
+                        <StackLayout class="alarm-card-home" paddingTop="10" nsRouterLink="">
+                            <GridLayout rows="*" columns="*,auto" >
+                            <Label col="0" [text]="'Boat Moving' | L" class="t-16 font-weight-bold c-black alarm-red"
+                                   horizontalAlignment="left"  verticalAlignment="center"></Label>
+                                <Label col="1" [text]="'It\'s me' | L" class="t-16 font-weight-bold checkin-button"
+                                       horizontalAlignment="left"  verticalAlignment="middle" ></Label>
+                            </GridLayout>
+                        </StackLayout>
+                        -->
+                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm > 0" (tap)="onAlarmsTap(device.id)">
                             <Label [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold c-black alarm-card-simple-title"
                                        horizontalAlignment="left"></Label>
                             <StackLayout *ngFor="let alarmType of device.keyTypeActive">
@@ -109,7 +119,7 @@
                                 </StackLayout>
                             </StackLayout>
                         </StackLayout>
-                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm === 0">
+                        <StackLayout class="alarm-card-home" *ngIf="device.sum_active_alarm === 0" (tap)="onAlarmsTap(device.id)">
                                 <Label [text]="'ACTIVE ALARMS' | L" class="t-16 font-weight-bold c-black alarm-card-simple-title"
                                        horizontalAlignment="left"></Label>
                             <GridLayout columns="0, 40, auto, auto" rows="40">

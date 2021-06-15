@@ -18,6 +18,7 @@ import {isAndroid } from '@nativescript/core/platform';
 import { Image } from '@nativescript/core/ui/image';
 import { ImageSource } from '@nativescript/core/image-source';
 import {hasKey, getString} from '@nativescript/core/application-settings';
+import {BoatComponent} from "~/app/boat/boat.component";
 import {BottomNavigation} from "@nativescript/core/ui/bottom-navigation";
 
 import {HttpClient} from '@angular/common/http';
@@ -270,8 +271,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     }
 
     onBoatImageTap(idDevice: number) {
+        console.log("tapped device: "+idDevice);
+        this.dataService.tappedDeviceId.next(idDevice);
         let bottomNav = <BottomNavigation>Application.getRootView().getViewById('bottomNav');
-        bottomNav.selectedIndex = 1;
+        bottomNav.selectedIndex = 1;  // currentIndex - just for searching as keyword
+    }
+
+    onAlarmsTap(idDevice: number) {
+        console.log("tapped device: "+idDevice);
+        this.dataService.tappedDeviceId.next(idDevice);
+        let bottomNav = <BottomNavigation>Application.getRootView().getViewById('bottomNav');
+        bottomNav.selectedIndex = 2;  // currentIndex - just for searching as keyword
     }
 
     onWeatherTap(idDevice: number) {

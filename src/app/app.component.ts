@@ -89,22 +89,23 @@ export class AppComponent implements OnInit {
         }
     }
 
-    onLocationMenuTap(args){
+    // onLocationMenuTap(args){
+    //     if (2 == this.currentIndex)
+    //     {
+    //         this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
+    //     }
+    // }
+
+
+    onAlarmsMenuTap(args){
         if (2 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
         }
     }
 
-    onAlarmsMenuTap(args){
-        if (3 == this.currentIndex)
-        {
-            this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
-        }
-    }
-
     onSettingsMenuTap(args){
-        if (4 == this.currentIndex)
+        if (3 == this.currentIndex)
         {
             this.routerExtensions.navigate([""], { clearHistory: true, transition: {name: "slideRight", duration: 300, curve: AnimationCurve.easeOut}});
         }

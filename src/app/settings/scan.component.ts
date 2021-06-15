@@ -40,8 +40,9 @@ export class ScanComponent implements OnInit {
                 // Note that this Promise is never invoked when a 'continuousScanCallback' function is provided
                 let productNumberScan = '';
                 let webKeyScan = '';
+                let regKeyScan = '';
                 let serialNumberScan = '';
-                [productNumberScan, serialNumberScan, webKeyScan] = result.text.replace(/.*\/d\//g, "").split('-');
+                [productNumberScan, serialNumberScan, webKeyScan, regKeyScan] = result.text.replace(/.*\/d\//g, "").split('-');
                 let md5 = Md5.hashStr(serialNumberScan).toString().substr(0,3);
                 serialNumberScan = ("00000000000000000000000000000000" + (parseInt(serialNumberScan, 16)).toString(2)).substr(-32);
                 const year = ("0000" + (parseInt(serialNumberScan.substr(0,7), 2).toString(10))).substr(-2);
@@ -49,6 +50,9 @@ export class ScanComponent implements OnInit {
                 const producer = ("0000" + (parseInt(serialNumberScan.substr(13,6), 2).toString(10))).substr(-2);
                 const productNumber = ("0000" + (parseInt(serialNumberScan.substr(19,13), 2).toString(10))).substr(-4);
                 this.serialNumber = year + '-' + week + '-' + producer + '-' + productNumber + '-' + md5;
+                if (regKeyScan && regKeyScan != '') {
+                    this.registrationKey = regKeyScan
+                }
 
             }, (errorMessage) => {
                 console.log("No scan. " + errorMessage);

@@ -17,7 +17,7 @@
         -->
         <TabStripItem id="tabItemAlarm" class="navigation__item icon-boatofficer" (tap)="onAlarmsMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
-            <Image [src]="(dataService.sumActiveAlarms == 0 ? (currentIndex == 3 ? '~/assets/alert_active.png' :  '~/assets/alert_inactive.png') : (currentIndex == 3 ? '~/assets/alert_active_badge.png' :  '~/assets/alert_inactive_badge.png'))"></Image>
+            <Image [src]="(dataService.sumActiveAlarms == 0 ? (currentIndex == 2 ? '~/assets/alert_active.png' :  '~/assets/alert_inactive.png') : (currentIndex == 2 ? '~/assets/alert_active_badge.png' :  '~/assets/alert_inactive_badge.png'))"></Image>
         </TabStripItem>
         <TabStripItem id="tabItemSettings" iconSource="font://&#x4d;" class="navigation__item icon-boatofficer" (tap)="onSettingsMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>

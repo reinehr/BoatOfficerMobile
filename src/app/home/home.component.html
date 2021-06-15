@@ -29,7 +29,7 @@
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index" marginTop="30">
                         <StackLayout class="only-boat-name" *ngIf="!device.boat_image_medium || device.boat_image_medium == 'null'">
                             <GridLayout (tap)="onBoatImageTap(device.id)">
-                                <GridLayout rows="35, 35" columns="*, 40" class="bg-darkblue">
+                                <GridLayout rows="30, 30" columns="*, 40" class="bg-darkblue">
                                     <Label col="0" row="0" class="boat-name-in-button" [text]="device.name"></Label>
                                     <Label col="1" row="0" class="role-symbol-in-button"
                                            [text]="''" *ngIf="device.role == 'sailor'"></Label>

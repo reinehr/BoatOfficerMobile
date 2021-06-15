@@ -39,7 +39,7 @@
                         <StackLayout (tap)="toggleBoatDetails(device.id)">
                             <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [deviceType]="device.type"></boat-header>
                         </StackLayout>
-                        <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse">
+                        <StackLayout class="boat-details" [id]="'boat-details' + device.id" visibility="collapse" (loaded)="boatDetailsLoaded($event)">
                             <boat-settings-bar [role]="device.role" [deviceType]="device.type" [idDevice]="idDevice" [numCandidates]="device.num_candidate"></boat-settings-bar>
                             <StackLayout class="alarm-card"
                                          *ngIf="device.id && device.id>0 && dataService.boatStatus && dataService.boatStatus[device.id] && dataService.boatStatus[device.id].sensor_data && dataService.boatStatus[device.id].sensor_data.time">

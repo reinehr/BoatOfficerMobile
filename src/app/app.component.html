@@ -10,9 +10,11 @@
         <TabStripItem id="tabItemBoat" iconSource="font://&#x4f;" class="navigation__item icon-boatofficer" (tap)="onBoatMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
+        <!--
         <TabStripItem id="tabItemLocation" iconSource="font://&#xf5a0;" class="navigation__item fas" (tap)="onLocationMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
         </TabStripItem>
+        -->
         <TabStripItem id="tabItemAlarm" class="navigation__item icon-boatofficer" (tap)="onAlarmsMenuTap($event)">
             <Label text="." fontColor="#ffffff" color="#ffffff" fontSize="1"></Label>
             <Image [src]="(dataService.sumActiveAlarms == 0 ? (currentIndex == 3 ? '~/assets/alert_active.png' :  '~/assets/alert_inactive.png') : (currentIndex == 3 ? '~/assets/alert_active_badge.png' :  '~/assets/alert_inactive_badge.png'))"></Image>
@@ -29,11 +31,11 @@
     <TabContentItem>
         <page-router-outlet name="boatoutlet"></page-router-outlet>
     </TabContentItem>
-
+<!--
     <TabContentItem>
         <page-router-outlet name="locationoutlet"></page-router-outlet>
     </TabContentItem>
-
+-->
     <TabContentItem>
         <page-router-outlet name="alarmoutlet"></page-router-outlet>
     </TabContentItem>

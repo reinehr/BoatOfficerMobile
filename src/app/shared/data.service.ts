@@ -194,6 +194,7 @@ export class DataService {
     public loadedHistoryData = new BehaviorSubject<boolean>(false);
     public loadedLatestSensorData = new BehaviorSubject<boolean>(false);
     public sumActiveAlarms = 0;
+    public tappedDeviceId = new BehaviorSubject<number>(0);
 
     constructor(
         public apiService: ApiService

@@ -65,6 +65,19 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         this.scrollBase = this.page.getViewById("level_5") as StackLayout;
     }
 
+    boatDetailsLoaded(eventData){
+        if (this.dataService.tappedDeviceId.getValue() != 0)
+        {
+            if ('boat-details'+this.dataService.tappedDeviceId.getValue() == eventData.object.id)
+            {
+                console.log("scroll to this boat: " + this.dataService.tappedDeviceId.getValue());
+                this.showBoatDetails(this.dataService.tappedDeviceId.getValue());
+                this.dataService.tappedDeviceId.next(0);
+                console.log("cleared boat id: " + this.dataService.tappedDeviceId.getValue());
+            }
+        }
+    }
+
     refreshList(args) {
         const pullRefresh = args.object;
         this.dataService.refreshBoatStatus();
@@ -212,24 +225,36 @@ export class AlarmComponent implements OnInit, AfterViewInit {
         this.scrollLayout.scrollToVerticalOffset(0, true);
     }
 
+    showBoatDetails(deviceId)
+    {
+        const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
+        const scrollTarget = this.page.getViewById("level_6_"+deviceId) as StackLayout;
+
+        // for (const idDevice in this.dataService.deviceData)
+        // {
+        //     const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+this.dataService.deviceData[idDevice].id);
+        //     boatDetailsView.visibility = "collapse";
+        //     boatDetailsView.opacity = 1;
+        // }
+
+        boatDetailsView.opacity = 0;
+        boatDetailsView.visibility = "visible";
+        boatDetailsView.animate({
+            opacity: 1,
+            duration: 100
+        }).then( () => {
+            this.scrollLayout.scrollToVerticalOffset(scrollTarget.getLocationRelativeTo(this.scrollBase).y, true);
+        });
+        this.allboatsvisible = true;
+    }
+
     toggleBoatDetails(deviceId) {
         console.log("Boat Tapped No: "+deviceId);
         const boatDetailsView = <StackLayout> this.page.getViewById("boat-details"+deviceId);
 
         if (boatDetailsView.isCollapsed)
         {
-            const scrollTarget = this.page.getViewById("level_6_"+deviceId) as StackLayout;
-
-            boatDetailsView.opacity = 0;
-            boatDetailsView.visibility = "visible";
-            boatDetailsView.animate({
-                opacity: 1,
-                duration: 100
-            }).then( () => {
-                this.scrollLayout.scrollToVerticalOffset(scrollTarget.getLocationRelativeTo(this.scrollBase).y, true);
-            });
-            // not exactly true, but collapse of all is desired at tap on Title Bar
-            this.allboatsvisible = true;
+            this.showBoatDetails(deviceId);
         }
         else
         {

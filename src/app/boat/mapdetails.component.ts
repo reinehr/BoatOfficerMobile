@@ -131,6 +131,12 @@ export class MapdetailsComponent implements OnInit {
             const halftime = maxDays / 3.0;
             const base = Math.pow(0.5, 1 / halftime);
             this.mapView.removeAllShapes();
+            let mapType = 0;
+            if(isAndroid){
+                mapType =  this.mapView.gMap.getMapType();
+            }else{
+                mapType =  this.mapView.gMap.mapType;
+            }
             for (const position of this.dataService.boatHistory[this.dataService.deviceData[idDevice].id].position_data) {
                 if (lastLatitude > 0) {
                     const eventmilliseconds = new Date(position.time);
@@ -148,7 +154,11 @@ export class MapdetailsComponent implements OnInit {
                             polyline.width = 2;
                         }
                         polyline.geodesic = false;
-                        polyline.color = new Color(255 * density, 0, 20, 50);
+                        if (mapType==1 || mapType == 3) {
+                            polyline.color = new Color(255 * density, 0, 20, 50);
+                        } else {
+                            polyline.color = new Color(255 * density, 255, 220, 50);
+                        }
                         this.mapView.addPolyline(polyline);
                     }
                     // console.log(density);
@@ -184,6 +194,8 @@ export class MapdetailsComponent implements OnInit {
         }else{
             this.mapView.gMap.mapType = mapType;
         }
+
+        this.setSelectedInterval(this.selectedIntervalId);
     }
 
     onMarkerEvent(args) {
@@ -234,6 +246,12 @@ export class MapdetailsComponent implements OnInit {
         this.selectedIntervalId = id;
         // this.initialized = !this.initialized;
         // this.initialized = !this.initialized;
+        let mapType = 0;
+        if(isAndroid){
+            mapType =  this.mapView.gMap.getMapType();
+        }else{
+            mapType =  this.mapView.gMap.mapType;
+        }
         const level6 = this.page
             .getViewById('level_3_' + this.dataService.deviceData[this.idDevice].id)
             .getViewById('level_4_' + this.dataService.deviceData[this.idDevice].id)
@@ -288,7 +306,11 @@ export class MapdetailsComponent implements OnInit {
                                 polyline.width = 2;
                             }
                             polyline.geodesic = false;
-                            polyline.color = new Color(255 * density, 0, 20, 50);
+                            if (mapType==1 || mapType == 3) {
+                                polyline.color = new Color(255 * density, 0, 20, 50);
+                            } else {
+                                polyline.color = new Color(255 * density, 255, 220, 50);
+                            }
                             this.mapView.addPolyline(polyline);
                         }
                         // console.log(density);

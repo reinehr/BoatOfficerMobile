@@ -45,14 +45,14 @@
                         </GridLayout>
                         <Button row="1" col="0"
                                 width="80%"
-                                text="{{'Report Webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.location_name)"
                                 pageTransition="slideLeft"></Button>
                         <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
                                 row="2" col="0"
                                 width="80%"
-                                text="{{'Suggest new webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="suggestNewWebcam()"
                                 pageTransition="slideLeft"></Button>
@@ -84,14 +84,14 @@
                         <Button *ngIf="dataService.deviceData[idDevice].is_pro"
                                 row="1" col="0"
                                 width="80%"
-                                text="{{'Report Webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.location_name)"
                                 pageTransition="slideLeft"></Button>
                         <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
                                 row="2" col="0"
                                 width="80%"
-                                text="{{'Suggest new webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="suggestNewWebcam()"
                                 pageTransition="slideLeft"></Button>
@@ -123,14 +123,14 @@
                         <Button *ngIf="dataService.deviceData[idDevice].is_pro"
                                 row="1" col="0"
                                 width="80%"
-                                text="{{'Report Webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.location_name)"
                                 pageTransition="slideLeft"></Button>
                         <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
                                 row="2" col="0"
                                 width="80%"
-                                text="{{'Suggest new webcam' | L}}({{'by e-mail' | L}})"
+                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
                                 class="light-button"
                                 (tap)="suggestNewWebcam()"
                                 pageTransition="slideLeft"></Button>

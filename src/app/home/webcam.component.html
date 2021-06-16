@@ -20,124 +20,124 @@
                 <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" [visibility]="selectedIntervalId > 0 && !dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==0 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
-                    <GridLayout columns="10, *, auto, 10" rows="25">
-                        <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.location_name"
-                               class="t-12 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
-                        <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.distance  | number:'1.1-1') + ' km'"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.name"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="*" rows="*, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" >
-                        <GridLayout id="GridLayout-webcam1" [columns]="webcamWidth[1] ? webcamWidth[1] : '*'" [rows]="webcamHeight[1] ? webcamHeight[1] : '*'">
-                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url"
-                                     (loadStarted)="onLoadStarted($event)"
-                                     (loadFinished)="onLoadFinished($event, 1)">
-                            </WebView>
+                <ScrollView>
+                    <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==0 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                        <GridLayout columns="10, *, auto, 10" rows="25">
+                            <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.location_name"
+                                   class="t-12 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
                         </GridLayout>
-                        <Button row="1" col="0"
-                                width="80%"
-                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.location_name)"
-                                pageTransition="slideLeft"></Button>
-                        <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
-                                row="2" col="0"
-                                width="80%"
-                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="suggestNewWebcam()"
-                                pageTransition="slideLeft"></Button>
-                    </GridLayout>
-                </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==1 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
-                    <GridLayout columns="10, *, auto, 10" rows="25">
-                        <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.location_name"
-                               class="t-12 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
-                        <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.distance  | number:'1.1-1') + ' km'"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.name"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="*" rows="*, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" >
-                        <GridLayout id="GridLayout-webcam2" [columns]="webcamWidth[2] ? webcamWidth[2] : '*'" [rows]="webcamHeight[2] ? webcamHeight[2] : '*'">
-                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url"
-                                     (loadStarted)="onLoadStarted($event)"
-                                     (loadFinished)="onLoadFinished($event, 2)">
-                            </WebView>
+                        <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
+                            <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.distance  | number:'1.1-1') + ' km'"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.name"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
                         </GridLayout>
-                        <Button *ngIf="dataService.deviceData[idDevice].is_pro"
-                                row="1" col="0"
-                                width="80%"
-                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.location_name)"
-                                pageTransition="slideLeft"></Button>
-                        <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
-                                row="2" col="0"
-                                width="80%"
-                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="suggestNewWebcam()"
-                                pageTransition="slideLeft"></Button>
-                    </GridLayout>
-                </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==2 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
-                    <GridLayout columns="10, *, auto, 10" rows="25">
-                        <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.location_name"
-                               class="t-12 font-weight-bold"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
-                        <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.distance  | number:'1.1-1') + ' km'"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="left"></Label>
-                        <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.name"
-                               class="t-12 font-weight-normal"
-                               verticalAlignment="bottom" horizontalAlignment="right"></Label>
-                    </GridLayout>
-                    <GridLayout columns="*" rows="*, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" >
-                        <GridLayout id="GridLayout-webcam3" [columns]="webcamWidth[3] ? webcamWidth[3] : '*'" [rows]="webcamHeight[3] ? webcamHeight[3] : '*'">
-                            <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url"
-                                     (loadStarted)="onLoadStarted($event)"
-                                     (loadFinished)="onLoadFinished($event, 3)">
-                            </WebView>
+                        <GridLayout columns="*" rows="400, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" >
+                            <GridLayout id="GridLayout-webcam1" [columns]="webcamWidth[1] ? webcamWidth[1] : '*'" [rows]="webcamHeight[1] ? webcamHeight[1] : '*'">
+                                <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url"
+                                         (loadStarted)="onLoadStarted($event)"
+                                         (loadFinished)="onLoadFinished($event, 1)">
+                                </WebView>
+                            </GridLayout>
+                            <Button row="1" col="0"
+                                    width="80%"
+                                    text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.latitude, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.location_name)"
+                                    pageTransition="slideLeft"></Button>
+                            <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
+                                    row="2" col="0"
+                                    width="80%"
+                                    text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="suggestNewWebcam()"
+                                    pageTransition="slideLeft"></Button>
                         </GridLayout>
-                        <Button *ngIf="dataService.deviceData[idDevice].is_pro"
-                                row="1" col="0"
-                                width="80%"
-                                text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.location_name)"
-                                pageTransition="slideLeft"></Button>
-                        <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
-                                row="2" col="0"
-                                width="80%"
-                                text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
-                                class="light-button"
-                                (tap)="suggestNewWebcam()"
-                                pageTransition="slideLeft"></Button>
-                    </GridLayout>
-
-
-                </StackLayout>
+                    </StackLayout>
+                    <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==1 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                        <GridLayout columns="10, *, auto, 10" rows="25">
+                            <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.location_name"
+                                   class="t-12 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
+                        </GridLayout>
+                        <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
+                            <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.distance  | number:'1.1-1') + ' km'"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.name"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
+                        </GridLayout>
+                        <GridLayout columns="*" rows="400, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" >
+                            <GridLayout id="GridLayout-webcam2" [columns]="webcamWidth[2] ? webcamWidth[2] : '*'" [rows]="webcamHeight[2] ? webcamHeight[2] : '*'">
+                                <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url"
+                                         (loadStarted)="onLoadStarted($event)"
+                                         (loadFinished)="onLoadFinished($event, 2)">
+                                </WebView>
+                            </GridLayout>
+                            <Button *ngIf="dataService.deviceData[idDevice].is_pro"
+                                    row="1" col="0"
+                                    width="80%"
+                                    text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.latitude, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.location_name)"
+                                    pageTransition="slideLeft"></Button>
+                            <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
+                                    row="2" col="0"
+                                    width="80%"
+                                    text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="suggestNewWebcam()"
+                                    pageTransition="slideLeft"></Button>
+                        </GridLayout>
+                    </StackLayout>
+                    <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==2 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                        <GridLayout columns="10, *, auto, 10" rows="25">
+                            <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.location_name"
+                                   class="t-12 font-weight-bold"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
+                        </GridLayout>
+                        <GridLayout columns="10, *, auto, 10" rows="25,5" paddingBottom="5">
+                            <Label col=1 row=0 [text]="(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.distance  | number:'1.1-1') + ' km'"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="left"></Label>
+                            <Label col=2 row=0 [text]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.name"
+                                   class="t-12 font-weight-normal"
+                                   verticalAlignment="bottom" horizontalAlignment="right"></Label>
+                        </GridLayout>
+                        <GridLayout columns="*" rows="400, 50, 50" paddingBottom="0" [id]="'webcam_'+idDevice" *ngIf="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" >
+                            <GridLayout id="GridLayout-webcam3" [columns]="webcamWidth[3] ? webcamWidth[3] : '*'" [rows]="webcamHeight[3] ? webcamHeight[3] : '*'">
+                                <WebView [id]="dataService.deviceData[idDevice].id" [src]="dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url"
+                                         (loadStarted)="onLoadStarted($event)"
+                                         (loadFinished)="onLoadFinished($event, 3)">
+                                </WebView>
+                            </GridLayout>
+                            <Button *ngIf="dataService.deviceData[idDevice].is_pro"
+                                    row="1" col="0"
+                                    width="80%"
+                                    text="{{'Report webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="reportWebcam(dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.latitude, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.name, dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.location_name)"
+                                    pageTransition="slideLeft"></Button>
+                            <Button *ngIf="dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id]"
+                                    row="2" col="0"
+                                    width="80%"
+                                    text="{{'Suggest new webcam' | L}} ({{'by e-mail' | L}})"
+                                    class="light-button"
+                                    (tap)="suggestNewWebcam()"
+                                    pageTransition="slideLeft"></Button>
+                        </GridLayout>
+                    </StackLayout>
+                </ScrollView>
             </StackLayout>
         </StackLayout>
     </StackLayout>

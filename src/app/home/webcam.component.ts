@@ -62,9 +62,9 @@ export class WebcamComponent implements OnInit {
     onLoadStarted(args: LoadEventData) {
     }
 
-    reportWebcam(webcamUrl, webcamName, webcamLocationName){
-        console.log("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20URL:%20"+webcamUrl+"%0A%0AReason%20for%20reporting:%20");
-        utils.openUrl("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20URL:%20"+webcamUrl+"%0A%0AReason%20for%20reporting:%20");
+    reportWebcam(webcamLatitude, webcamName, webcamLocationName){
+        console.log("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20Lat:%20"+webcamLatitude+"%0A%0AReason%20for%20reporting:%20%0A%0ALocation:%20"+webcamLocationName);
+        utils.openUrl("mailto:support@boatofficer.com?subject=Report%20Webcam&body=Hello%20BoatOfficer%20Support!%0A%0AWebcam%20Lat:%20"+webcamLatitude+"%0A%0AReason%20for%20reporting:%20%0A%0ALocation:%20"+webcamLocationName);
     }
 
     suggestNewWebcam(){

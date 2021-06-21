@@ -38,7 +38,7 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout id="level_5" *ngIf="dataService.loggedIn">
+                <StackLayout id="level_5" *ngIf="dataService && dataService.loggedIn">
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index">
                         <StackLayout (tap)="toggleBoatDetails(device.id)">
                             <boat-header [boatname]="device.name" [boat_image_small]="device.boat_image_small" [role]="device.role" [numberOfActiveAlarms]="device.sum_active_alarm" [deviceType]="device.type"></boat-header>

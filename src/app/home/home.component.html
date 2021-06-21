@@ -25,7 +25,7 @@
                         </GridLayout>
                     </StackLayout>
                 </StackLayout>
-                <StackLayout id="level_5" col=0 row=3 *ngIf="dataService">
+                <StackLayout id="level_5" col=0 row=3 *ngIf="dataService && dataService.loggedIn">
                     <StackLayout [id]="'level_6_' + device.id" *ngFor="let device of dataService.deviceData; let idDevice = index" marginTop="30">
                         <StackLayout class="only-boat-name" *ngIf="!device.boat_image_medium || device.boat_image_medium == 'null'">
                             <GridLayout (tap)="onBoatImageTap(device.id)">

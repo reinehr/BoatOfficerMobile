@@ -86,7 +86,7 @@ export class BoatComponent implements OnInit, AfterViewInit {
         if (!this.dataService.loggedIn)
         {
             console.log("not logged in - route to settings");
-            this.router.navigate([{ outlets: { settings: ['settings']}}]);
+            this.router.navigate([{ outlets: { settingsoutlet: ['settings']}}]);
         }
         else
         {

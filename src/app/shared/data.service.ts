@@ -13,6 +13,7 @@ import {alarmByTypeMap, AlarmInhibitSettings, AlarmSettings} from '~/app/shared/
 import {hasKey} from '@nativescript/core/application-settings';
 import {alert} from '@nativescript/core/ui/dialogs';
 import {localize} from "nativescript-localize";
+import {KeyboardType} from "@nativescript/core/ui/enums";
 
 export interface DataItem {
     id: number;
@@ -184,6 +185,7 @@ export class DataService {
     public boatHistory: BoatHistory;
     historyIntervalData = historyInterval;
     public isLoading = false;
+    public timestampLoading = Date.now();
     public isLoadingLatestSensorData = false;
     public isLoadingSensorDataHistory = false;
     public isLoadingAlarm = false;
@@ -206,8 +208,9 @@ export class DataService {
     }
 
     getDeviceAlarm(): void {
+        this.timestampLoading = Date.now();
         setTimeout(() => {
-            if (this.isLoading) {
+            if (this.isLoading && (Date.now() - this.timestampLoading) > 28000) {
                 alert({
                     okButtonText: 'OK',
                     title: localize('No data received'),
@@ -515,21 +518,23 @@ export class DataService {
 
 
     refreshSensorDataHistory(): void {
-        if(hasKey('token') && !this.isLoading) {
+        if(hasKey('token')) {
             this.isLoading = true;
             this.loggedIn = true;
             this.getSensorDataHistory();
-        } else {
+        }
+        if (!hasKey('token')) {
             this.loggedIn = false;
         }
     }
 
     refreshBoatStatus(): void {
-        if(hasKey('token') && !this.isLoading) {
+        if(hasKey('token')) {
             this.isLoading = true;
             this.loggedIn = true;
             this.getDeviceAlarm();
-        } else {
+        }
+        if (!hasKey('token')) {
             this.loggedIn = false;
         }
     }

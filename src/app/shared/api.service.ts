@@ -297,7 +297,7 @@ export class ApiService {
     }
 
     saveAlarmSettings(deviceId: number, alarmKey: string, alarmValue: number): Observable<any> {
-        console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue);
+        console.log('saveAlarmSettings (Device:' + deviceId + ', alarmKey:' + alarmKey, ', alarmValue:' + alarmValue, ')');
         return this.httpClient.post<any>(this.baseDeviceAlarmSettingsUrl + 'update_field/', {
                 type: alarmKey,
                 value_user: alarmValue,

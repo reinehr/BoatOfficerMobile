@@ -39,6 +39,9 @@ const routes: Routes = [
 
     {path: 'alarm', component: AlarmComponent, outlet: 'alarmoutlet'},
     {path: 'settingssingle/:idDevice', component: BoatsettingssingleComponent, outlet: 'alarmoutlet'},
+    {path: 'editalarmsettings/:idDevice/:field/:idAlarm', component: EditalarmsettingsComponent, outlet: 'alarmoutlet'},
+    {path: 'editinhibitsettings/:idDevice/:field/:idAlarm', component: EditinhibitsettingsComponent, outlet: 'alarmoutlet'},
+    {path: 'editdevicesettings/:idDevice/:field', component: EditdevicesettingsComponent, outlet: 'alarmoutlet'},
     {path: 'editusers/:idDevice/:roleOrRequests', component: EditusersComponent, outlet: 'alarmoutlet'},
 
     {path: 'boat', component: BoatComponent, outlet: 'boatoutlet'},

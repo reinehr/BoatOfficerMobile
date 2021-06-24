@@ -52,6 +52,8 @@ export class WebcamComponent implements OnInit {
     padding = [40, 40, 40, 40];
     mapView: MapView;
 
+    visibleWebcams_WithoutPro = 1;
+
 
     goBack() {
         this.routerExtensions.backToPreviousPage();
@@ -96,12 +98,14 @@ export class WebcamComponent implements OnInit {
                         //console.log(webView.parent.effectiveHeight);
                         //console.log(webView.height);
                         if (!this.webcamWidth[order]) {
+                            console.log("Order No: " + order + " result: "+result);
                             this.webcamWidth[order] = 295;
                             this.webcamHeight[order] = 240;
                             this.webcamScale[order] = 1;
                             this.webcamScaled[order] = false;
-                            //console.log('result widht: ' + result)
+                            //console.log('result width: ' + result)
                             this.webcamScale[order] = webView.getActualSize().width / result;
+                            console.log("actual width: " + webView.getActualSize().width + " webcamscale: "+this.webcamScale[order]);
                             let height = webView.getActualSize().height / this.webcamScale[order];
                             //console.log('new height: ' + height)
                             this.webcamHeight[order] = height;

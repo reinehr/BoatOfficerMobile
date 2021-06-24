@@ -17,10 +17,10 @@
                         <Label [text]="('Webcam' | L) + ' ' + (interval+1)" verticalAlignment="center" horizontalAlignment="center"></Label>
                     </GridLayout>
                 </StackLayout>
-                <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" [visibility]="selectedIntervalId > 0 && !dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                <StackLayout orientation="vertical" padding="10" class="alarm-card t-18" *ngIf="(selectedIntervalId >= visibleWebcams_WithoutPro) && !dataService.deviceData[idDevice].is_pro">
                     <TextView fontSize="18" text="{{'Please buy Pro' | L}}"></TextView>
                 </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==0 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==0 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam1.url && (selectedIntervalId < visibleWebcams_WithoutPro || dataService.deviceData[idDevice].is_pro)">
                     <GridLayout columns="10, *, auto, 10" rows="25">
                         <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
                                verticalAlignment="bottom" horizontalAlignment="left"></Label>
@@ -67,7 +67,7 @@
                         </GridLayout>
                     </GridLayout>
                 </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==1 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==1 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url && (selectedIntervalId < visibleWebcams_WithoutPro || dataService.deviceData[idDevice].is_pro)">
                     <GridLayout columns="10, *, auto, 10" rows="25">
                         <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
                                verticalAlignment="bottom" horizontalAlignment="left"></Label>
@@ -114,7 +114,7 @@
                         </GridLayout>
                     </GridLayout>
                 </StackLayout>
-                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==2 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam3.url" [visibility]="selectedIntervalId <= 0 || dataService.deviceData[idDevice].is_pro ? 'visible' : 'collapsed'">
+                <StackLayout padding="5,0,0,0" backgroundColor="white" marginBottom="0" *ngIf="selectedIntervalId==2 && dataService.boatStatus && dataService.boatStatus[dataService.deviceData[idDevice].id] && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2 && dataService.boatStatus[dataService.deviceData[idDevice].id].nearest_webcam2.url && (selectedIntervalId < visibleWebcams_WithoutPro || dataService.deviceData[idDevice].is_pro)">
                     <GridLayout columns="10, *, auto, 10" rows="25">
                         <Label col=1 row=0 [text]="'WEBCAM' | L" class="t-16 font-weight-bold"
                                verticalAlignment="bottom" horizontalAlignment="left"></Label>
